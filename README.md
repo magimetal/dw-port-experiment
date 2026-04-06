@@ -10,26 +10,35 @@ A faithful, assembly-accurate Python reimplementation of **Dragon Warrior** (198
 
 ## Work In Progress
 
-While this codebase represents a **complete, playable implementation** of Dragon Warrior 1 with NES-accurate mechanics and comprehensive test coverage, it remains a research/educational project with known issues:
+This codebase is a **partial implementation** of Dragon Warrior 1. While the NES-accurate mechanics and comprehensive test coverage demonstrate assembly-to-Python fidelity, the game itself is **not fully playable**:
 
-- **Terminal UI quirks**: Rendering edge cases on certain terminal emulators, color detection limitations
-- **Input handling**: Occasional missed keypresses in rapid sequences, terminal focus edge cases
-- **Combat edge cases**: Some multi-enemy formation behaviors and rare spell interaction bugs
-- **Save system**: JSON-based saves work but lack the EEPROM wear-leveling of real NES carts
-- **Performance**: Map scrolling could be smoother on slower terminals
-- **Completeness**: Some cosmetic features (flickering torch effect, exact screen transitions) are approximated
+**What Works:**
+- ROM data extraction (maps, enemies, items, chests, zones, etc.)
+- Load game / start new game
+- Walk around the first map (Tantegel Castle)
+- Talk to NPCs
+- Go up/down stairs
 
-The core game is fully completable—you can defeat the Dragonlord and restore the light. However, this is preservation-quality research code, not a polished commercial release. Issues likely won't be fixed unless they break the main quest path.
+**What Does Not Work:**
+- **Cannot leave the first screen** — the game state machine has gaps
+- Combat encounters are stubbed / not fully integrated
+- Item usage beyond basic commands
+- Quest progression flags not fully wired
+- Most game mechanics exist as verified modules but aren't connected
+
+This is preservation-quality **research code** — a demonstration of how to accurately port NES assembly to Python with phase-gated verification. It is not a playable game beyond the opening area. Further development is unlikely.
 
 ## What Is This?
 
-This project is a **complete, playable port** of Dragon Warrior 1 that:
+This project is a **research implementation** of Dragon Warrior 1 that demonstrates NES assembly-accurate porting techniques:
 
 - Extracts all game data directly from the original NES ROM
-- Implements NES-accurate game logic (combat formulas, RNG, encounters)
-- Renders the game in your terminal using the `blessed` library
+- Implements NES-accurate game logic (combat formulas, RNG, encounters) as verified modules
+- Renders the opening area in your terminal using the `blessed` library
 - Verifies parity against the original game through 88 phase gates
 - Uses 6502 assembly comments for source tracking
+
+**Note**: This is a code preservation and reverse-engineering project. The mechanics are accurate, but the game integration stops after the opening castle.
 
 ## Quick Start
 
