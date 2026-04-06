@@ -1,0 +1,28 @@
+{
+  "completed": true,
+  "slice": "phase2-movement",
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "MovementUpdates": true,
+        "LCDC8": true,
+        "LCE02": true,
+        "LCE06": true,
+        "LCE1F": true,
+        "LCDFD": true,
+        "ChkRandomFight": true,
+        "LCE82": true,
+        "LCEBD": true,
+        "ChkFightRepel": true,
+        "RepelTbl": true,
+        "OvrWrldEnGrid": true,
+        "EnemyGroupsTbl": true,
+        "CaveEnIndexTbl": true
+      }
+    }
+  }
+}

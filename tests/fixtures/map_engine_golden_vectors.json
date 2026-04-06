@@ -1,0 +1,49 @@
+{
+  "source": {
+    "bank00_labels": [
+      "MapDatTbl",
+      "GetBlockID",
+      "GetOvrWldTarget",
+      "ChkWtrOrBrdg",
+      "ChkOthrMaps",
+      "MapEntryDirTbl"
+    ],
+    "bank03_labels": [
+      "ChangeMaps",
+      "MapEntryTbl",
+      "MapTargetTbl"
+    ]
+  },
+  "vectors": {
+    "map_count": 30,
+    "warp_count": 51,
+    "map4_tile_start": 15,
+    "map1_hill_tile": 2,
+    "map4_border_tile_oob": 0,
+    "map1_border_tile_oob": 15,
+    "is_passable_hill": true,
+    "is_passable_water": false,
+    "water_coordinate": [
+      255,
+      255
+    ],
+    "check_warp_index": 4,
+    "check_warp_dst": [
+      4,
+      11,
+      29,
+      0
+    ],
+    "handle_warp_state": [
+      4,
+      11,
+      29
+    ],
+    "load_map_clamp": [
+      4,
+      29,
+      29
+    ],
+    "check_non_warp_none": true
+  }
+}

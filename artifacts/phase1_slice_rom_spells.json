@@ -1,0 +1,71 @@
+{
+  "phase": "1-slice-rom-spells",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_rom_spells",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_bank_read_gate_artifact": {
+      "ok": true,
+      "detail": {
+        "completed": true,
+        "source_directory": "/tmp/dw-disassembly/source_files",
+        "files": {
+          "Bank00.asm": {
+            "path": "/tmp/dw-disassembly/source_files/Bank00.asm",
+            "bytes": 313521,
+            "lines": 7435,
+            "sha1": "5374a0d9b688f07e658905a8455651b2913d9519",
+            "labels_checked": {
+              "WrldMapPtrTbl": true
+            }
+          },
+          "Bank03.asm": {
+            "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+            "bytes": 457772,
+            "lines": 10921,
+            "sha1": "7d75d90f344e5828f1411ca31918ad73966c8aa1",
+            "labels_checked": {
+              "SpellCostTbl": true,
+              "CheckMP": true
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase1_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 4 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [ 25%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [ 50%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 75%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [100%]\n\n============================== 4 passed in 0.05s ===============================\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "vectors": {
+    "remaining_content_matrix": {
+      "content_ids": [
+        2,
+        3,
+        4,
+        6,
+        9,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "chest_indices": [
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        22,
+        23,
+        25,
+        26,
+        27,
+        29
+      ]
+    },
+    "search_content_2": {
+      "action": "map_search",
+      "action_detail": "chest:index:9;contents:2;reward:herb:+1;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_herb": true,
+      "herbs_after": 1
+    },
+    "search_content_3": {
+      "action": "map_search",
+      "action_detail": "chest:index:6;contents:3;reward:key:+1;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_key": true,
+      "magic_keys_after": 1
+    },
+    "search_content_4": {
+      "action": "map_search",
+      "action_detail": "chest:index:5;contents:4;reward:item:TORCH;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_torch": true,
+      "inventory_slots_after": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_6": {
+      "action": "map_search",
+      "action_detail": "chest:index:7;contents:6;reward:item:WINGS;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_wings": true,
+      "inventory_slots_after": [
+        3,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_9": {
+      "action": "map_search",
+      "action_detail": "chest:index:27;contents:9;reward:item:FIGHTERS_RING;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_fighters_ring": true,
+      "inventory_slots_after": [
+        6,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_12": {
+      "action": "map_search",
+      "action_detail": "chest:index:15;contents:12;reward:item:CURSED_BELT;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_cursed_belt": true,
+      "inventory_slots_after": [
+        9,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_13": {
+      "action": "map_search",
+      "action_detail": "chest:index:23;contents:13;reward:item:SILVER_HARP;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_silver_harp": true,
+      "inventory_slots_after": [
+        10,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_14": {
+      "action": "map_search",
+      "action_detail": "chest:index:25;contents:14;reward:item:DEATH_NECKLACE;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_death_necklace": true,
+      "inventory_slots_after": [
+        11,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_15": {
+      "action": "map_search",
+      "action_detail": "chest:index:17;contents:15;reward:item:STONES_OF_SUNLIGHT;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_stones_of_sunlight": true,
+      "inventory_slots_after": [
+        12,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_16": {
+      "action": "map_search",
+      "action_detail": "chest:index:18;contents:16;reward:item:STAFF_OF_RAIN;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_staff_of_rain": true,
+      "inventory_slots_after": [
+        13,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_16_reopen": {
+      "action": "map_search",
+      "action_detail": "chest:index:18;contents:16;opened:true;reward:none",
+      "screen_mode": "dialog",
+      "frame_contains_empty": true,
+      "inventory_slots_after": [
+        13,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_content_2_herb_full": {
+      "action": "map_search",
+      "action_detail": "chest:index:9;contents:2;reward:herb:full",
+      "screen_mode": "dialog",
+      "frame_contains_herb_full": true,
+      "herbs_after": 6
+    },
+    "search_content_3_key_full": {
+      "action": "map_search",
+      "action_detail": "chest:index:6;contents:3;reward:key:full",
+      "screen_mode": "dialog",
+      "frame_contains_key_full": true,
+      "magic_keys_after": 6
+    },
+    "search_content_16_inventory_full": {
+      "action": "map_search",
+      "action_detail": "chest:index:18;contents:16;reward:item:full",
+      "screen_mode": "dialog",
+      "frame_contains_inventory_full": true,
+      "inventory_slots_after": [
+        17,
+        17,
+        17,
+        17
+      ]
+    }
+  }
+}

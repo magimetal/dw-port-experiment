@@ -1,0 +1,22 @@
+{
+  "vectors": {
+    "overworld": {
+      "rows": 17,
+      "cols": 21,
+      "center_char": "@",
+      "top_left_char": "."
+    },
+    "npc_overlay": {
+      "default_story_right_of_center": "\u2591",
+      "post_story_right_of_center": "Z",
+      "default_npc_visible_count": 7,
+      "post_npc_visible_count": 9
+    },
+    "darkness": {
+      "corner_char": " ",
+      "center_char": "@",
+      "dark_tile_count": 332,
+      "deterministic_repeat_match": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-map-command-search",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "search_no_chest_returns_deterministic_nothing_dialog": true,
+    "search_chest_tile_detects_extracted_chest": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_search.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_search_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded SEARCH integration: map root SEARCH now resolves deterministic no-result dialog and deterministic chest-tile detection using extracted chest data."
+}

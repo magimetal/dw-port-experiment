@@ -1,0 +1,24 @@
+{
+  "slice": "phase4-main-loop-map-command-search-tool-rewards-capacity",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "search_wings_chest_applies_reward": true,
+    "search_dragons_scale_chest_applies_reward": true,
+    "search_fairy_flute_chest_applies_reward": true,
+    "search_herb_full_guard_rejects_without_state_change": true,
+    "search_key_full_guard_rejects_without_state_change": true,
+    "search_tool_full_guard_rejects_without_state_change": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_search_tool_rewards_capacity.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_search_tool_rewards_capacity_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded SEARCH remaining non-gold tool chest rewards (contents_id 21/22/23) and deterministic herb/key/tool full-capacity rejection guards."
+}

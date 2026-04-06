@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-post-victory-npc-world-state-proof",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "existing_v81_tantegel_npc_proof_remains_pass": true,
+    "npc_variant_resolves_correctly_for_additional_map_id": true,
+    "post_victory_pre_input_frame_uses_endgame_render_path": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_post_victory_npc_world_state_proof.json",
+    "vectors_fixture": "tests/fixtures/main_loop_post_victory_npc_world_state_proof_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

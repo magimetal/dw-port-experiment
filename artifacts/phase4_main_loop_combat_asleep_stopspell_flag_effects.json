@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-combat-asleep-stopspell-flag-effects",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "asleep_enemy_skips_attack_turn": true,
+    "asleep_enemy_wakes_on_even_rng_without_attacking": true,
+    "stopspelled_spell_attempt_is_downgraded_to_physical_attack": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_asleep_stopspell_flag_effects.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_asleep_stopspell_flag_effects_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

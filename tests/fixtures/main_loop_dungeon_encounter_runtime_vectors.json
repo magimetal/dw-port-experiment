@@ -1,0 +1,35 @@
+{
+  "vectors": {
+    "dungeon_encounter": {
+      "input": "RIGHT",
+      "map_id": 15,
+      "screen_mode": "combat",
+      "action": "encounter_triggered",
+      "action_detail": "enemy:32",
+      "position": [
+        1,
+        0
+      ],
+      "rng_after": [
+        40,
+        122
+      ],
+      "frame_contains_fight": true,
+      "frame_contains_enemy": true,
+      "frame_contains_wizard": true,
+      "combat_session": {
+        "enemy_id": 32,
+        "enemy_name": "Wizard",
+        "enemy_hp": 58,
+        "enemy_max_hp": 58,
+        "enemy_base_hp": 65,
+        "enemy_atk": 80,
+        "enemy_def": 70,
+        "enemy_agi": 247,
+        "enemy_mdef": 242,
+        "enemy_xp": 50,
+        "enemy_gp": 165
+      }
+    }
+  }
+}

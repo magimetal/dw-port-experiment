@@ -1,0 +1,94 @@
+{
+  "vectors": {
+    "endgame_a_to_title": {
+      "input": "A",
+      "pre_input_render_path": "endgame",
+      "pre_input_frame_contains_final_page_text": true,
+      "action": "endgame_return_to_title",
+      "action_detail": "restart",
+      "screen_mode": "title",
+      "session_exit": false,
+      "frame_contains_title": true,
+      "frame_contains_new_game": true,
+      "frame_contains_continue": true,
+      "player_name_after": "HERO",
+      "story_flags_after": 0,
+      "map_after": [
+        4,
+        5,
+        27
+      ],
+      "combat_session_cleared": true,
+      "dialog_session_cleared": true,
+      "dialog_box_state_cleared": true,
+      "opened_chest_indices": [],
+      "opened_doors": []
+    },
+    "endgame_z_to_title": {
+      "input": "Z",
+      "pre_input_render_path": "endgame",
+      "pre_input_frame_contains_final_page_text": true,
+      "action": "endgame_return_to_title",
+      "action_detail": "restart",
+      "screen_mode": "title",
+      "session_exit": false,
+      "frame_contains_title": true,
+      "frame_contains_new_game": true,
+      "frame_contains_continue": true,
+      "player_name_after": "HERO",
+      "story_flags_after": 0,
+      "map_after": [
+        4,
+        5,
+        27
+      ],
+      "combat_session_cleared": true,
+      "dialog_session_cleared": true,
+      "dialog_box_state_cleared": true,
+      "opened_chest_indices": [],
+      "opened_doors": []
+    },
+    "endgame_q_quit": {
+      "input": "Q",
+      "pre_input_render_path": "endgame",
+      "pre_input_frame_contains_final_page_text": true,
+      "action": "quit",
+      "action_detail": "endgame",
+      "screen_mode": "endgame",
+      "session_exit": true
+    },
+    "endgame_esc_quit": {
+      "input": "ESC",
+      "pre_input_render_path": "endgame",
+      "pre_input_frame_contains_final_page_text": true,
+      "action": "quit",
+      "action_detail": "endgame",
+      "screen_mode": "endgame",
+      "session_exit": true
+    },
+    "endgame_enter_regression": {
+      "input": "ENTER",
+      "pre_input_render_path": "endgame",
+      "pre_input_frame_contains_final_page_text": true,
+      "action": "endgame_return_to_title",
+      "action_detail": "restart",
+      "screen_mode": "title",
+      "session_exit": false,
+      "frame_contains_title": true,
+      "frame_contains_new_game": true,
+      "frame_contains_continue": true,
+      "player_name_after": "HERO",
+      "story_flags_after": 0,
+      "map_after": [
+        4,
+        5,
+        27
+      ],
+      "combat_session_cleared": true,
+      "dialog_session_cleared": true,
+      "dialog_box_state_cleared": true,
+      "opened_chest_indices": [],
+      "opened_doors": []
+    }
+  }
+}

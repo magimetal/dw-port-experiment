@@ -1,0 +1,15 @@
+{
+  "completed": true,
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank01.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank01.asm",
+      "bytes": 442264,
+      "lines": 9656,
+      "labels_checked": {
+        "BaseStatsTbl": true,
+        "SetBaseStats": true
+      }
+    }
+  }
+}

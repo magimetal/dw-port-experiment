@@ -1,0 +1,93 @@
+{
+  "phase": "4-slice-npc-interaction-dialog-handoff",
+  "all_passed": false,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": false,
+      "missing": [
+        "blessed",
+        "pytest",
+        "hypothesis"
+      ]
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase4_slice_npc_interaction_dialog_handoff_generator": {
+      "ok": true,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m ui.run_phase4_slice_main_loop",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_main_loop_npc_interaction_dialog_handoff_artifacts": {
+      "ok": true,
+      "detail": {
+        "report": {
+          "slice": "phase4-main-loop-npc-interaction-dialog-handoff",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "interact_adjacent_npc_enters_dialog_mode": true,
+            "npc_dialog_handoff_advances_and_returns_map": true,
+            "npc_dialog_uses_npc_and_dialog_extract_data": true,
+            "interact_without_adjacent_npc_noops": true
+          },
+          "outputs": {
+            "report": "artifacts/phase4_main_loop_npc_interaction_dialog_handoff.json",
+            "vectors_fixture": "tests/fixtures/main_loop_npc_interaction_dialog_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          },
+          "scope_note": "Phase 4 bounded NPC interaction handoff: map-mode interact checks adjacent NPC in facing direction, filters by story-variant visibility, and routes into dialog mode using existing dialog session/box flow."
+        },
+        "vectors": {
+          "vectors": {
+            "adjacent_npc": {
+              "initial_screen_mode": "dialog",
+              "initial_action": "npc_interact_dialog",
+              "initial_action_detail": "control:98;block:TextBlock3",
+              "advance_action": "dialog_page_advance",
+              "done_action": "dialog_done",
+              "final_screen_mode": "map",
+              "line_one_contains_speaker": true,
+              "line_two_contains_dialog_ref": true
+            },
+            "no_adjacent_npc": {
+              "screen_mode": "map",
+              "action": "npc_interact_none",
+              "action_detail": "down"
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase4_npc_interaction_dialog_handoff_slice": {
+      "ok": false,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m pytest tests/ -v",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "/opt/homebrew/opt/python@3.14/bin/python3.14: No module named pytest\n"
+    }
+  }
+}

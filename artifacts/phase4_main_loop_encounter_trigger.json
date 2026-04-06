@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-encounter-trigger",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "movement_rolls_random_encounter": true,
+    "encounter_transition_enters_combat_mode": true,
+    "encounter_rng_progression_is_deterministic": true,
+    "combat_frame_rendered_after_encounter": true,
+    "movement_seed_can_skip_encounter": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_encounter_trigger.json",
+    "vectors_fixture": "tests/fixtures/main_loop_encounter_trigger_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded encounter integration only: movement triggers overworld encounter checks, transitions map->combat, and records deterministic enemy/rng evidence without full combat resolution."
+}

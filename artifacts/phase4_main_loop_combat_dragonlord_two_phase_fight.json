@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-combat-dragonlord-two-phase-fight",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "phase1_defeat_transitions_to_phase2_full_hp_stats": true,
+    "phase2_defeat_uses_existing_victory_flow_zero_rewards": true,
+    "run_blocked_in_both_dragonlord_phases": true,
+    "phase1_no_excellent_move_guard_enforced": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_dragonlord_two_phase_fight.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_dragonlord_two_phase_fight_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

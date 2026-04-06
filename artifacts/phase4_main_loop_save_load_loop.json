@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-save-load-loop",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "title_continue_handoff_enters_map_mode": true,
+    "title_continue_load_matches_saved_payload": true,
+    "quit_from_map_triggers_json_save": true,
+    "quit_save_roundtrip_matches_state": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_save_load_loop.json",
+    "vectors_fixture": "tests/fixtures/main_loop_save_load_loop_vectors.json",
+    "runtime_save": "artifacts/phase4_save_load_loop_runtime_save.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded save/load integration only: title CONTINUE wiring through main session and save-on-exit trigger from active map session."
+}

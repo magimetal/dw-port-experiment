@@ -1,0 +1,25 @@
+{
+  "vectors": {
+    "render": {
+      "line_count": 6,
+      "col_count": 11,
+      "sha1": "dfc72598729f1923d0b1bfee229716beaa3c69b1",
+      "deterministic_repeat_match": true,
+      "first_line": "\u250c COMMAND \u2510",
+      "last_line": "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "contains_cursor_fight": true,
+      "contains_item_row": true
+    },
+    "input": {
+      "initial_cursor": 0,
+      "down_cursor": 1,
+      "up_wrap_cursor": 3,
+      "select_kind": "select",
+      "select_index": 2,
+      "cancel_kind": "cancel"
+    },
+    "purity": {
+      "initial_still_zero_after_transitions": true
+    }
+  }
+}

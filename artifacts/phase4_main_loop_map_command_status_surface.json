@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-command-status-surface",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "command_menu_select_status_opens_status_overlay": true,
+    "status_overlay_blocks_map_movement_while_open": true,
+    "status_overlay_closes_cleanly_back_to_map": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_status_surface.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_status_surface_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded STATUS integration: STATUS opens a deterministic status overlay from map mode, blocks map movement while open, and closes cleanly back to map without side effects."
+}

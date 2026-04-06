@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-npc-shop-sell-handoff",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "npc_shop_sell_handoff_sells_owned_item": true,
+    "npc_shop_sell_handoff_rejects_when_unsellable_or_missing": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_shop_sell_handoff.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_shop_sell_handoff_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded shop sell handoff: currently supported shop NPC controls accept deterministic SHOP_SELL:<item_id> flow through ShopRuntime.sell, update inventory/gold, and emit deterministic dialog outcomes without full shop browse UI parity."
+}

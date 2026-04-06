@@ -1,0 +1,53 @@
+{
+  "completed": true,
+  "slice": "phase2-items",
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "ChkTorch": true,
+        "UseTorch": true,
+        "ChkFryWtr": true,
+        "ChkWings": true,
+        "UseWings": true,
+        "ChkDragonScale": true,
+        "ChkHarp": true,
+        "HarpRNGLoop": true,
+        "ChkDrop": true,
+        "ChkOutside": true,
+        "DoReturn": true,
+        "WearCursedItem": true,
+        "ChkDeathNecklace": true,
+        "CheckTantCursed": true,
+        "LCB73": true
+      }
+    },
+    "Dragon_Warrior_Defines.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Dragon_Warrior_Defines.asm",
+      "bytes": 73176,
+      "lines": 1370,
+      "labels_checked": {
+        "F_RNBW_BRDG": true,
+        "F_DRGSCALE": true,
+        "F_CRSD_BELT": true,
+        "F_DTH_NECKLACE": true,
+        "IS_CURSED": true,
+        "INV_TORCH": true,
+        "INV_FAIRY": true,
+        "INV_WINGS": true,
+        "INV_SCALE": true,
+        "INV_HARP": true,
+        "INV_BELT": true,
+        "INV_NECKLACE": true,
+        "INV_DROP": true,
+        "MAP_OVERWORLD": true,
+        "MAP_DLCSTL_BF": true,
+        "MAP_ERDRCK_B1": true,
+        "MAP_DUNGEON": true
+      }
+    }
+  }
+}

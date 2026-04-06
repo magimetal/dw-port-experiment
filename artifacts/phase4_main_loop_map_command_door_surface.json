@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-command-door-surface",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "door_select_uses_key_when_facing_door": true,
+    "door_rejects_when_no_door_facing": true,
+    "door_rejects_when_no_key_available": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_door_surface.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_door_surface_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded DOOR integration: DOOR consumes one key when a door tile is directly in front of the player, and rejects deterministically when no door is present or no key is available."
+}

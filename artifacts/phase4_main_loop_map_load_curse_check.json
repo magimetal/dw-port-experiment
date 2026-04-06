@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-load-curse-check",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "map_load_with_cursed_belt_sets_hp_to_1": true,
+    "map_load_without_curse_flag_preserves_hp": true,
+    "step_hook_regression_unchanged": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_load_curse_check.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_load_curse_check_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded map-load curse-check slice: after warp/stairs map load, CURSED_BELT forces HP=1 and annotates action_detail with cursed_belt:hp_set_to_1_on_load; non-cursed map-load keeps HP unchanged; v69 cursed step hook remains unchanged."
+}

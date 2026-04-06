@@ -1,0 +1,73 @@
+{
+  "vectors": {
+    "fight": {
+      "action": "combat_turn",
+      "action_detail": "FIGHT",
+      "screen_mode": "combat",
+      "enemy_hp_after": 7,
+      "player_hp_after": 11,
+      "rng_after": [
+        141,
+        182
+      ],
+      "frame_contains_player_hit": true,
+      "frame_contains_enemy_hit": true
+    },
+    "spell_hurt": {
+      "action": "combat_victory",
+      "action_detail": "HURT",
+      "screen_mode": "dialog",
+      "enemy_hp_after": null,
+      "player_hp_after": 15,
+      "mp_after": 10,
+      "rng_after": [
+        141,
+        182
+      ],
+      "frame_contains_hurt": false,
+      "frame_contains_enemy_hit": false
+    },
+    "item": {
+      "action": "combat_turn",
+      "action_detail": "ITEM",
+      "screen_mode": "combat",
+      "enemy_hp_after": 7,
+      "player_hp_after": 13,
+      "rng_after": [
+        129,
+        3
+      ],
+      "frame_contains_item_noop": true
+    },
+    "run": {
+      "action": "combat_run",
+      "action_detail": "RUN",
+      "screen_mode": "map",
+      "combat_session_cleared": true
+    },
+    "excellent_fight": {
+      "action": "combat_turn",
+      "action_detail": "FIGHT",
+      "screen_mode": "combat",
+      "enemy_hp_after": 4,
+      "player_hp_after": 11,
+      "rng_after": [
+        141,
+        155
+      ],
+      "frame_contains_excellent": true
+    },
+    "run_fail": {
+      "action": "combat_run_failed",
+      "action_detail": "RUN",
+      "screen_mode": "combat",
+      "combat_session_present": true,
+      "player_hp_after": 13,
+      "rng_after": [
+        129,
+        0
+      ],
+      "frame_contains_blocked": true
+    }
+  }
+}

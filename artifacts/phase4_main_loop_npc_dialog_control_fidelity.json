@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-npc-dialog-control-fidelity",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "bounded_controls_map_to_expected_dialog_entries": true,
+    "control_62_princess_flag_branches_to_next_entry": true,
+    "npc_interaction_handoff_uses_resolved_control_98": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_dialog_control_fidelity.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_dialog_control_fidelity_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded NPC dialog-control fidelity: replace modulo block mapping with Bank03-driven dialog-control resolution for regular and princess-branching controls, with deterministic block/entry evidence over extracted NPC control values."
+}

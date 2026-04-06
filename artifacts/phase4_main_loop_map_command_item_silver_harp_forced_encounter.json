@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-command-item-silver-harp-forced-encounter",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "item_menu_lists_silver_harp_target": true,
+    "silver_harp_use_forces_overworld_encounter": true,
+    "silver_harp_use_rejects_off_overworld_without_consuming": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_item_silver_harp_forced_encounter.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_item_silver_harp_forced_encounter_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded ITEM Silver Harp forced-encounter slice: verifies overworld ITEM use enters the combat handoff deterministically via forced enemy selection and rejects deterministically off overworld with no inventory mutation."
+}

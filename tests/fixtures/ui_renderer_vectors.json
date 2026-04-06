@@ -1,0 +1,49 @@
+{
+  "vectors": {
+    "dispatch": {
+      "title": {
+        "rendered": true,
+        "line_count": 24,
+        "col_count": 80,
+        "marker": "W A R R I O R",
+        "contains_marker": true
+      },
+      "map": {
+        "rendered": true,
+        "line_count": 24,
+        "col_count": 80,
+        "marker": "@",
+        "contains_marker": true
+      },
+      "combat": {
+        "rendered": true,
+        "line_count": 24,
+        "col_count": 80,
+        "marker": "BATTLE",
+        "contains_marker": true
+      },
+      "dialog": {
+        "rendered": true,
+        "line_count": 24,
+        "col_count": 80,
+        "marker": "\u2554",
+        "contains_marker": true
+      }
+    },
+    "double_buffer": {
+      "writes_after_first": 1,
+      "writes_after_second": 1,
+      "writes_after_third": 2
+    },
+    "resize": {
+      "small_contains_notice": true,
+      "small_contains_current": true,
+      "recover_contains_player": true
+    },
+    "write_behavior": {
+      "flush_count": 8,
+      "last_write_line_count": 24,
+      "last_write_col_count": 80
+    }
+  }
+}

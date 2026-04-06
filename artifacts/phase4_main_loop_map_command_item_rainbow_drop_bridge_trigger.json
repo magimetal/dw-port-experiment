@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-map-command-item-rainbow-drop-bridge-trigger",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "item_menu_lists_rainbow_drop_target": true,
+    "rainbow_drop_use_sets_bridge_flag_and_bridge_tile": true,
+    "rainbow_drop_use_rejects_off_coords_without_consuming": true,
+    "rainbow_drop_use_rejects_when_bridge_already_built": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_item_rainbow_drop_bridge_trigger.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_item_rainbow_drop_bridge_trigger_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded ITEM Rainbow Drop bridge-trigger slice: verifies map ITEM use succeeds only at the Charlock coordinates, sets bridge flag, and yields deterministic rejection off-coords/already-built without inventory consumption."
+}

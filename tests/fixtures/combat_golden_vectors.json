@@ -1,0 +1,46 @@
+{
+  "source": {
+    "bank03_labels": [
+      "PlyrCalcHitDmg",
+      "EnCalcHitDmg",
+      "NormalAttack",
+      "PlyrWeakAttack",
+      "EnWeakAttack",
+      "DoHeal",
+      "DoHealmore",
+      "ModEnHitPoints",
+      "ChkSpellFail",
+      "EnCastHurt",
+      "EnCastHurtmore",
+      "LE61F"
+    ]
+  },
+  "vectors": {
+    "player_attack_max_atk": 63,
+    "player_attack_weak_negative": 0,
+    "player_attack_weak_lt2": 1,
+    "enemy_attack_zero_zero": 0,
+    "enemy_attack_equal_threshold": 22,
+    "enemy_hp_init_low": 1,
+    "excellent_move_non_dl": true,
+    "excellent_move_dl_blocked": false,
+    "excellent_move_damage": 71,
+    "heal_min": 10,
+    "heal_max": 17,
+    "healmore_min": 85,
+    "healmore_max": 100,
+    "hurt_min": 5,
+    "hurt_max": 12,
+    "hurtmore_min": 58,
+    "hurtmore_max": 65,
+    "enemy_hurt_armor": 6,
+    "enemy_hurt_armor_base5": 3,
+    "enemy_hurtmore_armor": 30,
+    "enemy_hurtmore_armor_base32": 21,
+    "spell_fail_true": true,
+    "spell_fail_false": false,
+    "force_field_clamp": 0,
+    "swamp_clamp": 0,
+    "step_heal_cap": 254
+  }
+}

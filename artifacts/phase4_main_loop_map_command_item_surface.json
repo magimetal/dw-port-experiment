@@ -1,0 +1,24 @@
+{
+  "slice": "phase4-main-loop-map-command-item-surface",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "command_menu_select_item_opens_item_menu_surface": true,
+    "item_menu_blocks_movement_input_while_open": true,
+    "item_menu_cancel_returns_to_map": true,
+    "item_menu_select_torch_uses_runtime_path": true,
+    "item_menu_select_torch_rejects_when_not_usable_here": true,
+    "item_menu_rejects_when_inventory_is_empty": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_item_surface.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_item_surface_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded ITEM integration: ITEM opens deterministic inventory surface from map command root, consumes map movement while open, supports bounded item-use routing via ItemsRuntime where available, and closes cleanly."
+}

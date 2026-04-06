@@ -1,0 +1,54 @@
+{
+  "slice": "phase1-enemies",
+  "entry_count": 40,
+  "table_start": "0x5e5b",
+  "entry_bytes": 16,
+  "first_enemy": {
+    "enemy_id": 0,
+    "name": "Slime",
+    "rom_offset": "0x5e5b",
+    "atk": 5,
+    "def": 3,
+    "hp": 3,
+    "pattern_flags": 0,
+    "agi": 15,
+    "mdef": 1,
+    "xp": 1,
+    "gp": 2,
+    "name_bytes": [
+      105,
+      64,
+      74,
+      77,
+      250,
+      250,
+      250,
+      250
+    ],
+    "name_hex": "69404a4dfafafafa"
+  },
+  "last_enemy": {
+    "enemy_id": 39,
+    "name": "Dragonlord's True Form",
+    "rom_offset": "0x60cb",
+    "atk": 140,
+    "def": 200,
+    "hp": 130,
+    "pattern_flags": 14,
+    "agi": 255,
+    "mdef": 240,
+    "xp": 0,
+    "gp": 0,
+    "name_bytes": [
+      49,
+      58,
+      12,
+      14,
+      12,
+      250,
+      250,
+      250
+    ],
+    "name_hex": "313a0c0e0cfafafa"
+  }
+}

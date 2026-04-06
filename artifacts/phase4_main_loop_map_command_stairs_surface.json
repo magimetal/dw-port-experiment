@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-command-stairs-surface",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "stairs_select_uses_warp_when_present": true,
+    "stairs_rejects_when_no_warp_on_tile": true,
+    "stairs_rejects_on_non_dungeon_maps": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_stairs_surface.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_stairs_surface_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded STAIRS integration: STAIRS uses extracted warp data for deterministic transition on supported dungeon stair tiles and rejects deterministically when unavailable."
+}

@@ -1,0 +1,37 @@
+{
+  "vectors": {
+    "search_herb_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:24;contents:17;reward:herb:+1;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_herb": true,
+      "herbs_after": 1
+    },
+    "search_key_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:20;contents:18;reward:key:+1;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_key": true,
+      "magic_keys_after": 1
+    },
+    "search_tool_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:8;contents:20;reward:item:FAIRY_WATER;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_tool": true,
+      "inventory_slots_after": [
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_key_chest_reopen": {
+      "action": "map_search",
+      "action_detail": "chest:index:20;contents:18;opened:true;reward:none",
+      "screen_mode": "dialog",
+      "frame_contains_empty": true,
+      "magic_keys_after": 1
+    }
+  }
+}

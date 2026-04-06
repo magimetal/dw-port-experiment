@@ -1,0 +1,17 @@
+{
+  "vectors": {
+    "control_6c_trade": {
+      "initial_action_detail": "control:108;byte:0xB2;block:TextBlock12;entry:2;side_effect:staff_of_rain_granted",
+      "done_steps": 1,
+      "inventory_after_trade": [
+        13,
+        0,
+        0,
+        0
+      ],
+      "has_harp_after_trade": false,
+      "has_staff_after_trade": true,
+      "follow_up_action_detail": "control:108;byte:0xA5;block:TextBlock11;entry:5"
+    }
+  }
+}

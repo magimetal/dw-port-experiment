@@ -1,0 +1,25 @@
+{
+  "vectors": {
+    "door_success": {
+      "action": "map_door",
+      "action_detail": "opened:key_used",
+      "screen_mode": "dialog",
+      "magic_keys_after": 0,
+      "frame_contains_opened": true
+    },
+    "door_no_door_rejected": {
+      "action": "map_door_rejected",
+      "action_detail": "no_door",
+      "screen_mode": "dialog",
+      "magic_keys_after": 3,
+      "frame_contains_no_door": true
+    },
+    "door_no_key_rejected": {
+      "action": "map_door_rejected",
+      "action_detail": "no_key",
+      "screen_mode": "dialog",
+      "magic_keys_after": 0,
+      "frame_contains_no_key": true
+    }
+  }
+}

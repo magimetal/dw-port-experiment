@@ -1,0 +1,39 @@
+{
+  "vectors": {
+    "dragonlord_phase2_victory": {
+      "action": "combat_victory",
+      "action_detail": "dragonlord_endgame",
+      "screen_mode": "dialog",
+      "experience_before": 321,
+      "experience_after": 321,
+      "gold_before": 654,
+      "gold_after": 654,
+      "story_flags_before": 0,
+      "story_flags_after": 4,
+      "dragonlord_dead_flag_set": true,
+      "combat_session_cleared": true,
+      "frame_contains_special_page_1": true,
+      "frame_contains_generic_rewards": false,
+      "frame": "                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557  \n\u2551Thou hast brought us peace, again                                           \u2551  \n\u2551                                                                            \u2551  \n\u2551                                                                            \u2551  \n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d  "
+    },
+    "ending_dialog_sequence": {
+      "first_action": "combat_victory",
+      "first_screen_mode": "dialog",
+      "first_frame_contains_page_1": true,
+      "second_action": "dialog_page_advance",
+      "second_screen_mode": "dialog",
+      "second_frame_contains_page_2": true,
+      "third_action": "dialog_page_advance",
+      "third_screen_mode": "dialog",
+      "third_frame_contains_page_3": true,
+      "done_action": "dialog_done",
+      "done_screen_mode": "endgame",
+      "done_frame_contains_the_end": true
+    },
+    "npc_render_after_flag": {
+      "default_story_right_of_center": "\u2591",
+      "post_dragonlord_right_of_center": "Z",
+      "post_variant_uses_wizard_sprite": true
+    }
+  }
+}

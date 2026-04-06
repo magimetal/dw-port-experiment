@@ -1,0 +1,642 @@
+{
+  "phase": "1-slice-zones",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_zones_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_zones",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_zones_artifacts": {
+      "ok": true,
+      "detail": {
+        "zones": {
+          "source": {
+            "bank03_labels": [
+              "RepelTbl",
+              "OvrWrldEnGrid",
+              "CaveEnIndexTbl",
+              "EnemyGroupsTbl"
+            ],
+            "repel_table_start": "0xf50a",
+            "overworld_zone_grid_start": "0xf532",
+            "cave_en_index_table_start": "0xf552",
+            "enemy_groups_table_start": "0xf55f"
+          },
+          "overworld_zone_grid": [
+            [
+              3,
+              3,
+              2,
+              2,
+              3,
+              5,
+              4,
+              5
+            ],
+            [
+              3,
+              2,
+              1,
+              2,
+              3,
+              3,
+              4,
+              5
+            ],
+            [
+              4,
+              1,
+              0,
+              0,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              5,
+              1,
+              1,
+              12,
+              6,
+              6,
+              6,
+              6
+            ],
+            [
+              5,
+              5,
+              4,
+              12,
+              9,
+              7,
+              7,
+              7
+            ],
+            [
+              10,
+              9,
+              8,
+              12,
+              12,
+              12,
+              8,
+              7
+            ],
+            [
+              10,
+              10,
+              11,
+              12,
+              13,
+              13,
+              9,
+              8
+            ],
+            [
+              11,
+              11,
+              12,
+              13,
+              13,
+              12,
+              9,
+              9
+            ]
+          ],
+          "overworld_zone_grid_raw_bytes": [
+            51,
+            34,
+            53,
+            69,
+            50,
+            18,
+            51,
+            69,
+            65,
+            0,
+            35,
+            69,
+            81,
+            28,
+            102,
+            102,
+            85,
+            76,
+            151,
+            119,
+            169,
+            140,
+            204,
+            135,
+            170,
+            188,
+            221,
+            152,
+            187,
+            205,
+            220,
+            153
+          ],
+          "overworld_formation_table": [
+            [
+              "Slime",
+              "Red Slime",
+              "Slime",
+              "Red Slime",
+              "Slime"
+            ],
+            [
+              "Red Slime",
+              "Slime",
+              "Red Slime",
+              "Drakee",
+              "Red Slime"
+            ],
+            [
+              "Slime",
+              "Ghost",
+              "Drakee",
+              "Ghost",
+              "Red Slime"
+            ],
+            [
+              "Red Slime",
+              "Red Slime",
+              "Drakee",
+              "Ghost",
+              "Magician"
+            ],
+            [
+              "Ghost",
+              "Magician",
+              "Magidrakee",
+              "Magidrakee",
+              "Scorpion"
+            ],
+            [
+              "Ghost",
+              "Magician",
+              "Magidrakee",
+              "Scorpion",
+              "Skeleton"
+            ],
+            [
+              "Magidrakee",
+              "Scorpion",
+              "Skeleton",
+              "Warlock",
+              "Wolf"
+            ],
+            [
+              "Skeleton",
+              "Warlock",
+              "Metal Scorpion",
+              "Wolf",
+              "Wolf"
+            ],
+            [
+              "Metal Scorpion",
+              "Wraith",
+              "Wolflord",
+              "Wolflord",
+              "Goldman"
+            ],
+            [
+              "Wraith",
+              "Wyvern",
+              "Wolflord",
+              "Wyvern",
+              "Goldman"
+            ],
+            [
+              "Wyvern",
+              "Rogue Scorpion",
+              "Wraith Knight",
+              "Knight",
+              "Demon Knight"
+            ],
+            [
+              "Wraith Knight",
+              "Knight",
+              "Magiwyvern",
+              "Demon Knight",
+              "Metal Slime"
+            ],
+            [
+              "Knight",
+              "Magiwyvern",
+              "Demon Knight",
+              "Werewolf",
+              "Starwyvern"
+            ],
+            [
+              "Werewolf",
+              "Green Dragon",
+              "Starwyvern",
+              "Starwyvern",
+              "Wizard"
+            ]
+          ],
+          "dungeon_formation_table": [
+            [
+              "Poltergeist",
+              "Droll",
+              "Drakeema",
+              "Skeleton",
+              "Warlock"
+            ],
+            [
+              "Specter",
+              "Wolflord",
+              "Druinlord",
+              "Drollmagi",
+              "Wraith Knight"
+            ],
+            [
+              "Werewolf",
+              "Green Dragon",
+              "Starwyvern",
+              "Wizard",
+              "Axe Knight"
+            ],
+            [
+              "Wizard",
+              "Axe Knight",
+              "Blue Dragon",
+              "Blue Dragon",
+              "Stoneman"
+            ],
+            [
+              "Wizard",
+              "Stoneman",
+              "Armored Knight",
+              "Armored Knight",
+              "Red Dragon"
+            ],
+            [
+              "Ghost",
+              "Magician",
+              "Scorpion",
+              "Druin",
+              "Druin"
+            ]
+          ],
+          "enemy_groups_table": [
+            [
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              3,
+              2,
+              3,
+              1
+            ],
+            [
+              1,
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              3,
+              4,
+              5,
+              5,
+              6
+            ],
+            [
+              3,
+              4,
+              5,
+              6,
+              11
+            ],
+            [
+              5,
+              6,
+              11,
+              12,
+              14
+            ],
+            [
+              11,
+              12,
+              13,
+              14,
+              14
+            ],
+            [
+              13,
+              15,
+              18,
+              18,
+              25
+            ],
+            [
+              15,
+              21,
+              18,
+              21,
+              25
+            ],
+            [
+              21,
+              22,
+              23,
+              26,
+              28
+            ],
+            [
+              23,
+              26,
+              27,
+              28,
+              16
+            ],
+            [
+              26,
+              27,
+              28,
+              29,
+              31
+            ],
+            [
+              29,
+              30,
+              31,
+              31,
+              32
+            ],
+            [
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            [
+              17,
+              18,
+              19,
+              20,
+              23
+            ],
+            [
+              29,
+              30,
+              31,
+              32,
+              33
+            ],
+            [
+              32,
+              33,
+              34,
+              34,
+              35
+            ],
+            [
+              32,
+              35,
+              36,
+              36,
+              37
+            ],
+            [
+              3,
+              4,
+              6,
+              7,
+              7
+            ]
+          ],
+          "cave_index_table": [
+            16,
+            17,
+            17,
+            17,
+            18,
+            18,
+            19,
+            19,
+            14,
+            14,
+            7,
+            15,
+            15
+          ],
+          "repel_table": [
+            5,
+            7,
+            9,
+            11,
+            11,
+            14,
+            18,
+            20,
+            18,
+            24,
+            22,
+            28,
+            28,
+            36,
+            40,
+            44,
+            10,
+            40,
+            50,
+            47,
+            52,
+            56,
+            60,
+            68,
+            120,
+            48,
+            76,
+            78,
+            79,
+            86,
+            88,
+            86,
+            80,
+            94,
+            98,
+            100,
+            105,
+            120,
+            90,
+            140
+          ]
+        },
+        "artifact": {
+          "slice": "phase1-zones",
+          "tables": {
+            "repel": {
+              "start": "0xf50a",
+              "bytes": 40
+            },
+            "overworld_zone_grid": {
+              "start": "0xf532",
+              "bytes": 32
+            },
+            "cave_en_index": {
+              "start": "0xf552",
+              "bytes": 13
+            },
+            "enemy_groups": {
+              "start": "0xf55f",
+              "bytes": 100,
+              "rows": 20,
+              "row_width": 5,
+              "overworld_rows": 14
+            }
+          },
+          "zone_grid_first_row": [
+            3,
+            3,
+            2,
+            2,
+            3,
+            5,
+            4,
+            5
+          ],
+          "zone_grid_last_row": [
+            11,
+            11,
+            12,
+            13,
+            13,
+            12,
+            9,
+            9
+          ],
+          "formation_row_0_ids": [
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "formation_row_13_ids": [
+            29,
+            30,
+            31,
+            31,
+            32
+          ],
+          "formation_row_14_ids": [
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "formation_row_19_ids": [
+            3,
+            4,
+            6,
+            7,
+            7
+          ],
+          "cave_index_table": [
+            16,
+            17,
+            17,
+            17,
+            18,
+            18,
+            19,
+            19,
+            14,
+            14,
+            7,
+            15,
+            15
+          ],
+          "repel_first_ten": [
+            5,
+            7,
+            9,
+            11,
+            11,
+            14,
+            18,
+            20,
+            18,
+            24
+          ],
+          "repel_last_five": [
+            100,
+            105,
+            120,
+            90,
+            140
+          ]
+        },
+        "read_gate": {
+          "completed": true,
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "file": {
+            "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+            "bytes": 457772,
+            "lines": 10921,
+            "labels_checked": {
+              "RepelTbl": true,
+              "OvrWrldEnGrid": true,
+              "CaveEnIndexTbl": true,
+              "EnemyGroupsTbl": true
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase1_zones_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 13 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  7%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [ 15%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 23%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [ 30%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 38%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 46%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 53%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 61%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 69%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 76%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 84%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 92%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [100%]\n\n============================== 13 passed in 0.06s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

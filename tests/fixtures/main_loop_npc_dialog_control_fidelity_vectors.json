@@ -1,0 +1,578 @@
+{
+  "vectors": {
+    "bounded_control_count": 80,
+    "bounded_controls": [
+      {
+        "control": 22,
+        "dialog_byte": "0x45",
+        "block_id": 5,
+        "entry_index": 5,
+        "matches_expected": true
+      },
+      {
+        "control": 23,
+        "dialog_byte": "0x46",
+        "block_id": 5,
+        "entry_index": 6,
+        "matches_expected": true
+      },
+      {
+        "control": 24,
+        "dialog_byte": "0x47",
+        "block_id": 5,
+        "entry_index": 7,
+        "matches_expected": true
+      },
+      {
+        "control": 25,
+        "dialog_byte": "0x48",
+        "block_id": 5,
+        "entry_index": 8,
+        "matches_expected": true
+      },
+      {
+        "control": 26,
+        "dialog_byte": "0x49",
+        "block_id": 5,
+        "entry_index": 9,
+        "matches_expected": true
+      },
+      {
+        "control": 27,
+        "dialog_byte": "0x4A",
+        "block_id": 5,
+        "entry_index": 10,
+        "matches_expected": true
+      },
+      {
+        "control": 28,
+        "dialog_byte": "0x4B",
+        "block_id": 5,
+        "entry_index": 11,
+        "matches_expected": true
+      },
+      {
+        "control": 29,
+        "dialog_byte": "0x4C",
+        "block_id": 5,
+        "entry_index": 12,
+        "matches_expected": true
+      },
+      {
+        "control": 30,
+        "dialog_byte": "0x4D",
+        "block_id": 5,
+        "entry_index": 13,
+        "matches_expected": true
+      },
+      {
+        "control": 31,
+        "dialog_byte": "0x4E",
+        "block_id": 5,
+        "entry_index": 14,
+        "matches_expected": true
+      },
+      {
+        "control": 32,
+        "dialog_byte": "0x4F",
+        "block_id": 5,
+        "entry_index": 15,
+        "matches_expected": true
+      },
+      {
+        "control": 33,
+        "dialog_byte": "0x50",
+        "block_id": 6,
+        "entry_index": 0,
+        "matches_expected": true
+      },
+      {
+        "control": 34,
+        "dialog_byte": "0x51",
+        "block_id": 6,
+        "entry_index": 1,
+        "matches_expected": true
+      },
+      {
+        "control": 35,
+        "dialog_byte": "0x52",
+        "block_id": 6,
+        "entry_index": 2,
+        "matches_expected": true
+      },
+      {
+        "control": 36,
+        "dialog_byte": "0x53",
+        "block_id": 6,
+        "entry_index": 3,
+        "matches_expected": true
+      },
+      {
+        "control": 37,
+        "dialog_byte": "0x54",
+        "block_id": 6,
+        "entry_index": 4,
+        "matches_expected": true
+      },
+      {
+        "control": 38,
+        "dialog_byte": "0x55",
+        "block_id": 6,
+        "entry_index": 5,
+        "matches_expected": true
+      },
+      {
+        "control": 39,
+        "dialog_byte": "0x56",
+        "block_id": 6,
+        "entry_index": 6,
+        "matches_expected": true
+      },
+      {
+        "control": 40,
+        "dialog_byte": "0x57",
+        "block_id": 6,
+        "entry_index": 7,
+        "matches_expected": true
+      },
+      {
+        "control": 41,
+        "dialog_byte": "0x58",
+        "block_id": 6,
+        "entry_index": 8,
+        "matches_expected": true
+      },
+      {
+        "control": 42,
+        "dialog_byte": "0x59",
+        "block_id": 6,
+        "entry_index": 9,
+        "matches_expected": true
+      },
+      {
+        "control": 43,
+        "dialog_byte": "0x5A",
+        "block_id": 6,
+        "entry_index": 10,
+        "matches_expected": true
+      },
+      {
+        "control": 44,
+        "dialog_byte": "0x5B",
+        "block_id": 6,
+        "entry_index": 11,
+        "matches_expected": true
+      },
+      {
+        "control": 45,
+        "dialog_byte": "0x5C",
+        "block_id": 6,
+        "entry_index": 12,
+        "matches_expected": true
+      },
+      {
+        "control": 46,
+        "dialog_byte": "0x5D",
+        "block_id": 6,
+        "entry_index": 13,
+        "matches_expected": true
+      },
+      {
+        "control": 47,
+        "dialog_byte": "0x5E",
+        "block_id": 6,
+        "entry_index": 14,
+        "matches_expected": true
+      },
+      {
+        "control": 48,
+        "dialog_byte": "0x5F",
+        "block_id": 6,
+        "entry_index": 15,
+        "matches_expected": true
+      },
+      {
+        "control": 49,
+        "dialog_byte": "0x60",
+        "block_id": 7,
+        "entry_index": 0,
+        "matches_expected": true
+      },
+      {
+        "control": 50,
+        "dialog_byte": "0x61",
+        "block_id": 7,
+        "entry_index": 1,
+        "matches_expected": true
+      },
+      {
+        "control": 51,
+        "dialog_byte": "0x62",
+        "block_id": 7,
+        "entry_index": 2,
+        "matches_expected": true
+      },
+      {
+        "control": 52,
+        "dialog_byte": "0x63",
+        "block_id": 7,
+        "entry_index": 3,
+        "matches_expected": true
+      },
+      {
+        "control": 53,
+        "dialog_byte": "0x64",
+        "block_id": 7,
+        "entry_index": 4,
+        "matches_expected": true
+      },
+      {
+        "control": 54,
+        "dialog_byte": "0x65",
+        "block_id": 7,
+        "entry_index": 5,
+        "matches_expected": true
+      },
+      {
+        "control": 55,
+        "dialog_byte": "0x66",
+        "block_id": 7,
+        "entry_index": 6,
+        "matches_expected": true
+      },
+      {
+        "control": 56,
+        "dialog_byte": "0x67",
+        "block_id": 7,
+        "entry_index": 7,
+        "matches_expected": true
+      },
+      {
+        "control": 57,
+        "dialog_byte": "0x68",
+        "block_id": 7,
+        "entry_index": 8,
+        "matches_expected": true
+      },
+      {
+        "control": 58,
+        "dialog_byte": "0x69",
+        "block_id": 7,
+        "entry_index": 9,
+        "matches_expected": true
+      },
+      {
+        "control": 59,
+        "dialog_byte": "0x6A",
+        "block_id": 7,
+        "entry_index": 10,
+        "matches_expected": true
+      },
+      {
+        "control": 60,
+        "dialog_byte": "0x6B",
+        "block_id": 7,
+        "entry_index": 11,
+        "matches_expected": true
+      },
+      {
+        "control": 61,
+        "dialog_byte": "0x6C",
+        "block_id": 7,
+        "entry_index": 12,
+        "matches_expected": true
+      },
+      {
+        "control": 62,
+        "dialog_byte": "0x6D",
+        "block_id": 7,
+        "entry_index": 13,
+        "matches_expected": true
+      },
+      {
+        "control": 63,
+        "dialog_byte": "0x6E",
+        "block_id": 7,
+        "entry_index": 14,
+        "matches_expected": true
+      },
+      {
+        "control": 64,
+        "dialog_byte": "0x6F",
+        "block_id": 7,
+        "entry_index": 15,
+        "matches_expected": true
+      },
+      {
+        "control": 65,
+        "dialog_byte": "0x70",
+        "block_id": 8,
+        "entry_index": 0,
+        "matches_expected": true
+      },
+      {
+        "control": 66,
+        "dialog_byte": "0x71",
+        "block_id": 8,
+        "entry_index": 1,
+        "matches_expected": true
+      },
+      {
+        "control": 67,
+        "dialog_byte": "0x72",
+        "block_id": 8,
+        "entry_index": 2,
+        "matches_expected": true
+      },
+      {
+        "control": 68,
+        "dialog_byte": "0x73",
+        "block_id": 8,
+        "entry_index": 3,
+        "matches_expected": true
+      },
+      {
+        "control": 69,
+        "dialog_byte": "0x74",
+        "block_id": 8,
+        "entry_index": 4,
+        "matches_expected": true
+      },
+      {
+        "control": 70,
+        "dialog_byte": "0x75",
+        "block_id": 8,
+        "entry_index": 5,
+        "matches_expected": true
+      },
+      {
+        "control": 71,
+        "dialog_byte": "0x76",
+        "block_id": 8,
+        "entry_index": 6,
+        "matches_expected": true
+      },
+      {
+        "control": 72,
+        "dialog_byte": "0x77",
+        "block_id": 8,
+        "entry_index": 7,
+        "matches_expected": true
+      },
+      {
+        "control": 73,
+        "dialog_byte": "0x78",
+        "block_id": 8,
+        "entry_index": 8,
+        "matches_expected": true
+      },
+      {
+        "control": 74,
+        "dialog_byte": "0x79",
+        "block_id": 8,
+        "entry_index": 9,
+        "matches_expected": true
+      },
+      {
+        "control": 75,
+        "dialog_byte": "0x7A",
+        "block_id": 8,
+        "entry_index": 10,
+        "matches_expected": true
+      },
+      {
+        "control": 76,
+        "dialog_byte": "0x7B",
+        "block_id": 8,
+        "entry_index": 11,
+        "matches_expected": true
+      },
+      {
+        "control": 77,
+        "dialog_byte": "0x7C",
+        "block_id": 8,
+        "entry_index": 12,
+        "matches_expected": true
+      },
+      {
+        "control": 78,
+        "dialog_byte": "0x7D",
+        "block_id": 8,
+        "entry_index": 13,
+        "matches_expected": true
+      },
+      {
+        "control": 79,
+        "dialog_byte": "0x7E",
+        "block_id": 8,
+        "entry_index": 14,
+        "matches_expected": true
+      },
+      {
+        "control": 80,
+        "dialog_byte": "0x7F",
+        "block_id": 8,
+        "entry_index": 15,
+        "matches_expected": true
+      },
+      {
+        "control": 81,
+        "dialog_byte": "0x80",
+        "block_id": 9,
+        "entry_index": 0,
+        "matches_expected": true
+      },
+      {
+        "control": 82,
+        "dialog_byte": "0x81",
+        "block_id": 9,
+        "entry_index": 1,
+        "matches_expected": true
+      },
+      {
+        "control": 83,
+        "dialog_byte": "0x82",
+        "block_id": 9,
+        "entry_index": 2,
+        "matches_expected": true
+      },
+      {
+        "control": 84,
+        "dialog_byte": "0x83",
+        "block_id": 9,
+        "entry_index": 3,
+        "matches_expected": true
+      },
+      {
+        "control": 85,
+        "dialog_byte": "0x84",
+        "block_id": 9,
+        "entry_index": 4,
+        "matches_expected": true
+      },
+      {
+        "control": 86,
+        "dialog_byte": "0x85",
+        "block_id": 9,
+        "entry_index": 5,
+        "matches_expected": true
+      },
+      {
+        "control": 87,
+        "dialog_byte": "0x86",
+        "block_id": 9,
+        "entry_index": 6,
+        "matches_expected": true
+      },
+      {
+        "control": 88,
+        "dialog_byte": "0x87",
+        "block_id": 9,
+        "entry_index": 7,
+        "matches_expected": true
+      },
+      {
+        "control": 89,
+        "dialog_byte": "0x88",
+        "block_id": 9,
+        "entry_index": 8,
+        "matches_expected": true
+      },
+      {
+        "control": 90,
+        "dialog_byte": "0x89",
+        "block_id": 9,
+        "entry_index": 9,
+        "matches_expected": true
+      },
+      {
+        "control": 91,
+        "dialog_byte": "0x8A",
+        "block_id": 9,
+        "entry_index": 10,
+        "matches_expected": true
+      },
+      {
+        "control": 92,
+        "dialog_byte": "0x8B",
+        "block_id": 9,
+        "entry_index": 11,
+        "matches_expected": true
+      },
+      {
+        "control": 93,
+        "dialog_byte": "0x8C",
+        "block_id": 9,
+        "entry_index": 12,
+        "matches_expected": true
+      },
+      {
+        "control": 94,
+        "dialog_byte": "0x8D",
+        "block_id": 9,
+        "entry_index": 13,
+        "matches_expected": true
+      },
+      {
+        "control": 95,
+        "dialog_byte": "0x8E",
+        "block_id": 9,
+        "entry_index": 14,
+        "matches_expected": true
+      },
+      {
+        "control": 96,
+        "dialog_byte": "0x8F",
+        "block_id": 9,
+        "entry_index": 15,
+        "matches_expected": true
+      },
+      {
+        "control": 97,
+        "dialog_byte": "0x90",
+        "block_id": 10,
+        "entry_index": 0,
+        "matches_expected": true
+      },
+      {
+        "control": 98,
+        "dialog_byte": "0x9B",
+        "block_id": 10,
+        "entry_index": 11,
+        "matches_expected": true
+      },
+      {
+        "control": 99,
+        "dialog_byte": "0x9B",
+        "block_id": 10,
+        "entry_index": 11,
+        "matches_expected": true
+      },
+      {
+        "control": 100,
+        "dialog_byte": "0x9E",
+        "block_id": 10,
+        "entry_index": 14,
+        "matches_expected": true
+      },
+      {
+        "control": 101,
+        "dialog_byte": "0xA0",
+        "block_id": 11,
+        "entry_index": 0,
+        "matches_expected": true
+      }
+    ],
+    "bounded_all_match": true,
+    "control_62_without_princess": {
+      "dialog_byte": "0x9B",
+      "block": "TextBlock10",
+      "entry": 11
+    },
+    "control_62_with_princess": {
+      "dialog_byte": "0x9C",
+      "block": "TextBlock10",
+      "entry": 12
+    }
+  }
+}

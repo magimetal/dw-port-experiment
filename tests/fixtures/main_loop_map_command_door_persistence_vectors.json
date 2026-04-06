@@ -1,0 +1,34 @@
+{
+  "vectors": {
+    "door_opened": {
+      "action": "map_door",
+      "action_detail": "opened:key_used",
+      "screen_mode": "dialog",
+      "magic_keys_after": 0,
+      "opened_door_count": 1,
+      "frame_contains_opened": true
+    },
+    "door_render_state": {
+      "before_closed_glyph": "+",
+      "after_open_glyph": "\u2591",
+      "center_before": "@",
+      "center_after": "@"
+    },
+    "door_passability": {
+      "action": "move",
+      "screen_mode": "map",
+      "player_after": [
+        18,
+        6
+      ]
+    },
+    "door_already_open": {
+      "action": "map_door",
+      "action_detail": "already_open",
+      "screen_mode": "dialog",
+      "magic_keys_after": 0,
+      "frame_contains_already_open": true,
+      "back_to_map_action": "dialog_done"
+    }
+  }
+}

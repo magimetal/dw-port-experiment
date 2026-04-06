@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-command-search-chest-rewards",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "search_no_chest_returns_deterministic_nothing_dialog": true,
+    "search_chest_applies_gold_reward_and_marks_opened": true,
+    "search_chest_reopen_is_empty_and_does_not_grant_again": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_search_chest_rewards.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_search_chest_rewards_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded SEARCH chest-reward integration: apply deterministic gold reward for supported chest content, track opened chest state, and prevent repeat collection."
+}

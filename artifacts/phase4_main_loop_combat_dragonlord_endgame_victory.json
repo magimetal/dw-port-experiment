@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-combat-dragonlord-endgame-victory",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "dragonlord_phase2_defeat_sets_dead_flag_and_uses_special_dialog": true,
+    "special_ending_dialog_pages_advance_to_bounded_endgame_mode": true,
+    "npc_sprite_resolution_respects_dead_flag_on_next_render": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_dragonlord_endgame_victory.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_dragonlord_endgame_victory_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slice": "phase3-status-panel",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "required_fields_present": true,
+    "equipment_row_decodes_expected": true,
+    "low_threshold_markers_present": true,
+    "fixed_width_and_deterministic": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_status_panel.json",
+    "vectors_fixture": "tests/fixtures/ui_status_panel_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 3 bounded status-panel completion only: required fields, equipment row, and deterministic low HP/MP threshold markers."
+}

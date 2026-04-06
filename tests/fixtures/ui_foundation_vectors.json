@@ -1,0 +1,50 @@
+{
+  "vectors": {
+    "layout": {
+      "cols": 80,
+      "rows": 24,
+      "map": [
+        0,
+        0,
+        21,
+        17
+      ],
+      "status": [
+        60,
+        0,
+        20
+      ],
+      "dialog": [
+        17,
+        7
+      ]
+    },
+    "viewport": {
+      "rows": 17,
+      "cols": 21,
+      "center_char": "@",
+      "top_left_char": ".",
+      "top_right_char": "^"
+    },
+    "frame": {
+      "line_count": 24,
+      "col_count": 80,
+      "sha1": "74b5a9fbe7347461321dfe18bb50910975657f4b",
+      "deterministic_repeat_match": true,
+      "player_glyph_count": 1,
+      "dialog_title_present": true,
+      "status_name_line": "NAME ERDRICK        "
+    },
+    "plan_references": {
+      "phase": "3",
+      "slice": "ui-foundation",
+      "items": [
+        "terminal bootstrap min 80x24",
+        "deterministic layout model",
+        "map viewport scaffold 21x17",
+        "status panel scaffold",
+        "dialog frame scaffold"
+      ]
+    }
+  }
+}

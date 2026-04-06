@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-map-command-root-surface",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "command_menu_open_shows_talk_and_spell": true,
+    "command_menu_cancel_returns_to_map_without_state_change": true,
+    "command_menu_select_spell_opens_spell_selection_surface": true,
+    "command_menu_select_talk_routes_existing_npc_dialog_flow": true,
+    "command_menu_select_talk_without_target_noops": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_root_surface.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_root_surface_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded map command-root surface: map-mode command menu opens TALK/SPELL options, TALK reuses NPC interaction flow, and SPELL reuses field spell-selection menu integration."
+}

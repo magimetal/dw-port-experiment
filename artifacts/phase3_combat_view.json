@@ -1,0 +1,26 @@
+{
+  "slice": "phase3-combat-view",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "fresh_game_has_no_spell_submenu": true,
+    "learned_spells_decode_from_state": true,
+    "hp_bar_approximation_works": true,
+    "command_menu_integrates": true,
+    "spell_submenu_runtime_works": true,
+    "spell_without_learned_spells_blocked": true,
+    "combat_log_retains_last_four": true,
+    "render_is_deterministic_80x24": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_combat_view.json",
+    "vectors_fixture": "tests/fixtures/ui_combat_view_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 3 bounded combat-view slice only: enemy panel, rough HP bar, command/spell menu runtime, and recent combat log window."
+}

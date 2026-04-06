@@ -1,0 +1,104 @@
+{
+  "vectors": {
+    "swamp_step_applies_2hp_damage": {
+      "action": "move",
+      "action_detail": "68,37",
+      "map_before": [
+        1,
+        68,
+        36
+      ],
+      "map_after": [
+        1,
+        68,
+        37
+      ],
+      "target_tile": 6,
+      "hp_before": 12,
+      "hp_after": 10
+    },
+    "force_field_step_applies_15hp_damage": {
+      "action": "move",
+      "action_detail": "9,1",
+      "map_before": [
+        2,
+        8,
+        1
+      ],
+      "map_after": [
+        2,
+        9,
+        1
+      ],
+      "target_tile": 13,
+      "hp_before": 20,
+      "hp_after": 5
+    },
+    "erdricks_armor_step_heal_applies": {
+      "action": "move",
+      "action_detail": "2,1",
+      "map_before": [
+        4,
+        1,
+        1
+      ],
+      "map_after": [
+        4,
+        2,
+        1
+      ],
+      "target_tile": 4,
+      "hp_before": 12,
+      "hp_after": 13
+    },
+    "swamp_with_erdricks_armor_is_immune": {
+      "action": "move",
+      "action_detail": "68,37",
+      "map_before": [
+        1,
+        68,
+        36
+      ],
+      "map_after": [
+        1,
+        68,
+        37
+      ],
+      "target_tile": 6,
+      "hp_before": 12,
+      "hp_after": 12
+    },
+    "magic_armor_4step_heal_applies": {
+      "step_actions": [
+        "move",
+        "move",
+        "move",
+        "move"
+      ],
+      "hp_before": 12,
+      "hp_after": 13,
+      "counter_after": 4,
+      "position_after": [
+        1,
+        1
+      ]
+    },
+    "neutral_step_has_no_terrain_effect": {
+      "action": "move",
+      "action_detail": "2,1",
+      "map_before": [
+        4,
+        1,
+        1
+      ],
+      "map_after": [
+        4,
+        2,
+        1
+      ],
+      "target_tile": 4,
+      "hp_before": 12,
+      "hp_after": 12
+    }
+  }
+}

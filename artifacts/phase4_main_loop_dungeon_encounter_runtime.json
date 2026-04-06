@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-dungeon-encounter-runtime",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "dungeon_movement_rolls_random_encounter": true,
+    "dungeon_encounter_transition_enters_combat_mode": true,
+    "dungeon_encounter_rng_progression_is_deterministic": true,
+    "dungeon_enemy_selection_uses_cave_index_table": true,
+    "dungeon_combat_frame_rendered_after_encounter": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_dungeon_encounter_runtime.json",
+    "vectors_fixture": "tests/fixtures/main_loop_dungeon_encounter_runtime_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded dungeon encounter runtime integration only: dungeon map movement now triggers encounter checks and deterministic enemy selection through CaveEnIndexTbl/EnemyGroupsTbl data, then hands off to combat mode."
+}

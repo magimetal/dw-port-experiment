@@ -1,0 +1,28 @@
+{
+  "slice": "phase2-movement",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "all_movement_labels_present": true,
+    "zone_grid_is_8x8": true,
+    "enemy_groups_has_20_rows": true,
+    "repel_table_has_40_values": true,
+    "zone_0_0_matches_expected": true,
+    "zone_119_119_matches_expected": true,
+    "swamp_plain_damages_2": true,
+    "force_field_plain_clamps_to_zero": true,
+    "zone0_abort_path_returns_none": true,
+    "repel_false_case_locked": true
+  },
+  "outputs": {
+    "read_gate": "artifacts/phase2_movement_read_gate.json",
+    "report": "artifacts/phase2_movement_logic.json",
+    "vectors_fixture": "tests/fixtures/movement_golden_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

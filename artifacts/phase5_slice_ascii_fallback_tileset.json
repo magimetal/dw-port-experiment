@@ -1,0 +1,67 @@
+{
+  "phase": "5-slice-ascii-fallback-tileset",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "check_phase5_slice_ascii_fallback_tileset": {
+      "ok": true,
+      "detail": {
+        "checks": {
+          "map_ascii_only": true,
+          "map_preserves_player_marker": true,
+          "map_preserves_status_marker": true,
+          "map_dialog_border_falls_back_to_ascii": true,
+          "combat_ascii_only": true,
+          "combat_preserves_battle_marker": true,
+          "combat_attack_cursor_falls_back_to_ascii": true,
+          "dialog_ascii_only": true,
+          "dialog_preserves_text_content": true,
+          "dialog_border_falls_back_to_ascii": true
+        },
+        "vectors": {
+          "map": {
+            "contains_non_ascii": false,
+            "contains_player": true,
+            "contains_status_name": true,
+            "contains_ascii_dialog_border": true,
+            "contains_unicode_dialog_border": false
+          },
+          "combat": {
+            "contains_non_ascii": false,
+            "contains_battle_marker": true,
+            "contains_ascii_cursor": true,
+            "contains_unicode_cursor": false
+          },
+          "dialog": {
+            "contains_non_ascii": false,
+            "contains_text": true,
+            "contains_ascii_border": true,
+            "contains_unicode_border": false
+          }
+        }
+      }
+    }
+  }
+}

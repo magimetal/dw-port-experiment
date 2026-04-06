@@ -1,0 +1,6 @@
+{
+  "rom_file": "dragon-warrior-1.nes",
+  "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+  "policy": "local-parity-baseline",
+  "source": "User-approved adaptation on 2026-03-29 to continue with local ROM instead of plan default SHA1"
+}

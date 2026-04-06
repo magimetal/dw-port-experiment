@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-scaffold",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "title_mode_renders": true,
+    "new_game_handoff_enters_map_mode": true,
+    "map_input_handoff_updates_state": true,
+    "tick_decrements_timers": true,
+    "quit_handoff_sets_session_exit": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_scaffold.json",
+    "vectors_fixture": "tests/fixtures/main_loop_scaffold_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded integration scaffold only: terminal session + renderer wiring, title/bootstrap handoff, map input routing, deterministic tick timers, and quit flow."
+}

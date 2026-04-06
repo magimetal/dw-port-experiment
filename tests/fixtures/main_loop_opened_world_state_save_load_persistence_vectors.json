@@ -1,0 +1,53 @@
+{
+  "vectors": {
+    "save_on_quit": {
+      "action": "quit",
+      "quit_requested": true,
+      "save_exists": true,
+      "world_state": {
+        "opened_chest_indices": [
+          0
+        ],
+        "opened_doors": [
+          [
+            4,
+            18,
+            6
+          ]
+        ]
+      }
+    },
+    "continue": {
+      "action": "continue_loaded",
+      "screen_mode": "map",
+      "restored_opened_chest_indices": [
+        0
+      ],
+      "restored_opened_doors": [
+        [
+          4,
+          18,
+          6
+        ]
+      ]
+    },
+    "reopen_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:0;contents:19;opened:true;reward:none",
+      "screen_mode": "dialog",
+      "frame_contains_empty": true
+    },
+    "reopen_door": {
+      "action": "map_door",
+      "action_detail": "already_open",
+      "screen_mode": "dialog",
+      "frame_contains_already_open": true,
+      "move_after_dialog_action": "move",
+      "move_after_dialog_screen_mode": "map",
+      "player_after_move": [
+        18,
+        6
+      ]
+    }
+  }
+}

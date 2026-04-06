@@ -1,0 +1,57 @@
+{
+  "vectors": {
+    "word_wrap": {
+      "hello_world_width_6": [
+        "Hello",
+        "World"
+      ],
+      "newline_split": [
+        "Line1",
+        "Line2"
+      ],
+      "long_word_force_break": [
+        "ABCDE",
+        "FGHIJ"
+      ],
+      "long_word_rejoined": "ABCDEFGHIJ"
+    },
+    "render": {
+      "line_count": 5,
+      "body_line_count": 3,
+      "sha1": "1a689a324ff8f998ac66fe1b3442cbf452b56525",
+      "deterministic_repeat_match": true,
+      "top_border_starts_with": "\u2554",
+      "top_border_ends_with": "\u2557",
+      "bottom_border_starts_with": "\u255a",
+      "bottom_border_ends_with": "\u255d",
+      "body_uses_vertical_bar": true,
+      "inner_width": 76
+    },
+    "paging": {
+      "page_count": 2,
+      "two_page_advance_kind": "page_advance",
+      "advanced_page_index": 1,
+      "last_page_done_kind": "dialog_done",
+      "continuation_indicator_present": true,
+      "continuation_indicator_column": 76,
+      "continuation_indicator_absent_last": true
+    },
+    "dialog_engine_integration": {
+      "page_one_contains_player_name": true,
+      "page_one_contains_gold_cost": true,
+      "page_one_preserves_unknown_marker": true,
+      "page_one_has_line_break": true,
+      "render_contains_player_name": true,
+      "page_two_text": "Second page",
+      "session_done_after_two_pages": true
+    },
+    "typewriter": {
+      "initial_char_reveal": 0,
+      "after_tick_3": 3,
+      "after_skip": -1
+    },
+    "purity": {
+      "original_page_unchanged_after_advance": true
+    }
+  }
+}

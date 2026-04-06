@@ -1,0 +1,27 @@
+{
+  "completed": true,
+  "slice": "phase2-combat",
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "PlyrCalcHitDmg": true,
+        "EnCalcHitDmg": true,
+        "NormalAttack": true,
+        "PlyrWeakAttack": true,
+        "EnWeakAttack": true,
+        "DoHeal": true,
+        "DoHealmore": true,
+        "ModEnHitPoints": true,
+        "CheckEnRun": true,
+        "ChkSpellFail": true,
+        "EnCastHurt": true,
+        "EnCastHurtmore": true,
+        "LE61F": true
+      }
+    }
+  }
+}

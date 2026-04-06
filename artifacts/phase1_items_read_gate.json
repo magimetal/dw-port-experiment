@@ -1,0 +1,32 @@
+{
+  "completed": true,
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank00.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank00.asm",
+      "bytes": 313521,
+      "lines": 7435,
+      "labels_checked": {
+        "ItemCostTbl": true,
+        "InnCostTbl": true,
+        "ShopItemsTbl": true,
+        "WeaponsBonusTbl": true,
+        "ArmorBonusTbl": true,
+        "ShieldBonusTbl": true
+      }
+    },
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "ItemCostTbl": true,
+        "InnCostTbl": true,
+        "ShopItemsTbl": true,
+        "WeaponsBonusTbl": true,
+        "ArmorBonusTbl": true,
+        "ShieldBonusTbl": true
+      }
+    }
+  }
+}

@@ -1,0 +1,534 @@
+{
+  "source": "Bank01.asm BaseStatsTbl @ LA0CD",
+  "levels": [
+    {
+      "level": 1,
+      "strength": 4,
+      "agility": 4,
+      "max_hp": 15,
+      "max_mp": 0,
+      "modsn_spells": 0,
+      "spell_flags": 0,
+      "spells_known": []
+    },
+    {
+      "level": 2,
+      "strength": 5,
+      "agility": 4,
+      "max_hp": 22,
+      "max_mp": 0,
+      "modsn_spells": 0,
+      "spell_flags": 0,
+      "spells_known": []
+    },
+    {
+      "level": 3,
+      "strength": 7,
+      "agility": 6,
+      "max_hp": 24,
+      "max_mp": 5,
+      "modsn_spells": 0,
+      "spell_flags": 1,
+      "spells_known": [
+        "HEAL"
+      ]
+    },
+    {
+      "level": 4,
+      "strength": 7,
+      "agility": 8,
+      "max_hp": 31,
+      "max_mp": 16,
+      "modsn_spells": 0,
+      "spell_flags": 3,
+      "spells_known": [
+        "HEAL",
+        "HURT"
+      ]
+    },
+    {
+      "level": 5,
+      "strength": 12,
+      "agility": 10,
+      "max_hp": 35,
+      "max_mp": 20,
+      "modsn_spells": 0,
+      "spell_flags": 3,
+      "spells_known": [
+        "HEAL",
+        "HURT"
+      ]
+    },
+    {
+      "level": 6,
+      "strength": 16,
+      "agility": 10,
+      "max_hp": 38,
+      "max_mp": 24,
+      "modsn_spells": 0,
+      "spell_flags": 3,
+      "spells_known": [
+        "HEAL",
+        "HURT"
+      ]
+    },
+    {
+      "level": 7,
+      "strength": 18,
+      "agility": 17,
+      "max_hp": 40,
+      "max_mp": 26,
+      "modsn_spells": 0,
+      "spell_flags": 7,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP"
+      ]
+    },
+    {
+      "level": 8,
+      "strength": 22,
+      "agility": 20,
+      "max_hp": 46,
+      "max_mp": 29,
+      "modsn_spells": 0,
+      "spell_flags": 7,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP"
+      ]
+    },
+    {
+      "level": 9,
+      "strength": 30,
+      "agility": 22,
+      "max_hp": 50,
+      "max_mp": 36,
+      "modsn_spells": 0,
+      "spell_flags": 15,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT"
+      ]
+    },
+    {
+      "level": 10,
+      "strength": 35,
+      "agility": 31,
+      "max_hp": 54,
+      "max_mp": 40,
+      "modsn_spells": 0,
+      "spell_flags": 31,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL"
+      ]
+    },
+    {
+      "level": 11,
+      "strength": 40,
+      "agility": 35,
+      "max_hp": 62,
+      "max_mp": 50,
+      "modsn_spells": 0,
+      "spell_flags": 31,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL"
+      ]
+    },
+    {
+      "level": 12,
+      "strength": 48,
+      "agility": 40,
+      "max_hp": 63,
+      "max_mp": 58,
+      "modsn_spells": 0,
+      "spell_flags": 63,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE"
+      ]
+    },
+    {
+      "level": 13,
+      "strength": 52,
+      "agility": 48,
+      "max_hp": 70,
+      "max_mp": 64,
+      "modsn_spells": 0,
+      "spell_flags": 127,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN"
+      ]
+    },
+    {
+      "level": 14,
+      "strength": 60,
+      "agility": 55,
+      "max_hp": 78,
+      "max_mp": 70,
+      "modsn_spells": 0,
+      "spell_flags": 127,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN"
+      ]
+    },
+    {
+      "level": 15,
+      "strength": 68,
+      "agility": 64,
+      "max_hp": 86,
+      "max_mp": 72,
+      "modsn_spells": 0,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL"
+      ]
+    },
+    {
+      "level": 16,
+      "strength": 72,
+      "agility": 70,
+      "max_hp": 92,
+      "max_mp": 95,
+      "modsn_spells": 0,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL"
+      ]
+    },
+    {
+      "level": 17,
+      "strength": 72,
+      "agility": 78,
+      "max_hp": 100,
+      "max_mp": 100,
+      "modsn_spells": 1,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE"
+      ]
+    },
+    {
+      "level": 18,
+      "strength": 85,
+      "agility": 84,
+      "max_hp": 115,
+      "max_mp": 108,
+      "modsn_spells": 1,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE"
+      ]
+    },
+    {
+      "level": 19,
+      "strength": 87,
+      "agility": 86,
+      "max_hp": 130,
+      "max_mp": 115,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 20,
+      "strength": 92,
+      "agility": 88,
+      "max_hp": 138,
+      "max_mp": 128,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 21,
+      "strength": 95,
+      "agility": 90,
+      "max_hp": 149,
+      "max_mp": 135,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 22,
+      "strength": 97,
+      "agility": 90,
+      "max_hp": 158,
+      "max_mp": 146,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 23,
+      "strength": 99,
+      "agility": 94,
+      "max_hp": 165,
+      "max_mp": 153,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 24,
+      "strength": 103,
+      "agility": 98,
+      "max_hp": 170,
+      "max_mp": 161,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 25,
+      "strength": 113,
+      "agility": 100,
+      "max_hp": 174,
+      "max_mp": 161,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 26,
+      "strength": 117,
+      "agility": 105,
+      "max_hp": 180,
+      "max_mp": 168,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 27,
+      "strength": 125,
+      "agility": 107,
+      "max_hp": 189,
+      "max_mp": 175,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 28,
+      "strength": 130,
+      "agility": 115,
+      "max_hp": 195,
+      "max_mp": 180,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 29,
+      "strength": 135,
+      "agility": 120,
+      "max_hp": 200,
+      "max_mp": 190,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    },
+    {
+      "level": 30,
+      "strength": 140,
+      "agility": 130,
+      "max_hp": 210,
+      "max_mp": 200,
+      "modsn_spells": 3,
+      "spell_flags": 255,
+      "spells_known": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ]
+    }
+  ]
+}

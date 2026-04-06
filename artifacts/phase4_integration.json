@@ -1,0 +1,67 @@
+{
+  "phase": "4",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "check_phase4_main_loop_artifacts_passed": {
+      "ok": true,
+      "detail": {
+        "artifact_count": 54,
+        "artifacts_with_all_passed_true": 54,
+        "failures": []
+      }
+    },
+    "check_phase4_walkthrough_checkpoints_optional_future": {
+      "ok": true,
+      "detail": {
+        "optional_future_audit": [
+          {
+            "item": "full_walkthrough_checkpoints_cp_00_to_cp_08",
+            "status": "OPTIONAL/FUTURE AUDIT",
+            "missing": [
+              "cp_00.json",
+              "cp_01.json",
+              "cp_02.json",
+              "cp_03.json",
+              "cp_04.json",
+              "cp_05.json",
+              "cp_06.json",
+              "cp_07.json",
+              "cp_08.json"
+            ],
+            "rationale": "Gameplay systems are implemented and machine-verified via bounded Phase 4 slice gates; full manual walkthrough checkpoint catalog is deferred."
+          }
+        ]
+      }
+    },
+    "run_pytest_full_suite": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollected 374 items\n\ntests/test_combat.py ..............                                      [  3%]\ntests/test_dialog_engine.py .......                                      [  5%]\ntests/test_items_engine.py ....                                          [  6%]\ntests/test_level_up.py .......                                           [  8%]\ntests/test_main_loop_scaffold.py ....................................... [ 18%]\n........................................................................ [ 38%]\n........................................................................ [ 57%]\n..................................                                       [ 66%]\ntests/test_map_engine.py .......                                         [ 68%]\ntests/test_movement.py ...........                                       [ 71%]\ntests/test_phase1_chests.py ...                                          [ 72%]\ntests/test_phase1_dialog.py ...                                          [ 72%]\ntests/test_phase1_enemies.py ...                                         [ 73%]\ntests/test_phase1_foundation.py ...                                      [ 74%]\ntests/test_phase1_items.py ...                                           [ 75%]\ntests/test_phase1_maps.py ...                                            [ 76%]\ntests/test_phase1_npcs.py ...                                            [ 77%]\ntests/test_phase1_read_gate.py .                                         [ 77%]\ntests/test_phase1_rom_spells.py ...                                      [ 78%]\ntests/test_phase1_warps.py ...                                           [ 78%]\ntests/test_phase1_zones.py ...                                           [ 79%]\ntests/test_rng.py ..........                                             [ 82%]\ntests/test_save_load.py ........                                         [ 84%]\ntests/test_shop.py ......                                                [ 86%]\ntests/test_state.py .....                                                [ 87%]\ntests/test_ui_combat_view.py .......                                     [ 89%]\ntests/test_ui_dialog_box.py ...........                                  [ 92%]\ntests/test_ui_foundation.py ....                                         [ 93%]\ntests/test_ui_map_view.py .....                                          [ 94%]\ntests/test_ui_menu.py .....                                              [ 95%]\ntests/test_ui_renderer.py ......                                         [ 97%]\ntests/test_ui_status_panel.py ....                                       [ 98%]\ntests/test_ui_title_bootstrap.py .....                                   [100%]\n\n============================= 374 passed in 0.82s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

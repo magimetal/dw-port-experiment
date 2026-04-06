@@ -1,0 +1,278 @@
+{
+  "phase": "5-slice-xp-table-extractor",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_xp_table_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_xp_table",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_xp_table_artifacts": {
+      "ok": true,
+      "detail": {
+        "xp_table": {
+          "source": {
+            "bank03_labels": [
+              "LevelUpTbl",
+              "LoadStats"
+            ],
+            "rom_table_start": "0xf36b",
+            "entry_bytes": 2,
+            "entry_count": 30
+          },
+          "levels": [
+            {
+              "level": 1,
+              "xp_threshold": 0,
+              "rom_offset": "0xf36b"
+            },
+            {
+              "level": 2,
+              "xp_threshold": 7,
+              "rom_offset": "0xf36d"
+            },
+            {
+              "level": 3,
+              "xp_threshold": 23,
+              "rom_offset": "0xf36f"
+            },
+            {
+              "level": 4,
+              "xp_threshold": 47,
+              "rom_offset": "0xf371"
+            },
+            {
+              "level": 5,
+              "xp_threshold": 110,
+              "rom_offset": "0xf373"
+            },
+            {
+              "level": 6,
+              "xp_threshold": 220,
+              "rom_offset": "0xf375"
+            },
+            {
+              "level": 7,
+              "xp_threshold": 450,
+              "rom_offset": "0xf377"
+            },
+            {
+              "level": 8,
+              "xp_threshold": 800,
+              "rom_offset": "0xf379"
+            },
+            {
+              "level": 9,
+              "xp_threshold": 1300,
+              "rom_offset": "0xf37b"
+            },
+            {
+              "level": 10,
+              "xp_threshold": 2000,
+              "rom_offset": "0xf37d"
+            },
+            {
+              "level": 11,
+              "xp_threshold": 2900,
+              "rom_offset": "0xf37f"
+            },
+            {
+              "level": 12,
+              "xp_threshold": 4000,
+              "rom_offset": "0xf381"
+            },
+            {
+              "level": 13,
+              "xp_threshold": 5500,
+              "rom_offset": "0xf383"
+            },
+            {
+              "level": 14,
+              "xp_threshold": 7500,
+              "rom_offset": "0xf385"
+            },
+            {
+              "level": 15,
+              "xp_threshold": 10000,
+              "rom_offset": "0xf387"
+            },
+            {
+              "level": 16,
+              "xp_threshold": 13000,
+              "rom_offset": "0xf389"
+            },
+            {
+              "level": 17,
+              "xp_threshold": 16000,
+              "rom_offset": "0xf38b"
+            },
+            {
+              "level": 18,
+              "xp_threshold": 19000,
+              "rom_offset": "0xf38d"
+            },
+            {
+              "level": 19,
+              "xp_threshold": 22000,
+              "rom_offset": "0xf38f"
+            },
+            {
+              "level": 20,
+              "xp_threshold": 26000,
+              "rom_offset": "0xf391"
+            },
+            {
+              "level": 21,
+              "xp_threshold": 30000,
+              "rom_offset": "0xf393"
+            },
+            {
+              "level": 22,
+              "xp_threshold": 34000,
+              "rom_offset": "0xf395"
+            },
+            {
+              "level": 23,
+              "xp_threshold": 38000,
+              "rom_offset": "0xf397"
+            },
+            {
+              "level": 24,
+              "xp_threshold": 42000,
+              "rom_offset": "0xf399"
+            },
+            {
+              "level": 25,
+              "xp_threshold": 46000,
+              "rom_offset": "0xf39b"
+            },
+            {
+              "level": 26,
+              "xp_threshold": 50000,
+              "rom_offset": "0xf39d"
+            },
+            {
+              "level": 27,
+              "xp_threshold": 54000,
+              "rom_offset": "0xf39f"
+            },
+            {
+              "level": 28,
+              "xp_threshold": 58000,
+              "rom_offset": "0xf3a1"
+            },
+            {
+              "level": 29,
+              "xp_threshold": 62000,
+              "rom_offset": "0xf3a3"
+            },
+            {
+              "level": 30,
+              "xp_threshold": 65535,
+              "rom_offset": "0xf3a5"
+            }
+          ]
+        },
+        "artifact": {
+          "slice": "phase1-xp-table",
+          "entry_count": 30,
+          "table_start": "0xf36b",
+          "entry_bytes": 2,
+          "first_level": {
+            "level": 1,
+            "xp_threshold": 0,
+            "rom_offset": "0xf36b"
+          },
+          "last_level": {
+            "level": 30,
+            "xp_threshold": 65535,
+            "rom_offset": "0xf3a5"
+          }
+        },
+        "read_gate": {
+          "completed": true,
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "LevelUpTbl": true,
+                "LoadStats": true
+              }
+            }
+          }
+        },
+        "level_count": 30
+      }
+    },
+    "check_phase5_slice_xp_table_extractor": {
+      "ok": true,
+      "detail": {
+        "xp_table_json": "extractor/data_out/xp_table.json",
+        "level_count": 30,
+        "checks": {
+          "row18_lv2_threshold": true,
+          "row19_lv10_threshold": true,
+          "row20_lv20_threshold": true,
+          "row21_lv30_threshold": true,
+          "row22_all_30_thresholds": true,
+          "spotcheck_lv1_zero": true
+        },
+        "sample": {
+          "level_1": {
+            "level": 1,
+            "xp_threshold": 0,
+            "rom_offset": "0xf36b"
+          },
+          "level_2": {
+            "level": 2,
+            "xp_threshold": 7,
+            "rom_offset": "0xf36d"
+          },
+          "level_10": {
+            "level": 10,
+            "xp_threshold": 2000,
+            "rom_offset": "0xf37d"
+          },
+          "level_20": {
+            "level": 20,
+            "xp_threshold": 26000,
+            "rom_offset": "0xf391"
+          },
+          "level_30": {
+            "level": 30,
+            "xp_threshold": 65535,
+            "rom_offset": "0xf3a5"
+          }
+        }
+      }
+    }
+  }
+}

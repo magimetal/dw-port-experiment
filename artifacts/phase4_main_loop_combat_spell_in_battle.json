@@ -1,0 +1,27 @@
+{
+  "slice": "phase4-main-loop-combat-spell-in-battle",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "heal_cast_consumes_mp_and_heals": true,
+    "healmore_cast_consumes_mp_and_heals": true,
+    "hurt_cast_consumes_mp_and_applies_damage": true,
+    "hurtmore_cast_consumes_mp_and_applies_damage": true,
+    "sleep_cast_sets_asleep_flag_when_not_resisted": true,
+    "stopspell_cast_sets_block_flag_when_not_resisted": true,
+    "chkspellfail_path_consumes_mp_and_applies_no_damage": true,
+    "not_enough_mp_rejects_without_state_change": true,
+    "field_spell_rejected_in_combat": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_spell_in_battle.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_spell_in_battle_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded combat spell-in-battle parity: all six player combat spells route through CombatSession with MP deduction, DoHeal/DoHealmore/LE736/LE751 formulas, and ChkSpellFail for HURT/HURTMORE/SLEEP/STOPSPELL."
+}

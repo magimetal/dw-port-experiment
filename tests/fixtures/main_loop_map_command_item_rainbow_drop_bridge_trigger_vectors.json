@@ -1,0 +1,53 @@
+{
+  "vectors": {
+    "item_menu_open": {
+      "action": "map_item_menu_opened",
+      "action_detail": "count:1",
+      "screen_mode": "map",
+      "frame_contains_item_title": true,
+      "frame_contains_rainbow_drop": true
+    },
+    "item_use_rainbow_drop_success": {
+      "action": "map_item_used",
+      "action_detail": "RAINBOW DROP:ok",
+      "screen_mode": "dialog",
+      "rainbow_bridge_flag_set": true,
+      "inventory_slots_after": [
+        14,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_used_text": true,
+      "base_tile_before_bridge": 1,
+      "tile_after_bridge_active": 10,
+      "tile_after_bridge_inactive": 1
+    },
+    "item_use_rainbow_drop_wrong_coords": {
+      "action": "map_item_rejected",
+      "action_detail": "RAINBOW DROP:no_rainbow_appeared_here",
+      "screen_mode": "dialog",
+      "rainbow_bridge_flag_set": false,
+      "inventory_slots_after": [
+        14,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    },
+    "item_use_rainbow_drop_already_built": {
+      "action": "map_item_rejected",
+      "action_detail": "RAINBOW DROP:no_rainbow_appeared_here",
+      "screen_mode": "dialog",
+      "rainbow_bridge_flag_set": true,
+      "inventory_slots_after": [
+        14,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    }
+  }
+}

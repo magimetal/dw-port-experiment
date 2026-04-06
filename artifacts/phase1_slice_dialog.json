@@ -1,0 +1,58 @@
+{
+  "phase": "1-slice-dialog",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_dialog_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m extractor.run_phase1_slice_dialog",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_dialog_artifacts": {
+      "ok": true,
+      "detail": {
+        "pointer_count": 19,
+        "text_block_count": 19,
+        "total_text_bytes": 15496,
+        "slice": "phase1-dialog",
+        "read_gate_completed": true,
+        "required_labels": {
+          "Bank02.TextBlock1": true,
+          "Bank02.TextBlock19": true,
+          "Bank03.DoDialogLoBlock": true
+        }
+      }
+    },
+    "run_pytest_phase1_dialog_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py tests/test_phase1_npcs.py tests/test_phase1_dialog.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 25 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  4%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [  8%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 12%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [ 16%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 20%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 24%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 28%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 32%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 36%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 40%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 44%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 48%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 52%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 56%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 60%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 64%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 68%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 72%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 76%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 80%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 84%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 88%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 92%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 96%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [100%]\n\n============================== 25 passed in 0.06s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "completed": true,
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank00.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank00.asm",
+      "bytes": 313521,
+      "lines": 7435,
+      "sha1": "5374a0d9b688f07e658905a8455651b2913d9519",
+      "labels_checked": {
+        "WrldMapPtrTbl": true
+      }
+    },
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "sha1": "7d75d90f344e5828f1411ca31918ad73966c8aa1",
+      "labels_checked": {
+        "SpellCostTbl": true,
+        "CheckMP": true
+      }
+    }
+  }
+}

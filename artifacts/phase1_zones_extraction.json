@@ -1,0 +1,106 @@
+{
+  "slice": "phase1-zones",
+  "tables": {
+    "repel": {
+      "start": "0xf50a",
+      "bytes": 40
+    },
+    "overworld_zone_grid": {
+      "start": "0xf532",
+      "bytes": 32
+    },
+    "cave_en_index": {
+      "start": "0xf552",
+      "bytes": 13
+    },
+    "enemy_groups": {
+      "start": "0xf55f",
+      "bytes": 100,
+      "rows": 20,
+      "row_width": 5,
+      "overworld_rows": 14
+    }
+  },
+  "zone_grid_first_row": [
+    3,
+    3,
+    2,
+    2,
+    3,
+    5,
+    4,
+    5
+  ],
+  "zone_grid_last_row": [
+    11,
+    11,
+    12,
+    13,
+    13,
+    12,
+    9,
+    9
+  ],
+  "formation_row_0_ids": [
+    0,
+    1,
+    0,
+    1,
+    0
+  ],
+  "formation_row_13_ids": [
+    29,
+    30,
+    31,
+    31,
+    32
+  ],
+  "formation_row_14_ids": [
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "formation_row_19_ids": [
+    3,
+    4,
+    6,
+    7,
+    7
+  ],
+  "cave_index_table": [
+    16,
+    17,
+    17,
+    17,
+    18,
+    18,
+    19,
+    19,
+    14,
+    14,
+    7,
+    15,
+    15
+  ],
+  "repel_first_ten": [
+    5,
+    7,
+    9,
+    11,
+    11,
+    14,
+    18,
+    20,
+    18,
+    24
+  ],
+  "repel_last_five": [
+    100,
+    105,
+    120,
+    90,
+    140
+  ]
+}

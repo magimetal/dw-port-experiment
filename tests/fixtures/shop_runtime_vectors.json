@@ -1,0 +1,75 @@
+{
+  "source": {
+    "bank00_labels": [
+      "ItemCostTbl",
+      "InnCostTbl",
+      "ShopItemsTbl"
+    ],
+    "bank03_labels": [
+      "CheckBuyWeapon",
+      "GetBuybackPrice",
+      "ApplyPurchase",
+      "DoToolPurchase",
+      "ChkToolPurchase",
+      "AddInvItem",
+      "DoToolSell",
+      "KeysDialog",
+      "InnDialog"
+    ]
+  },
+  "vectors": {
+    "shop_0_item_ids": [
+      2,
+      3,
+      10,
+      11,
+      14
+    ],
+    "shop_0_prices": [
+      180,
+      560,
+      1000,
+      3000,
+      90
+    ],
+    "inn_costs": [
+      20,
+      6,
+      25,
+      100,
+      55
+    ],
+    "is_shop0_selling_copper_sword": true,
+    "is_shop0_selling_flame_sword": false,
+    "can_afford_120_gold_bamboo": true,
+    "can_afford_120_gold_copper": false,
+    "buy_copper_from_club_success": true,
+    "buy_copper_from_club_gold": 50,
+    "buy_copper_from_club_equipment": 96,
+    "buy_herb_cap_success": false,
+    "buy_herb_cap_message": "cannot hold more herbs",
+    "buy_herb_cap_state_unchanged": true,
+    "buy_torch_success": true,
+    "buy_torch_gold": 112,
+    "buy_torch_inventory_slots": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "buy_torch_full_success": false,
+    "buy_torch_full_message": "inventory full",
+    "buy_torch_full_state_unchanged": true,
+    "sell_torch_gold_gain": 4,
+    "sell_torch_new_gold": 4,
+    "sell_torch_inventory_slots": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sell_herb_gold_gain": 12,
+    "sell_herb_new_gold": 12,
+    "sell_herb_new_count": 0
+  }
+}

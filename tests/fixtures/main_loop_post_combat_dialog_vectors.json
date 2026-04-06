@@ -1,0 +1,32 @@
+{
+  "vectors": {
+    "victory": {
+      "initial_screen_mode": "dialog",
+      "initial_action": "combat_victory",
+      "advance_action": "dialog_page_advance",
+      "advance_contains_rewards": true,
+      "done_action": "dialog_done",
+      "final_screen_mode": "map"
+    },
+    "defeat": {
+      "initial_screen_mode": "dialog",
+      "initial_action": "combat_defeat",
+      "advance_action": "dialog_page_advance",
+      "advance_contains_revive": true,
+      "done_action": "dialog_done",
+      "final_screen_mode": "map",
+      "revive_map_after_outcome": [
+        4,
+        5,
+        27
+      ]
+    },
+    "level_up": {
+      "initial_screen_mode": "dialog",
+      "initial_action": "combat_victory",
+      "page_three_contains_level_up": true,
+      "done_action": "dialog_done",
+      "final_screen_mode": "map"
+    }
+  }
+}

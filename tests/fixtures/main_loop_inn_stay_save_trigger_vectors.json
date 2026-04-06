@@ -1,0 +1,14 @@
+{
+  "vectors": {
+    "inn_stay": {
+      "action": "inn_stay",
+      "quit_requested": false,
+      "hp_after": 31,
+      "mp_after": 16,
+      "max_hp": 31,
+      "max_mp": 16,
+      "save_exists": true,
+      "save_dict_roundtrip_equal": true
+    }
+  }
+}

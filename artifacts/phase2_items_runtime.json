@@ -1,0 +1,28 @@
+{
+  "slice": "phase2-items",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "all_bank03_labels_present": true,
+    "all_defines_labels_present": true,
+    "torch_runtime_effect": true,
+    "fairy_water_sets_repel": true,
+    "wings_do_return_when_allowed": true,
+    "dragon_scale_sets_flag_once": true,
+    "silver_harp_forces_overworld_encounter": true,
+    "rainbow_drop_sets_bridge_flag": true,
+    "outside_and_return_paths": true,
+    "curse_runtime_transitions": true
+  },
+  "outputs": {
+    "read_gate": "artifacts/phase2_items_read_gate.json",
+    "report": "artifacts/phase2_items_runtime.json",
+    "vectors_fixture": "tests/fixtures/items_runtime_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

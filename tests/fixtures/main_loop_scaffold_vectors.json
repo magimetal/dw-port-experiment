@@ -1,0 +1,39 @@
+{
+  "vectors": {
+    "title": {
+      "contains_marker": true,
+      "line_count": 24,
+      "col_count": 80
+    },
+    "new_game": {
+      "screen_mode": "map",
+      "action": "new_game_started",
+      "player_name": "ERDRICK",
+      "frame_contains_player": true
+    },
+    "map_step": {
+      "input": "RIGHT",
+      "action": "move",
+      "position": [
+        47,
+        1
+      ],
+      "expected_position": [
+        47,
+        1
+      ]
+    },
+    "timers_after_step": {
+      "repel_timer": 1,
+      "light_timer": 0
+    },
+    "quit": {
+      "action": "quit",
+      "quit_requested": true
+    },
+    "write_behavior": {
+      "write_count": 11,
+      "flush_count": 11
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "slice": "phase3-title-bootstrap",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "title_frame_is_80x24": true,
+    "title_frame_is_deterministic": true,
+    "title_frame_contains_bootstrap_actions": true,
+    "menu_selection_moves": true,
+    "name_entry_accepts_up_to_8_chars": true,
+    "new_game_handoff_returns_fresh_state": true,
+    "continue_handoff_loads_state": true,
+    "continue_missing_save_is_non_fatal": true,
+    "quit_handoff_emits_quit_action": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_title_bootstrap.json",
+    "vectors_fixture": "tests/fixtures/ui_title_bootstrap_vectors.json",
+    "tmp_save": "artifacts/phase3_title_bootstrap_tmp_save.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 3 title/bootstrap slice only: deterministic title render, minimal selectable actions (new game/continue/quit), and handoff scaffolding for future full loop integration."
+}

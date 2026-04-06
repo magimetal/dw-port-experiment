@@ -1,0 +1,37 @@
+{
+  "vectors": {
+    "render": {
+      "line_count": 24,
+      "col_count": 80,
+      "sha1": "aca3bbf19f630a31e380d50c967728b9ef2882c1",
+      "deterministic_repeat_match": true,
+      "contains_title_token": true,
+      "contains_new_game": true,
+      "contains_continue": true,
+      "contains_quit": true
+    },
+    "menu": {
+      "initial_index": 0,
+      "down_index": 1,
+      "up_wrap_index": 2,
+      "enter_new_game_name_mode": true
+    },
+    "name_entry": {
+      "typed_name_buffer": "ERDRICKX",
+      "name_max_len": 8,
+      "after_backspace": "ERDRICK",
+      "new_game_handoff_action": "new_game",
+      "new_game_handoff_name": "ERDRICK"
+    },
+    "continue": {
+      "continue_handoff_action": "continue",
+      "continue_handoff_name": "LOTO",
+      "continue_handoff_map": 4,
+      "missing_continue_handoff": true,
+      "missing_continue_message": "NO SAVE DATA IN SLOT 0"
+    },
+    "quit": {
+      "quit_handoff_action": "quit"
+    }
+  }
+}

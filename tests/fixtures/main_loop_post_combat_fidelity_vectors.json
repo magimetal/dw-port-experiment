@@ -1,0 +1,30 @@
+{
+  "vectors": {
+    "defeat_revive": {
+      "action": "combat_defeat",
+      "mp_after": 15,
+      "max_mp_after": 15,
+      "hp_after": 15,
+      "max_hp_after": 15,
+      "map_after": [
+        4,
+        5,
+        27
+      ]
+    },
+    "victory_gold": {
+      "action": "combat_victory",
+      "gold_before": 120,
+      "enemy_gp_base": 5,
+      "gold_after": 124,
+      "reward_gold": 4
+    },
+    "level_up_dialog": {
+      "action": "combat_victory",
+      "page_three_contains_announcement": true,
+      "page_three_action": "dialog_page_advance",
+      "done_action": "dialog_done",
+      "final_screen_mode": "map"
+    }
+  }
+}

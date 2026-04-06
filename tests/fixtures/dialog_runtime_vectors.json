@@ -1,0 +1,22 @@
+{
+  "source": {
+    "bank02_labels": [
+      "TextBlock1",
+      "TextBlock19"
+    ],
+    "bank03_labels": [
+      "DoDialogLoBlock",
+      "DoDialogHiBlock",
+      "SetDialogBytes"
+    ]
+  },
+  "vectors": {
+    "dialog_block_count": 19,
+    "block1_first_page": "<CTRL_F4> hath woken up.",
+    "block1_is_done_after_one_page": false,
+    "block1_page_count": 16,
+    "custom_page_one": "Hello ERDRICK costs 42\n[VAR]",
+    "custom_page_two": "Bye",
+    "custom_done_after_two_pages": true
+  }
+}

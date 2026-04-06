@@ -1,0 +1,77 @@
+{
+  "slice": "phase1-items",
+  "item_cost_count": 33,
+  "shop_count": 12,
+  "first_item_cost": {
+    "item_id": 0,
+    "item_name": "Bamboo pole",
+    "gold": 10,
+    "rom_offset": "0x1957"
+  },
+  "last_item_cost": {
+    "item_id": 32,
+    "item_name": "Rainbow drop",
+    "gold": 0,
+    "rom_offset": "0x1997"
+  },
+  "first_shop": {
+    "shop_id": 0,
+    "shop_name": "Kol weapons and armor shop",
+    "item_ids": [
+      2,
+      3,
+      10,
+      11,
+      14
+    ],
+    "item_names": [
+      "Copper sword",
+      "Hand axe",
+      "Half plate",
+      "Full plate",
+      "Small shield"
+    ],
+    "rom_offset_start": "0x19a1",
+    "rom_offset_end": "0x19a6"
+  },
+  "last_shop": {
+    "shop_id": 11,
+    "shop_name": "Cantlin item shop 2",
+    "item_ids": [
+      22,
+      21
+    ],
+    "item_names": [
+      "Dragon's scale",
+      "Wings"
+    ],
+    "rom_offset_start": "0x19dc",
+    "rom_offset_end": "0x19de"
+  },
+  "weapon_bonuses": [
+    0,
+    2,
+    4,
+    10,
+    15,
+    20,
+    28,
+    40
+  ],
+  "armor_bonuses": [
+    0,
+    2,
+    4,
+    10,
+    16,
+    24,
+    24,
+    28
+  ],
+  "shield_bonuses": [
+    0,
+    4,
+    10,
+    20
+  ]
+}

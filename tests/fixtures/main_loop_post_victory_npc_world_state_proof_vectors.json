@@ -1,0 +1,24 @@
+{
+  "vectors": {
+    "tantegel_post_victory_regression": {
+      "default_story_right_of_center": "\u2591",
+      "post_dragonlord_right_of_center": "Z",
+      "post_variant_uses_wizard_sprite": true
+    },
+    "additional_map_id_post_victory_npc_variant": {
+      "map_id": 5,
+      "story_flags": 4,
+      "active_map_variant": "post_dragonlord",
+      "active_npc_count": 5,
+      "resolved_sprite": "princess_gwaelin",
+      "right_of_center_char": "P"
+    },
+    "post_victory_endgame_pre_input": {
+      "pre_input_render_path": "endgame",
+      "pre_input_frame_contains_final_page_text": true,
+      "action": "endgame_return_to_title",
+      "action_detail": "restart",
+      "screen_mode": "title"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "phase": "2-slice-dialog",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase2_slice_dialog_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m engine.run_phase2_slice_dialog",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_dialog_runtime_artifacts": {
+      "ok": true,
+      "detail": {
+        "read_gate": {
+          "completed": true,
+          "slice": "phase2-dialog",
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank02.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank02.asm",
+              "bytes": 235474,
+              "lines": 3847,
+              "labels_checked": {
+                "TextBlock1": true,
+                "TextBlock19": true
+              }
+            },
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "DoDialogLoBlock": true,
+                "DoDialogHiBlock": true,
+                "SetDialogBytes": true
+              }
+            }
+          }
+        },
+        "report": {
+          "slice": "phase2-dialog",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "all_bank02_labels_present": true,
+            "all_bank03_labels_present": true,
+            "dialog_block_count_19": true,
+            "block1_first_page_expected": true,
+            "block1_not_done_after_first_page": true,
+            "block1_has_multiple_pages": true,
+            "custom_resolution_page_one": true,
+            "custom_resolution_page_two": true,
+            "custom_session_done_after_two_pages": true
+          },
+          "outputs": {
+            "read_gate": "artifacts/phase2_dialog_read_gate.json",
+            "report": "artifacts/phase2_dialog_runtime.json",
+            "vectors_fixture": "tests/fixtures/dialog_runtime_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          }
+        },
+        "vectors": {
+          "source": {
+            "bank02_labels": [
+              "TextBlock1",
+              "TextBlock19"
+            ],
+            "bank03_labels": [
+              "DoDialogLoBlock",
+              "DoDialogHiBlock",
+              "SetDialogBytes"
+            ]
+          },
+          "vectors": {
+            "dialog_block_count": 19,
+            "block1_first_page": "<CTRL_F4> hath woken up.",
+            "block1_is_done_after_one_page": false,
+            "block1_page_count": 16,
+            "custom_page_one": "Hello ERDRICK costs 42\n[VAR]",
+            "custom_page_two": "Bye",
+            "custom_done_after_two_pages": true
+          }
+        }
+      }
+    },
+    "run_pytest_phase2_dialog_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py tests/test_phase1_npcs.py tests/test_phase1_dialog.py tests/test_phase1_maps.py tests/test_rng.py tests/test_state.py tests/test_level_up.py tests/test_combat.py tests/test_movement.py tests/test_map_engine.py tests/test_dialog_engine.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 84 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  1%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [  2%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [  3%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [  4%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [  5%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [  7%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [  8%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [  9%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 10%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 11%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 13%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 14%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 15%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 16%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 17%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 19%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 20%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 21%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 22%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 23%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 25%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 26%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 27%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 28%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [ 29%]\ntests/test_phase1_maps.py::test_maps_metadata_offsets_and_counts PASSED  [ 30%]\ntests/test_phase1_maps.py::test_maps_decode_spot_checks_from_rom PASSED  [ 32%]\ntests/test_phase1_maps.py::test_maps_output_and_artifacts_exist PASSED   [ 33%]\ntests/test_rng.py::test_rng_output_domain_across_seed_grid PASSED        [ 34%]\ntests/test_rng.py::test_rng_determinism PASSED                           [ 35%]\ntests/test_rng.py::test_rng_golden_fixture_sequence PASSED               [ 36%]\ntests/test_rng.py::test_rng_range_uses_rng_ub_mod_n PASSED               [ 38%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[0] PASSED  [ 39%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-1] PASSED [ 40%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-99] PASSED [ 41%]\ntests/test_rng.py::test_rng_artifacts_exist_and_are_consistent PASSED    [ 42%]\ntests/test_rng.py::test_rng_slice_raises_non_availability_py65_errors PASSED [ 44%]\ntests/test_rng.py::test_rng_slice_preserves_existing_py65_fixture_when_py65_missing PASSED [ 45%]\ntests/test_state.py::test_fresh_game_initialization_defaults PASSED      [ 46%]\ntests/test_state.py::test_state_clamps_byte_and_word_fields PASSED       [ 47%]\ntests/test_state.py::test_state_rejects_invalid_inventory_or_npc_shapes PASSED [ 48%]\ntests/test_state.py::test_state_save_api_roundtrip_is_wired_to_save_load_runtime PASSED [ 50%]\ntests/test_state.py::test_state_slice_artifacts_exist_and_are_consistent PASSED [ 51%]\ntests/test_level_up.py::test_xp_table_exact_matches_golden_fixture PASSED [ 52%]\ntests/test_level_up.py::test_base_stats_exact_matches_golden_fixture PASSED [ 53%]\ntests/test_level_up.py::test_level_resolution_across_threshold_boundaries PASSED [ 54%]\ntests/test_level_up.py::test_level_resolution_monotone_for_full_u16_domain PASSED [ 55%]\ntests/test_level_up.py::test_spell_progression_key_unlocks PASSED        [ 57%]\ntests/test_level_up.py::test_stats_for_level_and_resolve_progression PASSED [ 58%]\ntests/test_level_up.py::test_level_slice_artifacts_exist_and_are_consistent PASSED [ 59%]\ntests/test_combat.py::test_player_attack_boundary_max_atk_min_def PASSED [ 60%]\ntests/test_combat.py::test_player_attack_boundary_zero_atk_max_def_weak_path PASSED [ 61%]\ntests/test_combat.py::test_player_attack_boundary_base_lt_2_weak_path PASSED [ 63%]\ntests/test_combat.py::test_enemy_attack_boundary_zero_zero_case PASSED   [ 64%]\ntests/test_combat.py::test_enemy_attack_equal_threshold_uses_normal_path_regression PASSED [ 65%]\ntests/test_combat.py::test_enemy_hp_init_never_below_one PASSED          [ 66%]\ntests/test_combat.py::test_spell_ranges_over_full_8bit_rng_domain PASSED [ 67%]\ntests/test_combat.py::test_enemy_spell_damage_with_armor_reduction PASSED [ 69%]\ntests/test_combat.py::test_enemy_spell_damage_reduction_order_regression PASSED [ 70%]\ntests/test_combat.py::test_spell_fail_threshold_logic PASSED             [ 71%]\ntests/test_combat.py::test_excellent_move_rules PASSED                   [ 72%]\ntests/test_combat.py::test_hp_underflow_overflow_clamps PASSED           [ 73%]\ntests/test_combat.py::test_combat_slice_artifacts_exist_and_are_consistent PASSED [ 75%]\ntests/test_movement.py::test_step_regen_armor_paths PASSED               [ 76%]\ntests/test_movement.py::test_swamp_and_force_field_damage_paths PASSED   [ 77%]\ntests/test_movement.py::test_encounter_mask_rules PASSED                 [ 78%]\ntests/test_movement.py::test_overworld_zone_lookup PASSED                [ 79%]\ntests/test_movement.py::test_zone_zero_fight_modifiers PASSED            [ 80%]\ntests/test_movement.py::test_enemy_selection_rerolls_above_slot_four PASSED [ 82%]\ntests/test_movement.py::test_choose_overworld_enemy_zone_zero_can_abort PASSED [ 83%]\ntests/test_movement.py::test_repel_logic_paths PASSED                    [ 84%]\ntests/test_movement.py::test_movement_slice_artifacts_exist_and_are_consistent PASSED [ 85%]\ntests/test_map_engine.py::test_tile_lookup_and_oob_border_tile PASSED    [ 86%]\ntests/test_map_engine.py::test_tiles_are_standard_block_ids_after_conversion PASSED [ 88%]\ntests/test_map_engine.py::test_map_passability_from_extracted_tiles PASSED [ 89%]\ntests/test_map_engine.py::test_passability_uses_collision_threshold_rule PASSED [ 90%]\ntests/test_map_engine.py::test_warp_detection_and_transition_to_tantegel PASSED [ 91%]\ntests/test_map_engine.py::test_load_map_clamps_coordinates PASSED        [ 92%]\ntests/test_map_engine.py::test_map_engine_slice_artifacts_exist_and_are_consistent PASSED [ 94%]\ntests/test_dialog_engine.py::test_start_dialog_unknown_id_raises PASSED  [ 95%]\ntests/test_dialog_engine.py::test_dialog_session_paging_and_control_resolution PASSED [ 96%]\ntests/test_dialog_engine.py::test_dialog_session_preserves_unresolved_machine_markers PASSED [ 97%]\ntests/test_dialog_engine.py::test_dialog_engine_with_extracted_dialog_data PASSED [ 98%]\ntests/test_dialog_engine.py::test_dialog_slice_artifacts_exist_and_are_consistent PASSED [100%]\n\n============================== 84 passed in 0.12s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "slice": "phase4-main-loop-map-command-search-remaining-unsupported-chest-contents",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "remaining_content_matrix_matches_extracted_data": true,
+    "search_content_2_applies_herb_reward": true,
+    "search_content_3_applies_key_reward": true,
+    "search_content_4_applies_torch_reward": true,
+    "search_content_6_applies_wings_reward": true,
+    "search_content_9_applies_fighters_ring_reward": true,
+    "search_content_12_applies_cursed_belt_reward": true,
+    "search_content_13_applies_silver_harp_reward": true,
+    "search_content_14_applies_death_necklace_reward": true,
+    "search_content_15_applies_stones_of_sunlight_reward": true,
+    "search_content_16_applies_staff_of_rain_reward": true,
+    "search_content_16_reopen_is_empty": true,
+    "search_content_2_herb_full_guard_rejects_without_state_change": true,
+    "search_content_3_key_full_guard_rejects_without_state_change": true,
+    "search_content_16_inventory_full_guard_rejects_without_state_change": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_search_remaining_unsupported_chest_contents.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_search_remaining_unsupported_chest_contents_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded SEARCH remaining unsupported chest contents integration: support extracted contents_id 2/3/4/6/9/12/13/14/15/16 with deterministic reward dialogs, opened-state behavior, and full-capacity guards."
+}

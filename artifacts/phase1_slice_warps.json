@@ -1,0 +1,907 @@
+{
+  "phase": "1-slice-warps",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_warps_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_warps",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_warps_artifacts": {
+      "ok": true,
+      "detail": {
+        "warps": {
+          "source": {
+            "bank03_labels": [
+              "MapEntryTbl",
+              "MapTargetTbl"
+            ],
+            "bank00_labels": [
+              "MapEntryDirTbl"
+            ],
+            "map_entry_table_start": "0xf3d8",
+            "map_target_table_start": "0xf471",
+            "map_entry_dir_table_start": "0x1924",
+            "entry_bytes": 3,
+            "entry_count": 51
+          },
+          "warps": [
+            {
+              "index": 0,
+              "src_map": 1,
+              "src_x": 2,
+              "src_y": 2,
+              "dst_map": 9,
+              "dst_x": 0,
+              "dst_y": 14,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf3d8",
+                "dst": "0xf471",
+                "dir": "0x1924"
+              }
+            },
+            {
+              "index": 1,
+              "src_map": 1,
+              "src_x": 81,
+              "src_y": 1,
+              "dst_map": 13,
+              "dst_x": 4,
+              "dst_y": 9,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf3db",
+                "dst": "0xf474",
+                "dir": "0x1925"
+              }
+            },
+            {
+              "index": 2,
+              "src_map": 1,
+              "src_x": 104,
+              "src_y": 10,
+              "dst_map": 7,
+              "dst_x": 19,
+              "dst_y": 23,
+              "entry_dir": 0,
+              "rom_offsets": {
+                "src": "0xf3de",
+                "dst": "0xf477",
+                "dir": "0x1926"
+              }
+            },
+            {
+              "index": 3,
+              "src_map": 1,
+              "src_x": 48,
+              "src_y": 41,
+              "dst_map": 8,
+              "dst_x": 0,
+              "dst_y": 15,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf3e1",
+                "dst": "0xf47a",
+                "dir": "0x1927"
+              }
+            },
+            {
+              "index": 4,
+              "src_map": 1,
+              "src_x": 43,
+              "src_y": 43,
+              "dst_map": 4,
+              "dst_x": 11,
+              "dst_y": 29,
+              "entry_dir": 0,
+              "rom_offsets": {
+                "src": "0xf3e4",
+                "dst": "0xf47d",
+                "dir": "0x1928"
+              }
+            },
+            {
+              "index": 5,
+              "src_map": 1,
+              "src_x": 104,
+              "src_y": 44,
+              "dst_map": 21,
+              "dst_x": 0,
+              "dst_y": 0,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf3e7",
+                "dst": "0xf480",
+                "dir": "0x1929"
+              }
+            },
+            {
+              "index": 6,
+              "src_map": 1,
+              "src_x": 48,
+              "src_y": 48,
+              "dst_map": 2,
+              "dst_x": 10,
+              "dst_y": 19,
+              "entry_dir": 0,
+              "rom_offsets": {
+                "src": "0xf3ea",
+                "dst": "0xf483",
+                "dir": "0x192a"
+              }
+            },
+            {
+              "index": 7,
+              "src_map": 1,
+              "src_x": 104,
+              "src_y": 49,
+              "dst_map": 21,
+              "dst_x": 0,
+              "dst_y": 29,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf3ed",
+                "dst": "0xf486",
+                "dir": "0x192b"
+              }
+            },
+            {
+              "index": 8,
+              "src_map": 1,
+              "src_x": 29,
+              "src_y": 57,
+              "dst_map": 22,
+              "dst_x": 0,
+              "dst_y": 7,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf3f0",
+                "dst": "0xf489",
+                "dir": "0x192c"
+              }
+            },
+            {
+              "index": 9,
+              "src_map": 1,
+              "src_x": 102,
+              "src_y": 72,
+              "dst_map": 11,
+              "dst_x": 29,
+              "dst_y": 14,
+              "entry_dir": 3,
+              "rom_offsets": {
+                "src": "0xf3f3",
+                "dst": "0xf48c",
+                "dir": "0x192d"
+              }
+            },
+            {
+              "index": 10,
+              "src_map": 1,
+              "src_x": 25,
+              "src_y": 89,
+              "dst_map": 3,
+              "dst_x": 0,
+              "dst_y": 10,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf3f6",
+                "dst": "0xf48f",
+                "dir": "0x192e"
+              }
+            },
+            {
+              "index": 11,
+              "src_map": 1,
+              "src_x": 73,
+              "src_y": 102,
+              "dst_map": 10,
+              "dst_x": 15,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf3f9",
+                "dst": "0xf492",
+                "dir": "0x192f"
+              }
+            },
+            {
+              "index": 12,
+              "src_map": 1,
+              "src_x": 108,
+              "src_y": 109,
+              "dst_map": 14,
+              "dst_x": 0,
+              "dst_y": 4,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf3fc",
+                "dst": "0xf495",
+                "dir": "0x1930"
+              }
+            },
+            {
+              "index": 13,
+              "src_map": 1,
+              "src_x": 28,
+              "src_y": 12,
+              "dst_map": 28,
+              "dst_x": 0,
+              "dst_y": 0,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf3ff",
+                "dst": "0xf498",
+                "dir": "0x1931"
+              }
+            },
+            {
+              "index": 14,
+              "src_map": 2,
+              "src_x": 10,
+              "src_y": 1,
+              "dst_map": 15,
+              "dst_x": 9,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf402",
+                "dst": "0xf49b",
+                "dir": "0x1932"
+              }
+            },
+            {
+              "index": 15,
+              "src_map": 2,
+              "src_x": 4,
+              "src_y": 14,
+              "dst_map": 15,
+              "dst_x": 8,
+              "dst_y": 13,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf405",
+                "dst": "0xf49e",
+                "dir": "0x1933"
+              }
+            },
+            {
+              "index": 16,
+              "src_map": 2,
+              "src_x": 15,
+              "src_y": 14,
+              "dst_map": 15,
+              "dst_x": 17,
+              "dst_y": 15,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf408",
+                "dst": "0xf4a1",
+                "dir": "0x1934"
+              }
+            },
+            {
+              "index": 17,
+              "src_map": 4,
+              "src_x": 29,
+              "src_y": 29,
+              "dst_map": 12,
+              "dst_x": 0,
+              "dst_y": 4,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf40b",
+                "dst": "0xf4a4",
+                "dir": "0x1935"
+              }
+            },
+            {
+              "index": 18,
+              "src_map": 5,
+              "src_x": 8,
+              "src_y": 8,
+              "dst_map": 4,
+              "dst_x": 7,
+              "dst_y": 7,
+              "entry_dir": 1,
+              "rom_offsets": {
+                "src": "0xf40e",
+                "dst": "0xf4a7",
+                "dir": "0x1936"
+              }
+            },
+            {
+              "index": 19,
+              "src_map": 9,
+              "src_x": 19,
+              "src_y": 0,
+              "dst_map": 24,
+              "dst_x": 6,
+              "dst_y": 11,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf411",
+                "dst": "0xf4aa",
+                "dir": "0x1937"
+              }
+            },
+            {
+              "index": 20,
+              "src_map": 15,
+              "src_x": 15,
+              "src_y": 1,
+              "dst_map": 16,
+              "dst_x": 8,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf414",
+                "dst": "0xf4ad",
+                "dir": "0x1938"
+              }
+            },
+            {
+              "index": 21,
+              "src_map": 15,
+              "src_x": 13,
+              "src_y": 7,
+              "dst_map": 16,
+              "dst_x": 4,
+              "dst_y": 4,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf417",
+                "dst": "0xf4b0",
+                "dir": "0x1939"
+              }
+            },
+            {
+              "index": 22,
+              "src_map": 15,
+              "src_x": 19,
+              "src_y": 7,
+              "dst_map": 16,
+              "dst_x": 9,
+              "dst_y": 8,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf41a",
+                "dst": "0xf4b3",
+                "dir": "0x193a"
+              }
+            },
+            {
+              "index": 23,
+              "src_map": 15,
+              "src_x": 14,
+              "src_y": 9,
+              "dst_map": 16,
+              "dst_x": 8,
+              "dst_y": 9,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf41d",
+                "dst": "0xf4b6",
+                "dir": "0x193b"
+              }
+            },
+            {
+              "index": 24,
+              "src_map": 15,
+              "src_x": 2,
+              "src_y": 14,
+              "dst_map": 16,
+              "dst_x": 0,
+              "dst_y": 1,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf420",
+                "dst": "0xf4b9",
+                "dir": "0x193c"
+              }
+            },
+            {
+              "index": 25,
+              "src_map": 15,
+              "src_x": 2,
+              "src_y": 4,
+              "dst_map": 16,
+              "dst_x": 0,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf423",
+                "dst": "0xf4bc",
+                "dir": "0x193d"
+              }
+            },
+            {
+              "index": 26,
+              "src_map": 15,
+              "src_x": 8,
+              "src_y": 19,
+              "dst_map": 16,
+              "dst_x": 5,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf426",
+                "dst": "0xf4bf",
+                "dir": "0x193e"
+              }
+            },
+            {
+              "index": 27,
+              "src_map": 16,
+              "src_x": 3,
+              "src_y": 0,
+              "dst_map": 17,
+              "dst_x": 7,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf429",
+                "dst": "0xf4c2",
+                "dir": "0x193f"
+              }
+            },
+            {
+              "index": 28,
+              "src_map": 16,
+              "src_x": 9,
+              "src_y": 1,
+              "dst_map": 17,
+              "dst_x": 2,
+              "dst_y": 2,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf42c",
+                "dst": "0xf4c5",
+                "dir": "0x1940"
+              }
+            },
+            {
+              "index": 29,
+              "src_map": 16,
+              "src_x": 0,
+              "src_y": 8,
+              "dst_map": 17,
+              "dst_x": 5,
+              "dst_y": 4,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf42f",
+                "dst": "0xf4c8",
+                "dir": "0x1941"
+              }
+            },
+            {
+              "index": 30,
+              "src_map": 16,
+              "src_x": 1,
+              "src_y": 9,
+              "dst_map": 17,
+              "dst_x": 0,
+              "dst_y": 9,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf432",
+                "dst": "0xf4cb",
+                "dir": "0x1942"
+              }
+            },
+            {
+              "index": 31,
+              "src_map": 17,
+              "src_x": 1,
+              "src_y": 6,
+              "dst_map": 18,
+              "dst_x": 0,
+              "dst_y": 9,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf435",
+                "dst": "0xf4ce",
+                "dir": "0x1943"
+              }
+            },
+            {
+              "index": 32,
+              "src_map": 17,
+              "src_x": 7,
+              "src_y": 7,
+              "dst_map": 18,
+              "dst_x": 7,
+              "dst_y": 7,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf438",
+                "dst": "0xf4d1",
+                "dir": "0x1944"
+              }
+            },
+            {
+              "index": 33,
+              "src_map": 18,
+              "src_x": 2,
+              "src_y": 2,
+              "dst_map": 19,
+              "dst_x": 9,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf43b",
+                "dst": "0xf4d4",
+                "dir": "0x1945"
+              }
+            },
+            {
+              "index": 34,
+              "src_map": 18,
+              "src_x": 8,
+              "src_y": 1,
+              "dst_map": 19,
+              "dst_x": 4,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf43e",
+                "dst": "0xf4d7",
+                "dir": "0x1946"
+              }
+            },
+            {
+              "index": 35,
+              "src_map": 19,
+              "src_x": 5,
+              "src_y": 5,
+              "dst_map": 20,
+              "dst_x": 0,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf441",
+                "dst": "0xf4da",
+                "dir": "0x1947"
+              }
+            },
+            {
+              "index": 36,
+              "src_map": 19,
+              "src_x": 0,
+              "src_y": 0,
+              "dst_map": 20,
+              "dst_x": 0,
+              "dst_y": 6,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf444",
+                "dst": "0xf4dd",
+                "dir": "0x1948"
+              }
+            },
+            {
+              "index": 37,
+              "src_map": 20,
+              "src_x": 9,
+              "src_y": 0,
+              "dst_map": 20,
+              "dst_x": 0,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf447",
+                "dst": "0xf4e0",
+                "dir": "0x1949"
+              }
+            },
+            {
+              "index": 38,
+              "src_map": 20,
+              "src_x": 9,
+              "src_y": 6,
+              "dst_map": 6,
+              "dst_x": 10,
+              "dst_y": 29,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf44a",
+                "dst": "0xf4e3",
+                "dir": "0x194a"
+              }
+            },
+            {
+              "index": 39,
+              "src_map": 22,
+              "src_x": 0,
+              "src_y": 0,
+              "dst_map": 23,
+              "dst_x": 0,
+              "dst_y": 0,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf44d",
+                "dst": "0xf4e6",
+                "dir": "0x194b"
+              }
+            },
+            {
+              "index": 40,
+              "src_map": 22,
+              "src_x": 6,
+              "src_y": 5,
+              "dst_map": 23,
+              "dst_x": 6,
+              "dst_y": 5,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf450",
+                "dst": "0xf4e9",
+                "dir": "0x194c"
+              }
+            },
+            {
+              "index": 41,
+              "src_map": 22,
+              "src_x": 12,
+              "src_y": 12,
+              "dst_map": 23,
+              "dst_x": 12,
+              "dst_y": 12,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf453",
+                "dst": "0xf4ec",
+                "dir": "0x194d"
+              }
+            },
+            {
+              "index": 42,
+              "src_map": 24,
+              "src_x": 1,
+              "src_y": 18,
+              "dst_map": 25,
+              "dst_x": 11,
+              "dst_y": 2,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf456",
+                "dst": "0xf4ef",
+                "dir": "0x194e"
+              }
+            },
+            {
+              "index": 43,
+              "src_map": 25,
+              "src_x": 1,
+              "src_y": 1,
+              "dst_map": 26,
+              "dst_x": 14,
+              "dst_y": 1,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf459",
+                "dst": "0xf4f2",
+                "dir": "0x194f"
+              }
+            },
+            {
+              "index": 44,
+              "src_map": 25,
+              "src_x": 12,
+              "src_y": 1,
+              "dst_map": 26,
+              "dst_x": 18,
+              "dst_y": 1,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf45c",
+                "dst": "0xf4f5",
+                "dir": "0x1950"
+              }
+            },
+            {
+              "index": 45,
+              "src_map": 25,
+              "src_x": 5,
+              "src_y": 6,
+              "dst_map": 26,
+              "dst_x": 6,
+              "dst_y": 11,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf45f",
+                "dst": "0xf4f8",
+                "dir": "0x1951"
+              }
+            },
+            {
+              "index": 46,
+              "src_map": 25,
+              "src_x": 1,
+              "src_y": 10,
+              "dst_map": 26,
+              "dst_x": 2,
+              "dst_y": 17,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf462",
+                "dst": "0xf4fb",
+                "dir": "0x1952"
+              }
+            },
+            {
+              "index": 47,
+              "src_map": 25,
+              "src_x": 12,
+              "src_y": 10,
+              "dst_map": 26,
+              "dst_x": 18,
+              "dst_y": 13,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf465",
+                "dst": "0xf4fe",
+                "dir": "0x1953"
+              }
+            },
+            {
+              "index": 48,
+              "src_map": 26,
+              "src_x": 9,
+              "src_y": 5,
+              "dst_map": 27,
+              "dst_x": 0,
+              "dst_y": 4,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf468",
+                "dst": "0xf501",
+                "dir": "0x1954"
+              }
+            },
+            {
+              "index": 49,
+              "src_map": 26,
+              "src_x": 10,
+              "src_y": 9,
+              "dst_map": 27,
+              "dst_x": 5,
+              "dst_y": 4,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf46b",
+                "dst": "0xf504",
+                "dir": "0x1955"
+              }
+            },
+            {
+              "index": 50,
+              "src_map": 28,
+              "src_x": 9,
+              "src_y": 9,
+              "dst_map": 29,
+              "dst_x": 8,
+              "dst_y": 9,
+              "entry_dir": 2,
+              "rom_offsets": {
+                "src": "0xf46e",
+                "dst": "0xf507",
+                "dir": "0x1956"
+              }
+            }
+          ]
+        },
+        "artifact": {
+          "slice": "phase1-warps",
+          "entry_count": 51,
+          "entry_bytes": 3,
+          "map_entry_table_start": "0xf3d8",
+          "map_target_table_start": "0xf471",
+          "map_entry_dir_table_start": "0x1924",
+          "first_entry": {
+            "index": 0,
+            "src_map": 1,
+            "src_x": 2,
+            "src_y": 2,
+            "dst_map": 9,
+            "dst_x": 0,
+            "dst_y": 14,
+            "entry_dir": 1,
+            "rom_offsets": {
+              "src": "0xf3d8",
+              "dst": "0xf471",
+              "dir": "0x1924"
+            }
+          },
+          "middle_entry": {
+            "index": 25,
+            "src_map": 15,
+            "src_x": 2,
+            "src_y": 4,
+            "dst_map": 16,
+            "dst_x": 0,
+            "dst_y": 0,
+            "entry_dir": 2,
+            "rom_offsets": {
+              "src": "0xf423",
+              "dst": "0xf4bc",
+              "dir": "0x193d"
+            }
+          },
+          "last_entry": {
+            "index": 50,
+            "src_map": 28,
+            "src_x": 9,
+            "src_y": 9,
+            "dst_map": 29,
+            "dst_x": 8,
+            "dst_y": 9,
+            "entry_dir": 2,
+            "rom_offsets": {
+              "src": "0xf46e",
+              "dst": "0xf507",
+              "dir": "0x1956"
+            }
+          }
+        },
+        "read_gate": {
+          "completed": true,
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank00.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank00.asm",
+              "bytes": 313521,
+              "lines": 7435,
+              "labels_checked": {
+                "MapEntryDirTbl": true
+              }
+            },
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "MapEntryTbl": true,
+                "MapTargetTbl": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase1_warps_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 16 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  6%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [ 12%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 18%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [ 25%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 31%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 37%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 43%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 50%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 56%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 62%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 68%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 75%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 81%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 87%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 93%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [100%]\n\n============================== 16 passed in 0.06s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-npc-special-control-side-effects",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "control_0x6a_chains_followup_dialog": true,
+    "control_0x6c_trades_harp_for_staff_and_changes_followup_dialog": true,
+    "control_0x6d_grants_rainbow_drop_and_changes_followup_dialog": true,
+    "control_0x6e_updates_gwaelin_flags_and_followup_dialog": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_special_control_side_effects.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_special_control_side_effects_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded special NPC side effects/chaining: 0x6A dialog chain playback, 0x6D rainbow-drop trade inventory mutation, and 0x6E Gwaelin-return flag mutation."
+}

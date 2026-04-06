@@ -1,0 +1,20 @@
+{
+  "slice": "phase2-level",
+  "all_passed": true,
+  "checks": {
+    "xp_table_has_30_levels": true,
+    "base_stats_has_30_levels": true,
+    "xp_table_strictly_non_decreasing": true,
+    "level_resolution_caps_at_30": true,
+    "level_resolution_floor_at_1": true,
+    "level_3_learns_heal": true,
+    "level_19_learns_hurtmore": true,
+    "level_1_stats_match_expected": true,
+    "level_30_stats_match_expected": true
+  },
+  "outputs": {
+    "xp_fixture": "tests/fixtures/xp_table_golden.json",
+    "base_stats_fixture": "tests/fixtures/base_stats_golden.json",
+    "read_gate": "artifacts/phase2_level_read_gate.json"
+  }
+}

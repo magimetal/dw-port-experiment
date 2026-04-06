@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-map-spell-selection-surface",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "spell_menu_open_shows_field_spells_and_allows_navigation": true,
+    "spell_menu_cancel_returns_to_map_without_state_change": true,
+    "spell_menu_select_casts_selected_spell": true,
+    "spell_menu_rejects_when_no_field_spells_learned": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_spell_selection_surface.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_spell_selection_surface_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded map spell-selection command surface: SPELL opens field-only spell menu in map mode, supports deterministic cursor/select/cancel behavior, and preserves existing spell-cast integration."
+}

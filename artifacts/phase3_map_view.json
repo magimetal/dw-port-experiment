@@ -1,0 +1,24 @@
+{
+  "slice": "phase3-map-view",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "overworld_viewport_renders_21x17": true,
+    "player_glyph_is_centered": true,
+    "npc_overlay_story_visibility_changes": true,
+    "npc_overlay_draws_visible_npcs": true,
+    "dungeon_darkness_masks_outside_radius": true,
+    "darkness_render_is_deterministic": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_map_view.json",
+    "vectors_fixture": "tests/fixtures/ui_map_view_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 3 bounded map-view slice only: deterministic 21x17 map viewport, NPC overlay/visibility, and dungeon darkness radius masking."
+}

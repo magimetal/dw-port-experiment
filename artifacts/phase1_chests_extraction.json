@@ -1,0 +1,24 @@
+{
+  "slice": "phase1-chests",
+  "entry_count": 31,
+  "table_start": "0x5ddd",
+  "table_bytes": 124,
+  "first_entry": {
+    "index": 0,
+    "rom_offset": "0x5ddd",
+    "map_id": 4,
+    "x": 1,
+    "y": 13,
+    "contents_id": 19,
+    "opened": false
+  },
+  "last_entry": {
+    "index": 30,
+    "rom_offset": "0x5e55",
+    "map_id": 29,
+    "x": 9,
+    "y": 3,
+    "contents_id": 23,
+    "opened": false
+  }
+}

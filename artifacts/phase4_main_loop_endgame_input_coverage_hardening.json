@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-endgame-input-coverage-hardening",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "endgame_a_key_returns_to_title": true,
+    "endgame_z_key_returns_to_title": true,
+    "endgame_q_key_quits_session": true,
+    "endgame_esc_key_quits_session": true,
+    "endgame_enter_regression_still_returns_to_title": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_endgame_input_coverage_hardening.json",
+    "vectors_fixture": "tests/fixtures/main_loop_endgame_input_coverage_hardening_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

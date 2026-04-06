@@ -1,0 +1,26 @@
+{
+  "slice": "phase2-combat",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "all_combat_labels_present": true,
+    "heal_range_10_17": true,
+    "healmore_range_85_100": true,
+    "force_field_clamps_to_zero": true,
+    "swamp_clamps_to_zero": true,
+    "enemy_attack_equal_threshold_22": true,
+    "enemy_hurt_base5_reduced_to_3": true,
+    "enemy_hurtmore_base32_reduced_to_21": true
+  },
+  "outputs": {
+    "read_gate": "artifacts/phase2_combat_read_gate.json",
+    "formula_report": "artifacts/phase2_combat_formulas.json",
+    "vectors_fixture": "tests/fixtures/combat_golden_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

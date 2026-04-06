@@ -1,0 +1,89 @@
+{
+  "phase": "4-slice-npc-shop-sell-handoff",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase4_slice_npc_shop_sell_handoff_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m ui.run_phase4_slice_main_loop",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_main_loop_npc_shop_sell_handoff_artifacts": {
+      "ok": true,
+      "detail": {
+        "report": {
+          "slice": "phase4-main-loop-npc-shop-sell-handoff",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "npc_shop_sell_handoff_sells_owned_item": true,
+            "npc_shop_sell_handoff_rejects_when_unsellable_or_missing": true
+          },
+          "outputs": {
+            "report": "artifacts/phase4_main_loop_npc_shop_sell_handoff.json",
+            "vectors_fixture": "tests/fixtures/main_loop_npc_shop_sell_handoff_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          },
+          "scope_note": "Phase 4 bounded shop sell handoff: currently supported shop NPC controls accept deterministic SHOP_SELL:<item_id> flow through ShopRuntime.sell, update inventory/gold, and emit deterministic dialog outcomes without full shop browse UI parity."
+        },
+        "vectors": {
+          "vectors": {
+            "shop_sell": {
+              "action": "npc_shop_sell_transaction",
+              "screen_mode": "dialog",
+              "action_detail": "control:1;shop_id:0;item_id:17;result:sold;gold_gain:12",
+              "gold_after": 112,
+              "herbs_after": 0,
+              "gold_gain_expected": 12,
+              "frame_contains_sold": true
+            },
+            "shop_sell_rejected": {
+              "action": "npc_shop_sell_transaction",
+              "screen_mode": "dialog",
+              "action_detail": "control:1;shop_id:0;item_id:17;result:rejected:not_owned_or_unsellable;gold_gain:0",
+              "gold_after": 100,
+              "herbs_after": 0,
+              "frame_contains_rejected": true
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase4_npc_shop_sell_handoff_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m pytest tests/test_shop.py tests/test_main_loop_scaffold.py -k shop_control_handoff or shop_sell_handoff or phase4_npc_shop_sell_handoff -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 144 items / 139 deselected / 5 selected\n\ntests/test_main_loop_scaffold.py::test_map_npc_shop_control_handoff_executes_bounded_purchase PASSED [ 20%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_control_handoff_rejects_when_gold_is_insufficient PASSED [ 40%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_sell_handoff_sells_owned_item_and_enters_dialog PASSED [ 60%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_sell_handoff_rejects_when_item_not_owned_or_unsellable PASSED [ 80%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_shop_sell_handoff_artifacts_exist_and_are_consistent PASSED [100%]\n\n====================== 5 passed, 139 deselected in 0.08s =======================\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "vectors": {
+    "item_menu_open": {
+      "action": "map_item_menu_opened",
+      "action_detail": "count:1",
+      "screen_mode": "map",
+      "frame_contains_item_title": true,
+      "frame_contains_silver_harp": true
+    },
+    "item_use_silver_harp_forced_encounter": {
+      "action": "encounter_triggered",
+      "action_detail": "enemy:0;source:silver_harp",
+      "screen_mode": "combat",
+      "enemy_id": 0,
+      "enemy_name": "Slime",
+      "rng_after": [
+        4,
+        133
+      ],
+      "inventory_slots_after": [
+        10,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_fight": true,
+      "frame_contains_slime": true
+    },
+    "item_use_silver_harp_rejected": {
+      "action": "map_item_rejected",
+      "action_detail": "SILVER HARP:harp_only_works_on_overworld",
+      "screen_mode": "dialog",
+      "inventory_slots_after": [
+        10,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_rejected_text": true
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-map-command-item-fairy-flute-interaction",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "item_menu_lists_fairy_flute_target": true,
+    "fairy_flute_use_forces_golem_encounter_at_guard_coords": true,
+    "fairy_flute_use_rejects_off_guard_coords_without_consuming": true,
+    "fairy_flute_use_rejects_when_golem_already_defeated": true,
+    "fairy_flute_use_rejects_non_overworld_same_coords": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_item_fairy_flute_interaction.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_item_fairy_flute_interaction_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded ITEM Fairy Flute interaction slice: verifies map ITEM use at the overworld golem guard tile deterministically forces golem encounter handoff, and off-tile/already-defeated paths reject with no inventory mutation."
+}

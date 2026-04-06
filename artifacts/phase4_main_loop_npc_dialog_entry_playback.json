@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-npc-dialog-entry-playback",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "interact_adjacent_npc_enters_dialog_mode": true,
+    "npc_dialog_uses_resolved_entry_metadata": true,
+    "npc_dialog_renders_real_entry_text": true,
+    "npc_dialog_completes_and_returns_map": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_dialog_entry_playback.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_dialog_entry_playback_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded NPC dialog entry playback: resolved NPC dialog control now enters real extracted dialog entry text via DialogEngine block/entry playback in the existing dialog UI flow."
+}

@@ -1,0 +1,18 @@
+{
+  "completed": true,
+  "slice": "phase2-state",
+  "files": {
+    "extractor/data_out/maps.json": {
+      "sha1": "9648335fe82d5d8bd9739b38394dd040876be37e",
+      "map_count": 30
+    },
+    "extractor/data_out/items.json": {
+      "sha1": "bd113f47a51ecec5e9706185515608ccf24c5644",
+      "item_cost_count": 33
+    },
+    "extractor/data_out/warps.json": {
+      "sha1": "f2236276fbe86d86b51f6645f916c5d26f607db8",
+      "warp_count": 51
+    }
+  }
+}

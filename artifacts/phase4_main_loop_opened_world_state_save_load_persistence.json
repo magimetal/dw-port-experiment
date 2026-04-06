@@ -1,0 +1,24 @@
+{
+  "slice": "phase4-main-loop-opened-world-state-save-load-persistence",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "save_payload_includes_opened_world_state": true,
+    "continue_restores_opened_world_state_sets": true,
+    "restored_opened_chest_reopens_as_empty": true,
+    "restored_opened_door_reports_already_open": true,
+    "restored_opened_door_remains_passable": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_opened_world_state_save_load_persistence.json",
+    "vectors_fixture": "tests/fixtures/main_loop_opened_world_state_save_load_persistence_vectors.json",
+    "runtime_save": "artifacts/phase4_opened_world_state_runtime_save.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded opened-world-state save/load persistence: currently supported opened chest indices and opened door coordinates are serialized on save, restored on continue, and drive chest/door behavior after load."
+}

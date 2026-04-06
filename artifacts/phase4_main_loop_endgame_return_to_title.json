@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-endgame-return-to-title",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "endgame_mode_renders_final_ending_page": true,
+    "endgame_enter_resets_and_returns_to_title": true,
+    "completed_save_persists_and_continue_is_available_after_restart": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_endgame_return_to_title.json",
+    "vectors_fixture": "tests/fixtures/main_loop_endgame_return_to_title_vectors.json",
+    "runtime_save": "artifacts/phase4_endgame_return_to_title_runtime_save.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

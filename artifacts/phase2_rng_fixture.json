@@ -1,0 +1,39 @@
+{
+  "slice": "phase2-rng",
+  "method": "py65",
+  "sequence_count": 1000,
+  "preserved_existing_fixture": false,
+  "seed": {
+    "lb": 0,
+    "ub": 0
+  },
+  "first_10": [
+    129,
+    4,
+    141,
+    40,
+    249,
+    108,
+    197,
+    208,
+    241,
+    84
+  ],
+  "last_10": [
+    21,
+    192,
+    193,
+    196,
+    205,
+    232,
+    57,
+    44,
+    5,
+    144
+  ],
+  "fixture_path": "tests/fixtures/rng_golden_sequence.json",
+  "read_gate_path": "artifacts/phase2_rng_read_gate.json",
+  "rom_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+  "baseline_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+  "baseline_match": true
+}

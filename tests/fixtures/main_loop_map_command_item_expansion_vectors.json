@@ -1,0 +1,59 @@
+{
+  "vectors": {
+    "item_menu_open": {
+      "frame_contains_item_title": true,
+      "frame_contains_torch": true,
+      "frame_contains_fairy_water": true,
+      "frame_contains_wings": true
+    },
+    "item_use_fairy_water_success": {
+      "action": "map_item_used",
+      "action_detail": "FAIRY WATER:ok",
+      "screen_mode": "dialog",
+      "repel_timer_after_route_input": 254,
+      "repel_timer_after_tick": 253,
+      "repel_timer_after": 253,
+      "inventory_slots_after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_used_text": true
+    },
+    "item_use_wings_success": {
+      "action": "map_item_used",
+      "action_detail": "WINGS:ok",
+      "screen_mode": "dialog",
+      "map_after": [
+        1,
+        42,
+        43
+      ],
+      "inventory_slots_after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_used_text": true
+    },
+    "item_use_wings_rejected": {
+      "action": "map_item_rejected",
+      "action_detail": "WINGS:wings_cannot_be_used_here",
+      "screen_mode": "dialog",
+      "map_after": [
+        13,
+        10,
+        10
+      ],
+      "inventory_slots_after": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_rejected_text": true
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "source": {
+    "bank03_labels": [
+      "ChkTorch",
+      "ChkFryWtr",
+      "ChkWings",
+      "ChkDragonScale",
+      "ChkHarp",
+      "ChkDrop",
+      "ChkOutside",
+      "DoReturn",
+      "WearCursedItem",
+      "CheckTantCursed"
+    ],
+    "defines_labels": [
+      "F_RNBW_BRDG",
+      "F_DRGSCALE",
+      "F_CRSD_BELT",
+      "F_DTH_NECKLACE",
+      "IS_CURSED"
+    ]
+  },
+  "vectors": {
+    "torch_success": true,
+    "torch_consumed": true,
+    "torch_light_radius": 5,
+    "torch_light_timer": 16,
+    "torch_inventory_after": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "torch_fail_reason": "torch requires dungeon map",
+    "fairy_repel_timer": 254,
+    "fairy_consumed": true,
+    "wings_success": true,
+    "wings_consumed": true,
+    "wings_dst": [
+      1,
+      42,
+      43
+    ],
+    "wings_fail_reason": "wings cannot be used here",
+    "dragon_scale_first_success": true,
+    "dragon_scale_flag_set": true,
+    "dragon_scale_defense_delta": 2,
+    "dragon_scale_second_reason": "already wearing dragon scale",
+    "harp_success": true,
+    "harp_enemy": 0,
+    "harp_rng_after": [
+      129,
+      0
+    ],
+    "harp_fail_reason": "harp only works on overworld",
+    "rainbow_success": true,
+    "rainbow_flag_set": true,
+    "rainbow_bridge_target": [
+      1,
+      63,
+      49
+    ],
+    "rainbow_fail_reason": "no rainbow appeared here",
+    "outside_erdricks_dst": [
+      1,
+      28,
+      12
+    ],
+    "outside_garinham_cave_dst": [
+      9,
+      19,
+      0
+    ],
+    "outside_rock_mountain_dst": [
+      1,
+      29,
+      57
+    ],
+    "outside_swamp_cave_dst": [
+      1,
+      104,
+      44
+    ],
+    "outside_dragonlord_castle_dst": [
+      1,
+      48,
+      48
+    ],
+    "outside_fail_reason": "spell fizzled",
+    "return_ok_dst": [
+      1,
+      42,
+      43
+    ],
+    "return_fail_reason": "spell fizzled",
+    "cursed_belt_flag": true,
+    "cursed_necklace_flag": true,
+    "check_and_apply_curse_hp": 1,
+    "lift_curse_removed": true,
+    "lift_curse_flags": 0,
+    "lift_curse_inventory": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

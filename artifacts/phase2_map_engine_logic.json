@@ -1,0 +1,31 @@
+{
+  "slice": "phase2-map-engine",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "all_bank00_labels_present": true,
+    "all_bank03_labels_present": true,
+    "map_count_30": true,
+    "warp_count_51": true,
+    "map4_start_tile_water": true,
+    "map1_known_hill_tile": true,
+    "oob_uses_border_tile": true,
+    "hill_is_passable": true,
+    "water_is_not_passable": true,
+    "warp_detection_tantegel": true,
+    "warp_transition_updates_state": true,
+    "load_map_clamps_coords": true,
+    "non_warp_returns_none": true
+  },
+  "outputs": {
+    "read_gate": "artifacts/phase2_map_engine_read_gate.json",
+    "report": "artifacts/phase2_map_engine_logic.json",
+    "vectors_fixture": "tests/fixtures/map_engine_golden_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

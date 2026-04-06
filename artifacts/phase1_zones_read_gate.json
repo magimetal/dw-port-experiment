@@ -1,0 +1,15 @@
+{
+  "completed": true,
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "file": {
+    "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+    "bytes": 457772,
+    "lines": 10921,
+    "labels_checked": {
+      "RepelTbl": true,
+      "OvrWrldEnGrid": true,
+      "CaveEnIndexTbl": true,
+      "EnemyGroupsTbl": true
+    }
+  }
+}

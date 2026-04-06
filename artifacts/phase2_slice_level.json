@@ -1,0 +1,95 @@
+{
+  "phase": "2-slice-level",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase2_slice_level_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m engine.run_phase2_slice_level",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_level_artifacts": {
+      "ok": true,
+      "detail": {
+        "read_gate": {
+          "completed": true,
+          "slice": "phase2-level",
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank01.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank01.asm",
+              "bytes": 442264,
+              "lines": 9656,
+              "labels_checked": {
+                "BaseStatsTbl": true,
+                "SetBaseStats": true
+              }
+            },
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "LevelUpTbl": true,
+                "LoadStats": true
+              }
+            }
+          }
+        },
+        "artifact": {
+          "slice": "phase2-level",
+          "all_passed": true,
+          "checks": {
+            "xp_table_has_30_levels": true,
+            "base_stats_has_30_levels": true,
+            "xp_table_strictly_non_decreasing": true,
+            "level_resolution_caps_at_30": true,
+            "level_resolution_floor_at_1": true,
+            "level_3_learns_heal": true,
+            "level_19_learns_hurtmore": true,
+            "level_1_stats_match_expected": true,
+            "level_30_stats_match_expected": true
+          },
+          "outputs": {
+            "xp_fixture": "tests/fixtures/xp_table_golden.json",
+            "base_stats_fixture": "tests/fixtures/base_stats_golden.json",
+            "read_gate": "artifacts/phase2_level_read_gate.json"
+          }
+        },
+        "xp_fixture_levels": 30,
+        "base_stats_levels": 30
+      }
+    },
+    "run_pytest_phase2_level_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py tests/test_phase1_npcs.py tests/test_phase1_dialog.py tests/test_phase1_maps.py tests/test_rng.py tests/test_state.py tests/test_level_up.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 50 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  2%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [  4%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [  6%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [  8%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 10%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 12%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 14%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 16%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 18%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 20%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 22%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 24%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 26%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 28%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 30%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 32%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 34%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 36%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 38%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 40%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 42%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 44%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 46%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 48%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [ 50%]\ntests/test_phase1_maps.py::test_maps_metadata_offsets_and_counts PASSED  [ 52%]\ntests/test_phase1_maps.py::test_maps_decode_spot_checks_from_rom PASSED  [ 54%]\ntests/test_phase1_maps.py::test_maps_output_and_artifacts_exist PASSED   [ 56%]\ntests/test_rng.py::test_rng_output_domain_across_seed_grid PASSED        [ 58%]\ntests/test_rng.py::test_rng_determinism PASSED                           [ 60%]\ntests/test_rng.py::test_rng_golden_fixture_sequence PASSED               [ 62%]\ntests/test_rng.py::test_rng_range_uses_rng_ub_mod_n PASSED               [ 64%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[0] PASSED  [ 66%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-1] PASSED [ 68%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-99] PASSED [ 70%]\ntests/test_rng.py::test_rng_artifacts_exist_and_are_consistent PASSED    [ 72%]\ntests/test_rng.py::test_rng_slice_raises_non_availability_py65_errors PASSED [ 74%]\ntests/test_rng.py::test_rng_slice_preserves_existing_py65_fixture_when_py65_missing PASSED [ 76%]\ntests/test_state.py::test_fresh_game_initialization_defaults PASSED      [ 78%]\ntests/test_state.py::test_state_clamps_byte_and_word_fields PASSED       [ 80%]\ntests/test_state.py::test_state_rejects_invalid_inventory_or_npc_shapes PASSED [ 82%]\ntests/test_state.py::test_state_save_api_is_deferred_to_save_slice PASSED [ 84%]\ntests/test_state.py::test_state_slice_artifacts_exist_and_are_consistent PASSED [ 86%]\ntests/test_level_up.py::test_xp_table_exact_matches_golden_fixture PASSED [ 88%]\ntests/test_level_up.py::test_base_stats_exact_matches_golden_fixture PASSED [ 90%]\ntests/test_level_up.py::test_level_resolution_across_threshold_boundaries PASSED [ 92%]\ntests/test_level_up.py::test_level_resolution_monotone_for_full_u16_domain PASSED [ 94%]\ntests/test_level_up.py::test_spell_progression_key_unlocks PASSED        [ 96%]\ntests/test_level_up.py::test_stats_for_level_and_resolve_progression PASSED [ 98%]\ntests/test_level_up.py::test_level_slice_artifacts_exist_and_are_consistent PASSED [100%]\n\n============================== 50 passed in 0.10s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

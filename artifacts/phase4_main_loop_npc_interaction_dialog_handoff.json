@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-npc-interaction-dialog-handoff",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "interact_adjacent_npc_enters_dialog_mode": true,
+    "npc_dialog_handoff_advances_and_returns_map": true,
+    "npc_dialog_uses_npc_and_dialog_extract_data": true,
+    "interact_without_adjacent_npc_noops": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_interaction_dialog_handoff.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_interaction_dialog_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded NPC interaction handoff: map-mode interact checks adjacent NPC in facing direction, filters by story-variant visibility, and routes into dialog mode using existing dialog session/box flow."
+}

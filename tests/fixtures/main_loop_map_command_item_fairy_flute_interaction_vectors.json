@@ -1,0 +1,72 @@
+{
+  "vectors": {
+    "item_menu_open": {
+      "action": "map_item_menu_opened",
+      "action_detail": "count:1",
+      "screen_mode": "map",
+      "frame_contains_item_title": true,
+      "frame_contains_fairy_flute": true
+    },
+    "item_use_fairy_flute_success": {
+      "action": "encounter_triggered",
+      "action_detail": "enemy:24;source:fairy_flute",
+      "screen_mode": "combat",
+      "rng_after": [
+        129,
+        0
+      ],
+      "enemy_id": 24,
+      "enemy_name": "Golem",
+      "enemy_hp": 70,
+      "enemy_max_hp": 70,
+      "story_flags_after": 0,
+      "inventory_slots_after": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_fight": true,
+      "frame_contains_golem": true
+    },
+    "item_use_fairy_flute_wrong_coords": {
+      "action": "map_item_rejected",
+      "action_detail": "FAIRY FLUTE:flute_has_no_effect",
+      "screen_mode": "dialog",
+      "story_flags_after": 0,
+      "inventory_slots_after": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    },
+    "item_use_fairy_flute_golem_dead": {
+      "action": "map_item_rejected",
+      "action_detail": "FAIRY FLUTE:flute_has_no_effect",
+      "screen_mode": "dialog",
+      "story_flags_after": 2,
+      "inventory_slots_after": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    },
+    "item_use_fairy_flute_non_overworld": {
+      "action": "map_item_rejected",
+      "action_detail": "FAIRY FLUTE:flute_has_no_effect",
+      "screen_mode": "dialog",
+      "story_flags_after": 0,
+      "inventory_slots_after": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    }
+  }
+}

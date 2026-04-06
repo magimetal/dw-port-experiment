@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-command-item-dragons-scale-equip-state",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "item_menu_lists_dragons_scale_target": true,
+    "dragons_scale_use_sets_flag_and_defense_without_consuming": true,
+    "dragons_scale_use_rejects_when_already_equipped_without_state_change": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_item_dragons_scale_equip_state.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_item_dragons_scale_equip_state_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded ITEM Dragon's Scale equip-state slice: validates map ITEM use/equip feedback, flag+defense mutation on first use, and deterministic already-equipped rejection without inventory consumption or state drift."
+}

@@ -1,0 +1,45 @@
+{
+  "phase": "1-foundation",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "check_enemy_hurt_fixture": {
+      "ok": true,
+      "detail": {
+        "min": 3,
+        "max": 10,
+        "formula": "rng & 0x07 + 0x03",
+        "source": "Bank03.asm EnCastHurt @ LEC23 (CPU $EC2F-$EC32)"
+      }
+    },
+    "run_pytest_foundation": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_foundation.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 3 items\n\ntests/test_phase1_foundation.py::test_enemy_hurt_fixture_exists_and_matches_corrected_range PASSED [ 33%]\ntests/test_phase1_foundation.py::test_foundation_directories_exist PASSED [ 66%]\ntests/test_phase1_foundation.py::test_rom_baseline_configuration_present PASSED [100%]\n\n============================== 3 passed in 0.05s ===============================\n",
+      "stderr": ""
+    }
+  }
+}

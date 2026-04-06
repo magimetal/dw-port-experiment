@@ -1,0 +1,25 @@
+{
+  "slice": "phase4-main-loop-inn-cost-deduct",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "inn_stay_action_routed_through_main_session": true,
+    "inn_stay_deducts_inn_cost_when_affordable": true,
+    "inn_stay_restores_hp_mp_to_max": true,
+    "inn_stay_triggers_json_save": true,
+    "inn_stay_save_roundtrip_matches_state": true,
+    "inn_stay_rejects_when_gold_insufficient": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_inn_cost_deduct.json",
+    "vectors_fixture": "tests/fixtures/main_loop_inn_cost_deduct_vectors.json",
+    "runtime_save": "artifacts/phase4_inn_cost_deduct_runtime_save.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded inn cost integration only: INN_STAY path uses inn cost table, deducts gold when affordable, restores HP/MP, triggers save, and rejects when gold is insufficient."
+}

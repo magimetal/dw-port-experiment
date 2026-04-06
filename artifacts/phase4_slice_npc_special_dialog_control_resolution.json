@@ -1,0 +1,174 @@
+{
+  "phase": "4-slice-npc-special-dialog-control-resolution",
+  "all_passed": false,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": false,
+      "missing": [
+        "blessed",
+        "pytest",
+        "hypothesis"
+      ]
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase4_slice_npc_special_dialog_control_resolution_generator": {
+      "ok": true,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m ui.run_phase4_slice_main_loop",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_main_loop_npc_special_dialog_control_resolution_artifacts": {
+      "ok": true,
+      "detail": {
+        "report": {
+          "slice": "phase4-main-loop-npc-special-dialog-control-resolution",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "special_controls_0x66_0x6e_default_resolution_matches_rom": true,
+            "special_control_branch_cases_match_rom": true,
+            "npc_interaction_handoff_uses_special_control_0x6a_resolution": true,
+            "special_control_0x6a_dialog_entry_renders_and_completes": true
+          },
+          "outputs": {
+            "report": "artifacts/phase4_main_loop_npc_special_dialog_control_resolution.json",
+            "vectors_fixture": "tests/fixtures/main_loop_npc_special_dialog_control_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          },
+          "scope_note": "Phase 4 bounded special NPC control resolution only: controls 0x66-0x6E now resolve to ROM-faithful dialog entry bytes for currently reachable branch cases, without executing shop/quest side effects."
+        },
+        "vectors": {
+          "vectors": {
+            "default_controls": {
+              "0x66": {
+                "dialog_byte": "0xA4",
+                "block": "TextBlock11",
+                "entry": 4
+              },
+              "0x67": {
+                "dialog_byte": "0xA6",
+                "block": "TextBlock11",
+                "entry": 6
+              },
+              "0x68": {
+                "dialog_byte": "0xA9",
+                "block": "TextBlock11",
+                "entry": 9
+              },
+              "0x69": {
+                "dialog_byte": "0xAC",
+                "block": "TextBlock11",
+                "entry": 12
+              },
+              "0x6A": {
+                "dialog_byte": "0xAD",
+                "block": "TextBlock11",
+                "entry": 13
+              },
+              "0x6B": {
+                "dialog_byte": "0x4C",
+                "block": "TextBlock5",
+                "entry": 12
+              },
+              "0x6C": {
+                "dialog_byte": "0xB1",
+                "block": "TextBlock12",
+                "entry": 1
+              },
+              "0x6D": {
+                "dialog_byte": "0xB3",
+                "block": "TextBlock12",
+                "entry": 3
+              },
+              "0x6E": {
+                "dialog_byte": "0xBF",
+                "block": "TextBlock12",
+                "entry": 15
+              }
+            },
+            "branch_cases": {
+              "control_66_with_stones": {
+                "dialog_byte": "0xA5",
+                "block": "TextBlock11",
+                "entry": 5
+              },
+              "control_67_cursed": {
+                "dialog_byte": "0xA7",
+                "block": "TextBlock11",
+                "entry": 7
+              },
+              "control_68_with_erdricks_sword": {
+                "dialog_byte": "0xAA",
+                "block": "TextBlock11",
+                "entry": 10
+              },
+              "control_69_ring_worn": {
+                "dialog_byte": "0xAB",
+                "block": "TextBlock11",
+                "entry": 11
+              },
+              "control_6c_with_harp": {
+                "dialog_byte": "0xB2",
+                "block": "TextBlock12",
+                "entry": 2
+              },
+              "control_6d_with_token_only": {
+                "dialog_byte": "0x49",
+                "block": "TextBlock5",
+                "entry": 9
+              },
+              "control_6d_with_token_staff_stones": {
+                "dialog_byte": "0xB4",
+                "block": "TextBlock12",
+                "entry": 4
+              },
+              "control_6e_with_gwaelin": {
+                "dialog_byte": "0xB9",
+                "block": "TextBlock12",
+                "entry": 9
+              }
+            },
+            "interaction_control_6a": {
+              "initial_screen_mode": "dialog",
+              "initial_action": "npc_interact_dialog",
+              "initial_action_detail": "control:106;byte:0xAD;block:TextBlock11;entry:13",
+              "initial_frame_contains_foretold": true,
+              "done_action": "dialog_done"
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase4_npc_special_dialog_control_resolution_slice": {
+      "ok": false,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m pytest tests/ -v",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "/opt/homebrew/opt/python@3.14/bin/python3.14: No module named pytest\n"
+    }
+  }
+}

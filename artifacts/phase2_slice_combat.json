@@ -1,0 +1,147 @@
+{
+  "phase": "2-slice-combat",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase2_slice_combat_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m engine.run_phase2_slice_combat",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_combat_artifacts": {
+      "ok": true,
+      "detail": {
+        "read_gate": {
+          "completed": true,
+          "slice": "phase2-combat",
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "PlyrCalcHitDmg": true,
+                "EnCalcHitDmg": true,
+                "NormalAttack": true,
+                "PlyrWeakAttack": true,
+                "EnWeakAttack": true,
+                "DoHeal": true,
+                "DoHealmore": true,
+                "ModEnHitPoints": true,
+                "CheckEnRun": true,
+                "ChkSpellFail": true,
+                "EnCastHurt": true,
+                "EnCastHurtmore": true,
+                "LE61F": true
+              }
+            }
+          }
+        },
+        "formula": {
+          "slice": "phase2-combat",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "all_combat_labels_present": true,
+            "heal_range_10_17": true,
+            "healmore_range_85_100": true,
+            "force_field_clamps_to_zero": true,
+            "swamp_clamps_to_zero": true,
+            "enemy_attack_equal_threshold_22": true,
+            "enemy_hurt_base5_reduced_to_3": true,
+            "enemy_hurtmore_base32_reduced_to_21": true
+          },
+          "outputs": {
+            "read_gate": "artifacts/phase2_combat_read_gate.json",
+            "formula_report": "artifacts/phase2_combat_formulas.json",
+            "vectors_fixture": "tests/fixtures/combat_golden_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          }
+        },
+        "vectors": {
+          "source": {
+            "bank03_labels": [
+              "PlyrCalcHitDmg",
+              "EnCalcHitDmg",
+              "NormalAttack",
+              "PlyrWeakAttack",
+              "EnWeakAttack",
+              "DoHeal",
+              "DoHealmore",
+              "ModEnHitPoints",
+              "ChkSpellFail",
+              "EnCastHurt",
+              "EnCastHurtmore",
+              "LE61F"
+            ]
+          },
+          "vectors": {
+            "player_attack_max_atk": 63,
+            "player_attack_weak_negative": 0,
+            "player_attack_weak_lt2": 1,
+            "enemy_attack_zero_zero": 0,
+            "enemy_attack_equal_threshold": 22,
+            "enemy_hp_init_low": 1,
+            "excellent_move_non_dl": true,
+            "excellent_move_dl_blocked": false,
+            "excellent_move_damage": 71,
+            "heal_min": 10,
+            "heal_max": 17,
+            "healmore_min": 85,
+            "healmore_max": 100,
+            "hurt_min": 5,
+            "hurt_max": 12,
+            "hurtmore_min": 58,
+            "hurtmore_max": 65,
+            "enemy_hurt_armor": 6,
+            "enemy_hurt_armor_base5": 3,
+            "enemy_hurtmore_armor": 30,
+            "enemy_hurtmore_armor_base32": 21,
+            "spell_fail_true": true,
+            "spell_fail_false": false,
+            "force_field_clamp": 0,
+            "swamp_clamp": 0,
+            "step_heal_cap": 254
+          }
+        }
+      }
+    },
+    "run_pytest_phase2_combat_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py tests/test_phase1_npcs.py tests/test_phase1_dialog.py tests/test_phase1_maps.py tests/test_rng.py tests/test_state.py tests/test_level_up.py tests/test_combat.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 63 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  1%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [  3%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [  4%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [  6%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [  7%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [  9%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 11%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 12%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 14%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 15%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 17%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 19%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 20%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 22%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 23%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 25%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 26%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 28%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 30%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 31%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 33%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 34%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 36%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 38%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [ 39%]\ntests/test_phase1_maps.py::test_maps_metadata_offsets_and_counts PASSED  [ 41%]\ntests/test_phase1_maps.py::test_maps_decode_spot_checks_from_rom PASSED  [ 42%]\ntests/test_phase1_maps.py::test_maps_output_and_artifacts_exist PASSED   [ 44%]\ntests/test_rng.py::test_rng_output_domain_across_seed_grid PASSED        [ 46%]\ntests/test_rng.py::test_rng_determinism PASSED                           [ 47%]\ntests/test_rng.py::test_rng_golden_fixture_sequence PASSED               [ 49%]\ntests/test_rng.py::test_rng_range_uses_rng_ub_mod_n PASSED               [ 50%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[0] PASSED  [ 52%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-1] PASSED [ 53%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-99] PASSED [ 55%]\ntests/test_rng.py::test_rng_artifacts_exist_and_are_consistent PASSED    [ 57%]\ntests/test_rng.py::test_rng_slice_raises_non_availability_py65_errors PASSED [ 58%]\ntests/test_rng.py::test_rng_slice_preserves_existing_py65_fixture_when_py65_missing PASSED [ 60%]\ntests/test_state.py::test_fresh_game_initialization_defaults PASSED      [ 61%]\ntests/test_state.py::test_state_clamps_byte_and_word_fields PASSED       [ 63%]\ntests/test_state.py::test_state_rejects_invalid_inventory_or_npc_shapes PASSED [ 65%]\ntests/test_state.py::test_state_save_api_is_deferred_to_save_slice PASSED [ 66%]\ntests/test_state.py::test_state_slice_artifacts_exist_and_are_consistent PASSED [ 68%]\ntests/test_level_up.py::test_xp_table_exact_matches_golden_fixture PASSED [ 69%]\ntests/test_level_up.py::test_base_stats_exact_matches_golden_fixture PASSED [ 71%]\ntests/test_level_up.py::test_level_resolution_across_threshold_boundaries PASSED [ 73%]\ntests/test_level_up.py::test_level_resolution_monotone_for_full_u16_domain PASSED [ 74%]\ntests/test_level_up.py::test_spell_progression_key_unlocks PASSED        [ 76%]\ntests/test_level_up.py::test_stats_for_level_and_resolve_progression PASSED [ 77%]\ntests/test_level_up.py::test_level_slice_artifacts_exist_and_are_consistent PASSED [ 79%]\ntests/test_combat.py::test_player_attack_boundary_max_atk_min_def PASSED [ 80%]\ntests/test_combat.py::test_player_attack_boundary_zero_atk_max_def_weak_path PASSED [ 82%]\ntests/test_combat.py::test_player_attack_boundary_base_lt_2_weak_path PASSED [ 84%]\ntests/test_combat.py::test_enemy_attack_boundary_zero_zero_case PASSED   [ 85%]\ntests/test_combat.py::test_enemy_attack_equal_threshold_uses_normal_path_regression PASSED [ 87%]\ntests/test_combat.py::test_enemy_hp_init_never_below_one PASSED          [ 88%]\ntests/test_combat.py::test_spell_ranges_over_full_8bit_rng_domain PASSED [ 90%]\ntests/test_combat.py::test_enemy_spell_damage_with_armor_reduction PASSED [ 92%]\ntests/test_combat.py::test_enemy_spell_damage_reduction_order_regression PASSED [ 93%]\ntests/test_combat.py::test_spell_fail_threshold_logic PASSED             [ 95%]\ntests/test_combat.py::test_excellent_move_rules PASSED                   [ 96%]\ntests/test_combat.py::test_hp_underflow_overflow_clamps PASSED           [ 98%]\ntests/test_combat.py::test_combat_slice_artifacts_exist_and_are_consistent PASSED [100%]\n\n============================== 63 passed in 0.10s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

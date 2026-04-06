@@ -1,0 +1,709 @@
+{
+  "row_results": [
+    {
+      "row": 1,
+      "system": "ROM",
+      "test": "SHA1 match",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "passed": true,
+      "evidence": "extractor/rom_baseline.json + dragon-warrior-1.nes",
+      "rom_source": "verify.py phase gate baseline"
+    },
+    {
+      "row": 2,
+      "system": "ROM",
+      "test": "PRG size",
+      "expected": "65536",
+      "actual": 65536,
+      "passed": true,
+      "evidence": "extractor/data_out/rom_header.json",
+      "rom_source": "iNES header byte 4"
+    },
+    {
+      "row": 3,
+      "system": "ROM",
+      "test": "CHR size",
+      "expected": "16384",
+      "actual": 16384,
+      "passed": true,
+      "evidence": "extractor/data_out/rom_header.json",
+      "rom_source": "iNES header byte 5"
+    },
+    {
+      "row": 4,
+      "system": "ROM",
+      "test": "Mapper",
+      "expected": "1",
+      "actual": 1,
+      "passed": true,
+      "evidence": "extractor/data_out/rom_header.json",
+      "rom_source": "Header flags 6/7"
+    },
+    {
+      "row": 5,
+      "system": "Maps",
+      "test": "Overworld dimensions",
+      "expected": "[120, 120]",
+      "actual": [
+        120,
+        120
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/maps.json",
+      "rom_source": "Data Crystal ROM map 0x1D6D"
+    },
+    {
+      "row": 6,
+      "system": "Maps",
+      "test": "Map metadata count",
+      "expected": "30 entries ids 0..29",
+      "actual": {
+        "count": 30,
+        "id_range": [
+          0,
+          29
+        ]
+      },
+      "passed": true,
+      "evidence": "extractor/data_out/maps.json",
+      "rom_source": "ROM metadata table 0x002A-0x00C0"
+    },
+    {
+      "row": 7,
+      "system": "Maps",
+      "test": "Tantegel size",
+      "expected": "[30, 30]",
+      "actual": [
+        30,
+        30
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/maps.json",
+      "rom_source": "Metadata entry 4"
+    },
+    {
+      "row": 8,
+      "system": "Maps",
+      "test": "Throne Room size",
+      "expected": "[10, 10]",
+      "actual": [
+        10,
+        10
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/maps.json",
+      "rom_source": "Metadata entry 5"
+    },
+    {
+      "row": 9,
+      "system": "Chests",
+      "test": "Chest count",
+      "expected": "31",
+      "actual": 31,
+      "passed": true,
+      "evidence": "extractor/data_out/chests.json",
+      "rom_source": "ROM 0x5DDD-0x5E58"
+    },
+    {
+      "row": 10,
+      "system": "Chests",
+      "test": "Tantegel chest spot-check",
+      "expected": "[4, 1, 13, 19]",
+      "actual": [
+        4,
+        1,
+        13,
+        19
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/chests.json",
+      "rom_source": "Extracted TreasureTbl entry"
+    },
+    {
+      "row": 11,
+      "system": "Enemies",
+      "test": "Enemy count",
+      "expected": "40",
+      "actual": 40,
+      "passed": true,
+      "evidence": "extractor/data_out/enemies.json",
+      "rom_source": "EnStatTbl"
+    },
+    {
+      "row": 12,
+      "system": "Enemies",
+      "test": "Enemy 0 name",
+      "expected": "Slime",
+      "actual": "Slime",
+      "passed": true,
+      "evidence": "extractor/data_out/enemies.json",
+      "rom_source": "EnStatTbl entry 0x00"
+    },
+    {
+      "row": 13,
+      "system": "Enemies",
+      "test": "Dragonlord form2 HP base",
+      "expected": "130",
+      "actual": {
+        "enemy_table_hp": 130,
+        "phase1_to_phase2_enemy_id_check": true,
+        "phase1_to_phase2_hp_check": true
+      },
+      "passed": true,
+      "evidence": "extractor/data_out/enemies.json + artifacts/phase5_slice_edge_case_regression_gate.json",
+      "rom_source": "Enemy table @ ROM 0x5E5B"
+    },
+    {
+      "row": 14,
+      "system": "MP Costs",
+      "test": "HEAL",
+      "expected": "4",
+      "actual": 4,
+      "passed": true,
+      "evidence": "extractor/data_out/spells.json",
+      "rom_source": "SpellCostTbl @ 0x1D63"
+    },
+    {
+      "row": 15,
+      "system": "MP Costs",
+      "test": "HURTMORE",
+      "expected": "5",
+      "actual": 5,
+      "passed": true,
+      "evidence": "extractor/data_out/spells.json",
+      "rom_source": "SpellCostTbl @ 0x1D6C"
+    },
+    {
+      "row": 16,
+      "system": "MP Costs",
+      "test": "RETURN",
+      "expected": "8",
+      "actual": 8,
+      "passed": true,
+      "evidence": "extractor/data_out/spells.json",
+      "rom_source": "SpellCostTbl @ 0x1D69"
+    },
+    {
+      "row": 17,
+      "system": "MP Costs",
+      "test": "OUTSIDE",
+      "expected": "6",
+      "actual": 6,
+      "passed": true,
+      "evidence": "extractor/data_out/spells.json",
+      "rom_source": "SpellCostTbl @ 0x1D68"
+    },
+    {
+      "row": 18,
+      "system": "XP Table",
+      "test": "Level 2 threshold",
+      "expected": "7",
+      "actual": 7,
+      "passed": true,
+      "evidence": "extractor/data_out/xp_table.json",
+      "rom_source": "Bank03 LF35D"
+    },
+    {
+      "row": 19,
+      "system": "XP Table",
+      "test": "Level 10 threshold",
+      "expected": "2000",
+      "actual": 2000,
+      "passed": true,
+      "evidence": "extractor/data_out/xp_table.json",
+      "rom_source": "Bank03 LF36D"
+    },
+    {
+      "row": 20,
+      "system": "XP Table",
+      "test": "Level 20 threshold",
+      "expected": "26000",
+      "actual": 26000,
+      "passed": true,
+      "evidence": "extractor/data_out/xp_table.json",
+      "rom_source": "Bank03 LF381"
+    },
+    {
+      "row": 21,
+      "system": "XP Table",
+      "test": "Level 30 threshold",
+      "expected": "65535",
+      "actual": 65535,
+      "passed": true,
+      "evidence": "extractor/data_out/xp_table.json",
+      "rom_source": "Bank03 LF395"
+    },
+    {
+      "row": 22,
+      "system": "XP Table",
+      "test": "All 30 thresholds",
+      "expected": "30 entries",
+      "actual": 30,
+      "passed": true,
+      "evidence": "extractor/data_out/xp_table.json",
+      "rom_source": "Bank03 LF35B-LF395"
+    },
+    {
+      "row": 23,
+      "system": "RNG",
+      "test": "Golden sequence",
+      "expected": "1000 ticks match fixture",
+      "actual": {
+        "count": 1000,
+        "matches": true
+      },
+      "passed": true,
+      "evidence": "tests/fixtures/rng_golden_sequence.json",
+      "rom_source": "Bank03 LC55B"
+    },
+    {
+      "row": 24,
+      "system": "RNG",
+      "test": "Deterministic seed replay",
+      "expected": "same-seed sequences identical",
+      "actual": {
+        "first8": [
+          129,
+          4,
+          141,
+          40,
+          249,
+          108,
+          197,
+          208
+        ],
+        "matches": true
+      },
+      "passed": true,
+      "evidence": "tests/test_rng.py::test_rng_determinism",
+      "rom_source": "Bank03 LFSR"
+    },
+    {
+      "row": 25,
+      "system": "Combat",
+      "test": "Excellent move chance",
+      "expected": "8/256 (=1/32)",
+      "actual": "8/256",
+      "passed": true,
+      "evidence": "engine.combat.excellent_move_check",
+      "rom_source": "Bank03 LE61F"
+    },
+    {
+      "row": 26,
+      "system": "Combat",
+      "test": "No excellent vs Dragonlord",
+      "expected": "0/256",
+      "actual": {
+        "rng_sweep": "0/256",
+        "edge_case_gate_check": true
+      },
+      "passed": true,
+      "evidence": "engine.combat.excellent_move_check + artifacts/phase5_slice_edge_case_regression_gate.json",
+      "rom_source": "Bank03 LE617-LE61D"
+    },
+    {
+      "row": 27,
+      "system": "Combat",
+      "test": "Player weak attack split",
+      "expected": "128 zeros / 128 ones",
+      "actual": {
+        "zero": 128,
+        "one": 128
+      },
+      "passed": true,
+      "evidence": "engine.combat.player_attack_damage",
+      "rom_source": "Bank03 LF026"
+    },
+    {
+      "row": 28,
+      "system": "Combat",
+      "test": "Normal attack formula parity",
+      "expected": "44",
+      "actual": 44,
+      "passed": true,
+      "evidence": "engine.combat.player_attack_damage",
+      "rom_source": "Bank03 LF030"
+    },
+    {
+      "row": 29,
+      "system": "Combat",
+      "test": "8-bit wraparound boundary",
+      "expected": "63",
+      "actual": 63,
+      "passed": true,
+      "evidence": "tests/test_combat.py::test_player_attack_boundary_max_atk_min_def",
+      "rom_source": "Bank03 arithmetic wrap"
+    },
+    {
+      "row": 30,
+      "system": "Combat",
+      "test": "HEAL range",
+      "expected": "10..17",
+      "actual": [
+        10,
+        17
+      ],
+      "passed": true,
+      "evidence": "engine.combat.heal_spell_hp",
+      "rom_source": "Bank03 LDBB8"
+    },
+    {
+      "row": 31,
+      "system": "Combat",
+      "test": "HEALMORE range",
+      "expected": "85..100",
+      "actual": [
+        85,
+        100
+      ],
+      "passed": true,
+      "evidence": "engine.combat.healmore_spell_hp",
+      "rom_source": "Bank03 LDBD7"
+    },
+    {
+      "row": 32,
+      "system": "Combat",
+      "test": "HURT/HURTMORE ranges",
+      "expected": "HURT 5..12; HURTMORE 58..65",
+      "actual": {
+        "hurt": [
+          5,
+          12
+        ],
+        "hurtmore": [
+          58,
+          65
+        ]
+      },
+      "passed": true,
+      "evidence": "engine.combat.hurt_spell_damage + hurtmore_spell_damage",
+      "rom_source": "Bank03 LE736/LE751"
+    },
+    {
+      "row": 33,
+      "system": "Combat",
+      "test": "Enemy HP init formula",
+      "expected": "randomized and bounded 98..130",
+      "actual": [
+        98,
+        130
+      ],
+      "passed": true,
+      "evidence": "engine.combat.enemy_hp_init",
+      "rom_source": "Bank03 LE599"
+    },
+    {
+      "row": 34,
+      "system": "Zones",
+      "test": "Zone grid dimensions",
+      "expected": "8x8 values in 0..13",
+      "actual": {
+        "rows": 8,
+        "cols": 8,
+        "min": 0,
+        "max": 13
+      },
+      "passed": true,
+      "evidence": "extractor/data_out/zones.json",
+      "rom_source": "Bank03 LF522"
+    },
+    {
+      "row": 35,
+      "system": "Zones",
+      "test": "Zone (0,0) value",
+      "expected": "3",
+      "actual": 3,
+      "passed": true,
+      "evidence": "extractor/data_out/zones.json",
+      "rom_source": "Bank03 LF522"
+    },
+    {
+      "row": 36,
+      "system": "Zones",
+      "test": "Zone (7,7) value",
+      "expected": "9",
+      "actual": 9,
+      "passed": true,
+      "evidence": "extractor/data_out/zones.json",
+      "rom_source": "Bank03 LF53E"
+    },
+    {
+      "row": 37,
+      "system": "Zones",
+      "test": "Formation row 0",
+      "expected": "['Slime', 'Red Slime', 'Slime', 'Red Slime', 'Slime']",
+      "actual": [
+        "Slime",
+        "Red Slime",
+        "Slime",
+        "Red Slime",
+        "Slime"
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/zones.json",
+      "rom_source": "Bank03 LF54F"
+    },
+    {
+      "row": 38,
+      "system": "Zones",
+      "test": "Formation row 13",
+      "expected": "['Werewolf', 'Green Dragon', 'Starwyvern', 'Starwyvern', 'Wizard']",
+      "actual": [
+        "Werewolf",
+        "Green Dragon",
+        "Starwyvern",
+        "Starwyvern",
+        "Wizard"
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/zones.json",
+      "rom_source": "Bank03 LF590"
+    },
+    {
+      "row": 39,
+      "system": "Zones",
+      "test": "Cave index table",
+      "expected": "[16, 17, 17, 17, 18, 18, 19, 19, 14, 14, 7, 15, 15]",
+      "actual": [
+        16,
+        17,
+        17,
+        17,
+        18,
+        18,
+        19,
+        19,
+        14,
+        14,
+        7,
+        15,
+        15
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/zones.json",
+      "rom_source": "Bank03 LF542"
+    },
+    {
+      "row": 40,
+      "system": "Zones",
+      "test": "Top-left overworld zone consistency",
+      "expected": "only zone id 3 in coordinates 0..14",
+      "actual": [
+        3
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/zones.json",
+      "rom_source": "Bank03 OvrWrldEnGrid mapping"
+    },
+    {
+      "row": 41,
+      "system": "Items",
+      "test": "Magic Key consumption",
+      "expected": "door use consumes one key",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_map_command_door_surface.json",
+      "rom_source": "Bank03 key-use door path"
+    },
+    {
+      "row": 42,
+      "system": "Items",
+      "test": "Torch radius + timer",
+      "expected": "radius=5 timer=16",
+      "actual": {
+        "radius": 5,
+        "timer": 16
+      },
+      "passed": true,
+      "evidence": "tests/fixtures/items_runtime_vectors.json",
+      "rom_source": "Bank03 ChkTorch"
+    },
+    {
+      "row": 43,
+      "system": "Items",
+      "test": "Rainbow Drop bridge placement",
+      "expected": "bridge flag set and bridge tile at [1,63,49]",
+      "actual": {
+        "bridge_check": true,
+        "bridge_target": [
+          1,
+          63,
+          49
+        ]
+      },
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_map_command_item_rainbow_drop_bridge_trigger.json + tests/fixtures/items_runtime_vectors.json",
+      "rom_source": "Bank03 place_charlock"
+    },
+    {
+      "row": 44,
+      "system": "Items",
+      "test": "Cursed equip load effect",
+      "expected": "HP set to 1 on map load",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_map_load_curse_check.json",
+      "rom_source": "Bank03 LCB73"
+    },
+    {
+      "row": 45,
+      "system": "Terrain",
+      "test": "Swamp step damage",
+      "expected": "true",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "rom_source": "Bank03 LCDE2"
+    },
+    {
+      "row": 46,
+      "system": "Terrain",
+      "test": "Force field step damage",
+      "expected": "true",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "rom_source": "Bank03 LCE47"
+    },
+    {
+      "row": 47,
+      "system": "Terrain",
+      "test": "Erdrick armor swamp immunity",
+      "expected": "true",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "rom_source": "Bank03 LCDD0"
+    },
+    {
+      "row": 48,
+      "system": "Terrain",
+      "test": "Erdrick armor step heal",
+      "expected": "true",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "rom_source": "Bank03 LCCFA"
+    },
+    {
+      "row": 49,
+      "system": "Quest",
+      "test": "Gwaelin rescue flag side-effect",
+      "expected": "true",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_npc_special_control_side_effects.json",
+      "rom_source": "RAM map story flag path"
+    },
+    {
+      "row": 50,
+      "system": "Quest",
+      "test": "Dragonlord defeat flag",
+      "expected": "true",
+      "actual": true,
+      "passed": true,
+      "evidence": "artifacts/phase4_main_loop_combat_dragonlord_endgame_victory.json",
+      "rom_source": "RAM map 0x00E4 bit 2"
+    },
+    {
+      "row": 51,
+      "system": "Stats",
+      "test": "Lv1 base stats",
+      "expected": "STR=4 AGI=4 HP=15 MP=0",
+      "actual": [
+        4,
+        4,
+        15,
+        0
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/stats.json",
+      "rom_source": "Bank01 LA0CD"
+    },
+    {
+      "row": 52,
+      "system": "Stats",
+      "test": "Lv30 base stats",
+      "expected": "STR=140 AGI=130 HP=210 MP=200",
+      "actual": [
+        140,
+        130,
+        210,
+        200
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/stats.json",
+      "rom_source": "Bank01 LA17B"
+    },
+    {
+      "row": 53,
+      "system": "Stats",
+      "test": "HEAL learned at Lv3",
+      "expected": "HEAL in spells_known",
+      "actual": [
+        "HEAL"
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/stats.json",
+      "rom_source": "Bank01 LA0D9"
+    },
+    {
+      "row": 54,
+      "system": "Stats",
+      "test": "HEALMORE learned at Lv17",
+      "expected": "HEALMORE in spells_known",
+      "actual": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE"
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/stats.json",
+      "rom_source": "Bank01 LA12D"
+    },
+    {
+      "row": 55,
+      "system": "Stats",
+      "test": "HURTMORE learned at Lv19",
+      "expected": "HURTMORE in spells_known",
+      "actual": [
+        "HEAL",
+        "HURT",
+        "SLEEP",
+        "RADIANT",
+        "STOPSPELL",
+        "OUTSIDE",
+        "RETURN",
+        "REPEL",
+        "HEALMORE",
+        "HURTMORE"
+      ],
+      "passed": true,
+      "evidence": "extractor/data_out/stats.json",
+      "rom_source": "Bank01 LA139"
+    },
+    {
+      "row": 56,
+      "system": "Save",
+      "test": "JSON save roundtrip + CRC",
+      "expected": "30-byte roundtrip and CRC present",
+      "actual": {
+        "json_roundtrip": true,
+        "save_dict_roundtrip": true,
+        "save_dict_has_crc": true
+      },
+      "passed": true,
+      "evidence": "artifacts/phase2_save_load_runtime.json + tests/fixtures/save_load_runtime_vectors.json",
+      "rom_source": "Bank03 LFA18 / SRAM-equivalent JSON"
+    }
+  ],
+  "all_passed": true,
+  "parity_report_sha256": "39716bb14389819e0f240add1157bd5dd70bf01a8a0e4b52db9073b1727e7f25"
+}

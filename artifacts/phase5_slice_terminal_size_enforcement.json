@@ -1,0 +1,74 @@
+{
+  "phase": "5-slice-terminal-size-enforcement",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "check_phase5_slice_terminal_size_enforcement": {
+      "ok": true,
+      "detail": {
+        "checks": {
+          "cols_below_min_shows_notice": true,
+          "cols_below_min_shows_required_size": true,
+          "cols_below_min_shows_current_size": true,
+          "cols_below_min_blocks_map_content": true,
+          "cols_below_min_blocks_status_content": true,
+          "cols_below_min_blocks_dialog_scaffold": true,
+          "rows_below_min_shows_notice": true,
+          "rows_below_min_shows_required_size": true,
+          "rows_below_min_shows_current_size": true,
+          "rows_below_min_blocks_map_content": true,
+          "rows_below_min_blocks_status_content": true,
+          "rows_below_min_blocks_dialog_scaffold": true
+        },
+        "vectors": {
+          "small_cols": {
+            "size": [
+              79,
+              24
+            ],
+            "notice_present": true,
+            "required_present": true,
+            "current_present": true,
+            "contains_player_marker": false,
+            "contains_status_name": false,
+            "contains_dialog_border": false
+          },
+          "small_rows": {
+            "size": [
+              80,
+              23
+            ],
+            "notice_present": true,
+            "required_present": true,
+            "current_present": true,
+            "contains_player_marker": false,
+            "contains_status_name": false,
+            "contains_dialog_border": false
+          }
+        }
+      }
+    }
+  }
+}

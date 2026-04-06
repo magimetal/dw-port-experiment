@@ -1,0 +1,50 @@
+{
+  "vectors": {
+    "encounter": {
+      "input": "RIGHT",
+      "screen_mode": "combat",
+      "action": "encounter_triggered",
+      "action_detail": "enemy:3",
+      "position": [
+        47,
+        1
+      ],
+      "rng_after": [
+        40,
+        122
+      ],
+      "frame_contains_fight": true,
+      "frame_contains_enemy": true,
+      "frame_contains_ghost": true,
+      "combat_session": {
+        "enemy_id": 3,
+        "enemy_name": "Ghost",
+        "enemy_hp": 7,
+        "enemy_max_hp": 7,
+        "enemy_base_hp": 7,
+        "enemy_atk": 11,
+        "enemy_def": 8,
+        "enemy_agi": 15,
+        "enemy_mdef": 4,
+        "enemy_xp": 3,
+        "enemy_gp": 5
+      }
+    },
+    "no_encounter": {
+      "input": "RIGHT",
+      "screen_mode": "map",
+      "action": "move",
+      "action_detail": "47,1",
+      "position": [
+        47,
+        1
+      ],
+      "rng_after": [
+        129,
+        3
+      ],
+      "frame_contains_fight": false,
+      "combat_session": null
+    }
+  }
+}

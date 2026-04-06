@@ -1,0 +1,237 @@
+{
+  "phase": "2-slice-items",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase2_slice_items_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m engine.run_phase2_slice_items",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_items_runtime_artifacts": {
+      "ok": true,
+      "detail": {
+        "read_gate": {
+          "completed": true,
+          "slice": "phase2-items",
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "ChkTorch": true,
+                "UseTorch": true,
+                "ChkFryWtr": true,
+                "ChkWings": true,
+                "UseWings": true,
+                "ChkDragonScale": true,
+                "ChkHarp": true,
+                "HarpRNGLoop": true,
+                "ChkDrop": true,
+                "ChkOutside": true,
+                "DoReturn": true,
+                "WearCursedItem": true,
+                "ChkDeathNecklace": true,
+                "CheckTantCursed": true,
+                "LCB73": true
+              }
+            },
+            "Dragon_Warrior_Defines.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Dragon_Warrior_Defines.asm",
+              "bytes": 73176,
+              "lines": 1370,
+              "labels_checked": {
+                "F_RNBW_BRDG": true,
+                "F_DRGSCALE": true,
+                "F_CRSD_BELT": true,
+                "F_DTH_NECKLACE": true,
+                "IS_CURSED": true,
+                "INV_TORCH": true,
+                "INV_FAIRY": true,
+                "INV_WINGS": true,
+                "INV_SCALE": true,
+                "INV_HARP": true,
+                "INV_BELT": true,
+                "INV_NECKLACE": true,
+                "INV_DROP": true,
+                "MAP_OVERWORLD": true,
+                "MAP_DLCSTL_BF": true,
+                "MAP_ERDRCK_B1": true,
+                "MAP_DUNGEON": true
+              }
+            }
+          }
+        },
+        "report": {
+          "slice": "phase2-items",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "all_bank03_labels_present": true,
+            "all_defines_labels_present": true,
+            "torch_runtime_effect": true,
+            "fairy_water_sets_repel": true,
+            "wings_do_return_when_allowed": true,
+            "dragon_scale_sets_flag_once": true,
+            "silver_harp_forces_overworld_encounter": true,
+            "rainbow_drop_sets_bridge_flag": true,
+            "outside_and_return_paths": true,
+            "curse_runtime_transitions": true
+          },
+          "outputs": {
+            "read_gate": "artifacts/phase2_items_read_gate.json",
+            "report": "artifacts/phase2_items_runtime.json",
+            "vectors_fixture": "tests/fixtures/items_runtime_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          }
+        },
+        "vectors": {
+          "source": {
+            "bank03_labels": [
+              "ChkTorch",
+              "ChkFryWtr",
+              "ChkWings",
+              "ChkDragonScale",
+              "ChkHarp",
+              "ChkDrop",
+              "ChkOutside",
+              "DoReturn",
+              "WearCursedItem",
+              "CheckTantCursed"
+            ],
+            "defines_labels": [
+              "F_RNBW_BRDG",
+              "F_DRGSCALE",
+              "F_CRSD_BELT",
+              "F_DTH_NECKLACE",
+              "IS_CURSED"
+            ]
+          },
+          "vectors": {
+            "torch_success": true,
+            "torch_consumed": true,
+            "torch_light_radius": 5,
+            "torch_light_timer": 16,
+            "torch_inventory_after": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "torch_fail_reason": "torch requires dungeon map",
+            "fairy_repel_timer": 254,
+            "fairy_consumed": true,
+            "wings_success": true,
+            "wings_consumed": true,
+            "wings_dst": [
+              1,
+              42,
+              43
+            ],
+            "wings_fail_reason": "wings cannot be used here",
+            "dragon_scale_first_success": true,
+            "dragon_scale_flag_set": true,
+            "dragon_scale_defense_delta": 2,
+            "dragon_scale_second_reason": "already wearing dragon scale",
+            "harp_success": true,
+            "harp_enemy": 0,
+            "harp_rng_after": [
+              129,
+              0
+            ],
+            "harp_fail_reason": "harp only works on overworld",
+            "rainbow_success": true,
+            "rainbow_flag_set": true,
+            "rainbow_bridge_target": [
+              1,
+              63,
+              49
+            ],
+            "rainbow_fail_reason": "no rainbow appeared here",
+            "outside_erdricks_dst": [
+              1,
+              28,
+              12
+            ],
+            "outside_garinham_cave_dst": [
+              9,
+              19,
+              0
+            ],
+            "outside_rock_mountain_dst": [
+              1,
+              29,
+              57
+            ],
+            "outside_swamp_cave_dst": [
+              1,
+              104,
+              44
+            ],
+            "outside_dragonlord_castle_dst": [
+              1,
+              48,
+              48
+            ],
+            "outside_fail_reason": "spell fizzled",
+            "return_ok_dst": [
+              1,
+              42,
+              43
+            ],
+            "return_fail_reason": "spell fizzled",
+            "cursed_belt_flag": true,
+            "cursed_necklace_flag": true,
+            "check_and_apply_curse_hp": 1,
+            "lift_curse_removed": true,
+            "lift_curse_flags": 0,
+            "lift_curse_inventory": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "run_pytest_phase2_items_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py tests/test_phase1_npcs.py tests/test_phase1_dialog.py tests/test_phase1_maps.py tests/test_rng.py tests/test_state.py tests/test_level_up.py tests/test_combat.py tests/test_movement.py tests/test_map_engine.py tests/test_dialog_engine.py tests/test_shop.py tests/test_save_load.py tests/test_items_engine.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 102 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  0%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [  1%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [  2%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [  3%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [  4%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [  5%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [  6%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [  7%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [  8%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [  9%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 10%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 11%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 12%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 13%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 14%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 15%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 16%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 17%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 18%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 19%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 20%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 21%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 22%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 23%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [ 24%]\ntests/test_phase1_maps.py::test_maps_metadata_offsets_and_counts PASSED  [ 25%]\ntests/test_phase1_maps.py::test_maps_decode_spot_checks_from_rom PASSED  [ 26%]\ntests/test_phase1_maps.py::test_maps_output_and_artifacts_exist PASSED   [ 27%]\ntests/test_rng.py::test_rng_output_domain_across_seed_grid PASSED        [ 28%]\ntests/test_rng.py::test_rng_determinism PASSED                           [ 29%]\ntests/test_rng.py::test_rng_golden_fixture_sequence PASSED               [ 30%]\ntests/test_rng.py::test_rng_range_uses_rng_ub_mod_n PASSED               [ 31%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[0] PASSED  [ 32%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-1] PASSED [ 33%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-99] PASSED [ 34%]\ntests/test_rng.py::test_rng_artifacts_exist_and_are_consistent PASSED    [ 35%]\ntests/test_rng.py::test_rng_slice_raises_non_availability_py65_errors PASSED [ 36%]\ntests/test_rng.py::test_rng_slice_preserves_existing_py65_fixture_when_py65_missing PASSED [ 37%]\ntests/test_state.py::test_fresh_game_initialization_defaults PASSED      [ 38%]\ntests/test_state.py::test_state_clamps_byte_and_word_fields PASSED       [ 39%]\ntests/test_state.py::test_state_rejects_invalid_inventory_or_npc_shapes PASSED [ 40%]\ntests/test_state.py::test_state_save_api_roundtrip_is_wired_to_canonical_save_dict PASSED [ 41%]\ntests/test_state.py::test_state_slice_artifacts_exist_and_are_consistent PASSED [ 42%]\ntests/test_level_up.py::test_xp_table_exact_matches_golden_fixture PASSED [ 43%]\ntests/test_level_up.py::test_base_stats_exact_matches_golden_fixture PASSED [ 44%]\ntests/test_level_up.py::test_level_resolution_across_threshold_boundaries PASSED [ 45%]\ntests/test_level_up.py::test_level_resolution_monotone_for_full_u16_domain PASSED [ 46%]\ntests/test_level_up.py::test_spell_progression_key_unlocks PASSED        [ 47%]\ntests/test_level_up.py::test_stats_for_level_and_resolve_progression PASSED [ 48%]\ntests/test_level_up.py::test_level_slice_artifacts_exist_and_are_consistent PASSED [ 49%]\ntests/test_combat.py::test_player_attack_boundary_max_atk_min_def PASSED [ 50%]\ntests/test_combat.py::test_player_attack_boundary_zero_atk_max_def_weak_path PASSED [ 50%]\ntests/test_combat.py::test_player_attack_boundary_base_lt_2_weak_path PASSED [ 51%]\ntests/test_combat.py::test_enemy_attack_boundary_zero_zero_case PASSED   [ 52%]\ntests/test_combat.py::test_enemy_attack_equal_threshold_uses_normal_path_regression PASSED [ 53%]\ntests/test_combat.py::test_enemy_hp_init_never_below_one PASSED          [ 54%]\ntests/test_combat.py::test_spell_ranges_over_full_8bit_rng_domain PASSED [ 55%]\ntests/test_combat.py::test_enemy_spell_damage_with_armor_reduction PASSED [ 56%]\ntests/test_combat.py::test_enemy_spell_damage_reduction_order_regression PASSED [ 57%]\ntests/test_combat.py::test_spell_fail_threshold_logic PASSED             [ 58%]\ntests/test_combat.py::test_excellent_move_rules PASSED                   [ 59%]\ntests/test_combat.py::test_hp_underflow_overflow_clamps PASSED           [ 60%]\ntests/test_combat.py::test_combat_slice_artifacts_exist_and_are_consistent PASSED [ 61%]\ntests/test_movement.py::test_step_regen_armor_paths PASSED               [ 62%]\ntests/test_movement.py::test_swamp_and_force_field_damage_paths PASSED   [ 63%]\ntests/test_movement.py::test_encounter_mask_rules PASSED                 [ 64%]\ntests/test_movement.py::test_overworld_zone_lookup PASSED                [ 65%]\ntests/test_movement.py::test_zone_zero_fight_modifiers PASSED            [ 66%]\ntests/test_movement.py::test_enemy_selection_rerolls_above_slot_four PASSED [ 67%]\ntests/test_movement.py::test_choose_overworld_enemy_zone_zero_can_abort PASSED [ 68%]\ntests/test_movement.py::test_repel_logic_paths PASSED                    [ 69%]\ntests/test_movement.py::test_movement_slice_artifacts_exist_and_are_consistent PASSED [ 70%]\ntests/test_map_engine.py::test_tile_lookup_and_oob_border_tile PASSED    [ 71%]\ntests/test_map_engine.py::test_tiles_are_standard_block_ids_after_conversion PASSED [ 72%]\ntests/test_map_engine.py::test_map_passability_from_extracted_tiles PASSED [ 73%]\ntests/test_map_engine.py::test_passability_uses_collision_threshold_rule PASSED [ 74%]\ntests/test_map_engine.py::test_warp_detection_and_transition_to_tantegel PASSED [ 75%]\ntests/test_map_engine.py::test_load_map_clamps_coordinates PASSED        [ 76%]\ntests/test_map_engine.py::test_map_engine_slice_artifacts_exist_and_are_consistent PASSED [ 77%]\ntests/test_dialog_engine.py::test_start_dialog_unknown_id_raises PASSED  [ 78%]\ntests/test_dialog_engine.py::test_dialog_session_paging_and_control_resolution PASSED [ 79%]\ntests/test_dialog_engine.py::test_dialog_session_preserves_unresolved_machine_markers PASSED [ 80%]\ntests/test_dialog_engine.py::test_dialog_engine_with_extracted_dialog_data PASSED [ 81%]\ntests/test_dialog_engine.py::test_dialog_slice_artifacts_exist_and_are_consistent PASSED [ 82%]\ntests/test_shop.py::test_shop_inventory_prices_and_inn_costs_match_extracted_tables PASSED [ 83%]\ntests/test_shop.py::test_weapon_purchase_applies_buyback_and_equips_new_weapon PASSED [ 84%]\ntests/test_shop.py::test_herb_cap_and_inventory_full_block_purchase PASSED [ 85%]\ntests/test_shop.py::test_tool_buy_and_sell_use_nibble_inventory_and_half_price_sale PASSED [ 86%]\ntests/test_shop.py::test_sell_herb_decrements_counter_and_adds_half_price PASSED [ 87%]\ntests/test_shop.py::test_shop_slice_artifacts_exist_and_are_consistent PASSED [ 88%]\ntests/test_save_load.py::test_save_data_layout_and_key_clamp PASSED      [ 89%]\ntests/test_save_load.py::test_crc_detects_payload_mutation PASSED        [ 90%]\ntests/test_save_load.py::test_portable_token_encode_decode_roundtrip_is_optional_non_canonical PASSED [ 91%]\ntests/test_save_load.py::test_portable_token_decode_rejects_crc_mismatch PASSED [ 92%]\ntests/test_save_load.py::test_save_dict_roundtrip_is_canonical_and_crc_checked PASSED [ 93%]\ntests/test_save_load.py::test_json_save_load_roundtrip_preserves_canonical_30_byte_save_data PASSED [ 94%]\ntests/test_save_load.py::test_json_save_load_can_include_opt_in_portable_token PASSED [ 95%]\ntests/test_save_load.py::test_save_load_slice_artifacts_exist_and_are_consistent PASSED [ 96%]\ntests/test_items_engine.py::test_torch_and_fairy_water_consumables_apply_runtime_effects PASSED [ 97%]\ntests/test_items_engine.py::test_wings_return_outside_and_return_spell_paths PASSED [ 98%]\ntests/test_items_engine.py::test_dragon_scale_silver_harp_rainbow_drop_and_curse_runtime_logic PASSED [ 99%]\ntests/test_items_engine.py::test_items_slice_artifacts_exist_and_are_consistent PASSED [100%]\n\n============================= 102 passed in 0.14s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

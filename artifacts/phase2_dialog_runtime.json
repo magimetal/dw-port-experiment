@@ -1,0 +1,27 @@
+{
+  "slice": "phase2-dialog",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "all_bank02_labels_present": true,
+    "all_bank03_labels_present": true,
+    "dialog_block_count_19": true,
+    "block1_first_page_expected": true,
+    "block1_not_done_after_first_page": true,
+    "block1_has_multiple_pages": true,
+    "custom_resolution_page_one": true,
+    "custom_resolution_page_two": true,
+    "custom_session_done_after_two_pages": true
+  },
+  "outputs": {
+    "read_gate": "artifacts/phase2_dialog_read_gate.json",
+    "report": "artifacts/phase2_dialog_runtime.json",
+    "vectors_fixture": "tests/fixtures/dialog_runtime_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

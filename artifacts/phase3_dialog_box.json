@@ -1,0 +1,31 @@
+{
+  "slice": "phase3-dialog-box",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "word_wrap_correct": true,
+    "render_is_deterministic": true,
+    "render_has_dw_borders": true,
+    "body_uses_vertical_bars": true,
+    "body_has_visible_lines": true,
+    "paging_advance_works": true,
+    "paging_done_emitted": true,
+    "continuation_indicator_correct": true,
+    "dialog_engine_control_codes_integrate": true,
+    "typewriter_starts_at_zero": true,
+    "typewriter_ticks": true,
+    "typewriter_skip_reveals_all": true,
+    "state_transitions_are_pure": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_dialog_box.json",
+    "vectors_fixture": "tests/fixtures/ui_dialog_box_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 3 bounded dialog box slice: DW-style \u2554\u2550\u2550\u2557 border rendering, word-wrap, paging state machine, typewriter reveal, continuation indicator."
+}

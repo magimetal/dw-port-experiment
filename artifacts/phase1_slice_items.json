@@ -1,0 +1,713 @@
+{
+  "phase": "1-slice-items",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_items_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_items",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_items_artifacts": {
+      "ok": true,
+      "detail": {
+        "items": {
+          "source": {
+            "bank00_labels": [
+              "ItemCostTbl",
+              "InnCostTbl",
+              "ShopItemsTbl",
+              "WeaponsBonusTbl",
+              "ArmorBonusTbl",
+              "ShieldBonusTbl"
+            ],
+            "bank03_aliases": [
+              "ItemCostTbl",
+              "InnCostTbl",
+              "ShopItemsTbl",
+              "WeaponsBonusTbl",
+              "ArmorBonusTbl",
+              "ShieldBonusTbl"
+            ],
+            "item_cost_table_start": "0x1957",
+            "item_cost_count": 33,
+            "key_cost_table_start": "0x1999",
+            "inn_cost_table_start": "0x199c",
+            "shop_items_table_start": "0x19a1",
+            "shop_items_table_end": "0x19de",
+            "weapons_bonus_table_start": "0x19df",
+            "armor_bonus_table_start": "0x19e7",
+            "shield_bonus_table_start": "0x19ef"
+          },
+          "item_costs": [
+            {
+              "item_id": 0,
+              "item_name": "Bamboo pole",
+              "gold": 10,
+              "rom_offset": "0x1957"
+            },
+            {
+              "item_id": 1,
+              "item_name": "Club",
+              "gold": 60,
+              "rom_offset": "0x1959"
+            },
+            {
+              "item_id": 2,
+              "item_name": "Copper sword",
+              "gold": 180,
+              "rom_offset": "0x195b"
+            },
+            {
+              "item_id": 3,
+              "item_name": "Hand axe",
+              "gold": 560,
+              "rom_offset": "0x195d"
+            },
+            {
+              "item_id": 4,
+              "item_name": "Broad sword",
+              "gold": 1500,
+              "rom_offset": "0x195f"
+            },
+            {
+              "item_id": 5,
+              "item_name": "Flame sword",
+              "gold": 9800,
+              "rom_offset": "0x1961"
+            },
+            {
+              "item_id": 6,
+              "item_name": "Erdrick's sword",
+              "gold": 2,
+              "rom_offset": "0x1963"
+            },
+            {
+              "item_id": 7,
+              "item_name": "Clothes",
+              "gold": 20,
+              "rom_offset": "0x1965"
+            },
+            {
+              "item_id": 8,
+              "item_name": "Leather armor",
+              "gold": 70,
+              "rom_offset": "0x1967"
+            },
+            {
+              "item_id": 9,
+              "item_name": "Chain mail",
+              "gold": 300,
+              "rom_offset": "0x1969"
+            },
+            {
+              "item_id": 10,
+              "item_name": "Half plate",
+              "gold": 1000,
+              "rom_offset": "0x196b"
+            },
+            {
+              "item_id": 11,
+              "item_name": "Full plate",
+              "gold": 3000,
+              "rom_offset": "0x196d"
+            },
+            {
+              "item_id": 12,
+              "item_name": "Magic armor",
+              "gold": 7700,
+              "rom_offset": "0x196f"
+            },
+            {
+              "item_id": 13,
+              "item_name": "Erdrick's armor",
+              "gold": 2,
+              "rom_offset": "0x1971"
+            },
+            {
+              "item_id": 14,
+              "item_name": "Small shield",
+              "gold": 90,
+              "rom_offset": "0x1973"
+            },
+            {
+              "item_id": 15,
+              "item_name": "Large shield",
+              "gold": 800,
+              "rom_offset": "0x1975"
+            },
+            {
+              "item_id": 16,
+              "item_name": "Silver shield",
+              "gold": 14800,
+              "rom_offset": "0x1977"
+            },
+            {
+              "item_id": 17,
+              "item_name": "Herb",
+              "gold": 24,
+              "rom_offset": "0x1979"
+            },
+            {
+              "item_id": 18,
+              "item_name": "Magic key",
+              "gold": 53,
+              "rom_offset": "0x197b"
+            },
+            {
+              "item_id": 19,
+              "item_name": "Torch",
+              "gold": 8,
+              "rom_offset": "0x197d"
+            },
+            {
+              "item_id": 20,
+              "item_name": "Fairy water",
+              "gold": 38,
+              "rom_offset": "0x197f"
+            },
+            {
+              "item_id": 21,
+              "item_name": "Wings",
+              "gold": 70,
+              "rom_offset": "0x1981"
+            },
+            {
+              "item_id": 22,
+              "item_name": "Dragon's scale",
+              "gold": 20,
+              "rom_offset": "0x1983"
+            },
+            {
+              "item_id": 23,
+              "item_name": "Fairy flute",
+              "gold": 0,
+              "rom_offset": "0x1985"
+            },
+            {
+              "item_id": 24,
+              "item_name": "Fighter's ring",
+              "gold": 30,
+              "rom_offset": "0x1987"
+            },
+            {
+              "item_id": 25,
+              "item_name": "Erdrick's token",
+              "gold": 0,
+              "rom_offset": "0x1989"
+            },
+            {
+              "item_id": 26,
+              "item_name": "Gwaelin's love",
+              "gold": 0,
+              "rom_offset": "0x198b"
+            },
+            {
+              "item_id": 27,
+              "item_name": "Cursed belt",
+              "gold": 360,
+              "rom_offset": "0x198d"
+            },
+            {
+              "item_id": 28,
+              "item_name": "Silver harp",
+              "gold": 0,
+              "rom_offset": "0x198f"
+            },
+            {
+              "item_id": 29,
+              "item_name": "Death necklace",
+              "gold": 2400,
+              "rom_offset": "0x1991"
+            },
+            {
+              "item_id": 30,
+              "item_name": "Stones of sunlight",
+              "gold": 0,
+              "rom_offset": "0x1993"
+            },
+            {
+              "item_id": 31,
+              "item_name": "Staff of rain",
+              "gold": 0,
+              "rom_offset": "0x1995"
+            },
+            {
+              "item_id": 32,
+              "item_name": "Rainbow drop",
+              "gold": 0,
+              "rom_offset": "0x1997"
+            }
+          ],
+          "key_costs": [
+            {
+              "town": "Cantlin",
+              "gold": 98,
+              "rom_offset": "0x1999"
+            },
+            {
+              "town": "Rimuldar",
+              "gold": 53,
+              "rom_offset": "0x199a"
+            },
+            {
+              "town": "Tantegel castle",
+              "gold": 85,
+              "rom_offset": "0x199b"
+            }
+          ],
+          "inn_costs": [
+            {
+              "town": "Kol",
+              "gold": 20,
+              "rom_offset": "0x199c"
+            },
+            {
+              "town": "Brecconary",
+              "gold": 6,
+              "rom_offset": "0x199d"
+            },
+            {
+              "town": "Garinham",
+              "gold": 25,
+              "rom_offset": "0x199e"
+            },
+            {
+              "town": "Cantlin",
+              "gold": 100,
+              "rom_offset": "0x199f"
+            },
+            {
+              "town": "Rimuldar",
+              "gold": 55,
+              "rom_offset": "0x19a0"
+            }
+          ],
+          "shop_inventories": [
+            {
+              "shop_id": 0,
+              "shop_name": "Kol weapons and armor shop",
+              "item_ids": [
+                2,
+                3,
+                10,
+                11,
+                14
+              ],
+              "item_names": [
+                "Copper sword",
+                "Hand axe",
+                "Half plate",
+                "Full plate",
+                "Small shield"
+              ],
+              "rom_offset_start": "0x19a1",
+              "rom_offset_end": "0x19a6"
+            },
+            {
+              "shop_id": 1,
+              "shop_name": "Brecconary weapons and armor shop",
+              "item_ids": [
+                0,
+                1,
+                2,
+                7,
+                8,
+                14
+              ],
+              "item_names": [
+                "Bamboo pole",
+                "Club",
+                "Copper sword",
+                "Clothes",
+                "Leather armor",
+                "Small shield"
+              ],
+              "rom_offset_start": "0x19a7",
+              "rom_offset_end": "0x19ad"
+            },
+            {
+              "shop_id": 2,
+              "shop_name": "Garinham weapons and armor shop",
+              "item_ids": [
+                1,
+                2,
+                3,
+                8,
+                9,
+                10,
+                15
+              ],
+              "item_names": [
+                "Club",
+                "Copper sword",
+                "Hand axe",
+                "Leather armor",
+                "Chain mail",
+                "Half plate",
+                "Large shield"
+              ],
+              "rom_offset_start": "0x19ae",
+              "rom_offset_end": "0x19b5"
+            },
+            {
+              "shop_id": 3,
+              "shop_name": "Cantlin weapons and armor shop 1",
+              "item_ids": [
+                0,
+                1,
+                2,
+                8,
+                9,
+                15
+              ],
+              "item_names": [
+                "Bamboo pole",
+                "Club",
+                "Copper sword",
+                "Leather armor",
+                "Chain mail",
+                "Large shield"
+              ],
+              "rom_offset_start": "0x19b6",
+              "rom_offset_end": "0x19bc"
+            },
+            {
+              "shop_id": 4,
+              "shop_name": "Cantlin weapons and armor shop 2",
+              "item_ids": [
+                3,
+                4,
+                11,
+                12
+              ],
+              "item_names": [
+                "Hand axe",
+                "Broad sword",
+                "Full plate",
+                "Magic armor"
+              ],
+              "rom_offset_start": "0x19bd",
+              "rom_offset_end": "0x19c1"
+            },
+            {
+              "shop_id": 5,
+              "shop_name": "Cantlin weapons and armor shop 3",
+              "item_ids": [
+                5,
+                16
+              ],
+              "item_names": [
+                "Flame sword",
+                "Silver shield"
+              ],
+              "rom_offset_start": "0x19c2",
+              "rom_offset_end": "0x19c4"
+            },
+            {
+              "shop_id": 6,
+              "shop_name": "Rimuldar weapons and armor shop",
+              "item_ids": [
+                2,
+                3,
+                4,
+                10,
+                11,
+                12
+              ],
+              "item_names": [
+                "Copper sword",
+                "Hand axe",
+                "Broad sword",
+                "Half plate",
+                "Full plate",
+                "Magic armor"
+              ],
+              "rom_offset_start": "0x19c5",
+              "rom_offset_end": "0x19cb"
+            },
+            {
+              "shop_id": 7,
+              "shop_name": "Kol item shop",
+              "item_ids": [
+                17,
+                19,
+                22,
+                21
+              ],
+              "item_names": [
+                "Herb",
+                "Torch",
+                "Dragon's scale",
+                "Wings"
+              ],
+              "rom_offset_start": "0x19cc",
+              "rom_offset_end": "0x19d0"
+            },
+            {
+              "shop_id": 8,
+              "shop_name": "Brecconary item shop",
+              "item_ids": [
+                17,
+                19,
+                22
+              ],
+              "item_names": [
+                "Herb",
+                "Torch",
+                "Dragon's scale"
+              ],
+              "rom_offset_start": "0x19d1",
+              "rom_offset_end": "0x19d4"
+            },
+            {
+              "shop_id": 9,
+              "shop_name": "Garinham item shop",
+              "item_ids": [
+                17,
+                19,
+                22
+              ],
+              "item_names": [
+                "Herb",
+                "Torch",
+                "Dragon's scale"
+              ],
+              "rom_offset_start": "0x19d5",
+              "rom_offset_end": "0x19d8"
+            },
+            {
+              "shop_id": 10,
+              "shop_name": "Cantlin item shop 1",
+              "item_ids": [
+                17,
+                19
+              ],
+              "item_names": [
+                "Herb",
+                "Torch"
+              ],
+              "rom_offset_start": "0x19d9",
+              "rom_offset_end": "0x19db"
+            },
+            {
+              "shop_id": 11,
+              "shop_name": "Cantlin item shop 2",
+              "item_ids": [
+                22,
+                21
+              ],
+              "item_names": [
+                "Dragon's scale",
+                "Wings"
+              ],
+              "rom_offset_start": "0x19dc",
+              "rom_offset_end": "0x19de"
+            }
+          ],
+          "equipment_bonuses": {
+            "weapons": [
+              0,
+              2,
+              4,
+              10,
+              15,
+              20,
+              28,
+              40
+            ],
+            "armor": [
+              0,
+              2,
+              4,
+              10,
+              16,
+              24,
+              24,
+              28
+            ],
+            "shields": [
+              0,
+              4,
+              10,
+              20
+            ]
+          },
+          "equipment_encoding": {
+            "weapon_values": {
+              "none": 0,
+              "bamboo_pole": 32,
+              "club": 64,
+              "copper_sword": 96,
+              "hand_axe": 128,
+              "broad_sword": 160,
+              "flame_sword": 192,
+              "erdricks_sword": 224
+            },
+            "armor_values": {
+              "none": 0,
+              "clothes": 4,
+              "leather_armor": 8,
+              "chain_mail": 12,
+              "half_plate": 16,
+              "full_plate": 20,
+              "magic_armor": 24,
+              "erdricks_armor": 28
+            },
+            "shield_values": {
+              "none": 0,
+              "small_shield": 1,
+              "large_shield": 2,
+              "silver_shield": 3
+            },
+            "masks": {
+              "weapons": 224,
+              "armor": 28,
+              "shields": 3
+            }
+          }
+        },
+        "artifact": {
+          "slice": "phase1-items",
+          "item_cost_count": 33,
+          "shop_count": 12,
+          "first_item_cost": {
+            "item_id": 0,
+            "item_name": "Bamboo pole",
+            "gold": 10,
+            "rom_offset": "0x1957"
+          },
+          "last_item_cost": {
+            "item_id": 32,
+            "item_name": "Rainbow drop",
+            "gold": 0,
+            "rom_offset": "0x1997"
+          },
+          "first_shop": {
+            "shop_id": 0,
+            "shop_name": "Kol weapons and armor shop",
+            "item_ids": [
+              2,
+              3,
+              10,
+              11,
+              14
+            ],
+            "item_names": [
+              "Copper sword",
+              "Hand axe",
+              "Half plate",
+              "Full plate",
+              "Small shield"
+            ],
+            "rom_offset_start": "0x19a1",
+            "rom_offset_end": "0x19a6"
+          },
+          "last_shop": {
+            "shop_id": 11,
+            "shop_name": "Cantlin item shop 2",
+            "item_ids": [
+              22,
+              21
+            ],
+            "item_names": [
+              "Dragon's scale",
+              "Wings"
+            ],
+            "rom_offset_start": "0x19dc",
+            "rom_offset_end": "0x19de"
+          },
+          "weapon_bonuses": [
+            0,
+            2,
+            4,
+            10,
+            15,
+            20,
+            28,
+            40
+          ],
+          "armor_bonuses": [
+            0,
+            2,
+            4,
+            10,
+            16,
+            24,
+            24,
+            28
+          ],
+          "shield_bonuses": [
+            0,
+            4,
+            10,
+            20
+          ]
+        },
+        "read_gate": {
+          "completed": true,
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank00.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank00.asm",
+              "bytes": 313521,
+              "lines": 7435,
+              "labels_checked": {
+                "ItemCostTbl": true,
+                "InnCostTbl": true,
+                "ShopItemsTbl": true,
+                "WeaponsBonusTbl": true,
+                "ArmorBonusTbl": true,
+                "ShieldBonusTbl": true
+              }
+            },
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "ItemCostTbl": true,
+                "InnCostTbl": true,
+                "ShopItemsTbl": true,
+                "WeaponsBonusTbl": true,
+                "ArmorBonusTbl": true,
+                "ShieldBonusTbl": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase1_items_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 19 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  5%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [ 10%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 15%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [ 21%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 26%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 31%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 36%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 42%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 47%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 52%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 57%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 63%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 68%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 73%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 78%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 84%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 89%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 94%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [100%]\n\n============================== 19 passed in 0.07s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

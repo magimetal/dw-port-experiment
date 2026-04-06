@@ -1,0 +1,66 @@
+{
+  "vectors": {
+    "search_wings_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:12;contents:21;reward:item:WINGS;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_wings": true,
+      "inventory_slots_after": [
+        3,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_dragons_scale_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:4;contents:22;reward:item:DRAGONS_SCALE;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_dragons_scale": true,
+      "inventory_slots_after": [
+        4,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_fairy_flute_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:30;contents:23;reward:item:FAIRY_FLUTE;opened:true",
+      "screen_mode": "dialog",
+      "frame_contains_fairy_flute": true,
+      "inventory_slots_after": [
+        5,
+        0,
+        0,
+        0
+      ]
+    },
+    "search_herb_full_guard": {
+      "action": "map_search",
+      "action_detail": "chest:index:24;contents:17;reward:herb:full",
+      "screen_mode": "dialog",
+      "frame_contains_herb_full": true,
+      "herbs_after": 6
+    },
+    "search_key_full_guard": {
+      "action": "map_search",
+      "action_detail": "chest:index:20;contents:18;reward:key:full",
+      "screen_mode": "dialog",
+      "frame_contains_key_full": true,
+      "magic_keys_after": 6
+    },
+    "search_tool_full_guard": {
+      "action": "map_search",
+      "action_detail": "chest:index:8;contents:20;reward:item:full",
+      "screen_mode": "dialog",
+      "frame_contains_inventory_full": true,
+      "inventory_slots_after": [
+        17,
+        17,
+        17,
+        17
+      ]
+    }
+  }
+}

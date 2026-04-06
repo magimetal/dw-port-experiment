@@ -1,0 +1,55 @@
+{
+  "source": {
+    "bank03_labels": [
+      "MovementUpdates",
+      "LCDC8",
+      "LCE1F",
+      "LCDFD",
+      "ChkRandomFight",
+      "LCE82",
+      "LCEBD",
+      "ChkFightRepel"
+    ]
+  },
+  "vectors": {
+    "regen_erdrick": [
+      11,
+      9
+    ],
+    "regen_magic_no_heal": [
+      10,
+      3
+    ],
+    "regen_magic_heal_on_counter_mod4_zero": [
+      11,
+      4
+    ],
+    "swamp_plain": [
+      8,
+      0
+    ],
+    "swamp_erdrick": [
+      11,
+      0
+    ],
+    "force_field_plain": [
+      0,
+      0
+    ],
+    "encounter_normal_true": true,
+    "encounter_normal_false": false,
+    "encounter_sand_true": true,
+    "zone_0_0": 3,
+    "zone_119_119": 9,
+    "zone0_non_hill_allows": true,
+    "zone0_non_hill_blocks": false,
+    "zone0_hill_allows": true,
+    "zone0_hill_blocks": false,
+    "choose_enemy_reroll": 4,
+    "choose_overworld_enemy_zone3": 4,
+    "choose_overworld_enemy_zone0_none": null,
+    "repel_true_negative_diff": true,
+    "repel_true_threshold": true,
+    "repel_false": false
+  }
+}

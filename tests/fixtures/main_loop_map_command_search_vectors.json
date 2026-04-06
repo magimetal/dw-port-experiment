@@ -1,0 +1,16 @@
+{
+  "vectors": {
+    "search_no_chest": {
+      "action": "map_search",
+      "action_detail": "none",
+      "screen_mode": "dialog",
+      "frame_contains_nothing": true
+    },
+    "search_chest": {
+      "action": "map_search",
+      "action_detail": "chest:index:0;contents:19",
+      "screen_mode": "dialog",
+      "frame_contains_chest": true
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "vectors": {
+    "inn_stay": {
+      "action": "inn_stay",
+      "quit_requested": false,
+      "inn_cost": 20,
+      "gold_before": 20,
+      "gold_after": 0,
+      "hp_after": 31,
+      "mp_after": 16,
+      "max_hp": 31,
+      "max_mp": 16,
+      "save_exists": true,
+      "save_dict_roundtrip_equal": true
+    },
+    "inn_stay_rejected": {
+      "action": "inn_stay_rejected",
+      "quit_requested": false,
+      "inn_cost": 20,
+      "gold_before": 19,
+      "gold_after": 19,
+      "hp_before": 5,
+      "hp_after": 5,
+      "mp_before": 1,
+      "mp_after": 1,
+      "save_exists": false
+    }
+  }
+}

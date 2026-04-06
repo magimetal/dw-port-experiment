@@ -1,0 +1,35 @@
+{
+  "vectors": {
+    "spells": {
+      "fresh_game_learned": [],
+      "max_learned_count": 10,
+      "contains_healmore": true,
+      "contains_hurtmore": true
+    },
+    "hp_bar": {
+      "empty": "[\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7]",
+      "half": "[\u2588\u2588\u2588\u2588\u2588\u00b7\u00b7\u00b7\u00b7\u00b7]",
+      "full": "[\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588]"
+    },
+    "runtime": {
+      "spell_menu_open_event": "spell_menu_opened",
+      "spell_mode_after_open": "spell",
+      "spell_move_event": null,
+      "spell_selected_event": "spell_selected",
+      "spell_selected_name": "HURT",
+      "no_spell_event": "no_spells",
+      "log_line_count": 4,
+      "latest_log_line": "ERDRICK TOOK 1 DAMAGE."
+    },
+    "render": {
+      "line_count": 24,
+      "col_count": 80,
+      "sha1": "297fd5323af03caef635eea0a8fe6e3ec54b2b61",
+      "deterministic_repeat_match": true,
+      "contains_enemy_name": true,
+      "contains_hp_bar": true,
+      "contains_log_title": true,
+      "contains_menu_title": true
+    }
+  }
+}

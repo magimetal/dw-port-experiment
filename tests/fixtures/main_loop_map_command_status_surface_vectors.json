@@ -1,0 +1,30 @@
+{
+  "vectors": {
+    "status_open": {
+      "action": "map_status_opened",
+      "action_detail": "overlay:status",
+      "screen_mode": "map",
+      "overlay_open": true,
+      "frame_contains_status_title": true,
+      "frame_contains_name": true,
+      "frame_contains_hp": true,
+      "frame_contains_mp": true
+    },
+    "status_input_while_open": {
+      "action": "map_status_input",
+      "action_detail": "RIGHT",
+      "screen_mode": "map",
+      "player_x_after": 10,
+      "player_y_after": 10
+    },
+    "status_close": {
+      "action": "map_status_closed",
+      "action_detail": "esc",
+      "screen_mode": "map",
+      "overlay_open_after_close": false,
+      "hp_after": 9,
+      "mp_after": 10,
+      "gold_after": 123
+    }
+  }
+}

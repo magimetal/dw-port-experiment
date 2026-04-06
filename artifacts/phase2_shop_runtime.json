@@ -1,0 +1,29 @@
+{
+  "slice": "phase2-shop",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "all_bank00_labels_present": true,
+    "all_bank03_labels_present": true,
+    "shop0_inventory_matches_items_json": true,
+    "shop0_prices_match_item_costs": true,
+    "inn_costs_match_table": true,
+    "weapon_buyback_applies_half_price": true,
+    "herb_cap_blocks_purchase": true,
+    "tool_purchase_adds_inventory_nibble": true,
+    "full_inventory_blocks_tool_purchase": true,
+    "tool_sell_returns_half_price": true,
+    "herb_sell_updates_counter_and_gold": true
+  },
+  "outputs": {
+    "read_gate": "artifacts/phase2_shop_read_gate.json",
+    "report": "artifacts/phase2_shop_runtime.json",
+    "vectors_fixture": "tests/fixtures/shop_runtime_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

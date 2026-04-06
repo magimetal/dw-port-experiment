@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-combat-enemy-sleep-stopspell-immunity",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "golem_sleep_is_immune_with_mp_cost": true,
+    "golem_stopspell_is_immune_with_mp_cost": true,
+    "non_immune_sleep_regression_preserved": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_enemy_sleep_stopspell_immunity.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_enemy_sleep_stopspell_immunity_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

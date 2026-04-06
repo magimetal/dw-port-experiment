@@ -1,0 +1,8 @@
+{
+  "adaptation": "phase0-rom-baseline",
+  "plan_default_sha1": "6a50ce57097332393e0e8751924fd56456ef083c",
+  "accepted_local_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+  "approved_by_user": true,
+  "approved_on": "2026-03-29",
+  "reason": "Continue implementation against locally available ROM parity baseline"
+}

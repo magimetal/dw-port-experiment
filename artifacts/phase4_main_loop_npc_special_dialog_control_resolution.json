@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-npc-special-dialog-control-resolution",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "special_controls_0x66_0x6e_default_resolution_matches_rom": true,
+    "special_control_branch_cases_match_rom": true,
+    "npc_interaction_handoff_uses_special_control_0x6a_resolution": true,
+    "special_control_0x6a_dialog_entry_renders_and_completes": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_special_dialog_control_resolution.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_special_dialog_control_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded special NPC control resolution only: controls 0x66-0x6E now resolve to ROM-faithful dialog entry bytes for currently reachable branch cases, without executing shop/quest side effects."
+}

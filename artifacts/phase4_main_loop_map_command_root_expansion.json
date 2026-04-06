@@ -1,0 +1,28 @@
+{
+  "slice": "phase4-main-loop-map-command-root-expansion",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "command_menu_open_shows_expanded_root_options": true,
+    "command_menu_cancel_returns_to_map_without_state_change": true,
+    "command_menu_select_spell_opens_spell_selection_surface": true,
+    "command_menu_select_talk_routes_existing_npc_dialog_flow": true,
+    "command_menu_select_talk_without_target_noops": true,
+    "command_menu_select_search_rejects_with_dialog_feedback": true,
+    "command_menu_select_status_rejects_with_dialog_feedback": true,
+    "command_menu_select_item_rejects_with_dialog_feedback": true,
+    "command_menu_select_stairs_rejects_with_dialog_feedback": true,
+    "command_menu_select_door_rejects_with_dialog_feedback": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_root_expansion.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_root_expansion_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded map command-root expansion: map-mode command menu adds SEARCH/STATUS/ITEM/STAIRS/DOOR with deterministic routed outcomes while preserving TALK and SPELL behavior."
+}

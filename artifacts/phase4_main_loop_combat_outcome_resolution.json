@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-combat-outcome-resolution",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "victory_applies_xp_gold_rewards": true,
+    "victory_level_up_updates_stats_deterministically": true,
+    "defeat_routes_to_revive_handoff": true,
+    "outcome_dialog_handoff_completes_and_returns_to_map": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_outcome_resolution.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_outcome_resolution_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded combat outcome integration only: victory grants XP/gold and progression updates, combat exits deterministically, and defeat routes through revive handoff (Tantegel + half gold)."
+}

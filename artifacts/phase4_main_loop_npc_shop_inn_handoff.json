@@ -1,0 +1,31 @@
+{
+  "slice": "phase4-main-loop-npc-shop-inn-handoff",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "npc_shop_control_handoff_runs_bounded_purchase": true,
+    "npc_shop_additional_control_handoff_runs_bounded_purchase": true,
+    "npc_shop_additional_pair_control_handoff_runs_bounded_purchase": true,
+    "npc_shop_next_pair_control_handoff_runs_bounded_purchase": true,
+    "npc_shop_control_handoff_rejects_when_gold_insufficient": true,
+    "npc_inn_control_handoff_runs_inn_transaction_and_save": true,
+    "npc_inn_additional_control_handoff_runs_inn_transaction_and_save": true,
+    "npc_inn_additional_pair_control_handoff_runs_inn_transaction_and_save": true,
+    "npc_inn_next_pair_control_handoff_runs_inn_transaction_and_save": true,
+    "npc_inn_additional_pair_control_handoff_rejects_when_gold_insufficient": true,
+    "npc_inn_next_pair_control_handoff_rejects_when_gold_insufficient": true,
+    "npc_inn_control_handoff_rejects_when_gold_insufficient": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_shop_inn_handoff.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_shop_inn_handoff_vectors.json",
+    "runtime_save": "artifacts/phase4_npc_shop_inn_handoff_runtime_save.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded NPC transaction handoff: selected shop/inn NPC controls now route directly through existing ShopRuntime/inn transaction paths in main loop with save integration on inn stay; expanded through the next reachable shop/inn control pair with explicit insufficient-gold inn rejection."
+}

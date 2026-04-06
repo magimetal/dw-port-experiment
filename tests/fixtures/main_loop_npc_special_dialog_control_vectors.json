@@ -1,0 +1,103 @@
+{
+  "vectors": {
+    "default_controls": {
+      "0x66": {
+        "dialog_byte": "0xA4",
+        "block": "TextBlock11",
+        "entry": 4
+      },
+      "0x67": {
+        "dialog_byte": "0xA6",
+        "block": "TextBlock11",
+        "entry": 6
+      },
+      "0x68": {
+        "dialog_byte": "0xA9",
+        "block": "TextBlock11",
+        "entry": 9
+      },
+      "0x69": {
+        "dialog_byte": "0xAC",
+        "block": "TextBlock11",
+        "entry": 12
+      },
+      "0x6A": {
+        "dialog_byte": "0xAD",
+        "block": "TextBlock11",
+        "entry": 13
+      },
+      "0x6B": {
+        "dialog_byte": "0x4C",
+        "block": "TextBlock5",
+        "entry": 12
+      },
+      "0x6C": {
+        "dialog_byte": "0xB1",
+        "block": "TextBlock12",
+        "entry": 1
+      },
+      "0x6D": {
+        "dialog_byte": "0xB3",
+        "block": "TextBlock12",
+        "entry": 3
+      },
+      "0x6E": {
+        "dialog_byte": "0xBF",
+        "block": "TextBlock12",
+        "entry": 15
+      }
+    },
+    "branch_cases": {
+      "control_66_with_stones": {
+        "dialog_byte": "0xA5",
+        "block": "TextBlock11",
+        "entry": 5
+      },
+      "control_67_cursed": {
+        "dialog_byte": "0xA7",
+        "block": "TextBlock11",
+        "entry": 7
+      },
+      "control_68_with_erdricks_sword": {
+        "dialog_byte": "0xAA",
+        "block": "TextBlock11",
+        "entry": 10
+      },
+      "control_69_ring_worn": {
+        "dialog_byte": "0xAB",
+        "block": "TextBlock11",
+        "entry": 11
+      },
+      "control_6c_with_harp": {
+        "dialog_byte": "0xB2",
+        "block": "TextBlock12",
+        "entry": 2
+      },
+      "control_6d_with_token_only": {
+        "dialog_byte": "0x49",
+        "block": "TextBlock5",
+        "entry": 9
+      },
+      "control_6d_with_token_staff_stones": {
+        "dialog_byte": "0xB4",
+        "block": "TextBlock12",
+        "entry": 4
+      },
+      "control_6e_with_gwaelin": {
+        "dialog_byte": "0xB9",
+        "block": "TextBlock12",
+        "entry": 9
+      }
+    },
+    "interaction_control_6a": {
+      "initial_screen_mode": "dialog",
+      "initial_action": "npc_interact_dialog",
+      "initial_action_detail": "control:106;byte:0xAD;block:TextBlock11;entry:13;chain:TextBlock5/entry:12",
+      "initial_action_detail_contains_chain": true,
+      "initial_frame_contains_foretold": true,
+      "second_action": "dialog_page_advance",
+      "second_frame_contains_blessing": true,
+      "done_action": "dialog_done"
+    }
+  }
+}

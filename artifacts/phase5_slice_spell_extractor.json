@@ -1,0 +1,180 @@
+{
+  "phase": "5-slice-spell-extractor",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_spells_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_spells",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_spells_artifacts": {
+      "ok": true,
+      "detail": {
+        "spells": {
+          "source": {
+            "spell_cost_table_start": "0x1d63",
+            "spell_cost_table_count": 10,
+            "learn_level_source": "extractor/data_out/stats.json"
+          },
+          "spells": [
+            {
+              "name": "HEAL",
+              "mp_cost": 4,
+              "learn_level": 3
+            },
+            {
+              "name": "HURT",
+              "mp_cost": 2,
+              "learn_level": 4
+            },
+            {
+              "name": "SLEEP",
+              "mp_cost": 2,
+              "learn_level": 7
+            },
+            {
+              "name": "RADIANT",
+              "mp_cost": 3,
+              "learn_level": 9
+            },
+            {
+              "name": "STOPSPELL",
+              "mp_cost": 2,
+              "learn_level": 10
+            },
+            {
+              "name": "OUTSIDE",
+              "mp_cost": 6,
+              "learn_level": 12
+            },
+            {
+              "name": "RETURN",
+              "mp_cost": 8,
+              "learn_level": 13
+            },
+            {
+              "name": "REPEL",
+              "mp_cost": 2,
+              "learn_level": 15
+            },
+            {
+              "name": "HEALMORE",
+              "mp_cost": 10,
+              "learn_level": 17
+            },
+            {
+              "name": "HURTMORE",
+              "mp_cost": 5,
+              "learn_level": 19
+            }
+          ]
+        },
+        "artifact": {
+          "slice": "phase1-spells",
+          "spell_count": 10,
+          "spell_cost_table_start": "0x1d63",
+          "samples": {
+            "heal": {
+              "name": "HEAL",
+              "mp_cost": 4,
+              "learn_level": 3
+            },
+            "healmore": {
+              "name": "HEALMORE",
+              "mp_cost": 10,
+              "learn_level": 17
+            },
+            "hurtmore": {
+              "name": "HURTMORE",
+              "mp_cost": 5,
+              "learn_level": 19
+            }
+          }
+        },
+        "read_gate": {
+          "completed": true,
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "inputs": {
+            "stats_json": "/Users/magimetal/Dev/dw-port/extractor/data_out/stats.json",
+            "stats_json_exists": true
+          },
+          "files": {
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "SpellCostTbl": true
+              }
+            },
+            "Bank01.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank01.asm",
+              "bytes": 442264,
+              "lines": 9656,
+              "labels_checked": {
+                "BaseStatsTbl": true,
+                "SetBaseStats": true
+              }
+            }
+          }
+        },
+        "spell_count": 10
+      }
+    },
+    "check_phase5_slice_spell_extractor": {
+      "ok": true,
+      "detail": {
+        "spells_json": "extractor/data_out/spells.json",
+        "spell_count": 10,
+        "checks": {
+          "spell_count_10": true,
+          "heal_mp4_lv3": true,
+          "healmore_mp10_lv17": true,
+          "hurtmore_mp5_lv19": true
+        },
+        "sample": {
+          "HEAL": {
+            "name": "HEAL",
+            "mp_cost": 4,
+            "learn_level": 3
+          },
+          "HEALMORE": {
+            "name": "HEALMORE",
+            "mp_cost": 10,
+            "learn_level": 17
+          },
+          "HURTMORE": {
+            "name": "HURTMORE",
+            "mp_cost": 5,
+            "learn_level": 19
+          }
+        }
+      }
+    }
+  }
+}

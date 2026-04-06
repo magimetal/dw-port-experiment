@@ -1,0 +1,23 @@
+{
+  "slice": "phase3-renderer",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "dispatch_all_supported_modes_without_crash": true,
+    "dispatch_mode_markers_present": true,
+    "double_buffer_skips_identical_frame": true,
+    "resize_safety_notice_and_recovery": true,
+    "single_write_per_emitted_frame": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_renderer.json",
+    "vectors_fixture": "tests/fixtures/ui_renderer_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 3 bounded renderer slice only: screen_mode dispatch, string-frame buffering/double-buffer write behavior, and resize-safe rendering."
+}

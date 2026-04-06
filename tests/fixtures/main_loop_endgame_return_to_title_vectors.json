@@ -1,0 +1,48 @@
+{
+  "vectors": {
+    "endgame_render": {
+      "screen_mode": "endgame",
+      "frame_contains_final_page_text": true,
+      "frame_contains_return_prompt": true,
+      "frame_contains_dragonlord_page_text": false,
+      "frame": "                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n                                                                                \n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557  \n\u2551THE LEGEND LIVES ON. PRESS ENTER TO RETURN TO TITLE.                        \u2551  \n\u2551                                                                            \u2551  \n\u2551                                                                            \u2551  \n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d  "
+    },
+    "endgame_to_title": {
+      "action": "endgame_return_to_title",
+      "action_detail": "restart",
+      "screen_mode": "title",
+      "frame_contains_title": true,
+      "frame_contains_new_game": true,
+      "frame_contains_continue": true,
+      "quit_requested": false,
+      "combat_session_cleared": true,
+      "dialog_session_cleared": true,
+      "dialog_box_state_cleared": true,
+      "map_command_menu_cleared": true,
+      "map_spell_menu_cleared": true,
+      "map_item_menu_cleared": true,
+      "map_status_overlay_open": false,
+      "opened_chest_indices": [],
+      "opened_doors": [],
+      "story_flags_after": 0,
+      "map_after": [
+        4,
+        5,
+        27
+      ],
+      "player_name_after": "HERO"
+    },
+    "continue_after_restart": {
+      "save_exists_before_restart": true,
+      "save_exists_after_restart": true,
+      "continue_action": "continue_loaded",
+      "continue_screen_mode": "map",
+      "loaded_story_flags": 4,
+      "loaded_experience": 65535,
+      "loaded_gold": 9999,
+      "loaded_player_name": "ERDRICK",
+      "loaded_has_dragonlord_dead_flag": true,
+      "frame_contains_no_save_data": false
+    }
+  }
+}

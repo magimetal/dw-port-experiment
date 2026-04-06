@@ -1,0 +1,22 @@
+{
+  "slice": "phase1-spells",
+  "spell_count": 10,
+  "spell_cost_table_start": "0x1d63",
+  "samples": {
+    "heal": {
+      "name": "HEAL",
+      "mp_cost": 4,
+      "learn_level": 3
+    },
+    "healmore": {
+      "name": "HEALMORE",
+      "mp_cost": 10,
+      "learn_level": 17
+    },
+    "hurtmore": {
+      "name": "HURTMORE",
+      "mp_cost": 5,
+      "learn_level": 19
+    }
+  }
+}

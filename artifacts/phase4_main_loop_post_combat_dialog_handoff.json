@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-post-combat-dialog-handoff",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "victory_outcome_enters_dialog_mode": true,
+    "victory_dialog_advances_then_returns_map": true,
+    "defeat_outcome_enters_dialog_mode": true,
+    "defeat_dialog_advances_then_returns_map": true,
+    "level_up_dialog_page_is_shown": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_post_combat_dialog_handoff.json",
+    "vectors_fixture": "tests/fixtures/main_loop_post_combat_dialog_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded post-combat dialog handoff: victory/defeat/level-up outcomes now enter dialog mode, use dialog box paging, and return to map only after dialog completion."
+}

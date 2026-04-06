@@ -1,0 +1,32 @@
+{
+  "phase": "5",
+  "all_passed": true,
+  "checks": {
+    "check_phase5_slice_closeout_validation_gate": {
+      "ok": true,
+      "detail": {
+        "checks": {
+          "phase5_parity_all_passed_true": true,
+          "phase5_parity_row_count_56": true,
+          "phase5_terminal_size_all_passed_true": true,
+          "phase5_ascii_fallback_all_passed_true": true
+        },
+        "evidence": {
+          "phase5_parity": {
+            "artifact": "artifacts/phase5_parity.json",
+            "all_passed": true,
+            "row_count": 56
+          },
+          "phase5_terminal_size": {
+            "artifact": "artifacts/phase5_slice_terminal_size_enforcement.json",
+            "all_passed": true
+          },
+          "phase5_ascii_fallback": {
+            "artifact": "artifacts/phase5_slice_ascii_fallback_tileset.json",
+            "all_passed": true
+          }
+        }
+      }
+    }
+  }
+}

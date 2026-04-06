@@ -1,0 +1,56 @@
+{
+  "vectors": {
+    "item_menu_open": {
+      "action": "map_item_menu_opened",
+      "action_detail": "count:2",
+      "screen_mode": "map",
+      "frame_contains_item_title": true,
+      "frame_contains_torch": true,
+      "frame_contains_wings": true
+    },
+    "item_menu_input_while_open": {
+      "action": "map_item_menu_input",
+      "action_detail": "RIGHT",
+      "screen_mode": "map",
+      "player_x_after": 10,
+      "player_y_after": 10
+    },
+    "item_menu_cancel": {
+      "action": "map_item_menu_cancel",
+      "action_detail": "menu_cancel",
+      "screen_mode": "map"
+    },
+    "item_use_torch_success": {
+      "action": "map_item_used",
+      "action_detail": "TORCH:ok",
+      "screen_mode": "dialog",
+      "inventory_slots_after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "light_radius_after": 5,
+      "light_timer_after": 15,
+      "frame_contains_used_text": true
+    },
+    "item_use_torch_rejected": {
+      "action": "map_item_rejected",
+      "action_detail": "TORCH:torch_requires_dungeon_map",
+      "screen_mode": "dialog",
+      "inventory_slots_after": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_rejected_text": true
+    },
+    "item_menu_empty_inventory": {
+      "action": "map_item_menu_rejected",
+      "action_detail": "empty_inventory",
+      "screen_mode": "dialog",
+      "frame_contains_empty_text": true
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "vectors": {
+    "adjacent_npc": {
+      "initial_screen_mode": "dialog",
+      "initial_action": "npc_interact_dialog",
+      "initial_action_detail": "control:98;byte:0x9B;block:TextBlock10;entry:11",
+      "advance_action": "dialog_done",
+      "done_action": "dialog_done",
+      "final_screen_mode": "map",
+      "enter_steps_to_done": 1,
+      "dialog_contains_princess_line": true,
+      "dialog_omits_scaffold_ref": true,
+      "dialog_omits_raw_byte_markers": true
+    },
+    "no_adjacent_npc": {
+      "screen_mode": "map",
+      "action": "npc_interact_none",
+      "action_detail": "down"
+    }
+  }
+}

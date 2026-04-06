@@ -1,0 +1,37 @@
+{
+  "vectors": {
+    "map_load_with_cursed_belt_sets_hp_to_1": {
+      "action": "map_stairs",
+      "action_detail": "warp:20;cursed_belt:hp_set_to_1_on_load",
+      "screen_mode": "map",
+      "map_after": [
+        16,
+        8,
+        0
+      ],
+      "hp_after": 1
+    },
+    "map_load_without_curse_flag_preserves_hp": {
+      "action": "map_stairs",
+      "action_detail": "warp:20",
+      "screen_mode": "map",
+      "map_after": [
+        16,
+        8,
+        0
+      ],
+      "hp_after": 12
+    },
+    "step_hook_regression_unchanged": {
+      "action": "move",
+      "action_detail": "47,1;cursed_belt:hp_set_to_1",
+      "screen_mode": "map",
+      "map_after": [
+        1,
+        47,
+        1
+      ],
+      "hp_after": 1
+    }
+  }
+}

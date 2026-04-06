@@ -1,0 +1,62 @@
+{
+  "source": {
+    "bank03_labels": [
+      "SaveData",
+      "Save10Times",
+      "GetCRC",
+      "DoCRC",
+      "DoLFSR",
+      "GetSaveGameBase"
+    ]
+  },
+  "vectors": {
+    "payload_length": 30,
+    "payload_exp": [
+      56,
+      21
+    ],
+    "payload_gold": [
+      138,
+      12
+    ],
+    "payload_keys_clamped": 6,
+    "payload_name_bytes": [
+      47,
+      50,
+      55,
+      50,
+      73,
+      7,
+      95,
+      95
+    ],
+    "payload_spare_bytes": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "crc": [
+      37,
+      99
+    ],
+    "save_dict_has_crc": true,
+    "save_dict_roundtrip_equal": true,
+    "json_roundtrip_save_data_equal": true,
+    "portable_token_length": 52,
+    "portable_token_prefix": "HAKYUDAS",
+    "portable_decode_player_name": "LOTO-7",
+    "portable_decode_experience": 5432,
+    "portable_decode_gold": 3210,
+    "portable_decode_magic_keys": 6,
+    "portable_decode_inventory_slots": [
+      18,
+      52,
+      80,
+      0
+    ],
+    "portable_decode_player_flags": 64,
+    "portable_decode_story_flags": 18,
+    "json_file_exists": true
+  }
+}

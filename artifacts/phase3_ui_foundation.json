@@ -1,0 +1,24 @@
+{
+  "slice": "phase3-ui-foundation",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "layout_min_terminal_80x24": true,
+    "viewport_is_21x17": true,
+    "viewport_center_is_player": true,
+    "frame_is_24x80": true,
+    "frame_deterministic": true,
+    "single_player_glyph": true,
+    "dialog_scaffold_present": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_ui_foundation.json",
+    "vectors_fixture": "tests/fixtures/ui_foundation_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

@@ -1,0 +1,365 @@
+{
+  "phase": "1-slice-chests",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_chests_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_chests",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_chests_artifacts": {
+      "ok": true,
+      "detail": {
+        "chests": {
+          "source": {
+            "bank03_labels": [
+              "LE202",
+              "LE217",
+              "LE21B"
+            ],
+            "rom_table_start": "0x5ddd",
+            "table_bytes": 124,
+            "entry_bytes": 4
+          },
+          "chest_entries": [
+            {
+              "index": 0,
+              "rom_offset": "0x5ddd",
+              "map_id": 4,
+              "x": 1,
+              "y": 13,
+              "contents_id": 19,
+              "opened": false
+            },
+            {
+              "index": 1,
+              "rom_offset": "0x5de1",
+              "map_id": 4,
+              "x": 1,
+              "y": 15,
+              "contents_id": 19,
+              "opened": false
+            },
+            {
+              "index": 2,
+              "rom_offset": "0x5de5",
+              "map_id": 4,
+              "x": 2,
+              "y": 14,
+              "contents_id": 19,
+              "opened": false
+            },
+            {
+              "index": 3,
+              "rom_offset": "0x5de9",
+              "map_id": 4,
+              "x": 3,
+              "y": 15,
+              "contents_id": 19,
+              "opened": false
+            },
+            {
+              "index": 4,
+              "rom_offset": "0x5ded",
+              "map_id": 5,
+              "x": 4,
+              "y": 4,
+              "contents_id": 22,
+              "opened": false
+            },
+            {
+              "index": 5,
+              "rom_offset": "0x5df1",
+              "map_id": 5,
+              "x": 5,
+              "y": 4,
+              "contents_id": 4,
+              "opened": false
+            },
+            {
+              "index": 6,
+              "rom_offset": "0x5df5",
+              "map_id": 5,
+              "x": 6,
+              "y": 1,
+              "contents_id": 3,
+              "opened": false
+            },
+            {
+              "index": 7,
+              "rom_offset": "0x5df9",
+              "map_id": 11,
+              "x": 24,
+              "y": 23,
+              "contents_id": 6,
+              "opened": false
+            },
+            {
+              "index": 8,
+              "rom_offset": "0x5dfd",
+              "map_id": 9,
+              "x": 8,
+              "y": 5,
+              "contents_id": 20,
+              "opened": false
+            },
+            {
+              "index": 9,
+              "rom_offset": "0x5e01",
+              "map_id": 9,
+              "x": 8,
+              "y": 6,
+              "contents_id": 2,
+              "opened": false
+            },
+            {
+              "index": 10,
+              "rom_offset": "0x5e05",
+              "map_id": 9,
+              "x": 9,
+              "y": 5,
+              "contents_id": 4,
+              "opened": false
+            },
+            {
+              "index": 11,
+              "rom_offset": "0x5e09",
+              "map_id": 6,
+              "x": 11,
+              "y": 11,
+              "contents_id": 2,
+              "opened": false
+            },
+            {
+              "index": 12,
+              "rom_offset": "0x5e0d",
+              "map_id": 6,
+              "x": 11,
+              "y": 12,
+              "contents_id": 21,
+              "opened": false
+            },
+            {
+              "index": 13,
+              "rom_offset": "0x5e11",
+              "map_id": 6,
+              "x": 11,
+              "y": 13,
+              "contents_id": 6,
+              "opened": false
+            },
+            {
+              "index": 14,
+              "rom_offset": "0x5e15",
+              "map_id": 6,
+              "x": 12,
+              "y": 12,
+              "contents_id": 3,
+              "opened": false
+            },
+            {
+              "index": 15,
+              "rom_offset": "0x5e19",
+              "map_id": 6,
+              "x": 12,
+              "y": 13,
+              "contents_id": 12,
+              "opened": false
+            },
+            {
+              "index": 16,
+              "rom_offset": "0x5e1d",
+              "map_id": 6,
+              "x": 13,
+              "y": 13,
+              "contents_id": 2,
+              "opened": false
+            },
+            {
+              "index": 17,
+              "rom_offset": "0x5e21",
+              "map_id": 12,
+              "x": 4,
+              "y": 5,
+              "contents_id": 15,
+              "opened": false
+            },
+            {
+              "index": 18,
+              "rom_offset": "0x5e25",
+              "map_id": 13,
+              "x": 3,
+              "y": 4,
+              "contents_id": 16,
+              "opened": false
+            },
+            {
+              "index": 19,
+              "rom_offset": "0x5e29",
+              "map_id": 24,
+              "x": 11,
+              "y": 0,
+              "contents_id": 2,
+              "opened": false
+            },
+            {
+              "index": 20,
+              "rom_offset": "0x5e2d",
+              "map_id": 24,
+              "x": 12,
+              "y": 0,
+              "contents_id": 18,
+              "opened": false
+            },
+            {
+              "index": 21,
+              "rom_offset": "0x5e31",
+              "map_id": 24,
+              "x": 13,
+              "y": 0,
+              "contents_id": 19,
+              "opened": false
+            },
+            {
+              "index": 22,
+              "rom_offset": "0x5e35",
+              "map_id": 26,
+              "x": 1,
+              "y": 1,
+              "contents_id": 12,
+              "opened": false
+            },
+            {
+              "index": 23,
+              "rom_offset": "0x5e39",
+              "map_id": 26,
+              "x": 13,
+              "y": 6,
+              "contents_id": 13,
+              "opened": false
+            },
+            {
+              "index": 24,
+              "rom_offset": "0x5e3d",
+              "map_id": 16,
+              "x": 5,
+              "y": 5,
+              "contents_id": 17,
+              "opened": false
+            },
+            {
+              "index": 25,
+              "rom_offset": "0x5e41",
+              "map_id": 23,
+              "x": 1,
+              "y": 6,
+              "contents_id": 14,
+              "opened": false
+            },
+            {
+              "index": 26,
+              "rom_offset": "0x5e45",
+              "map_id": 23,
+              "x": 3,
+              "y": 2,
+              "contents_id": 4,
+              "opened": false
+            },
+            {
+              "index": 27,
+              "rom_offset": "0x5e49",
+              "map_id": 23,
+              "x": 2,
+              "y": 2,
+              "contents_id": 9,
+              "opened": false
+            },
+            {
+              "index": 28,
+              "rom_offset": "0x5e4d",
+              "map_id": 23,
+              "x": 10,
+              "y": 9,
+              "contents_id": 20,
+              "opened": false
+            },
+            {
+              "index": 29,
+              "rom_offset": "0x5e51",
+              "map_id": 22,
+              "x": 13,
+              "y": 5,
+              "contents_id": 2,
+              "opened": false
+            },
+            {
+              "index": 30,
+              "rom_offset": "0x5e55",
+              "map_id": 29,
+              "x": 9,
+              "y": 3,
+              "contents_id": 23,
+              "opened": false
+            }
+          ]
+        },
+        "artifact": {
+          "slice": "phase1-chests",
+          "entry_count": 31,
+          "table_start": "0x5ddd",
+          "table_bytes": 124,
+          "first_entry": {
+            "index": 0,
+            "rom_offset": "0x5ddd",
+            "map_id": 4,
+            "x": 1,
+            "y": 13,
+            "contents_id": 19,
+            "opened": false
+          },
+          "last_entry": {
+            "index": 30,
+            "rom_offset": "0x5e55",
+            "map_id": 29,
+            "x": 9,
+            "y": 3,
+            "contents_id": 23,
+            "opened": false
+          }
+        }
+      }
+    },
+    "run_pytest_phase1_chests_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 7 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [ 14%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [ 28%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 42%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [ 57%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 71%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 85%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [100%]\n\n============================== 7 passed in 0.09s ===============================\n",
+      "stderr": ""
+    }
+  }
+}

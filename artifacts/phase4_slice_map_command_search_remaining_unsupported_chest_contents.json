@@ -1,0 +1,268 @@
+{
+  "phase": "4-slice-map-command-search-remaining-unsupported-chest-contents",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase4_slice_map_command_search_remaining_unsupported_chest_contents_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m ui.run_phase4_slice_map_command_search_remaining_unsupported_chest_contents",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_main_loop_map_command_search_remaining_unsupported_chest_contents_artifacts": {
+      "ok": true,
+      "detail": {
+        "report": {
+          "slice": "phase4-main-loop-map-command-search-remaining-unsupported-chest-contents",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "remaining_content_matrix_matches_extracted_data": true,
+            "search_content_2_applies_herb_reward": true,
+            "search_content_3_applies_key_reward": true,
+            "search_content_4_applies_torch_reward": true,
+            "search_content_6_applies_wings_reward": true,
+            "search_content_9_applies_fighters_ring_reward": true,
+            "search_content_12_applies_cursed_belt_reward": true,
+            "search_content_13_applies_silver_harp_reward": true,
+            "search_content_14_applies_death_necklace_reward": true,
+            "search_content_15_applies_stones_of_sunlight_reward": true,
+            "search_content_16_applies_staff_of_rain_reward": true,
+            "search_content_16_reopen_is_empty": true,
+            "search_content_2_herb_full_guard_rejects_without_state_change": true,
+            "search_content_3_key_full_guard_rejects_without_state_change": true,
+            "search_content_16_inventory_full_guard_rejects_without_state_change": true
+          },
+          "outputs": {
+            "report": "artifacts/phase4_main_loop_map_command_search_remaining_unsupported_chest_contents.json",
+            "vectors_fixture": "tests/fixtures/main_loop_map_command_search_remaining_unsupported_chest_contents_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          },
+          "scope_note": "Phase 4 bounded SEARCH remaining unsupported chest contents integration: support extracted contents_id 2/3/4/6/9/12/13/14/15/16 with deterministic reward dialogs, opened-state behavior, and full-capacity guards."
+        },
+        "vectors": {
+          "vectors": {
+            "remaining_content_matrix": {
+              "content_ids": [
+                2,
+                3,
+                4,
+                6,
+                9,
+                12,
+                13,
+                14,
+                15,
+                16
+              ],
+              "chest_indices": [
+                5,
+                6,
+                7,
+                9,
+                10,
+                11,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                22,
+                23,
+                25,
+                26,
+                27,
+                29
+              ]
+            },
+            "search_content_2": {
+              "action": "map_search",
+              "action_detail": "chest:index:9;contents:2;reward:herb:+1;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_herb": true,
+              "herbs_after": 1
+            },
+            "search_content_3": {
+              "action": "map_search",
+              "action_detail": "chest:index:6;contents:3;reward:key:+1;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_key": true,
+              "magic_keys_after": 1
+            },
+            "search_content_4": {
+              "action": "map_search",
+              "action_detail": "chest:index:5;contents:4;reward:item:TORCH;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_torch": true,
+              "inventory_slots_after": [
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_6": {
+              "action": "map_search",
+              "action_detail": "chest:index:7;contents:6;reward:item:WINGS;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_wings": true,
+              "inventory_slots_after": [
+                3,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_9": {
+              "action": "map_search",
+              "action_detail": "chest:index:27;contents:9;reward:item:FIGHTERS_RING;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_fighters_ring": true,
+              "inventory_slots_after": [
+                6,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_12": {
+              "action": "map_search",
+              "action_detail": "chest:index:15;contents:12;reward:item:CURSED_BELT;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_cursed_belt": true,
+              "inventory_slots_after": [
+                9,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_13": {
+              "action": "map_search",
+              "action_detail": "chest:index:23;contents:13;reward:item:SILVER_HARP;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_silver_harp": true,
+              "inventory_slots_after": [
+                10,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_14": {
+              "action": "map_search",
+              "action_detail": "chest:index:25;contents:14;reward:item:DEATH_NECKLACE;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_death_necklace": true,
+              "inventory_slots_after": [
+                11,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_15": {
+              "action": "map_search",
+              "action_detail": "chest:index:17;contents:15;reward:item:STONES_OF_SUNLIGHT;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_stones_of_sunlight": true,
+              "inventory_slots_after": [
+                12,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_16": {
+              "action": "map_search",
+              "action_detail": "chest:index:18;contents:16;reward:item:STAFF_OF_RAIN;opened:true",
+              "screen_mode": "dialog",
+              "frame_contains_staff_of_rain": true,
+              "inventory_slots_after": [
+                13,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_16_reopen": {
+              "action": "map_search",
+              "action_detail": "chest:index:18;contents:16;opened:true;reward:none",
+              "screen_mode": "dialog",
+              "frame_contains_empty": true,
+              "inventory_slots_after": [
+                13,
+                0,
+                0,
+                0
+              ]
+            },
+            "search_content_2_herb_full": {
+              "action": "map_search",
+              "action_detail": "chest:index:9;contents:2;reward:herb:full",
+              "screen_mode": "dialog",
+              "frame_contains_herb_full": true,
+              "herbs_after": 6
+            },
+            "search_content_3_key_full": {
+              "action": "map_search",
+              "action_detail": "chest:index:6;contents:3;reward:key:full",
+              "screen_mode": "dialog",
+              "frame_contains_key_full": true,
+              "magic_keys_after": 6
+            },
+            "search_content_16_inventory_full": {
+              "action": "map_search",
+              "action_detail": "chest:index:18;contents:16;reward:item:full",
+              "screen_mode": "dialog",
+              "frame_contains_inventory_full": true,
+              "inventory_slots_after": [
+                17,
+                17,
+                17,
+                17
+              ]
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase4_map_command_search_remaining_unsupported_chest_contents_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/ -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 273 items\n\ntests/test_combat.py::test_player_attack_boundary_max_atk_min_def PASSED [  0%]\ntests/test_combat.py::test_player_attack_boundary_zero_atk_max_def_weak_path PASSED [  0%]\ntests/test_combat.py::test_player_attack_boundary_base_lt_2_weak_path PASSED [  1%]\ntests/test_combat.py::test_enemy_attack_boundary_zero_zero_case PASSED   [  1%]\ntests/test_combat.py::test_enemy_attack_equal_threshold_uses_normal_path_regression PASSED [  1%]\ntests/test_combat.py::test_enemy_hp_init_never_below_one PASSED          [  2%]\ntests/test_combat.py::test_spell_ranges_over_full_8bit_rng_domain PASSED [  2%]\ntests/test_combat.py::test_enemy_spell_damage_with_armor_reduction PASSED [  2%]\ntests/test_combat.py::test_enemy_spell_damage_reduction_order_regression PASSED [  3%]\ntests/test_combat.py::test_spell_fail_threshold_logic PASSED             [  3%]\ntests/test_combat.py::test_excellent_move_rules PASSED                   [  4%]\ntests/test_combat.py::test_check_run_threshold_and_roll_logic PASSED     [  4%]\ntests/test_combat.py::test_hp_underflow_overflow_clamps PASSED           [  4%]\ntests/test_combat.py::test_combat_slice_artifacts_exist_and_are_consistent PASSED [  5%]\ntests/test_dialog_engine.py::test_start_dialog_unknown_id_raises PASSED  [  5%]\ntests/test_dialog_engine.py::test_dialog_session_paging_and_control_resolution PASSED [  5%]\ntests/test_dialog_engine.py::test_dialog_session_preserves_unresolved_machine_markers PASSED [  6%]\ntests/test_dialog_engine.py::test_dialog_engine_with_extracted_dialog_data PASSED [  6%]\ntests/test_dialog_engine.py::test_start_dialog_entry_selects_single_entry_by_index PASSED [  6%]\ntests/test_dialog_engine.py::test_start_dialog_entry_unknown_index_raises PASSED [  7%]\ntests/test_dialog_engine.py::test_dialog_slice_artifacts_exist_and_are_consistent PASSED [  7%]\ntests/test_items_engine.py::test_torch_and_fairy_water_consumables_apply_runtime_effects PASSED [  8%]\ntests/test_items_engine.py::test_wings_return_outside_and_return_spell_paths PASSED [  8%]\ntests/test_items_engine.py::test_dragon_scale_silver_harp_rainbow_drop_and_curse_runtime_logic PASSED [  8%]\ntests/test_items_engine.py::test_items_slice_artifacts_exist_and_are_consistent PASSED [  9%]\ntests/test_level_up.py::test_xp_table_exact_matches_golden_fixture PASSED [  9%]\ntests/test_level_up.py::test_base_stats_exact_matches_golden_fixture PASSED [  9%]\ntests/test_level_up.py::test_level_resolution_across_threshold_boundaries PASSED [ 10%]\ntests/test_level_up.py::test_level_resolution_monotone_for_full_u16_domain PASSED [ 10%]\ntests/test_level_up.py::test_spell_progression_key_unlocks PASSED        [ 10%]\ntests/test_level_up.py::test_stats_for_level_and_resolve_progression PASSED [ 11%]\ntests/test_level_up.py::test_level_slice_artifacts_exist_and_are_consistent PASSED [ 11%]\ntests/test_main_loop_scaffold.py::test_title_bootstrap_draws_and_handoffs_to_map_mode PASSED [ 12%]\ntests/test_main_loop_scaffold.py::test_map_mode_routes_deterministic_movement_and_tick_timers PASSED [ 12%]\ntests/test_main_loop_scaffold.py::test_map_movement_can_trigger_deterministic_encounter_transition PASSED [ 12%]\ntests/test_main_loop_scaffold.py::test_dungeon_map_movement_can_trigger_deterministic_encounter_transition PASSED [ 13%]\ntests/test_main_loop_scaffold.py::test_map_spell_heal_consumes_mp_heals_and_enters_dialog PASSED [ 13%]\ntests/test_main_loop_scaffold.py::test_map_spell_healmore_caps_hp_and_updates_mp PASSED [ 13%]\ntests/test_main_loop_scaffold.py::test_map_spell_outside_teleports_and_returns_to_map_after_dialog PASSED [ 14%]\ntests/test_main_loop_scaffold.py::test_map_spell_return_teleports_on_overworld PASSED [ 14%]\ntests/test_main_loop_scaffold.py::test_map_spell_repel_sets_repel_timer PASSED [ 15%]\ntests/test_main_loop_scaffold.py::test_map_spell_radiant_sets_light_in_dungeon PASSED [ 15%]\ntests/test_main_loop_scaffold.py::test_map_spell_rejects_when_mp_is_insufficient PASSED [ 15%]\ntests/test_main_loop_scaffold.py::test_map_spell_rejects_when_spell_not_known PASSED [ 16%]\ntests/test_main_loop_scaffold.py::test_map_spell_menu_opens_for_learned_field_spells_only PASSED [ 16%]\ntests/test_main_loop_scaffold.py::test_map_spell_menu_cancel_returns_to_map_without_state_change PASSED [ 16%]\ntests/test_main_loop_scaffold.py::test_map_spell_menu_select_casts_spell_and_enters_dialog PASSED [ 17%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_opens_with_talk_and_spell_options PASSED [ 17%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_cancel_returns_to_map_without_state_change PASSED [ 17%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_spell_opens_spell_menu_surface PASSED [ 18%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_talk_reuses_npc_interaction_flow PASSED [ 18%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_talk_without_adjacent_target_noops PASSED [ 19%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_rejects_bounded_unimplemented_commands_with_dialog[STATUS-3] PASSED [ 19%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_rejects_bounded_unimplemented_commands_with_dialog[ITEM-4] PASSED [ 19%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_rejects_bounded_unimplemented_commands_with_dialog[STAIRS-5] PASSED [ 20%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_rejects_bounded_unimplemented_commands_with_dialog[DOOR-6] PASSED [ 20%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_no_chest_enters_dialog_with_nothing_found PASSED [ 20%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_detects_chest_on_player_tile PASSED [ 21%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_does_not_reopen_collected_chest PASSED [ 21%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_gold_chest_reward[4-1-15-1] PASSED [ 21%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_gold_chest_reward[4-2-14-2] PASSED [ 22%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_gold_chest_reward[4-3-15-3] PASSED [ 22%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_gold_chest_reward[24-13-0-21] PASSED [ 23%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_reopen_for_remaining_gold_chest_is_empty PASSED [ 23%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_herb_reward_and_marks_opened PASSED [ 23%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_key_reward_and_marks_opened PASSED [ 24%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_tool_reward_and_marks_opened PASSED [ 24%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_wings_reward_and_marks_opened PASSED [ 24%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_dragons_scale_reward_and_marks_opened PASSED [ 25%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_fairy_flute_reward_and_marks_opened PASSED [ 25%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_rejects_herb_reward_when_herbs_full PASSED [ 26%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_rejects_key_reward_when_keys_full PASSED [ 26%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_rejects_tool_reward_when_inventory_full PASSED [ 26%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_non_gold_chest_reopen_is_empty PASSED [ 27%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[9-8-6-9-2-chest:index:9;contents:2;reward:herb:+1;opened:true-herbs-1-THOU HAST FOUND A HERB.] PASSED [ 27%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[5-6-1-6-3-chest:index:6;contents:3;reward:key:+1;opened:true-magic_keys-1-THOU HAST FOUND A MAGIC KEY.] PASSED [ 27%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[5-5-4-5-4-chest:index:5;contents:4;reward:item:TORCH;opened:true-inventory_slots-expected_state_value2-THOU HAST FOUND TORCH.] PASSED [ 28%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[11-24-23-7-6-chest:index:7;contents:6;reward:item:WINGS;opened:true-inventory_slots-expected_state_value3-THOU HAST FOUND WINGS.] PASSED [ 28%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[23-2-2-27-9-chest:index:27;contents:9;reward:item:FIGHTERS_RING;opened:true-inventory_slots-expected_state_value4-THOU HAST FOUND FIGHTER'S RING.] PASSED [ 28%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[6-12-13-15-12-chest:index:15;contents:12;reward:item:CURSED_BELT;opened:true-inventory_slots-expected_state_value5-THOU HAST FOUND CURSED BELT.] PASSED [ 29%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[26-13-6-23-13-chest:index:23;contents:13;reward:item:SILVER_HARP;opened:true-inventory_slots-expected_state_value6-THOU HAST FOUND SILVER HARP.] PASSED [ 29%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[23-1-6-25-14-chest:index:25;contents:14;reward:item:DEATH_NECKLACE;opened:true-inventory_slots-expected_state_value7-THOU HAST FOUND DEATH NECKLACE.] PASSED [ 30%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[12-4-5-17-15-chest:index:17;contents:15;reward:item:STONES_OF_SUNLIGHT;opened:true-inventory_slots-expected_state_value8-THOU HAST FOUND STONES OF SUNLIGHT.] PASSED [ 30%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_applies_remaining_unsupported_chest_rewards[13-3-4-18-16-chest:index:18;contents:16;reward:item:STAFF_OF_RAIN;opened:true-inventory_slots-expected_state_value9-THOU HAST FOUND STAFF OF RAIN.] PASSED [ 30%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_reopen_for_staff_of_rain_chest_is_empty PASSED [ 31%]\ntests/test_main_loop_scaffold.py::test_map_command_menu_select_search_rejects_remaining_unsupported_inventory_reward_when_full PASSED [ 31%]\ntests/test_main_loop_scaffold.py::test_combat_fight_resolves_turn_and_updates_session_log PASSED [ 31%]\ntests/test_main_loop_scaffold.py::test_combat_fight_uses_excellent_move_with_pinned_seed PASSED [ 32%]\ntests/test_main_loop_scaffold.py::test_combat_run_exits_combat_and_clears_session PASSED [ 32%]\ntests/test_main_loop_scaffold.py::test_combat_run_can_fail_and_enemy_counter_attacks PASSED [ 32%]\ntests/test_main_loop_scaffold.py::test_combat_spell_hurt_consumes_mp_and_deals_damage PASSED [ 33%]\ntests/test_main_loop_scaffold.py::test_combat_victory_applies_rewards_and_level_progression PASSED [ 33%]\ntests/test_main_loop_scaffold.py::test_combat_defeat_routes_through_revive_handoff_hook PASSED [ 34%]\ntests/test_main_loop_scaffold.py::test_post_combat_victory_dialog_advances_and_returns_to_map PASSED [ 34%]\ntests/test_main_loop_scaffold.py::test_post_combat_defeat_dialog_advances_and_returns_to_map PASSED [ 34%]\ntests/test_main_loop_scaffold.py::test_map_npc_interaction_handoffs_into_dialog_mode PASSED [ 35%]\ntests/test_main_loop_scaffold.py::test_map_npc_interaction_without_adjacent_target_stays_in_map_mode PASSED [ 35%]\ntests/test_main_loop_scaffold.py::test_npc_dialog_control_resolution_matches_bank03_regular_dialog_offsets PASSED [ 35%]\ntests/test_main_loop_scaffold.py::test_npc_dialog_control_resolution_applies_princess_flag_branching PASSED [ 36%]\ntests/test_main_loop_scaffold.py::test_npc_special_dialog_control_resolution_matches_rom_bounded_cases PASSED [ 36%]\ntests/test_main_loop_scaffold.py::test_map_npc_interaction_uses_special_control_resolution_for_0x6a PASSED [ 36%]\ntests/test_main_loop_scaffold.py::test_map_npc_interaction_control_0x6d_applies_rainbow_drop_side_effect PASSED [ 37%]\ntests/test_main_loop_scaffold.py::test_map_npc_interaction_control_0x6c_applies_staff_of_rain_side_effect PASSED [ 37%]\ntests/test_main_loop_scaffold.py::test_map_npc_interaction_control_0x6e_applies_gwaelin_return_side_effect PASSED [ 38%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_control_handoff_executes_bounded_purchase PASSED [ 38%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_control_0x02_handoff_executes_bounded_purchase PASSED [ 38%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_control_0x03_handoff_executes_bounded_purchase PASSED [ 39%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_control_0x04_handoff_executes_bounded_purchase PASSED [ 39%]\ntests/test_main_loop_scaffold.py::test_map_npc_shop_control_handoff_rejects_when_gold_is_insufficient PASSED [ 39%]\ntests/test_main_loop_scaffold.py::test_map_npc_inn_control_handoff_routes_into_inn_transaction_and_save PASSED [ 40%]\ntests/test_main_loop_scaffold.py::test_map_npc_inn_control_0x10_handoff_routes_into_inn_transaction_and_save PASSED [ 40%]\ntests/test_main_loop_scaffold.py::test_map_npc_inn_control_0x11_handoff_routes_into_inn_transaction_and_save PASSED [ 41%]\ntests/test_main_loop_scaffold.py::test_map_npc_inn_control_0x12_handoff_routes_into_inn_transaction_and_save PASSED [ 41%]\ntests/test_main_loop_scaffold.py::test_map_npc_inn_control_handoff_rejects_when_gold_is_insufficient PASSED [ 41%]\ntests/test_main_loop_scaffold.py::test_map_npc_inn_control_0x11_handoff_rejects_when_gold_is_insufficient PASSED [ 42%]\ntests/test_main_loop_scaffold.py::test_map_npc_inn_control_0x12_handoff_rejects_when_gold_is_insufficient PASSED [ 42%]\ntests/test_main_loop_scaffold.py::test_combat_item_action_advances_enemy_turn PASSED [ 42%]\ntests/test_main_loop_scaffold.py::test_quit_handoff_sets_quit_requested PASSED [ 43%]\ntests/test_main_loop_scaffold.py::test_continue_handoff_routes_loaded_state_through_main_session PASSED [ 43%]\ntests/test_main_loop_scaffold.py::test_quit_from_map_saves_current_state_to_json PASSED [ 43%]\ntests/test_main_loop_scaffold.py::test_inn_stay_from_map_triggers_save_and_restores_resources PASSED [ 44%]\ntests/test_main_loop_scaffold.py::test_inn_stay_rejects_when_gold_is_insufficient_and_skips_save PASSED [ 44%]\ntests/test_main_loop_scaffold.py::test_inn_stay_indexed_key_uses_selected_inn_cost PASSED [ 45%]\ntests/test_main_loop_scaffold.py::test_phase4_main_loop_artifacts_exist_and_are_consistent PASSED [ 45%]\ntests/test_main_loop_scaffold.py::test_phase4_save_load_loop_artifacts_exist_and_are_consistent PASSED [ 45%]\ntests/test_main_loop_scaffold.py::test_phase4_inn_stay_save_trigger_artifacts_exist_and_are_consistent PASSED [ 46%]\ntests/test_main_loop_scaffold.py::test_phase4_inn_cost_deduct_artifacts_exist_and_are_consistent PASSED [ 46%]\ntests/test_main_loop_scaffold.py::test_phase4_encounter_trigger_artifacts_exist_and_are_consistent PASSED [ 46%]\ntests/test_main_loop_scaffold.py::test_phase4_dungeon_encounter_runtime_artifacts_exist_and_are_consistent PASSED [ 47%]\ntests/test_main_loop_scaffold.py::test_phase4_combat_session_handoff_artifacts_exist_and_are_consistent PASSED [ 47%]\ntests/test_main_loop_scaffold.py::test_phase4_combat_turn_resolution_artifacts_exist_and_are_consistent PASSED [ 47%]\ntests/test_main_loop_scaffold.py::test_phase4_combat_outcome_resolution_artifacts_exist_and_are_consistent PASSED [ 48%]\ntests/test_main_loop_scaffold.py::test_phase4_post_combat_dialog_handoff_artifacts_exist_and_are_consistent PASSED [ 48%]\ntests/test_main_loop_scaffold.py::test_phase4_post_combat_fidelity_hardening_artifacts_exist_and_are_consistent PASSED [ 49%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_interaction_dialog_handoff_artifacts_exist_and_are_consistent PASSED [ 49%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_dialog_control_fidelity_artifacts_exist_and_are_consistent PASSED [ 49%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_dialog_entry_playback_artifacts_exist_and_are_consistent PASSED [ 50%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_special_dialog_control_resolution_artifacts_exist_and_are_consistent PASSED [ 50%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_special_control_side_effects_artifacts_exist_and_are_consistent PASSED [ 50%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_special_control_0x6c_side_effect_artifacts_exist_and_are_consistent PASSED [ 51%]\ntests/test_main_loop_scaffold.py::test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent PASSED [ 51%]\ntests/test_main_loop_scaffold.py::test_phase4_map_field_spell_casting_artifacts_exist_and_are_consistent PASSED [ 52%]\ntests/test_main_loop_scaffold.py::test_phase4_map_spell_selection_surface_artifacts_exist_and_are_consistent PASSED [ 52%]\ntests/test_main_loop_scaffold.py::test_phase4_map_command_root_surface_artifacts_exist_and_are_consistent PASSED [ 52%]\ntests/test_main_loop_scaffold.py::test_phase4_map_command_root_expansion_artifacts_exist_and_are_consistent PASSED [ 53%]\ntests/test_main_loop_scaffold.py::test_phase4_map_command_search_chest_rewards_artifacts_exist_and_are_consistent PASSED [ 53%]\ntests/test_main_loop_scaffold.py::test_phase4_map_command_search_non_gold_chest_rewards_artifacts_exist_and_are_consistent PASSED [ 53%]\ntests/test_main_loop_scaffold.py::test_phase4_map_command_search_tool_rewards_capacity_artifacts_exist_and_are_consistent PASSED [ 54%]\ntests/test_main_loop_scaffold.py::test_phase4_map_command_search_remaining_gold_chest_rewards_artifacts_exist_and_are_consistent PASSED [ 54%]\ntests/test_main_loop_scaffold.py::test_phase4_map_command_search_remaining_unsupported_chest_contents_artifacts_exist_and_are_consistent PASSED [ 54%]\ntests/test_map_engine.py::test_tile_lookup_and_oob_border_tile PASSED    [ 55%]\ntests/test_map_engine.py::test_tiles_are_standard_block_ids_after_conversion PASSED [ 55%]\ntests/test_map_engine.py::test_map_passability_from_extracted_tiles PASSED [ 56%]\ntests/test_map_engine.py::test_passability_uses_collision_threshold_rule PASSED [ 56%]\ntests/test_map_engine.py::test_warp_detection_and_transition_to_tantegel PASSED [ 56%]\ntests/test_map_engine.py::test_load_map_clamps_coordinates PASSED        [ 57%]\ntests/test_map_engine.py::test_map_engine_slice_artifacts_exist_and_are_consistent PASSED [ 57%]\ntests/test_movement.py::test_step_regen_armor_paths PASSED               [ 57%]\ntests/test_movement.py::test_swamp_and_force_field_damage_paths PASSED   [ 58%]\ntests/test_movement.py::test_encounter_mask_rules PASSED                 [ 58%]\ntests/test_movement.py::test_overworld_zone_lookup PASSED                [ 58%]\ntests/test_movement.py::test_zone_zero_fight_modifiers PASSED            [ 59%]\ntests/test_movement.py::test_enemy_selection_rerolls_above_slot_four PASSED [ 59%]\ntests/test_movement.py::test_choose_overworld_enemy_zone_zero_can_abort PASSED [ 60%]\ntests/test_movement.py::test_dungeon_enemy_group_index_maps_cave_range_only PASSED [ 60%]\ntests/test_movement.py::test_choose_dungeon_enemy_uses_cave_index_table_row_selection PASSED [ 60%]\ntests/test_movement.py::test_repel_logic_paths PASSED                    [ 61%]\ntests/test_movement.py::test_movement_slice_artifacts_exist_and_are_consistent PASSED [ 61%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 61%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 62%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 62%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 63%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 63%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [ 63%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 64%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 64%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 64%]\ntests/test_phase1_foundation.py::test_enemy_hurt_fixture_exists_and_matches_corrected_range PASSED [ 65%]\ntests/test_phase1_foundation.py::test_foundation_directories_exist PASSED [ 65%]\ntests/test_phase1_foundation.py::test_rom_baseline_configuration_present PASSED [ 65%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 66%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 66%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 67%]\ntests/test_phase1_maps.py::test_maps_metadata_offsets_and_counts PASSED  [ 67%]\ntests/test_phase1_maps.py::test_maps_decode_spot_checks_from_rom PASSED  [ 67%]\ntests/test_phase1_maps.py::test_maps_output_and_artifacts_exist PASSED   [ 68%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 68%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 68%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 69%]\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [ 69%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [ 69%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 70%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [ 70%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 71%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 71%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 71%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 72%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 72%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 72%]\ntests/test_rng.py::test_rng_output_domain_across_seed_grid PASSED        [ 73%]\ntests/test_rng.py::test_rng_determinism PASSED                           [ 73%]\ntests/test_rng.py::test_rng_golden_fixture_sequence PASSED               [ 73%]\ntests/test_rng.py::test_rng_range_uses_rng_ub_mod_n PASSED               [ 74%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[0] PASSED  [ 74%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-1] PASSED [ 75%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-99] PASSED [ 75%]\ntests/test_rng.py::test_rng_artifacts_exist_and_are_consistent PASSED    [ 75%]\ntests/test_rng.py::test_rng_slice_raises_non_availability_py65_errors PASSED [ 76%]\ntests/test_rng.py::test_rng_slice_preserves_existing_py65_fixture_when_py65_missing PASSED [ 76%]\ntests/test_save_load.py::test_save_data_layout_and_key_clamp PASSED      [ 76%]\ntests/test_save_load.py::test_crc_detects_payload_mutation PASSED        [ 77%]\ntests/test_save_load.py::test_portable_token_encode_decode_roundtrip_is_optional_non_canonical PASSED [ 77%]\ntests/test_save_load.py::test_portable_token_decode_rejects_crc_mismatch PASSED [ 78%]\ntests/test_save_load.py::test_save_dict_roundtrip_is_canonical_and_crc_checked PASSED [ 78%]\ntests/test_save_load.py::test_json_save_load_roundtrip_preserves_canonical_30_byte_save_data PASSED [ 78%]\ntests/test_save_load.py::test_json_save_load_can_include_opt_in_portable_token PASSED [ 79%]\ntests/test_save_load.py::test_save_load_slice_artifacts_exist_and_are_consistent PASSED [ 79%]\ntests/test_shop.py::test_shop_inventory_prices_and_inn_costs_match_extracted_tables PASSED [ 79%]\ntests/test_shop.py::test_weapon_purchase_applies_buyback_and_equips_new_weapon PASSED [ 80%]\ntests/test_shop.py::test_herb_cap_and_inventory_full_block_purchase PASSED [ 80%]\ntests/test_shop.py::test_tool_buy_and_sell_use_nibble_inventory_and_half_price_sale PASSED [ 80%]\ntests/test_shop.py::test_sell_herb_decrements_counter_and_adds_half_price PASSED [ 81%]\ntests/test_shop.py::test_shop_slice_artifacts_exist_and_are_consistent PASSED [ 81%]\ntests/test_state.py::test_fresh_game_initialization_defaults PASSED      [ 82%]\ntests/test_state.py::test_state_clamps_byte_and_word_fields PASSED       [ 82%]\ntests/test_state.py::test_state_rejects_invalid_inventory_or_npc_shapes PASSED [ 82%]\ntests/test_state.py::test_state_save_api_roundtrip_is_wired_to_canonical_save_dict PASSED [ 83%]\ntests/test_state.py::test_state_slice_artifacts_exist_and_are_consistent PASSED [ 83%]\ntests/test_ui_combat_view.py::test_hp_bar_is_deterministic_approximation PASSED [ 83%]\ntests/test_ui_combat_view.py::test_combat_log_keeps_recent_four_lines PASSED [ 84%]\ntests/test_ui_combat_view.py::test_spell_submenu_uses_only_learned_spells PASSED [ 84%]\ntests/test_ui_combat_view.py::test_command_menu_and_spell_runtime_transitions PASSED [ 84%]\ntests/test_ui_combat_view.py::test_spell_command_without_spells_does_not_open_submenu PASSED [ 85%]\ntests/test_ui_combat_view.py::test_render_combat_view_is_deterministic_80x24 PASSED [ 85%]\ntests/test_ui_combat_view.py::test_ui_combat_view_artifacts_exist_and_are_consistent PASSED [ 86%]\ntests/test_ui_dialog_box.py::test_word_wrap_respects_width_and_newlines PASSED [ 86%]\ntests/test_ui_dialog_box.py::test_paginate_splits_into_visible_pages PASSED [ 86%]\ntests/test_ui_dialog_box.py::test_render_dialog_box_has_dw_style_borders PASSED [ 87%]\ntests/test_ui_dialog_box.py::test_render_is_deterministic PASSED         [ 87%]\ntests/test_ui_dialog_box.py::test_paging_with_dialog_engine_control_codes PASSED [ 87%]\ntests/test_ui_dialog_box.py::test_apply_dialog_input_advances_pages_and_emits_events PASSED [ 88%]\ntests/test_ui_dialog_box.py::test_typewriter_reveal_and_skip PASSED      [ 88%]\ntests/test_ui_dialog_box.py::test_continuation_indicator_on_multi_page PASSED [ 89%]\ntests/test_ui_dialog_box.py::test_dialog_box_state_is_immutable PASSED   [ 89%]\ntests/test_ui_dialog_box.py::test_dialog_engine_integration_preserves_unknown_control_markers PASSED [ 89%]\ntests/test_ui_dialog_box.py::test_ui_dialog_box_artifacts_exist_and_are_consistent PASSED [ 90%]\ntests/test_ui_foundation.py::test_compute_layout_enforces_min_terminal_size PASSED [ 90%]\ntests/test_ui_foundation.py::test_render_map_rows_centers_player_glyph PASSED [ 90%]\ntests/test_ui_foundation.py::test_render_game_frame_is_24x80_and_deterministic PASSED [ 91%]\ntests/test_ui_foundation.py::test_ui_foundation_artifacts_exist_and_are_consistent PASSED [ 91%]\ntests/test_ui_map_view.py::test_resolve_npc_sprite_applies_conditional_rules PASSED [ 91%]\ntests/test_ui_map_view.py::test_render_map_rows_overlays_npcs_and_changes_visibility_with_story_flags PASSED [ 92%]\ntests/test_ui_map_view.py::test_render_map_rows_applies_dungeon_darkness_radius_mask PASSED [ 92%]\ntests/test_ui_map_view.py::test_ui_map_view_artifacts_exist_and_are_consistent PASSED [ 93%]\ntests/test_ui_menu.py::test_menu_render_is_deterministic_and_boxed PASSED [ 93%]\ntests/test_ui_menu.py::test_menu_up_down_wrap_behavior PASSED            [ 93%]\ntests/test_ui_menu.py::test_menu_enter_and_escape_emit_events PASSED     [ 94%]\ntests/test_ui_menu.py::test_menu_runtime_is_pure_immutable_transition PASSED [ 94%]\ntests/test_ui_menu.py::test_ui_menu_artifacts_exist_and_are_consistent PASSED [ 94%]\ntests/test_ui_renderer.py::test_supported_screen_modes_predicate_is_consistent PASSED [ 95%]\ntests/test_ui_renderer.py::test_renderer_dispatches_all_supported_modes_without_crash PASSED [ 95%]\ntests/test_ui_renderer.py::test_renderer_double_buffer_skips_identical_frame_writes PASSED [ 95%]\ntests/test_ui_renderer.py::test_renderer_handles_resize_without_exception_and_recovers PASSED [ 96%]\ntests/test_ui_renderer.py::test_ui_renderer_artifacts_exist_and_are_consistent PASSED [ 96%]\ntests/test_ui_status_panel.py::test_status_panel_renders_required_rows_with_fixed_width PASSED [ 97%]\ntests/test_ui_status_panel.py::test_equipment_byte_decodes_to_abbreviated_row PASSED [ 97%]\ntests/test_ui_status_panel.py::test_low_hp_mp_threshold_markers_use_less_than_25_percent_rule PASSED [ 97%]\ntests/test_ui_status_panel.py::test_ui_status_panel_artifacts_exist_and_are_consistent PASSED [ 98%]\ntests/test_ui_title_bootstrap.py::test_render_title_screen_is_24x80_and_deterministic PASSED [ 98%]\ntests/test_ui_title_bootstrap.py::test_menu_cursor_moves_and_wraps PASSED [ 98%]\ntests/test_ui_title_bootstrap.py::test_new_game_name_entry_caps_at_8_chars_and_handoffs_state PASSED [ 99%]\ntests/test_ui_title_bootstrap.py::test_continue_handoff_uses_save_load_and_missing_save_is_graceful PASSED [ 99%]\ntests/test_ui_title_bootstrap.py::test_ui_title_bootstrap_artifacts_exist_and_are_consistent PASSED [100%]\n\n============================= 273 passed in 0.43s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

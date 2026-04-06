@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-combat-session-handoff",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "encounter_handoff_sets_combat_session": true,
+    "combat_session_hp_is_deterministic": true,
+    "combat_view_uses_handoff_context": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_session_handoff.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_session_handoff_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded combat-session handoff only: encounter metadata initializes deterministic enemy combat session state and combat view consumes that state without turn resolution."
+}

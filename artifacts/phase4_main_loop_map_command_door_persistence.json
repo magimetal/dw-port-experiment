@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-map-command-door-persistence",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "door_open_persists_in_session_state": true,
+    "opened_door_changes_map_render_glyph": true,
+    "opened_door_becomes_passable_for_movement": true,
+    "already_open_door_does_not_consume_key_again": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_door_persistence.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_door_persistence_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded DOOR persistence: unlocked doors persist in session state, render as opened tiles, and become passable for movement within the active session."
+}

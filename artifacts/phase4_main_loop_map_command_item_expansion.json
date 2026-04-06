@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-map-command-item-expansion",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "item_menu_lists_supported_targets": true,
+    "fairy_water_sets_rom_timer_then_step_tick_decrements": true,
+    "wings_use_returns_and_consumes": true,
+    "wings_rejected_in_dungeon_without_consumption": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_item_expansion.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_item_expansion_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded ITEM expansion beyond torch: verifies Fairy Water and Wings use/rejection through existing map ITEM menu and ItemsRuntime wiring, including Fairy Water ROM set value before step tick and decremented post-step value."
+}

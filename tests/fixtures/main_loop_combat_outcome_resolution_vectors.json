@@ -1,0 +1,59 @@
+{
+  "vectors": {
+    "victory": {
+      "action": "combat_victory",
+      "action_detail": "HURT",
+      "screen_mode": "dialog",
+      "experience_after": 3,
+      "gold_after": 124,
+      "mp_after": 10,
+      "combat_session_cleared": true,
+      "dialog_page_1_contains_defeat": true,
+      "dialog_page_2_action": "dialog_page_advance",
+      "dialog_page_2_contains_rewards": true,
+      "dialog_done_action": "dialog_done",
+      "screen_mode_after_dialog_done": "map"
+    },
+    "victory_level_up": {
+      "action": "combat_victory",
+      "screen_mode": "dialog",
+      "experience_after": 9,
+      "gold_after": 124,
+      "level_after": 2,
+      "strength_after": 5,
+      "agility_after": 4,
+      "max_hp_after": 22,
+      "max_mp_after": 0,
+      "display_level_after": 2,
+      "combat_session_cleared": true,
+      "dialog_page_1_contains_defeat": true,
+      "dialog_page_2_action": "dialog_page_advance",
+      "dialog_page_2_contains_rewards": true,
+      "dialog_page_3_action": "dialog_page_advance",
+      "dialog_page_3_contains_level_up": true,
+      "dialog_done_action": "dialog_done",
+      "screen_mode_after_dialog_done": "map"
+    },
+    "defeat": {
+      "action": "combat_defeat",
+      "action_detail": "revive",
+      "screen_mode": "dialog",
+      "map_after": [
+        4,
+        5,
+        27
+      ],
+      "hp_after": 15,
+      "max_hp_after": 15,
+      "mp_after": 15,
+      "max_mp_after": 15,
+      "gold_after": 60,
+      "combat_session_cleared": true,
+      "dialog_page_1_contains_slain": true,
+      "dialog_page_2_action": "dialog_page_advance",
+      "dialog_page_2_contains_revive": true,
+      "dialog_done_action": "dialog_done",
+      "screen_mode_after_dialog_done": "map"
+    }
+  }
+}

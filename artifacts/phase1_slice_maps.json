@@ -1,0 +1,168 @@
+{
+  "phase": "1-slice-maps",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase1_slice_maps_extractor": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m extractor.run_phase1_slice_maps",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_maps_artifacts": {
+      "ok": true,
+      "detail": {
+        "map_count": 30,
+        "overworld_dimensions": {
+          "width": 120,
+          "height": 120
+        },
+        "overworld_tile_sha1": "105c74f3447536aa8b42ea6c00f5cc3e2dcffe1c",
+        "artifact": {
+          "slice": "phase1-maps",
+          "map_count": 30,
+          "map_metadata_start": "0x2a",
+          "map_metadata_entry_bytes": 5,
+          "overworld_map_id": 1,
+          "overworld_tile_sha1": "105c74f3447536aa8b42ea6c00f5cc3e2dcffe1c",
+          "overworld_dimensions": {
+            "width": 120,
+            "height": 120
+          },
+          "overworld_row0_first_16": [
+            4,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "overworld_row119_last_16": [
+            7,
+            7,
+            7,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "map_ids_with_tiles": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "notes": {
+            "metadata_count_observed": 30,
+            "plan_approximation": "Plan text says 29 maps; ROM metadata span 0x2A..0xBF decodes to 30 entries including map 0 unused."
+          }
+        },
+        "read_gate": {
+          "completed": true,
+          "source_directory": "/tmp/dw-disassembly/source_files",
+          "files": {
+            "Bank00.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank00.asm",
+              "bytes": 313521,
+              "lines": 7435,
+              "labels_checked": {
+                "MapDatTbl": true,
+                "WrldMapPtrTbl": true,
+                "GetBlockID": true,
+                "GetOvrWldTarget": true,
+                "ChkWtrOrBrdg": true,
+                "ChkOthrMaps": true
+              },
+              "map_decode_label_present": false
+            },
+            "Bank03.asm": {
+              "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+              "bytes": 457772,
+              "lines": 10921,
+              "labels_checked": {
+                "ChangeMaps": true
+              }
+            }
+          },
+          "notes": {
+            "map_decode_resolution": "No explicit 'MapDecode' label in Bank00.asm; extraction is derived from GetOvrWldTarget/ChkWtrOrBrdg/ChkOthrMaps routines that implement map decoding behavior."
+          }
+        }
+      }
+    },
+    "run_pytest_phase1_maps_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py tests/test_phase1_npcs.py tests/test_phase1_dialog.py tests/test_phase1_maps.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 28 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  3%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [  7%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [ 10%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [ 14%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 17%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 21%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 25%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 28%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 32%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 35%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 39%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 42%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 46%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 50%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 53%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 57%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 60%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 64%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 67%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 71%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 75%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 78%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 82%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 85%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [ 89%]\ntests/test_phase1_maps.py::test_maps_metadata_offsets_and_counts PASSED  [ 92%]\ntests/test_phase1_maps.py::test_maps_decode_spot_checks_from_rom PASSED  [ 96%]\ntests/test_phase1_maps.py::test_maps_output_and_artifacts_exist PASSED   [100%]\n\n============================== 28 passed in 0.07s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

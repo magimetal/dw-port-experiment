@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-npc-special-control-0x6c-side-effect",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "control_0x6c_trades_harp_for_staff": true,
+    "control_0x6c_followup_dialog_switches_to_completed_branch": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_npc_special_control_0x6c_side_effect.json",
+    "vectors_fixture": "tests/fixtures/main_loop_npc_special_control_0x6c_side_effect_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded special NPC side effect (0x6C): trade Silver Harp for Staff of Rain, then verify follow-up dialog branch changes to completed state."
+}

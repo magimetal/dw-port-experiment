@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-combat-player-stopspell-enforcement",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "blocked_spell_with_player_stopspell_true": true,
+    "normal_spell_path_when_player_stopspell_false": true,
+    "multi_turn_stopspell_leads_to_next_turn_spell_block": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_player_stopspell_enforcement.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_player_stopspell_enforcement_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

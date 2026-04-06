@@ -1,0 +1,27 @@
+{
+  "completed": true,
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "inputs": {
+    "stats_json": "/Users/magimetal/Dev/dw-port/extractor/data_out/stats.json",
+    "stats_json_exists": true
+  },
+  "files": {
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "SpellCostTbl": true
+      }
+    },
+    "Bank01.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank01.asm",
+      "bytes": 442264,
+      "lines": 9656,
+      "labels_checked": {
+        "BaseStatsTbl": true,
+        "SetBaseStats": true
+      }
+    }
+  }
+}

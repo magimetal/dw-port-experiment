@@ -1,0 +1,40 @@
+{
+  "vectors": {
+    "menu_open": {
+      "action": "map_command_menu_opened",
+      "action_detail": "count:2",
+      "screen_mode": "map",
+      "frame_contains_command_title": true,
+      "frame_contains_talk": true,
+      "frame_contains_spell": true,
+      "frame_contains_hurt": false
+    },
+    "menu_cancel": {
+      "action": "map_command_menu_cancel",
+      "screen_mode": "map",
+      "hp_after": 9,
+      "mp_after": 10
+    },
+    "menu_select_spell": {
+      "open_action": "map_command_menu_opened",
+      "move_action": "map_command_menu_input",
+      "move_action_detail": "DOWN",
+      "action": "map_spell_menu_opened",
+      "screen_mode": "map",
+      "frame_contains_spell_menu": true,
+      "frame_contains_heal": true
+    },
+    "menu_select_talk": {
+      "open_action": "map_command_menu_opened",
+      "action": "npc_interact_dialog",
+      "action_detail": "control:98;byte:0x9B;block:TextBlock10;entry:11",
+      "screen_mode": "dialog",
+      "frame_contains_princess_gwaelin": true
+    },
+    "menu_select_talk_no_target": {
+      "action": "npc_interact_none",
+      "action_detail": "down",
+      "screen_mode": "map"
+    }
+  }
+}

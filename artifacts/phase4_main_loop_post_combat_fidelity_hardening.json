@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-post-combat-fidelity-hardening",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "revive_restores_mp_and_hp": true,
+    "victory_gold_uses_variance_not_fixed_base": true,
+    "level_up_announcement_dialog_present": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_post_combat_fidelity_hardening.json",
+    "vectors_fixture": "tests/fixtures/main_loop_post_combat_fidelity_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded post-combat fidelity hardening: revive restores MP, enemy gold reward uses ROM variance formula, and level-up announcement dialog is present in post-combat paging."
+}

@@ -1,0 +1,29 @@
+{
+  "slice": "phase4-main-loop-field-spell-casting",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "spell_menu_open_shows_field_spells_and_allows_navigation": true,
+    "spell_menu_cancel_returns_to_map_without_state_change": true,
+    "spell_menu_select_casts_selected_spell": true,
+    "spell_menu_rejects_when_no_field_spells_learned": true,
+    "heal_cast_consumes_mp_and_heals": true,
+    "outside_cast_teleports_and_returns_map_after_dialog": true,
+    "return_cast_teleports_to_tantegel": true,
+    "repel_cast_sets_repel_timer": true,
+    "radiant_cast_sets_light_in_dungeon": true,
+    "not_enough_mp_rejected_without_state_change": true,
+    "unknown_spell_rejected_without_state_change": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_field_spell_casting.json",
+    "vectors_fixture": "tests/fixtures/main_loop_field_spell_casting_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded map spell command-surface parity: map-mode SPELL opens a field-spell menu (field spells only), supports cursor/select/cancel, and routes selected spells through the existing deterministic field spell casting path with dialog feedback."
+}

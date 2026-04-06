@@ -1,0 +1,24 @@
+{
+  "slice": "phase4-main-loop-combat-turn-resolution",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "fight_resolves_player_and_enemy_damage": true,
+    "spell_hurt_consumes_mp_and_applies_damage": true,
+    "item_action_processes_turn_without_player_effect": true,
+    "run_action_exits_combat_session": true,
+    "excellent_move_can_trigger_in_fight": true,
+    "run_failure_continues_combat_with_enemy_counter": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_turn_resolution.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_turn_resolution_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded combat turn resolution only: FIGHT/RUN/SPELL/ITEM are wired in combat mode, turns update deterministic state/logs, and combat session exits on RUN or death/victory."
+}

@@ -1,0 +1,113 @@
+{
+  "vectors": {
+    "fighters_ring_success": {
+      "action": "map_item_used",
+      "action_detail": "FIGHTER'S RING:ok",
+      "attack_after": 6,
+      "fighters_ring_flag_set": true,
+      "inventory_slots_after": [
+        6,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_used_text": true
+    },
+    "fighters_ring_already_equipped": {
+      "action": "map_item_rejected",
+      "action_detail": "FIGHTER'S RING:already_wearing_fighters_ring",
+      "attack_after": 6,
+      "fighters_ring_flag_set": true,
+      "inventory_slots_after": [
+        6,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    },
+    "death_necklace_success": {
+      "action": "map_item_used",
+      "action_detail": "DEATH NECKLACE:ok",
+      "death_necklace_flag_set": true,
+      "inventory_slots_after": [
+        11,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_used_text": true
+    },
+    "death_necklace_already_cursed": {
+      "action": "map_item_rejected",
+      "action_detail": "DEATH NECKLACE:already_cursed",
+      "cursed_belt_flag_set": true,
+      "death_necklace_flag_set": false,
+      "inventory_slots_after": [
+        11,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    },
+    "cursed_belt_success": {
+      "action": "map_item_used",
+      "action_detail": "CURSED BELT:ok",
+      "cursed_belt_flag_set": true,
+      "inventory_slots_after": [
+        9,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_used_text": true
+    },
+    "cursed_belt_already_cursed": {
+      "action": "map_item_rejected",
+      "action_detail": "CURSED BELT:already_cursed",
+      "death_necklace_flag_set": true,
+      "cursed_belt_flag_set": false,
+      "inventory_slots_after": [
+        9,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    },
+    "erdricks_token_held": {
+      "action": "map_item_rejected",
+      "action_detail": "ERDRICK'S TOKEN:quest_item_held",
+      "inventory_slots_after": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_holding": true
+    },
+    "stones_of_sunlight_held": {
+      "action": "map_item_rejected",
+      "action_detail": "STONES OF SUNLIGHT:quest_item_held",
+      "inventory_slots_after": [
+        12,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_holding": true
+    },
+    "staff_of_rain_held": {
+      "action": "map_item_rejected",
+      "action_detail": "STAFF OF RAIN:quest_item_held",
+      "inventory_slots_after": [
+        13,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_holding": true
+    }
+  }
+}

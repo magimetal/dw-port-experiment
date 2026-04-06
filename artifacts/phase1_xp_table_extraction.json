@@ -1,0 +1,16 @@
+{
+  "slice": "phase1-xp-table",
+  "entry_count": 30,
+  "table_start": "0xf36b",
+  "entry_bytes": 2,
+  "first_level": {
+    "level": 1,
+    "xp_threshold": 0,
+    "rom_offset": "0xf36b"
+  },
+  "last_level": {
+    "level": 30,
+    "xp_threshold": 65535,
+    "rom_offset": "0xf3a5"
+  }
+}

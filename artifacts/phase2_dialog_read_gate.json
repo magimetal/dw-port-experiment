@@ -1,0 +1,26 @@
+{
+  "completed": true,
+  "slice": "phase2-dialog",
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank02.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank02.asm",
+      "bytes": 235474,
+      "lines": 3847,
+      "labels_checked": {
+        "TextBlock1": true,
+        "TextBlock19": true
+      }
+    },
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "DoDialogLoBlock": true,
+        "DoDialogHiBlock": true,
+        "SetDialogBytes": true
+      }
+    }
+  }
+}

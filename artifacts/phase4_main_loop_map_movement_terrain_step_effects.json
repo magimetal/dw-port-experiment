@@ -1,0 +1,24 @@
+{
+  "slice": "phase4-main-loop-map-movement-terrain-step-effects",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "swamp_step_applies_2hp_damage": true,
+    "force_field_step_applies_15hp_damage": true,
+    "erdricks_armor_step_heal_applies": true,
+    "swamp_with_erdricks_armor_is_immune": true,
+    "magic_armor_4step_heal_applies": true,
+    "neutral_step_has_no_terrain_effect": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_movement_terrain_step_effects_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded terrain-step effects slice: main-loop movement applies swamp/force-field step damage, Erdrick's Armor step-heal with swamp immunity netting to zero, Magic Armor 4-step regeneration, and neutral-tile no-effect behavior."
+}

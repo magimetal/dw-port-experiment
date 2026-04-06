@@ -1,0 +1,101 @@
+{
+  "vectors": {
+    "menu_open": {
+      "action": "map_spell_menu_opened",
+      "action_detail": "count:2",
+      "screen_mode": "map",
+      "frame_contains_menu_title": true,
+      "frame_contains_heal": true,
+      "frame_contains_outside": true,
+      "frame_contains_hurt": false,
+      "move_action": "map_spell_menu_input",
+      "move_action_detail": "DOWN",
+      "move_frame_cursor_on_outside": true
+    },
+    "menu_cancel": {
+      "action": "map_spell_menu_cancel",
+      "screen_mode": "map",
+      "hp_after": 9,
+      "mp_after": 10
+    },
+    "menu_no_field_spells": {
+      "action": "map_spell_menu_rejected",
+      "action_detail": "no_field_spells",
+      "screen_mode": "dialog",
+      "frame_contains_unknown_spell": true
+    },
+    "menu_select_heal": {
+      "open_action": "map_spell_menu_opened",
+      "action": "map_spell_cast",
+      "action_detail": "HEAL:ok",
+      "screen_mode": "dialog",
+      "hp_after": 15,
+      "mp_after": 6,
+      "frame_contains_heal": true
+    },
+    "heal": {
+      "action": "map_spell_cast",
+      "action_detail": "HEAL:ok",
+      "screen_mode": "dialog",
+      "hp_after": 15,
+      "mp_after": 6,
+      "frame_contains_heal": true
+    },
+    "outside": {
+      "action": "map_spell_cast",
+      "action_detail": "OUTSIDE:ok",
+      "screen_mode": "dialog",
+      "map_after": [
+        1,
+        104,
+        44
+      ],
+      "mp_after": 4,
+      "done_action": "dialog_done",
+      "done_screen_mode": "map"
+    },
+    "return": {
+      "action": "map_spell_cast",
+      "action_detail": "RETURN:ok",
+      "screen_mode": "dialog",
+      "map_after": [
+        1,
+        42,
+        43
+      ],
+      "mp_after": 4
+    },
+    "repel": {
+      "action": "map_spell_cast",
+      "action_detail": "REPEL:ok",
+      "screen_mode": "dialog",
+      "repel_timer_after": 254,
+      "mp_after": 6
+    },
+    "radiant": {
+      "action": "map_spell_cast",
+      "action_detail": "RADIANT:ok",
+      "screen_mode": "dialog",
+      "light_radius_after": 5,
+      "light_timer_after": 254,
+      "mp_after": 5
+    },
+    "not_enough_mp": {
+      "action": "map_spell_rejected",
+      "action_detail": "HEAL:not_enough_mp",
+      "screen_mode": "dialog",
+      "hp_after": 9,
+      "mp_before": 3,
+      "mp_after": 3,
+      "frame_contains_not_enough_mp": true
+    },
+    "unknown_spell": {
+      "action": "map_spell_rejected",
+      "action_detail": "HEAL:unknown",
+      "screen_mode": "dialog",
+      "hp_after": 9,
+      "mp_after": 10,
+      "frame_contains_unknown_spell": true
+    }
+  }
+}

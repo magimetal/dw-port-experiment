@@ -1,0 +1,73 @@
+{
+  "slice": "phase1-npcs",
+  "pointer_count": 12,
+  "map_count": 12,
+  "npc_count": 136,
+  "first_map": {
+    "pointer_index": 0,
+    "map_id": 4,
+    "map_name": "Tantagel Castle GF",
+    "map_variant": "default",
+    "mobile_table_cpu_ptr": "0x9764",
+    "static_table_cpu_ptr": "0x9783",
+    "mobile_table_rom_offset": "0x1774",
+    "static_table_rom_offset": "0x1793",
+    "mobile_count": 10,
+    "static_count": 10
+  },
+  "first_npc": {
+    "slot": 0,
+    "map_id": 4,
+    "map_name": "Tantagel Castle GF",
+    "map_variant": "default",
+    "movement_pattern": "mobile",
+    "npc_type": 6,
+    "npc_type_name": "Woman",
+    "start_x": 8,
+    "start_y": 13,
+    "facing": 2,
+    "facing_name": "down",
+    "dialog_control": 98,
+    "conditional_type": {
+      "rule": "type_110_princess_or_female",
+      "base_sprite": "female_villager",
+      "overrides": [
+        {
+          "when": "map_id == MAP_TANTCSTL_GF and (story_flags & F_DGNLRD_DEAD) != 0",
+          "sprite": "princess_gwaelin"
+        },
+        {
+          "when": "map_id == MAP_THRONEROOM",
+          "sprite": "princess_gwaelin"
+        }
+      ]
+    },
+    "rom_offset": "0x1774",
+    "raw": {
+      "byte0": "0xc8",
+      "byte1": "0x4d",
+      "byte2": "0x62"
+    }
+  },
+  "last_npc": {
+    "slot": 8,
+    "map_id": 4,
+    "map_name": "Tantagel Castle GF",
+    "map_variant": "post_dragonlord",
+    "movement_pattern": "static",
+    "npc_type": 2,
+    "npc_type_name": "Grey Soldier",
+    "start_x": 12,
+    "start_y": 27,
+    "facing": 3,
+    "facing_name": "left",
+    "dialog_control": 253,
+    "conditional_type": null,
+    "rom_offset": "0x17f6",
+    "raw": {
+      "byte0": "0x4c",
+      "byte1": "0x7b",
+      "byte2": "0xfd"
+    }
+  }
+}

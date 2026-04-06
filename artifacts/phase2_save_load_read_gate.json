@@ -1,0 +1,23 @@
+{
+  "completed": true,
+  "slice": "phase2-save-load",
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "SaveData": true,
+        "Save10Times": true,
+        "GetCRC": true,
+        "DoCRC": true,
+        "DoLFSR": true,
+        "GetSaveGameBase": true
+      }
+    }
+  },
+  "notes": {
+    "password_status": "US ROM has no password encoder/decoder; canonical save is SRAM-equivalent 30-byte JSON payload with CRC."
+  }
+}

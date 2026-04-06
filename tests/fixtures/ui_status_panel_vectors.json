@@ -1,0 +1,45 @@
+{
+  "vectors": {
+    "equipment": {
+      "equipment_byte": 105,
+      "decoded": [
+        "COPR",
+        "LETH",
+        "SML"
+      ],
+      "line": "EQ COPR/LETH/SML    "
+    },
+    "thresholds": {
+      "critical_flags": [
+        true,
+        true
+      ],
+      "critical_hp_line": "HP!  4/20           ",
+      "critical_mp_line": "MP*  1/8            "
+    },
+    "required_labels": {
+      "name": "NAME ERDRICK        ",
+      "level": "LV   7              ",
+      "hp": "HP   15/20          ",
+      "mp": "MP   6/8            ",
+      "exp": "EXP  450            ",
+      "gold": "GOLD 321            ",
+      "equipment": "EQ COPR/LETH/SML    "
+    },
+    "shape": {
+      "line_count": 9,
+      "line_widths": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "deterministic_repeat_match": true
+    }
+  }
+}

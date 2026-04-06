@@ -1,0 +1,41 @@
+{
+  "vectors": {
+    "item_menu_open": {
+      "action": "map_item_menu_opened",
+      "action_detail": "count:1",
+      "screen_mode": "map",
+      "frame_contains_item_title": true,
+      "frame_contains_dragons_scale": true
+    },
+    "item_use_dragons_scale_success": {
+      "action": "map_item_used",
+      "action_detail": "DRAGON'S SCALE:ok",
+      "screen_mode": "dialog",
+      "defense_before": 2,
+      "defense_after": 4,
+      "dragon_scale_flag_set": true,
+      "inventory_slots_after": [
+        4,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_used_text": true
+    },
+    "item_use_dragons_scale_already_equipped": {
+      "action": "map_item_rejected",
+      "action_detail": "DRAGON'S SCALE:already_wearing_dragon_scale",
+      "screen_mode": "dialog",
+      "defense_before": 4,
+      "defense_after": 4,
+      "dragon_scale_flag_set": true,
+      "inventory_slots_after": [
+        4,
+        0,
+        0,
+        0
+      ],
+      "frame_contains_no_effect_text": true
+    }
+  }
+}

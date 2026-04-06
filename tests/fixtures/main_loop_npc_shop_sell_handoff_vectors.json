@@ -1,0 +1,21 @@
+{
+  "vectors": {
+    "shop_sell": {
+      "action": "npc_shop_sell_transaction",
+      "screen_mode": "dialog",
+      "action_detail": "control:1;shop_id:0;item_id:17;result:sold;gold_gain:12",
+      "gold_after": 112,
+      "herbs_after": 0,
+      "gold_gain_expected": 12,
+      "frame_contains_sold": true
+    },
+    "shop_sell_rejected": {
+      "action": "npc_shop_sell_transaction",
+      "screen_mode": "dialog",
+      "action_detail": "control:1;shop_id:0;item_id:17;result:rejected:not_owned_or_unsellable;gold_gain:0",
+      "gold_after": 100,
+      "herbs_after": 0,
+      "frame_contains_rejected": true
+    }
+  }
+}

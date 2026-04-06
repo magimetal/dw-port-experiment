@@ -1,0 +1,190 @@
+{
+  "phase": "4-slice-map-command-item-remaining-quest-item-use-effects",
+  "all_passed": false,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": false,
+      "missing": [
+        "blessed",
+        "pytest",
+        "hypothesis"
+      ]
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase4_slice_map_command_item_remaining_quest_item_use_effects_generator": {
+      "ok": true,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m ui.run_phase4_slice_map_command_item_remaining_quest_item_use_effects",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_main_loop_map_command_item_remaining_quest_item_use_effects_artifacts": {
+      "ok": true,
+      "detail": {
+        "report": {
+          "slice": "phase4-main-loop-map-command-item-remaining-quest-item-use-effects",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "fighters_ring_use_sets_attack_and_flag_without_consuming": true,
+            "fighters_ring_rejects_when_already_equipped": true,
+            "death_necklace_use_sets_curse_flag_without_consuming": true,
+            "death_necklace_rejects_when_already_cursed": true,
+            "cursed_belt_use_sets_curse_flag_without_consuming": true,
+            "cursed_belt_rejects_when_already_cursed": true,
+            "quest_items_show_held_dialog_without_consuming": true
+          },
+          "outputs": {
+            "report": "artifacts/phase4_main_loop_map_command_item_remaining_quest_item_use_effects.json",
+            "vectors_fixture": "tests/fixtures/main_loop_map_command_item_remaining_quest_item_use_effects_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          },
+          "scope_note": "Phase 4 bounded ITEM remaining quest/equip effects slice: routes Death Necklace, Fighter's Ring, Cursed Belt, Stones of Sunlight, Staff of Rain, and Erdrick's Token through deterministic map ITEM state transitions/dialog outcomes without adding deferred story hooks."
+        },
+        "vectors": {
+          "vectors": {
+            "fighters_ring_success": {
+              "action": "map_item_used",
+              "action_detail": "FIGHTER'S RING:ok",
+              "attack_after": 6,
+              "fighters_ring_flag_set": true,
+              "inventory_slots_after": [
+                6,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_used_text": true
+            },
+            "fighters_ring_already_equipped": {
+              "action": "map_item_rejected",
+              "action_detail": "FIGHTER'S RING:already_wearing_fighters_ring",
+              "attack_after": 6,
+              "fighters_ring_flag_set": true,
+              "inventory_slots_after": [
+                6,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_no_effect_text": true
+            },
+            "death_necklace_success": {
+              "action": "map_item_used",
+              "action_detail": "DEATH NECKLACE:ok",
+              "death_necklace_flag_set": true,
+              "inventory_slots_after": [
+                11,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_used_text": true
+            },
+            "death_necklace_already_cursed": {
+              "action": "map_item_rejected",
+              "action_detail": "DEATH NECKLACE:already_cursed",
+              "cursed_belt_flag_set": true,
+              "death_necklace_flag_set": false,
+              "inventory_slots_after": [
+                11,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_no_effect_text": true
+            },
+            "cursed_belt_success": {
+              "action": "map_item_used",
+              "action_detail": "CURSED BELT:ok",
+              "cursed_belt_flag_set": true,
+              "inventory_slots_after": [
+                9,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_used_text": true
+            },
+            "cursed_belt_already_cursed": {
+              "action": "map_item_rejected",
+              "action_detail": "CURSED BELT:already_cursed",
+              "death_necklace_flag_set": true,
+              "cursed_belt_flag_set": false,
+              "inventory_slots_after": [
+                9,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_no_effect_text": true
+            },
+            "erdricks_token_held": {
+              "action": "map_item_rejected",
+              "action_detail": "ERDRICK'S TOKEN:quest_item_held",
+              "inventory_slots_after": [
+                7,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_holding": true
+            },
+            "stones_of_sunlight_held": {
+              "action": "map_item_rejected",
+              "action_detail": "STONES OF SUNLIGHT:quest_item_held",
+              "inventory_slots_after": [
+                12,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_holding": true
+            },
+            "staff_of_rain_held": {
+              "action": "map_item_rejected",
+              "action_detail": "STAFF OF RAIN:quest_item_held",
+              "inventory_slots_after": [
+                13,
+                0,
+                0,
+                0
+              ],
+              "frame_contains_holding": true
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase4_map_command_item_remaining_quest_item_use_effects_slice": {
+      "ok": false,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m pytest tests/ -v",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "/opt/homebrew/opt/python@3.14/bin/python3.14: No module named pytest\n"
+    }
+  }
+}

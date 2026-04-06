@@ -1,0 +1,158 @@
+{
+  "slice": "phase2-state",
+  "all_passed": true,
+  "checks": {
+    "start_map_exists": true,
+    "start_coords_within_map": true,
+    "warp_table_entry_count": true,
+    "equipment_masks_present": true,
+    "fresh_game_defaults": true
+  },
+  "fresh_game_snapshot": {
+    "player_name": "ERDRICK",
+    "map_id": 4,
+    "player_x": 5,
+    "player_y": 27,
+    "hp": 15,
+    "mp": 0,
+    "level": 1,
+    "str": 4,
+    "agi": 4,
+    "max_hp": 15,
+    "max_mp": 0,
+    "attack": 4,
+    "defense": 2,
+    "experience": 0,
+    "gold": 120,
+    "equipment_byte": 2,
+    "magic_keys": 0,
+    "herbs": 0,
+    "inventory_slots": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "spells_known": 0,
+    "more_spells_quest": 0,
+    "player_flags": 0,
+    "story_flags": 0,
+    "quest_flags": 0,
+    "rng_lb": 0,
+    "rng_ub": 0,
+    "repel_timer": 0,
+    "light_timer": 0,
+    "light_radius": 0,
+    "npc_data": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "magic_armor_step_counter": 0,
+    "display_level": 1
+  },
+  "references": {
+    "plan_section": "\u00a72b engine/state.py",
+    "checkpoints": [
+      "cp_00_new_game",
+      "cp_01_tantegel_start"
+    ]
+  }
+}

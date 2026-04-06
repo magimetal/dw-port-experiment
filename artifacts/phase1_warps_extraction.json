@@ -1,0 +1,53 @@
+{
+  "slice": "phase1-warps",
+  "entry_count": 51,
+  "entry_bytes": 3,
+  "map_entry_table_start": "0xf3d8",
+  "map_target_table_start": "0xf471",
+  "map_entry_dir_table_start": "0x1924",
+  "first_entry": {
+    "index": 0,
+    "src_map": 1,
+    "src_x": 2,
+    "src_y": 2,
+    "dst_map": 9,
+    "dst_x": 0,
+    "dst_y": 14,
+    "entry_dir": 1,
+    "rom_offsets": {
+      "src": "0xf3d8",
+      "dst": "0xf471",
+      "dir": "0x1924"
+    }
+  },
+  "middle_entry": {
+    "index": 25,
+    "src_map": 15,
+    "src_x": 2,
+    "src_y": 4,
+    "dst_map": 16,
+    "dst_x": 0,
+    "dst_y": 0,
+    "entry_dir": 2,
+    "rom_offsets": {
+      "src": "0xf423",
+      "dst": "0xf4bc",
+      "dir": "0x193d"
+    }
+  },
+  "last_entry": {
+    "index": 50,
+    "src_map": 28,
+    "src_x": 9,
+    "src_y": 9,
+    "dst_map": 29,
+    "dst_x": 8,
+    "dst_y": 9,
+    "entry_dir": 2,
+    "rom_offsets": {
+      "src": "0xf46e",
+      "dst": "0xf507",
+      "dir": "0x1956"
+    }
+  }
+}

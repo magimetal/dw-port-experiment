@@ -1,0 +1,23 @@
+{
+  "slice": "phase4-main-loop-inn-stay-save-trigger",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "inn_stay_action_routed_through_main_session": true,
+    "inn_stay_restores_hp_mp_to_max": true,
+    "inn_stay_triggers_json_save": true,
+    "inn_stay_save_roundtrip_matches_state": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_inn_stay_save_trigger.json",
+    "vectors_fixture": "tests/fixtures/main_loop_inn_stay_save_trigger_vectors.json",
+    "runtime_save": "artifacts/phase4_inn_stay_runtime_save.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded inn-stay save trigger integration only: INN_STAY input path in main session restores HP/MP and triggers canonical JSON save."
+}

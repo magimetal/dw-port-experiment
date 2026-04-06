@@ -1,0 +1,6 @@
+{
+  "min": 3,
+  "max": 10,
+  "formula": "rng & 0x07 + 0x03",
+  "source": "Bank03.asm EnCastHurt @ LEC23 (CPU $EC2F-$EC32)"
+}

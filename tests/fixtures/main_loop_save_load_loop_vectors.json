@@ -1,0 +1,27 @@
+{
+  "vectors": {
+    "continue": {
+      "screen_mode": "map",
+      "action": "continue_loaded",
+      "player_name": "LOTO",
+      "position": [
+        4,
+        5,
+        27
+      ],
+      "save_dict_roundtrip_equal": true
+    },
+    "save_on_quit": {
+      "action": "quit",
+      "quit_requested": true,
+      "save_exists": true,
+      "loaded_name": "ERDRICK",
+      "loaded_position": [
+        4,
+        5,
+        27
+      ],
+      "save_dict_roundtrip_equal": true
+    }
+  }
+}

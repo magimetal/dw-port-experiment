@@ -1,0 +1,39 @@
+{
+  "slice": "phase1-stats",
+  "entry_count": 30,
+  "table_start": "0x60dd",
+  "entry_bytes": 6,
+  "first_level": {
+    "level": 1,
+    "strength": 4,
+    "agility": 4,
+    "max_hp": 15,
+    "max_mp": 0,
+    "modsn_spells": 0,
+    "spell_flags": 0,
+    "spells_known": [],
+    "rom_offset": "0x60dd"
+  },
+  "last_level": {
+    "level": 30,
+    "strength": 140,
+    "agility": 130,
+    "max_hp": 210,
+    "max_mp": 200,
+    "modsn_spells": 3,
+    "spell_flags": 255,
+    "spells_known": [
+      "HEAL",
+      "HURT",
+      "SLEEP",
+      "RADIANT",
+      "STOPSPELL",
+      "OUTSIDE",
+      "RETURN",
+      "REPEL",
+      "HEALMORE",
+      "HURTMORE"
+    ],
+    "rom_offset": "0x618b"
+  }
+}

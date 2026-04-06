@@ -1,0 +1,21 @@
+{
+  "slice": "phase4-main-loop-map-command-cursed-item-step-damage-hook",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "cursed_belt_step_sets_hp_to_1": true,
+    "death_necklace_step_triggers_death_outcome": true,
+    "step_without_curse_flags_has_no_side_effect": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_cursed_item_step_damage_hook.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_cursed_item_step_damage_hook_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded cursed movement hook slice: movement applies CURSED_BELT HP=1 per-step behavior, routes DEATH_NECKLACE movement death through existing defeat sequence, and preserves no-effect steps when no curse flags are set."
+}

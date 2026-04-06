@@ -1,0 +1,45 @@
+{
+  "vectors": {
+    "cursed_belt_step_sets_hp_to_1": {
+      "action": "move",
+      "action_detail": "47,1;cursed_belt:hp_set_to_1",
+      "screen_mode": "map",
+      "map_after": [
+        1,
+        47,
+        1
+      ],
+      "hp_after": 1
+    },
+    "death_necklace_step_triggers_death_outcome": {
+      "action": "combat_defeat",
+      "action_detail": "revive",
+      "screen_mode": "dialog",
+      "map_after": [
+        4,
+        5,
+        27
+      ],
+      "hp_after": 31,
+      "mp_after": 10,
+      "gold_after": 61,
+      "dialog_page_1_contains_slain": true,
+      "dialog_page_2_action": "dialog_page_advance",
+      "dialog_page_2_contains_revive": true,
+      "dialog_done_action": "dialog_done",
+      "dialog_done_screen_mode": "map"
+    },
+    "step_without_curse_flags_has_no_side_effect": {
+      "action": "move",
+      "action_detail": "47,1",
+      "screen_mode": "map",
+      "map_after": [
+        1,
+        47,
+        1
+      ],
+      "hp_after": 12,
+      "frame_contains_slain": false
+    }
+  }
+}

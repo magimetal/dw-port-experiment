@@ -1,0 +1,39 @@
+{
+  "phase": "5-slice-closeout-validation-gate",
+  "all_passed": true,
+  "checks": {
+    "check_phase5_slice_closeout_validation_gate": {
+      "ok": true,
+      "detail": {
+        "checks": {
+          "phase5_parity_all_passed_true": true,
+          "phase5_parity_row_count_56": true,
+          "phase5_terminal_size_all_passed_true": true,
+          "phase5_ascii_fallback_all_passed_true": true
+        },
+        "evidence": {
+          "phase5_parity": {
+            "artifact": "artifacts/phase5_parity.json",
+            "all_passed": true,
+            "row_count": 56
+          },
+          "phase5_terminal_size": {
+            "artifact": "artifacts/phase5_slice_terminal_size_enforcement.json",
+            "all_passed": true
+          },
+          "phase5_ascii_fallback": {
+            "artifact": "artifacts/phase5_slice_ascii_fallback_tileset.json",
+            "all_passed": true
+          }
+        }
+      }
+    },
+    "run_pytest_full_suite": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollected 379 items\n\ntests/test_combat.py ..............                                      [  3%]\ntests/test_dialog_engine.py .......                                      [  5%]\ntests/test_items_engine.py ....                                          [  6%]\ntests/test_level_up.py ........                                          [  8%]\ntests/test_main_loop_scaffold.py ....................................... [ 18%]\n........................................................................ [ 37%]\n........................................................................ [ 56%]\n..................................                                       [ 65%]\ntests/test_map_engine.py .......                                         [ 67%]\ntests/test_movement.py ...........                                       [ 70%]\ntests/test_phase1_chests.py ...                                          [ 71%]\ntests/test_phase1_dialog.py ...                                          [ 72%]\ntests/test_phase1_enemies.py ...                                         [ 73%]\ntests/test_phase1_foundation.py ...                                      [ 73%]\ntests/test_phase1_items.py ...                                           [ 74%]\ntests/test_phase1_maps.py ...                                            [ 75%]\ntests/test_phase1_npcs.py ...                                            [ 76%]\ntests/test_phase1_read_gate.py .                                         [ 76%]\ntests/test_phase1_rom_spells.py ...                                      [ 77%]\ntests/test_phase1_warps.py ...                                           [ 78%]\ntests/test_phase1_zones.py ...                                           [ 78%]\ntests/test_rng.py ..........                                             [ 81%]\ntests/test_save_load.py ........                                         [ 83%]\ntests/test_shop.py ......                                                [ 85%]\ntests/test_state.py .....                                                [ 86%]\ntests/test_ui_combat_view.py .......                                     [ 88%]\ntests/test_ui_dialog_box.py ...........                                  [ 91%]\ntests/test_ui_foundation.py ....                                         [ 92%]\ntests/test_ui_map_view.py .....                                          [ 93%]\ntests/test_ui_menu.py .....                                              [ 94%]\ntests/test_ui_renderer.py ..........                                     [ 97%]\ntests/test_ui_status_panel.py ....                                       [ 98%]\ntests/test_ui_title_bootstrap.py .....                                   [100%]\n\n============================= 379 passed in 0.74s ==============================\n",
+      "stderr": ""
+    }
+  }
+}

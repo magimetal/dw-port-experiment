@@ -1,0 +1,17 @@
+{
+  "vectors": {
+    "endgame_render": {
+      "render_path": "endgame",
+      "frame_contains_legend_text": true,
+      "frame_contains_press_enter": true
+    },
+    "double_buffer": {
+      "writes_after_first": 1,
+      "writes_after_second": 1
+    },
+    "small_terminal": {
+      "contains_notice": true,
+      "contains_current": true
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slice": "phase4-main-loop-map-command-search-non-gold-chest-rewards",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "search_herb_chest_applies_reward": true,
+    "search_key_chest_applies_reward": true,
+    "search_tool_chest_applies_reward": true,
+    "search_non_gold_reopen_is_empty": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_map_command_search_non_gold_chest_rewards.json",
+    "vectors_fixture": "tests/fixtures/main_loop_map_command_search_non_gold_chest_rewards_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 4 bounded SEARCH non-gold reward integration: apply deterministic herb/key/tool chest rewards, preserve opened state, and prevent repeat collection in-session."
+}

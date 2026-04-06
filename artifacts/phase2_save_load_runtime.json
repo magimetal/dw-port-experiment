@@ -1,0 +1,27 @@
+{
+  "slice": "phase2-save-load",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "all_bank03_labels_present": true,
+    "save_payload_is_30_bytes": true,
+    "save_keys_are_clamped_to_6": true,
+    "save_spare_bytes_are_c8": true,
+    "save_dict_roundtrip_preserves_30_bytes": true,
+    "json_roundtrip_preserves_30_bytes": true,
+    "portable_token_roundtrip_core_fields": true
+  },
+  "outputs": {
+    "read_gate": "artifacts/phase2_save_load_read_gate.json",
+    "report": "artifacts/phase2_save_load_runtime.json",
+    "vectors_fixture": "tests/fixtures/save_load_runtime_vectors.json",
+    "json_tmp": "artifacts/phase2_save_load_tmp.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 2 save/load runtime slice: canonical JSON persistence for SRAM-equivalent 30-byte SaveData+CRC and optional non-canonical portable token export."
+}

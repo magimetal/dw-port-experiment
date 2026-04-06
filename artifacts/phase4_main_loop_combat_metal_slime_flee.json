@@ -1,0 +1,20 @@
+{
+  "slice": "phase4-main-loop-combat-metal-slime-flee",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "metal_slime_survive_then_flee_zero_rewards": true,
+    "metal_slime_one_shot_uses_normal_victory_rewards": true,
+    "non_metal_slime_remains_normal": true
+  },
+  "outputs": {
+    "report": "artifacts/phase4_main_loop_combat_metal_slime_flee.json",
+    "vectors_fixture": "tests/fixtures/main_loop_combat_metal_slime_flee_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  }
+}

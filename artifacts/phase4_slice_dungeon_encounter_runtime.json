@@ -1,0 +1,110 @@
+{
+  "phase": "4-slice-dungeon-encounter-runtime",
+  "all_passed": false,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": false,
+      "missing": [
+        "blessed",
+        "pytest",
+        "hypothesis"
+      ]
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase4_slice_dungeon_encounter_runtime_generator": {
+      "ok": true,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m ui.run_phase4_slice_main_loop",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_main_loop_dungeon_encounter_runtime_artifacts": {
+      "ok": true,
+      "detail": {
+        "report": {
+          "slice": "phase4-main-loop-dungeon-encounter-runtime",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "dungeon_movement_rolls_random_encounter": true,
+            "dungeon_encounter_transition_enters_combat_mode": true,
+            "dungeon_encounter_rng_progression_is_deterministic": true,
+            "dungeon_enemy_selection_uses_cave_index_table": true,
+            "dungeon_combat_frame_rendered_after_encounter": true
+          },
+          "outputs": {
+            "report": "artifacts/phase4_main_loop_dungeon_encounter_runtime.json",
+            "vectors_fixture": "tests/fixtures/main_loop_dungeon_encounter_runtime_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          },
+          "scope_note": "Phase 4 bounded dungeon encounter runtime integration only: dungeon map movement now triggers encounter checks and deterministic enemy selection through CaveEnIndexTbl/EnemyGroupsTbl data, then hands off to combat mode."
+        },
+        "vectors": {
+          "vectors": {
+            "dungeon_encounter": {
+              "input": "RIGHT",
+              "map_id": 15,
+              "screen_mode": "combat",
+              "action": "encounter_triggered",
+              "action_detail": "enemy:32",
+              "position": [
+                1,
+                0
+              ],
+              "rng_after": [
+                40,
+                122
+              ],
+              "frame_contains_fight": true,
+              "frame_contains_enemy": true,
+              "frame_contains_wizard": true,
+              "combat_session": {
+                "enemy_id": 32,
+                "enemy_name": "Wizard",
+                "enemy_hp": 58,
+                "enemy_max_hp": 58,
+                "enemy_base_hp": 65,
+                "enemy_atk": 80,
+                "enemy_def": 70,
+                "enemy_agi": 247,
+                "enemy_mdef": 242,
+                "enemy_xp": 50,
+                "enemy_gp": 165
+              }
+            }
+          }
+        }
+      }
+    },
+    "run_pytest_phase4_dungeon_encounter_runtime_slice": {
+      "ok": false,
+      "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -m pytest tests/ -v",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "/opt/homebrew/opt/python@3.14/bin/python3.14: No module named pytest\n"
+    }
+  }
+}

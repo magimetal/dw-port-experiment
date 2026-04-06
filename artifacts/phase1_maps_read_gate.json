@@ -1,0 +1,33 @@
+{
+  "completed": true,
+  "source_directory": "/tmp/dw-disassembly/source_files",
+  "files": {
+    "Bank00.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank00.asm",
+      "bytes": 313521,
+      "lines": 7435,
+      "labels_checked": {
+        "MapDatTbl": true,
+        "WrldMapPtrTbl": true,
+        "GetBlockID": true,
+        "GetOvrWldTarget": true,
+        "ChkWtrOrBrdg": true,
+        "ChkOthrMaps": true,
+        "WrldBlkConvTbl": true,
+        "GenBlkConvTbl": true
+      },
+      "map_decode_label_present": false
+    },
+    "Bank03.asm": {
+      "path": "/tmp/dw-disassembly/source_files/Bank03.asm",
+      "bytes": 457772,
+      "lines": 10921,
+      "labels_checked": {
+        "ChangeMaps": true
+      }
+    }
+  },
+  "notes": {
+    "map_decode_resolution": "No explicit 'MapDecode' label in Bank00.asm; extraction is derived from GetOvrWldTarget/ChkWtrOrBrdg/ChkOthrMaps routines that implement map decoding behavior."
+  }
+}

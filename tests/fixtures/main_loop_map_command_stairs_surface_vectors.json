@@ -1,0 +1,36 @@
+{
+  "vectors": {
+    "stairs_success": {
+      "action": "map_stairs",
+      "action_detail": "warp:20",
+      "screen_mode": "map",
+      "map_after": [
+        16,
+        8,
+        0
+      ]
+    },
+    "stairs_no_warp_rejected": {
+      "action": "map_stairs_rejected",
+      "action_detail": "no_stairs",
+      "screen_mode": "dialog",
+      "map_after": [
+        15,
+        0,
+        0
+      ],
+      "frame_contains_no_stairs": true
+    },
+    "stairs_overworld_rejected": {
+      "action": "map_stairs_rejected",
+      "action_detail": "no_stairs",
+      "screen_mode": "dialog",
+      "map_after": [
+        1,
+        46,
+        1
+      ],
+      "frame_contains_no_stairs": true
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "slice": "phase3-menu",
+  "all_passed": true,
+  "checks": {
+    "rom_baseline_match": true,
+    "menu_render_is_deterministic": true,
+    "menu_render_has_box_border": true,
+    "menu_render_contains_items": true,
+    "up_down_wrap_work": true,
+    "enter_select_returns_index": true,
+    "escape_returns_cancel": true,
+    "state_transitions_are_pure": true
+  },
+  "outputs": {
+    "report": "artifacts/phase3_menu.json",
+    "vectors_fixture": "tests/fixtures/ui_menu_vectors.json"
+  },
+  "rom": {
+    "path": "dragon-warrior-1.nes",
+    "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+    "baseline_match": true
+  },
+  "scope_note": "Phase 3 bounded menu slice only: reusable deterministic menu render + input runtime."
+}

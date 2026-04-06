@@ -1,0 +1,224 @@
+{
+  "phase": "2-slice-state",
+  "all_passed": true,
+  "checks": {
+    "check_python_version": {
+      "ok": true,
+      "detail": "3.14.3",
+      "expected": ">=3.11"
+    },
+    "check_deps_importable": {
+      "ok": true,
+      "missing": []
+    },
+    "check_rom_sha1_baseline": {
+      "ok": true,
+      "rom": "dragon-warrior-1.nes",
+      "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
+      "expected": "66809063b828197d1fe12232ebd08ec0a498aa04"
+    },
+    "check_dir_structure": {
+      "ok": true,
+      "missing": []
+    },
+    "check_requirements_file": {
+      "ok": true,
+      "missing": []
+    },
+    "run_phase2_slice_state_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m engine.run_phase2_slice_state",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_state_artifacts": {
+      "ok": true,
+      "detail": {
+        "read_gate": {
+          "completed": true,
+          "slice": "phase2-state",
+          "files": {
+            "extractor/data_out/maps.json": {
+              "sha1": "9648335fe82d5d8bd9739b38394dd040876be37e",
+              "map_count": 30
+            },
+            "extractor/data_out/items.json": {
+              "sha1": "bd113f47a51ecec5e9706185515608ccf24c5644",
+              "item_cost_count": 33
+            },
+            "extractor/data_out/warps.json": {
+              "sha1": "f2236276fbe86d86b51f6645f916c5d26f607db8",
+              "warp_count": 51
+            }
+          }
+        },
+        "artifact": {
+          "slice": "phase2-state",
+          "all_passed": true,
+          "checks": {
+            "start_map_exists": true,
+            "start_coords_within_map": true,
+            "warp_table_entry_count": true,
+            "equipment_masks_present": true,
+            "fresh_game_defaults": true
+          },
+          "fresh_game_snapshot": {
+            "player_name": "ERDRICK",
+            "map_id": 4,
+            "player_x": 5,
+            "player_y": 27,
+            "hp": 15,
+            "mp": 0,
+            "level": 1,
+            "str": 4,
+            "agi": 4,
+            "max_hp": 15,
+            "max_mp": 0,
+            "attack": 4,
+            "defense": 2,
+            "experience": 0,
+            "gold": 120,
+            "equipment_byte": 2,
+            "magic_keys": 0,
+            "herbs": 0,
+            "inventory_slots": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "spells_known": 0,
+            "more_spells_quest": 0,
+            "player_flags": 0,
+            "story_flags": 0,
+            "quest_flags": 0,
+            "rng_lb": 0,
+            "rng_ub": 0,
+            "repel_timer": 0,
+            "light_timer": 0,
+            "light_radius": 0,
+            "npc_data": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "magic_armor_step_counter": 0,
+            "display_level": 1
+          },
+          "references": {
+            "plan_section": "\u00a72b engine/state.py",
+            "checkpoints": [
+              "cp_00_new_game",
+              "cp_01_tantegel_start"
+            ]
+          }
+        }
+      }
+    },
+    "run_pytest_phase2_state_slice": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_read_gate.py tests/test_phase1_rom_spells.py tests/test_phase1_chests.py tests/test_phase1_enemies.py tests/test_phase1_zones.py tests/test_phase1_warps.py tests/test_phase1_items.py tests/test_phase1_npcs.py tests/test_phase1_dialog.py tests/test_phase1_maps.py tests/test_rng.py tests/test_state.py -v",
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 43 items\n\ntests/test_phase1_read_gate.py::test_bank_read_gate_artifact_exists_and_has_required_labels PASSED [  2%]\ntests/test_phase1_rom_spells.py::test_rom_header_and_banks_match_expected_local_baseline PASSED [  4%]\ntests/test_phase1_rom_spells.py::test_spell_mp_costs_match_verified_offsets PASSED [  6%]\ntests/test_phase1_rom_spells.py::test_extracted_data_files_exist_and_are_machine_readable PASSED [  9%]\ntests/test_phase1_chests.py::test_chest_table_count_and_shape PASSED     [ 11%]\ntests/test_phase1_chests.py::test_chest_spot_checks_known_offsets PASSED [ 13%]\ntests/test_phase1_chests.py::test_chests_data_output_and_artifact_exist PASSED [ 16%]\ntests/test_phase1_enemies.py::test_enemy_table_count_and_shape PASSED    [ 18%]\ntests/test_phase1_enemies.py::test_enemy_spot_checks_from_enstattbl PASSED [ 20%]\ntests/test_phase1_enemies.py::test_enemies_data_output_and_artifact_exist PASSED [ 23%]\ntests/test_phase1_zones.py::test_zone_tables_offsets_and_dimensions PASSED [ 25%]\ntests/test_phase1_zones.py::test_zone_grid_and_formation_spot_checks PASSED [ 27%]\ntests/test_phase1_zones.py::test_zones_output_and_artifacts_exist PASSED [ 30%]\ntests/test_phase1_warps.py::test_warp_table_offsets_and_counts PASSED    [ 32%]\ntests/test_phase1_warps.py::test_warp_spot_checks_from_rom PASSED        [ 34%]\ntests/test_phase1_warps.py::test_warps_output_and_artifacts_exist PASSED [ 37%]\ntests/test_phase1_items.py::test_items_table_offsets_and_counts PASSED   [ 39%]\ntests/test_phase1_items.py::test_item_costs_shop_and_bonus_tables_from_rom PASSED [ 41%]\ntests/test_phase1_items.py::test_items_output_and_artifacts_exist PASSED [ 44%]\ntests/test_phase1_npcs.py::test_npc_table_offsets_and_counts PASSED      [ 46%]\ntests/test_phase1_npcs.py::test_npc_spot_checks_from_rom PASSED          [ 48%]\ntests/test_phase1_npcs.py::test_npcs_output_and_artifacts_exist PASSED   [ 51%]\ntests/test_phase1_dialog.py::test_dialog_table_offsets_and_range PASSED  [ 53%]\ntests/test_phase1_dialog.py::test_dialog_pointer_table_and_tokenization_from_rom PASSED [ 55%]\ntests/test_phase1_dialog.py::test_dialog_output_and_artifacts_exist PASSED [ 58%]\ntests/test_phase1_maps.py::test_maps_metadata_offsets_and_counts PASSED  [ 60%]\ntests/test_phase1_maps.py::test_maps_decode_spot_checks_from_rom PASSED  [ 62%]\ntests/test_phase1_maps.py::test_maps_output_and_artifacts_exist PASSED   [ 65%]\ntests/test_rng.py::test_rng_output_domain_across_seed_grid PASSED        [ 67%]\ntests/test_rng.py::test_rng_determinism PASSED                           [ 69%]\ntests/test_rng.py::test_rng_golden_fixture_sequence PASSED               [ 72%]\ntests/test_rng.py::test_rng_range_uses_rng_ub_mod_n PASSED               [ 74%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[0] PASSED  [ 76%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-1] PASSED [ 79%]\ntests/test_rng.py::test_rng_range_rejects_non_positive_bounds[-99] PASSED [ 81%]\ntests/test_rng.py::test_rng_artifacts_exist_and_are_consistent PASSED    [ 83%]\ntests/test_rng.py::test_rng_slice_raises_non_availability_py65_errors PASSED [ 86%]\ntests/test_rng.py::test_rng_slice_preserves_existing_py65_fixture_when_py65_missing PASSED [ 88%]\ntests/test_state.py::test_fresh_game_initialization_defaults PASSED      [ 90%]\ntests/test_state.py::test_state_clamps_byte_and_word_fields PASSED       [ 93%]\ntests/test_state.py::test_state_rejects_invalid_inventory_or_npc_shapes PASSED [ 95%]\ntests/test_state.py::test_state_save_api_is_deferred_to_save_slice PASSED [ 97%]\ntests/test_state.py::test_state_slice_artifacts_exist_and_are_consistent PASSED [100%]\n\n============================== 43 passed in 0.08s ==============================\n",
+      "stderr": ""
+    }
+  }
+}
