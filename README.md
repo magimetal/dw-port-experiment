@@ -8,6 +8,19 @@ A faithful, assembly-accurate Python reimplementation of **Dragon Warrior** (198
 
 > "Thou art the descendant of Erdrick. The ball of light has fallen into the hands of the Dragonlord, and his evil shadow has spread across the land. Go now, and restore peace to Alefgard!"
 
+## Work In Progress
+
+While this codebase represents a **complete, playable implementation** of Dragon Warrior 1 with NES-accurate mechanics and comprehensive test coverage, it remains a research/educational project with known issues:
+
+- **Terminal UI quirks**: Rendering edge cases on certain terminal emulators, color detection limitations
+- **Input handling**: Occasional missed keypresses in rapid sequences, terminal focus edge cases
+- **Combat edge cases**: Some multi-enemy formation behaviors and rare spell interaction bugs
+- **Save system**: JSON-based saves work but lack the EEPROM wear-leveling of real NES carts
+- **Performance**: Map scrolling could be smoother on slower terminals
+- **Completeness**: Some cosmetic features (flickering torch effect, exact screen transitions) are approximated
+
+The core game is fully completable—you can defeat the Dragonlord and restore the light. However, this is preservation-quality research code, not a polished commercial release. Issues likely won't be fixed unless they break the main quest path.
+
 ## What Is This?
 
 This project is a **complete, playable port** of Dragon Warrior 1 that:
