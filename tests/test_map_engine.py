@@ -174,6 +174,35 @@ def test_reverse_stairs_lookup_matches_late_region_locked_scope() -> None:
         assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == expected
 
 
+def test_shrine_family_reverse_tiles_decode_as_stairs() -> None:
+    maps_payload = json.loads(MAPS_PATH.read_text())
+    maps_by_id = {int(entry["id"]): entry for entry in maps_payload["maps"]}
+
+    assert maps_by_id[12]["tiles"][4][0] == 0x03
+    assert maps_by_id[13]["tiles"][9][4] == 0x03
+    assert maps_by_id[14]["tiles"][4][0] == 0x03
+
+
+def test_staff_of_rain_cave_reverse_stairs_match_rom_parity() -> None:
+    engine = _engine()
+    state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=13, player_x=4, player_y=9)
+
+    warp = engine.check_stairs_warp(state, x=4, y=9)
+
+    assert isinstance(warp, WarpDest)
+    assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == (1, 1, 81, 1)
+
+
+def test_rainbow_drop_cave_reverse_stairs_match_rom_parity() -> None:
+    engine = _engine()
+    state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=14, player_x=0, player_y=4)
+
+    warp = engine.check_stairs_warp(state, x=0, y=4)
+
+    assert isinstance(warp, WarpDest)
+    assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == (12, 1, 108, 109)
+
+
 def test_reverse_edge_exit_lookup_ignores_non_overworld_origin_edge_destinations() -> None:
     engine = _engine()
 
@@ -196,32 +225,51 @@ def test_reverse_edge_exit_lookup_requires_correct_direction_on_corner_maps() ->
     assert engine.check_edge_exit(bottom_corner, next_x=0, next_y=30) is None
 
 
-def test_reverse_stairs_lookup_rejects_ambiguous_duplicate_destination() -> None:
-    engine = _engine()
-    state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=20, player_x=0, player_y=0)
-
-    assert engine.check_stairs_warp(state, x=0, y=0) is None
-
-
-def test_reverse_stairs_lookup_preserves_late_region_ambiguity_guard() -> None:
-    engine = _engine()
-    state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=20, player_x=0, player_y=0)
-
-    assert engine.check_stairs_warp(state, x=0, y=0) is None
-
-
-def test_deferred_late_region_reverse_stairs_destinations_remain_unresolved() -> None:
+def test_dragonlord_sublevel_six_stairs_use_rom_order_for_duplicate_destination() -> None:
     engine = _engine()
     cases = (
-        (15, 9, 0),
-        (23, 6, 5),
-        (24, 6, 11),
-        (26, 2, 17),
+        ((20, 0, 0), (35, 19, 5, 5)),
+        ((20, 9, 0), (37, 20, 0, 0)),
+        ((20, 0, 6), (36, 19, 0, 0)),
+        ((20, 9, 6), (38, 6, 10, 29)),
     )
 
-    for map_id, player_x, player_y in cases:
+    for (map_id, player_x, player_y), expected in cases:
         state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id, player_x=player_x, player_y=player_y)
-        assert engine.check_stairs_warp(state, x=player_x, y=player_y) is None
+        warp = engine.check_stairs_warp(state, x=player_x, y=player_y)
+
+        assert isinstance(warp, WarpDest)
+        assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == expected
+
+
+def test_reverse_stairs_lookup_matches_remaining_safe_subset() -> None:
+    engine = _engine()
+    cases = (
+        ((15, 9, 0), (14, 2, 10, 1)),
+        ((15, 17, 15), (16, 2, 15, 14)),
+        ((24, 6, 11), (19, 9, 19, 0)),
+        ((16, 8, 0), (20, 15, 15, 1)),
+        ((16, 5, 0), (26, 15, 8, 19)),
+        ((17, 7, 0), (27, 16, 3, 0)),
+        ((17, 2, 2), (28, 16, 9, 1)),
+        ((17, 5, 4), (29, 16, 0, 8)),
+        ((17, 0, 9), (30, 16, 1, 9)),
+        ((18, 0, 9), (31, 17, 1, 6)),
+        ((18, 7, 7), (32, 17, 7, 7)),
+        ((19, 9, 0), (33, 18, 2, 2)),
+        ((19, 4, 0), (34, 18, 8, 1)),
+        ((20, 0, 6), (36, 19, 0, 0)),
+        ((23, 6, 5), (40, 22, 6, 5)),
+        ((23, 12, 12), (41, 22, 12, 12)),
+        ((26, 2, 17), (46, 25, 1, 10)),
+    )
+
+    for (map_id, player_x, player_y), expected in cases:
+        state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id, player_x=player_x, player_y=player_y)
+        warp = engine.check_stairs_warp(state, x=player_x, y=player_y)
+
+        assert isinstance(warp, WarpDest)
+        assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == expected
 
 
 def test_load_map_clamps_coordinates() -> None:

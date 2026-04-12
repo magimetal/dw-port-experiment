@@ -188,6 +188,7 @@ _MAP_TILE_DOOR = 0x11
 _MAP_TILE_TOWN = 0x07
 _MAP_TILE_CAVE = 0x08
 _MAP_TILE_CASTLE = 0x09
+_NO_KEY_REQUIRED_DOORS: frozenset[tuple[int, int, int]] = frozenset({(0x05, 0x04, 0x07)})
 _CHEST_GOLD_CONTENT_ID = 19
 _CHEST_GOLD_REWARD = 120
 _CHEST_HERB_CONTENT_IDS: frozenset[int] = frozenset({2, 17})
@@ -1130,7 +1131,7 @@ def _route_map_door_input(
             last_action=LoopAction(kind="map_door", detail="already_open"),
         )
 
-    if state.game_state.magic_keys <= 0:
+    if state.game_state.magic_keys <= 0 and door_key not in _NO_KEY_REQUIRED_DOORS:
         dialog_session, dialog_box_state = _single_page_dialog("THOU HAST NO KEY TO OPEN THIS DOOR.")
         return replace(
             state,
@@ -1141,7 +1142,12 @@ def _route_map_door_input(
             last_action=LoopAction(kind="map_door_rejected", detail="no_key"),
         )
 
-    updated_state = _clone_state(state.game_state, magic_keys=(state.game_state.magic_keys - 1) & 0xFF)
+    action_detail = "opened:key_used"
+    updated_state = state.game_state
+    if door_key not in _NO_KEY_REQUIRED_DOORS:
+        updated_state = _clone_state(state.game_state, magic_keys=(state.game_state.magic_keys - 1) & 0xFF)
+    else:
+        action_detail = "opened:no_key_required"
     dialog_session, dialog_box_state = _single_page_dialog("THOU HAST OPENED THE DOOR.")
     return replace(
         state,
@@ -1151,7 +1157,7 @@ def _route_map_door_input(
         dialog_session=dialog_session,
         dialog_box_state=dialog_box_state,
         dialog_return_mode="map",
-        last_action=LoopAction(kind="map_door", detail="opened:key_used"),
+        last_action=LoopAction(kind="map_door", detail=action_detail),
     )
 
 

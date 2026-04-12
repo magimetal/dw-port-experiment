@@ -66,6 +66,12 @@ DUNGEON_BLK_CONV_TBL = [
     0x16,  # BLK_BLANK
 ]
 
+_SHRINE_FAMILY_REVERSE_STAIR_COORDS: dict[int, frozenset[tuple[int, int]]] = {
+    12: frozenset({(0, 4)}),
+    13: frozenset({(4, 9)}),
+    14: frozenset({(0, 4)}),
+}
+
 
 MAP_NAMES = [
     "Unused",
@@ -176,7 +182,17 @@ def _convert_block_id(map_id: int, raw_block_id: int) -> int:
 
 
 def _convert_map_tiles(map_id: int, tiles: list[list[int]]) -> list[list[int]]:
-    return [[_convert_block_id(map_id, tile) for tile in row] for row in tiles]
+    converted_rows: list[list[int]] = []
+    override_coords = _SHRINE_FAMILY_REVERSE_STAIR_COORDS.get(map_id, frozenset())
+    for y_pos, row in enumerate(tiles):
+        converted_row: list[int] = []
+        for x_pos, tile in enumerate(row):
+            if (x_pos, y_pos) in override_coords and (tile & 0x0F) == 0x05:
+                converted_row.append(TOWN_BLK_CONV_TBL[0x05])
+                continue
+            converted_row.append(_convert_block_id(map_id, tile))
+        converted_rows.append(converted_row)
+    return converted_rows
 
 
 def extract_maps(rom: DW1ROM) -> dict:

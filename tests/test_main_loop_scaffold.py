@@ -749,6 +749,39 @@ def test_map_command_menu_select_door_rejects_when_no_key_available() -> None:
     assert "THOU HAST NO KEY TO OPEN THIS DOOR." in selected.frame
 
 
+def test_throne_room_starting_door_opens_without_magic_key() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=5,
+            player_x=4,
+            player_y=8,
+            magic_keys=0,
+            player_flags=0,
+        ),
+        title_state=initial_title_state(),
+        player_facing="up",
+    )
+    session = _session(state=seeded)
+
+    session.step("C")
+    for _ in range(6):
+        session.step("DOWN")
+    opened = session.step("ENTER")
+    session.step("ENTER")
+    moved = session.step("UP")
+
+    assert opened.screen_mode == "dialog"
+    assert opened.action.kind == "map_door"
+    assert opened.action.detail == "opened:no_key_required"
+    assert session.state.game_state.magic_keys == 0
+    assert "THOU HAST OPENED THE DOOR." in opened.frame
+    assert moved.screen_mode == "map"
+    assert moved.action.kind == "move"
+    assert (session.state.game_state.player_x, session.state.game_state.player_y) == (4, 7)
+
+
 def test_map_door_unlock_persists_and_allows_passage_through_opened_door() -> None:
     seeded = MainLoopState(
         screen_mode="map",
@@ -989,6 +1022,52 @@ def test_tantegel_sublevel_stairs_match_rom_parity() -> None:
     assert session.state.game_state.map_id == 4
     assert session.state.game_state.player_x == 29
     assert session.state.game_state.player_y == 29
+
+
+def test_staff_of_rain_cave_reverse_stairs_match_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=13,
+            player_x=4,
+            player_y=9,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    selected = _select_stairs(session)
+
+    assert selected.screen_mode == "map"
+    assert selected.action.kind == "map_stairs"
+    assert selected.action.detail == "warp:1"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 81
+    assert session.state.game_state.player_y == 1
+
+
+def test_rainbow_drop_cave_reverse_stairs_match_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=14,
+            player_x=0,
+            player_y=4,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    selected = _select_stairs(session)
+
+    assert selected.screen_mode == "map"
+    assert selected.action.kind == "map_stairs"
+    assert selected.action.detail == "warp:12"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 108
+    assert session.state.game_state.player_y == 109
 
 
 def test_tantegel_castle_edge_exit_matches_rom_parity() -> None:
@@ -1507,30 +1586,37 @@ def test_rock_mountain_b2_left_edge_walk_off_remains_blocked() -> None:
     assert session.state.game_state.player_y == 0
 
 
-def test_reverse_stairs_lookup_ignores_ambiguous_duplicate_destinations() -> None:
-    seeded = MainLoopState(
-        screen_mode="map",
-        game_state=_clone_state(
-            GameState.fresh_game("ERDRICK"),
-            map_id=20,
-            player_x=0,
-            player_y=0,
-        ),
-        title_state=initial_title_state(),
+def test_dragonlord_sublevel_six_stairs_follow_rom_order_and_direct_sources() -> None:
+    cases = (
+        ((20, 0, 0), "35", (19, 5, 5)),
+        ((20, 9, 0), "37", (20, 0, 0)),
+        ((20, 0, 6), "36", (19, 0, 0)),
+        ((20, 9, 6), "38", (6, 10, 29)),
     )
-    session = _session(state=seeded)
 
-    session.step("C")
-    for _ in range(5):
-        session.step("DOWN")
-    rejected = session.step("ENTER")
+    for (map_id, player_x, player_y), warp_index, expected in cases:
+        seeded = MainLoopState(
+            screen_mode="map",
+            game_state=_clone_state(
+                GameState.fresh_game("ERDRICK"),
+                map_id=map_id,
+                player_x=player_x,
+                player_y=player_y,
+            ),
+            title_state=initial_title_state(),
+        )
+        session = _session(state=seeded)
 
-    assert rejected.screen_mode == "dialog"
-    assert rejected.action.kind == "map_stairs_rejected"
-    assert rejected.action.detail == "no_stairs"
-    assert session.state.game_state.map_id == 20
-    assert session.state.game_state.player_x == 0
-    assert session.state.game_state.player_y == 0
+        selected = _select_stairs(session)
+
+        assert selected.screen_mode == "map"
+        assert selected.action.kind == "map_stairs"
+        assert selected.action.detail == f"warp:{warp_index}"
+        assert (
+            session.state.game_state.map_id,
+            session.state.game_state.player_x,
+            session.state.game_state.player_y,
+        ) == expected
 
 
 def test_charlock_reverse_stairs_match_late_region_locked_scope() -> None:
@@ -1603,38 +1689,28 @@ def test_garinham_late_floor_reverse_stairs_match_locked_scope() -> None:
         ) == expected
 
 
-def test_dragonlord_sublevel_six_duplicate_destination_remains_rejected() -> None:
-    seeded = MainLoopState(
-        screen_mode="map",
-        game_state=_clone_state(
-            GameState.fresh_game("ERDRICK"),
-            map_id=20,
-            player_x=0,
-            player_y=0,
-        ),
-        title_state=initial_title_state(),
-    )
-    session = _session(state=seeded)
-
-    rejected = _select_stairs(session)
-
-    assert rejected.screen_mode == "dialog"
-    assert rejected.action.kind == "map_stairs_rejected"
-    assert rejected.action.detail == "no_stairs"
-    assert session.state.game_state.map_id == 20
-    assert session.state.game_state.player_x == 0
-    assert session.state.game_state.player_y == 0
-
-
-def test_deferred_late_region_stairs_attempts_remain_rejected() -> None:
+def test_remaining_safe_subset_reverse_stairs_match_rom_parity() -> None:
     cases = (
-        (15, 9, 0),
-        (23, 6, 5),
-        (24, 6, 11),
-        (26, 2, 17),
+        ((15, 9, 0), "14", (2, 10, 1)),
+        ((15, 17, 15), "16", (2, 15, 14)),
+        ((24, 6, 11), "19", (9, 19, 0)),
+        ((16, 8, 0), "20", (15, 15, 1)),
+        ((16, 5, 0), "26", (15, 8, 19)),
+        ((17, 7, 0), "27", (16, 3, 0)),
+        ((17, 2, 2), "28", (16, 9, 1)),
+        ((17, 5, 4), "29", (16, 0, 8)),
+        ((17, 0, 9), "30", (16, 1, 9)),
+        ((18, 0, 9), "31", (17, 1, 6)),
+        ((18, 7, 7), "32", (17, 7, 7)),
+        ((19, 9, 0), "33", (18, 2, 2)),
+        ((19, 4, 0), "34", (18, 8, 1)),
+        ((20, 0, 6), "36", (19, 0, 0)),
+        ((23, 6, 5), "40", (22, 6, 5)),
+        ((23, 12, 12), "41", (22, 12, 12)),
+        ((26, 2, 17), "46", (25, 1, 10)),
     )
 
-    for map_id, player_x, player_y in cases:
+    for (map_id, player_x, player_y), warp_index, expected in cases:
         seeded = MainLoopState(
             screen_mode="map",
             game_state=_clone_state(
@@ -1647,14 +1723,16 @@ def test_deferred_late_region_stairs_attempts_remain_rejected() -> None:
         )
         session = _session(state=seeded)
 
-        rejected = _select_stairs(session)
+        selected = _select_stairs(session)
 
-        assert rejected.screen_mode == "dialog"
-        assert rejected.action.kind == "map_stairs_rejected"
-        assert rejected.action.detail == "no_stairs"
-        assert session.state.game_state.map_id == map_id
-        assert session.state.game_state.player_x == player_x
-        assert session.state.game_state.player_y == player_y
+        assert selected.screen_mode == "map"
+        assert selected.action.kind == "map_stairs"
+        assert selected.action.detail == f"warp:{warp_index}"
+        assert (
+            session.state.game_state.map_id,
+            session.state.game_state.player_x,
+            session.state.game_state.player_y,
+        ) == expected
 
 
 def test_map_command_menu_select_stairs_rejects_when_no_stairs_available() -> None:

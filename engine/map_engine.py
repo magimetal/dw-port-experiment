@@ -23,7 +23,49 @@ _ENTRY_DIR_LEFT = 1
 _ENTRY_DIR_UP = 2
 _ENTRY_DIR_RIGHT = 3
 _REVERSE_EDGE_WARP_INDEXES = frozenset({0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13})
-_REVERSE_STAIRS_WARP_INDEXES = frozenset({15, 17, 18, 21, 22, 23, 24, 25, 38, 39, 42, 43, 44, 45, 47, 48, 49, 50})
+_REVERSE_STAIRS_WARP_INDEXES = frozenset(
+    {
+        1,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+    }
+)
 
 
 def _u8(value: int) -> int:
@@ -70,12 +112,14 @@ class MapEngine:
         self._reverse_stairs_by_dst: dict[tuple[int, int, int], WarpDest] = {}
         for warp in self._warps:
             destination_key = (warp.dst_map, warp.dst_x, warp.dst_y)
-            if destination_counts[destination_key] != 1:
-                continue
             reverse_warp = self._reverse_warp(warp)
             if warp.index in _REVERSE_STAIRS_WARP_INDEXES:
-                self._reverse_stairs_by_dst[destination_key] = reverse_warp
-            if warp.index in _REVERSE_EDGE_WARP_INDEXES and self._is_reverse_edge_candidate(warp):
+                self._reverse_stairs_by_dst.setdefault(destination_key, reverse_warp)
+            if (
+                warp.index in _REVERSE_EDGE_WARP_INDEXES
+                and destination_counts[destination_key] == 1
+                and self._is_reverse_edge_candidate(warp)
+            ):
                 self._reverse_edge_by_exit[(warp.dst_map, warp.dst_x, warp.dst_y, warp.entry_dir)] = reverse_warp
 
     @classmethod

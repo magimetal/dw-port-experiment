@@ -42,19 +42,74 @@ This project is a **research implementation** of Dragon Warrior 1 that demonstra
 
 ## Quick Start
 
+### Launching with a virtual environment
+
 ```bash
 # 1. Clone and enter the repository
 cd dw-port
 
-# 2. Install dependencies
-pip3 install -r requirements.txt
+# 2. Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3. Place your Dragon Warrior ROM (must be named dragon-warrior-1.nes)
+# 3. Install dependencies
+python3 -m pip install --upgrade pip
+pip install -r requirements.txt
+
+# 4. Place your Dragon Warrior ROM (must be named dragon-warrior-1.nes)
 #    Expected SHA1: 66809063b828197d1fe12232ebd08ec0a498aa04
 
-# 4. Run the game!
+# 5. Run the game
 python3 main.py
 ```
+
+### Daily workflow
+
+```bash
+cd dw-port
+source .venv/bin/activate
+python3 main.py
+```
+
+When finished:
+
+```bash
+deactivate
+```
+
+### Controls / Hotkeys
+
+#### Title screen
+
+- Move cursor: `Up` / `Down`, or `W` / `S`, or `K` / `J`
+- Confirm: `Enter`, `A`, or `Z`
+- Back / quit: `Esc` or `Q`
+- Name entry: `A-Z`, `.` , `-`, `Space`
+- Delete name characters: `Backspace` or `Del`
+
+#### Map exploration
+
+- Move: arrow keys, `WASD`, or `HJKL`
+- Interact / talk: `Enter` or `Z`
+- Open command menu: `C`
+- Quit: `Esc` or `Q`
+
+#### Menus (command, spell, item, combat)
+
+- Move cursor: `Up` / `Down`, or `W` / `S`, or `K` / `J`
+- Select: `Enter`, `A`, or `Z`
+- Cancel / back: `Esc`, `B`, `X`, or `Q`
+
+#### Dialog boxes
+
+- Advance text: `Enter`, `A`, or `Z`
+
+#### Endgame screen
+
+- Return to title: `Enter`, `A`, or `Z`
+- Quit: `Esc` or `Q`
+
+Note: controls are context-sensitive. For example, `A` confirms in menus/title screens, but moves left while walking on the map.
 
 ## Project Structure
 
