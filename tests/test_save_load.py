@@ -13,6 +13,7 @@ from engine.save_load import (
     state_to_save_dict,
     state_to_save_data,
 )
+from engine.shop import ShopRuntime
 from engine.state import GameState
 
 
@@ -135,6 +136,61 @@ def test_json_save_load_can_include_opt_in_portable_token(tmp_path: Path) -> Non
     raw = json.loads(path.read_text())
     save_data = raw["slots"]["1"]["save_data"]
     assert isinstance(save_data.get("portable_token"), str)
+
+
+def test_save_json_recovers_when_existing_file_contains_invalid_json(tmp_path: Path) -> None:
+    path = tmp_path / "save.json"
+    path.write_text("")
+
+    save_json(GameState.fresh_game("ERDRICK"), slot=0, path=path)
+
+    loaded = load_json(slot=0, path=path)
+    assert loaded.player_name == "ERDRICK"
+
+
+def test_save_load_roundtrip_preserves_fighters_ring_attack_bonus() -> None:
+    state = GameState(
+        **{
+            **GameState.fresh_game("ERDRICK").to_dict(),
+            "attack": 6,
+            "more_spells_quest": 0x20,
+        }
+    )
+
+    decoded = state_from_save_dict(state_to_save_dict(state))
+
+    assert decoded.attack == 6
+    assert decoded.more_spells_quest & 0x20 == 0x20
+
+
+def test_save_load_roundtrip_preserves_dragons_scale_defense_bonus() -> None:
+    state = GameState(
+        **{
+            **GameState.fresh_game("ERDRICK").to_dict(),
+            "defense": 4,
+            "more_spells_quest": 0x10,
+        }
+    )
+
+    decoded = state_from_save_dict(state_to_save_dict(state))
+
+    assert decoded.defense == 4
+    assert decoded.more_spells_quest & 0x10 == 0x10
+
+
+def test_save_load_roundtrip_preserves_shop_bought_weapon_attack_bonus() -> None:
+    runtime = ShopRuntime.from_file(ROOT / "extractor" / "data_out" / "items.json")
+    purchased, success, message = runtime.buy(GameState(**{**GameState.fresh_game("ERDRICK").to_dict(), "gold": 200}), 2)
+
+    assert success is True
+    assert message == "purchased and equipped"
+    assert purchased.attack == 14
+
+    decoded = state_from_save_dict(state_to_save_dict(purchased))
+
+    assert decoded.equipment_byte == purchased.equipment_byte
+    assert decoded.attack == 14
+    assert decoded.defense == 2
 
 
 def test_save_load_slice_artifacts_exist_and_are_consistent() -> None:

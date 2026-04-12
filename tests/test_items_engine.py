@@ -135,7 +135,7 @@ def test_dragon_scale_silver_harp_rainbow_drop_and_curse_runtime_logic() -> None
     scale = runtime.use_item(_clone_state(base, defense=10), ITEM_DRAGON_SCALE)
     assert scale.success is True
     assert (scale.state.more_spells_quest & FLAG_DRAGON_SCALE) == FLAG_DRAGON_SCALE
-    assert scale.state.defense == 12
+    assert scale.state.defense == 4
 
     scale_again = runtime.use_item(scale.state, ITEM_DRAGON_SCALE)
     assert scale_again.success is False

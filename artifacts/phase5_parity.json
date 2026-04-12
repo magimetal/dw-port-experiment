@@ -7,7 +7,9 @@
       "expected": "66809063b828197d1fe12232ebd08ec0a498aa04",
       "actual": "66809063b828197d1fe12232ebd08ec0a498aa04",
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/rom_baseline.json + dragon-warrior-1.nes",
+      "evidence_tier": "extractor-only",
       "rom_source": "verify.py phase gate baseline"
     },
     {
@@ -17,7 +19,9 @@
       "expected": "65536",
       "actual": 65536,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/rom_header.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "iNES header byte 4"
     },
     {
@@ -27,7 +31,9 @@
       "expected": "16384",
       "actual": 16384,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/rom_header.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "iNES header byte 5"
     },
     {
@@ -37,7 +43,9 @@
       "expected": "1",
       "actual": 1,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/rom_header.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Header flags 6/7"
     },
     {
@@ -50,7 +58,9 @@
         120
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/maps.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Data Crystal ROM map 0x1D6D"
     },
     {
@@ -66,7 +76,9 @@
         ]
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/maps.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "ROM metadata table 0x002A-0x00C0"
     },
     {
@@ -79,7 +91,9 @@
         30
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/maps.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Metadata entry 4"
     },
     {
@@ -92,7 +106,9 @@
         10
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/maps.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Metadata entry 5"
     },
     {
@@ -102,7 +118,9 @@
       "expected": "31",
       "actual": 31,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/chests.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "ROM 0x5DDD-0x5E58"
     },
     {
@@ -117,7 +135,9 @@
         19
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/chests.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Extracted TreasureTbl entry"
     },
     {
@@ -127,7 +147,9 @@
       "expected": "40",
       "actual": 40,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/enemies.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "EnStatTbl"
     },
     {
@@ -137,7 +159,9 @@
       "expected": "Slime",
       "actual": "Slime",
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/enemies.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "EnStatTbl entry 0x00"
     },
     {
@@ -151,7 +175,9 @@
         "phase1_to_phase2_hp_check": true
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/enemies.json + artifacts/phase5_slice_edge_case_regression_gate.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Enemy table @ ROM 0x5E5B"
     },
     {
@@ -161,7 +187,9 @@
       "expected": "4",
       "actual": 4,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/spells.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "SpellCostTbl @ 0x1D63"
     },
     {
@@ -171,7 +199,9 @@
       "expected": "5",
       "actual": 5,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/spells.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "SpellCostTbl @ 0x1D6C"
     },
     {
@@ -181,7 +211,9 @@
       "expected": "8",
       "actual": 8,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/spells.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "SpellCostTbl @ 0x1D69"
     },
     {
@@ -191,7 +223,9 @@
       "expected": "6",
       "actual": 6,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/spells.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "SpellCostTbl @ 0x1D68"
     },
     {
@@ -201,7 +235,9 @@
       "expected": "7",
       "actual": 7,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/xp_table.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF35D"
     },
     {
@@ -211,7 +247,9 @@
       "expected": "2000",
       "actual": 2000,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/xp_table.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF36D"
     },
     {
@@ -221,7 +259,9 @@
       "expected": "26000",
       "actual": 26000,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/xp_table.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF381"
     },
     {
@@ -231,7 +271,9 @@
       "expected": "65535",
       "actual": 65535,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/xp_table.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF395"
     },
     {
@@ -241,7 +283,9 @@
       "expected": "30 entries",
       "actual": 30,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/xp_table.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF35B-LF395"
     },
     {
@@ -254,7 +298,9 @@
         "matches": true
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "tests/fixtures/rng_golden_sequence.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LC55B"
     },
     {
@@ -276,7 +322,9 @@
         "matches": true
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "tests/test_rng.py::test_rng_determinism",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LFSR"
     },
     {
@@ -286,7 +334,9 @@
       "expected": "8/256 (=1/32)",
       "actual": "8/256",
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.excellent_move_check",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LE61F"
     },
     {
@@ -299,7 +349,9 @@
         "edge_case_gate_check": true
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.excellent_move_check + artifacts/phase5_slice_edge_case_regression_gate.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LE617-LE61D"
     },
     {
@@ -312,7 +364,9 @@
         "one": 128
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.player_attack_damage",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF026"
     },
     {
@@ -322,7 +376,9 @@
       "expected": "44",
       "actual": 44,
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.player_attack_damage",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF030"
     },
     {
@@ -332,7 +388,9 @@
       "expected": "63",
       "actual": 63,
       "passed": true,
+      "status": "PASS",
       "evidence": "tests/test_combat.py::test_player_attack_boundary_max_atk_min_def",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 arithmetic wrap"
     },
     {
@@ -345,7 +403,9 @@
         17
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.heal_spell_hp",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LDBB8"
     },
     {
@@ -358,7 +418,9 @@
         100
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.healmore_spell_hp",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LDBD7"
     },
     {
@@ -377,7 +439,9 @@
         ]
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.hurt_spell_damage + hurtmore_spell_damage",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LE736/LE751"
     },
     {
@@ -390,11 +454,40 @@
         130
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "engine.combat.enemy_hp_init",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LE599"
     },
     {
       "row": 34,
+      "system": "Combat",
+      "test": "Live enemy spell execution for proven subset",
+      "expected": "pattern_flags 0x02 enemies cast HURT live; stopspelled cast falls back to physical attack",
+      "actual": {
+        "magician_hurt": {
+          "action": "combat_turn",
+          "screen_mode": "combat",
+          "player_hp_after": 7,
+          "frame_contains_cast": true,
+          "frame_contains_strike": false
+        },
+        "magician_stopspell_fallback": {
+          "action": "combat_turn",
+          "screen_mode": "combat",
+          "player_hp_after": 12,
+          "frame_contains_stopped": true,
+          "frame_contains_strike": true
+        }
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "main.py combat enemy-turn resolution + tests/test_main_loop_scaffold.py live Magician spell regressions",
+      "evidence_tier": "runtime-state",
+      "rom_source": "Bounded runtime proof: Magician live-casts HURT from pattern_flags 0x02; stopspell preserves existing blocked-cast fallback"
+    },
+    {
+      "row": 35,
       "system": "Zones",
       "test": "Zone grid dimensions",
       "expected": "8x8 values in 0..13",
@@ -405,31 +498,37 @@
         "max": 13
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/zones.json",
-      "rom_source": "Bank03 LF522"
-    },
-    {
-      "row": 35,
-      "system": "Zones",
-      "test": "Zone (0,0) value",
-      "expected": "3",
-      "actual": 3,
-      "passed": true,
-      "evidence": "extractor/data_out/zones.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF522"
     },
     {
       "row": 36,
       "system": "Zones",
+      "test": "Zone (0,0) value",
+      "expected": "3",
+      "actual": 3,
+      "passed": true,
+      "status": "PASS",
+      "evidence": "extractor/data_out/zones.json",
+      "evidence_tier": "extractor-only",
+      "rom_source": "Bank03 LF522"
+    },
+    {
+      "row": 37,
+      "system": "Zones",
       "test": "Zone (7,7) value",
       "expected": "9",
       "actual": 9,
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/zones.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF53E"
     },
     {
-      "row": 37,
+      "row": 38,
       "system": "Zones",
       "test": "Formation row 0",
       "expected": "['Slime', 'Red Slime', 'Slime', 'Red Slime', 'Slime']",
@@ -441,11 +540,13 @@
         "Slime"
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/zones.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF54F"
     },
     {
-      "row": 38,
+      "row": 39,
       "system": "Zones",
       "test": "Formation row 13",
       "expected": "['Werewolf', 'Green Dragon', 'Starwyvern', 'Starwyvern', 'Wizard']",
@@ -457,11 +558,13 @@
         "Wizard"
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/zones.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF590"
     },
     {
-      "row": 39,
+      "row": 40,
       "system": "Zones",
       "test": "Cave index table",
       "expected": "[16, 17, 17, 17, 18, 18, 19, 19, 14, 14, 7, 15, 15]",
@@ -481,11 +584,13 @@
         15
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/zones.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LF542"
     },
     {
-      "row": 40,
+      "row": 41,
       "system": "Zones",
       "test": "Top-left overworld zone consistency",
       "expected": "only zone id 3 in coordinates 0..14",
@@ -493,21 +598,25 @@
         3
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/zones.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 OvrWrldEnGrid mapping"
     },
     {
-      "row": 41,
+      "row": 42,
       "system": "Items",
       "test": "Magic Key consumption",
       "expected": "door use consumes one key",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_map_command_door_surface.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 key-use door path"
     },
     {
-      "row": 42,
+      "row": 43,
       "system": "Items",
       "test": "Torch radius + timer",
       "expected": "radius=5 timer=16",
@@ -516,11 +625,13 @@
         "timer": 16
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "tests/fixtures/items_runtime_vectors.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 ChkTorch"
     },
     {
-      "row": 43,
+      "row": 44,
       "system": "Items",
       "test": "Rainbow Drop bridge placement",
       "expected": "bridge flag set and bridge tile at [1,63,49]",
@@ -533,81 +644,97 @@
         ]
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_map_command_item_rainbow_drop_bridge_trigger.json + tests/fixtures/items_runtime_vectors.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 place_charlock"
     },
     {
-      "row": 44,
+      "row": 45,
       "system": "Items",
       "test": "Cursed equip load effect",
       "expected": "HP set to 1 on map load",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_map_load_curse_check.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LCB73"
     },
     {
-      "row": 45,
+      "row": 46,
       "system": "Terrain",
       "test": "Swamp step damage",
       "expected": "true",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LCDE2"
     },
     {
-      "row": 46,
+      "row": 47,
       "system": "Terrain",
       "test": "Force field step damage",
       "expected": "true",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LCE47"
     },
     {
-      "row": 47,
+      "row": 48,
       "system": "Terrain",
       "test": "Erdrick armor swamp immunity",
       "expected": "true",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LCDD0"
     },
     {
-      "row": 48,
+      "row": 49,
       "system": "Terrain",
       "test": "Erdrick armor step heal",
       "expected": "true",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank03 LCCFA"
     },
     {
-      "row": 49,
+      "row": 50,
       "system": "Quest",
       "test": "Gwaelin rescue flag side-effect",
       "expected": "true",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_npc_special_control_side_effects.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "RAM map story flag path"
     },
     {
-      "row": 50,
+      "row": 51,
       "system": "Quest",
       "test": "Dragonlord defeat flag",
       "expected": "true",
       "actual": true,
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase4_main_loop_combat_dragonlord_endgame_victory.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "RAM map 0x00E4 bit 2"
     },
     {
-      "row": 51,
+      "row": 52,
       "system": "Stats",
       "test": "Lv1 base stats",
       "expected": "STR=4 AGI=4 HP=15 MP=0",
@@ -618,11 +745,13 @@
         0
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/stats.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank01 LA0CD"
     },
     {
-      "row": 52,
+      "row": 53,
       "system": "Stats",
       "test": "Lv30 base stats",
       "expected": "STR=140 AGI=130 HP=210 MP=200",
@@ -633,11 +762,13 @@
         200
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/stats.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank01 LA17B"
     },
     {
-      "row": 53,
+      "row": 54,
       "system": "Stats",
       "test": "HEAL learned at Lv3",
       "expected": "HEAL in spells_known",
@@ -645,11 +776,13 @@
         "HEAL"
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/stats.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank01 LA0D9"
     },
     {
-      "row": 54,
+      "row": 55,
       "system": "Stats",
       "test": "HEALMORE learned at Lv17",
       "expected": "HEALMORE in spells_known",
@@ -665,11 +798,13 @@
         "HEALMORE"
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/stats.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank01 LA12D"
     },
     {
-      "row": 55,
+      "row": 56,
       "system": "Stats",
       "test": "HURTMORE learned at Lv19",
       "expected": "HURTMORE in spells_known",
@@ -686,11 +821,13 @@
         "HURTMORE"
       ],
       "passed": true,
+      "status": "PASS",
       "evidence": "extractor/data_out/stats.json",
+      "evidence_tier": "extractor-only",
       "rom_source": "Bank01 LA139"
     },
     {
-      "row": 56,
+      "row": 57,
       "system": "Save",
       "test": "JSON save roundtrip + CRC",
       "expected": "30-byte roundtrip and CRC present",
@@ -700,10 +837,286 @@
         "save_dict_has_crc": true
       },
       "passed": true,
+      "status": "PASS",
       "evidence": "artifacts/phase2_save_load_runtime.json + tests/fixtures/save_load_runtime_vectors.json",
+      "evidence_tier": "runtime-state",
       "rom_source": "Bank03 LFA18 / SRAM-equivalent JSON"
+    },
+    {
+      "row": 58,
+      "system": "Field Timers",
+      "test": "Non-movement input cadence",
+      "expected": "repel/light timers stay unchanged on non-step input and decrement on successful step progression, including dialog-ending steps",
+      "actual": {
+        "command_open": {
+          "repel_before": 2,
+          "repel_after": 2,
+          "light_before": 1,
+          "light_after": 1,
+          "action": "map_command_menu_opened"
+        },
+        "menu_navigation": {
+          "repel_before": 2,
+          "repel_after": 2,
+          "light_before": 1,
+          "light_after": 1,
+          "action": "map_command_menu_input"
+        },
+        "blocked_movement": {
+          "repel_before": 2,
+          "repel_after": 2,
+          "light_before": 1,
+          "light_after": 1,
+          "action": "blocked"
+        },
+        "step_to_dialog_outcome": {
+          "repel_before": 2,
+          "repel_after": 1,
+          "light_before": 1,
+          "light_after": 0,
+          "action": "combat_defeat",
+          "screen_mode": "dialog"
+        }
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "main.py MainLoopSession.step + tests/test_main_loop_scaffold.py timer cadence regressions",
+      "evidence_tier": "runtime-state",
+      "rom_source": "ROM-like step semantics observed: timers decay on successful step progression, including dialog-ending steps, but not non-movement or blocked input"
+    },
+    {
+      "row": 59,
+      "system": "Combat",
+      "test": "Enemy spell action mapping availability",
+      "expected": "Current repo proves only pattern_flags 0x02 -> HURT for Magician/Magidrakee; all other enemy spell patterns remain explicit UNKNOWN",
+      "actual": {
+        "spellcapable_enemy_count": 23,
+        "sample_enemy_ids": [
+          4,
+          5,
+          8,
+          10,
+          12
+        ],
+        "pattern_flags_present": true,
+        "proven_pattern_flags": [
+          2
+        ],
+        "proven_enemy_spell_actions": {
+          "Magician": [
+            "HURT"
+          ],
+          "Magidrakee": [
+            "HURT"
+          ]
+        },
+        "unknown_pattern_flags": [
+          3,
+          6,
+          9,
+          14,
+          16,
+          18,
+          19,
+          25,
+          32,
+          87,
+          96,
+          144,
+          146,
+          176,
+          177,
+          245,
+          249
+        ]
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "extractor/data_out/enemies.json + engine.combat.enemy_spell_actions_for_pattern + tests/test_combat.py mapping regression",
+      "evidence_tier": "runtime-state",
+      "rom_source": "Extractor-backed pattern_flags subset proves Magician/Magidrakee use HURT; remaining spell-pattern decode stays UNKNOWN"
+    },
+    {
+      "row": 60,
+      "system": "Stats",
+      "test": "Shop equip recomputes derived stats",
+      "expected": "attack/defense reflect weapon/armor-derived equipped item bonuses immediately after affordable purchase",
+      "actual": {
+        "success": true,
+        "message": "purchased and equipped",
+        "equipment_byte": 98,
+        "attack": 14,
+        "defense": 2
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "engine/shop.py runtime purchase path + tests/test_shop.py derived-stat regressions",
+      "evidence_tier": "runtime-state",
+      "rom_source": "Canonical recompute path now applies extracted weapon bonuses while preserving fresh-game baseline and unresolved shield defense behavior"
+    },
+    {
+      "row": 61,
+      "system": "Stats",
+      "test": "Shield-derived defense parity scope",
+      "expected": "fresh-game small-shield defense remains unresolved; Batch 3 proves weapon/armor/wearable recompute only and quarantines shield-derived defense until ROM-backed proof exists",
+      "actual": {
+        "fresh_game_equipment_byte": 2,
+        "fresh_game_defense": 2,
+        "scope_proven_in_batch3": [
+          "weapon bonuses",
+          "armor bonuses",
+          "Dragon's Scale",
+          "Fighter's Ring"
+        ],
+        "scope_quarantined": [
+          "shield-derived defense",
+          "fresh-game small-shield semantics"
+        ]
+      },
+      "passed": false,
+      "status": "UNKNOWN",
+      "evidence": "engine/state.py canonical derived-stat helper + PARITY_REPORT.md scoped Batch 3 evidence",
+      "evidence_tier": "unknown",
+      "rom_source": "Observed fresh-game baseline keeps equipment_byte=0x02 with defense=2; shield-derived defense remains UNKNOWN until ROM-backed proof resolves the mismatch"
+    },
+    {
+      "row": 62,
+      "system": "Stats",
+      "test": "Save/load preserves derived equipment modifiers",
+      "expected": "derived attack survives canonical save/load roundtrip",
+      "actual": {
+        "before_attack": 6,
+        "after_attack": 6,
+        "before_save_bytes": [
+          2,
+          32
+        ],
+        "after_save_bytes": [
+          2,
+          32
+        ]
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "engine/save_load.py roundtrip scaffold + tests/test_save_load.py parity regressions",
+      "evidence_tier": "runtime-state",
+      "rom_source": "Canonical recompute path restores wearable-derived modifiers after decode while preserving fresh-game baseline defense behavior"
+    },
+    {
+      "row": 63,
+      "system": "Economy",
+      "test": "Town-specific magic key pricing",
+      "expected": "Cantlin/Rimuldar/Tantegel key prices come from key cost table, not generic item price",
+      "actual": {
+        "generic_price": 53,
+        "town_prices": {
+          "Cantlin": 98,
+          "Rimuldar": 53,
+          "Tantegel castle": 85
+        }
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "extractor/data_out/items.json + engine/shop.py town-bound key pricing runtime",
+      "evidence_tier": "runtime-state",
+      "rom_source": "KeyCostTbl @ 0x1999-0x199B"
+    },
+    {
+      "row": 64,
+      "system": "Dialog/Flow",
+      "test": "Selected shop and inn TALK handoffs enter bounded dialog flow before side effects",
+      "expected": "Selected TALK interactions should enter bounded dialog/menu flow before transaction side effects",
+      "actual": {
+        "shop_action_check": true,
+        "inn_action_check": true,
+        "scope_note": "Phase 4 bounded NPC transaction handoff: selected shop/inn NPC controls now route directly through existing ShopRuntime/inn transaction paths in main loop with save integration on inn stay; expanded through the next reachable shop/inn control pair with explicit insufficient-gold inn rejection."
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "artifacts/phase4_main_loop_npc_shop_inn_handoff.json",
+      "evidence_tier": "runtime-state",
+      "rom_source": "Bounded runtime proof: talk now enters dialog, then prompt/menu, then confirmed transaction without first-TALK side effects"
+    },
+    {
+      "row": 65,
+      "system": "Replay/Checkpoint",
+      "test": "Replay executable fixture proof availability",
+      "expected": "representative executable replay fixtures prove overworld traversal, combat encounter resolution, and town purchase/stay flow",
+      "actual": {
+        "declared_domains": [
+          "combat_encounter_resolution",
+          "overworld_traversal",
+          "town_purchase_stay_flow"
+        ],
+        "executable_domains": [
+          "combat_encounter_resolution",
+          "overworld_traversal",
+          "town_purchase_stay_flow"
+        ],
+        "fixture_count": 3,
+        "case_count": 6
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "tests/replay/manifest.json + tests/replay/*.json + parity_proof.py",
+      "evidence_tier": "replay-proven",
+      "rom_source": "Bounded executable replay proof for current implemented overworld/combat/town behaviors"
+    },
+    {
+      "row": 66,
+      "system": "Replay/Checkpoint",
+      "test": "Checkpoint executable fixture proof availability",
+      "expected": "representative executable checkpoint fixtures prove dungeon traversal resume and save/load resume continuity",
+      "actual": {
+        "declared_domains": [
+          "dungeon_traversal",
+          "save_load_resume_continuity"
+        ],
+        "executable_domains": [
+          "dungeon_traversal",
+          "save_load_resume_continuity"
+        ],
+        "fixture_count": 2,
+        "case_count": 2
+      },
+      "passed": true,
+      "status": "PASS",
+      "evidence": "tests/checkpoints/manifest.json + tests/checkpoints/*.json + parity_proof.py",
+      "evidence_tier": "checkpoint-proven",
+      "rom_source": "Bounded executable checkpoint proof for current implemented dungeon resume and canonical save/load continuity"
+    },
+    {
+      "row": 67,
+      "system": "Resistance Decode",
+      "test": "ROM-backed resistance mapping availability",
+      "expected": "decoded resistance mapping present or explicit blocker surfaced",
+      "actual": {
+        "pattern_flags": true,
+        "mdef": true,
+        "s_ss_resist": false
+      },
+      "passed": false,
+      "status": "UNKNOWN",
+      "evidence": "extractor/data_out/enemies.json",
+      "evidence_tier": "unknown",
+      "rom_source": "Resistance decode remains unresolved pending ROM-backed mapping"
     }
   ],
-  "all_passed": true,
-  "parity_report_sha256": "39716bb14389819e0f240add1157bd5dd70bf01a8a0e4b52db9073b1727e7f25"
+  "all_passed": false,
+  "summary": {
+    "row_count": 67,
+    "status_counts": {
+      "PASS": 65,
+      "UNKNOWN": 2
+    },
+    "evidence_tier_counts": {
+      "extractor-only": 55,
+      "runtime-state": 8,
+      "unknown": 2,
+      "replay-proven": 1,
+      "checkpoint-proven": 1
+    },
+    "all_passed": false
+  },
+  "parity_report_sha256": "63e65e30dee84fbc511f8d9398d563cc87f434c549d168d2d78db9c7c3d2afca"
 }

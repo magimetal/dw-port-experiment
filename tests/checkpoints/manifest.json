@@ -1,0 +1,42 @@
+{
+  "fixtures": [
+    {
+      "id": "dungeon-light-timer-checkpoint",
+      "domain": "dungeon_traversal",
+      "type": "executable_fixture",
+      "status": "implemented",
+      "fixture_file": "dungeon_light_timer_checkpoint.json",
+      "seed_setup": {
+        "state": "dungeon seed after torch or radiant effect",
+        "rng": "deterministic fixed seed"
+      },
+      "expected_assertions": [
+        "checkpoint resume step enters deterministic dungeon encounter",
+        "light timer decays exactly once on resumed movement"
+      ],
+      "verification_commands": [
+        "python3 -m pytest tests/test_main_loop_scaffold.py"
+      ],
+      "owner": "phase5-parity-remediation"
+    },
+    {
+      "id": "save-load-continuity-checkpoint",
+      "domain": "save_load_resume_continuity",
+      "type": "executable_fixture",
+      "status": "implemented",
+      "fixture_file": "save_load_continuity_checkpoint.json",
+      "seed_setup": {
+        "state": "post-transaction save seed with equipment and timers",
+        "rng": "not required"
+      },
+      "expected_assertions": [
+        "canonical save payload roundtrip remains identical",
+        "opened chest and door world state reloads with derived equipment modifiers intact"
+      ],
+      "verification_commands": [
+        "python3 -m pytest tests/test_save_load.py tests/test_shop.py"
+      ],
+      "owner": "phase5-parity-remediation"
+    }
+  ]
+}

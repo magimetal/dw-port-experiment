@@ -7,6 +7,13 @@ from engine.state import CombatSessionState
 EN_DRAGONLORD1 = 38
 EN_DRAGONLORD2 = 39
 
+# SOURCE: extractor/data_out/enemies.json pattern_flags observed subset.
+# Bounded Batch 4: only pattern_flags 0x02 is mapped to a concrete live spell action
+# from current repo evidence surfaces. All other non-zero pattern flags remain unknown.
+_ENEMY_PATTERN_SPELL_ACTIONS: dict[int, tuple[str, ...]] = {
+    0x02: ("HURT",),
+}
+
 
 def _u8(value: int) -> int:
     return value & 0xFF
@@ -135,6 +142,10 @@ def enemy_hurtmore_damage(rng: DW1RNG, armor_reduction: bool) -> int:
     if armor_reduction:
         return (base * 2) // 3
     return base
+
+
+def enemy_spell_actions_for_pattern(pattern_flags: int) -> tuple[str, ...]:
+    return _ENEMY_PATTERN_SPELL_ACTIONS.get(_u8(pattern_flags), ())
 
 
 def check_spell_fail(en_mdef: int, rng: DW1RNG) -> bool:

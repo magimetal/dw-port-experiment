@@ -1,12 +1,14 @@
 import json
 from pathlib import Path
 
+from engine.items_engine import FLAG_DRAGON_SCALE, FLAG_FIGHTERS_RING
 from engine.combat import (
     EN_DRAGONLORD1,
     apply_damage,
     apply_heal,
     check_run,
     check_spell_fail,
+    enemy_spell_actions_for_pattern,
     enemy_attack_damage,
     enemy_hp_init,
     enemy_hurt_damage,
@@ -140,3 +142,33 @@ def test_combat_slice_artifacts_exist_and_are_consistent() -> None:
     assert fixture_vectors["heal_max"] == 17
     assert fixture_vectors["enemy_hurt_armor_base5"] == 3
     assert fixture_vectors["enemy_hurtmore_armor_base32"] == 21
+
+
+def test_enemy_spell_mapping_presence_or_blocker_visibility() -> None:
+    enemies = json.loads((ROOT / "extractor" / "data_out" / "enemies.json").read_text())["enemies"]
+    spellcasters = [enemy for enemy in enemies if enemy["pattern_flags"] != 0]
+
+    assert spellcasters
+    assert all("pattern_flags" in enemy for enemy in spellcasters)
+    assert all("mdef" in enemy for enemy in spellcasters)
+    assert all("s_ss_resist" not in enemy for enemy in spellcasters)
+
+
+def test_enemy_spell_mapping_is_explicit_only_for_proven_pattern_subset() -> None:
+    enemies = json.loads((ROOT / "extractor" / "data_out" / "enemies.json").read_text())["enemies"]
+    hurt_pattern_enemies = [enemy for enemy in enemies if enemy["pattern_flags"] == 0x02]
+    other_spell_patterns = sorted({int(enemy["pattern_flags"]) for enemy in enemies if enemy["pattern_flags"] not in (0, 0x02)})
+
+    assert [enemy["name"] for enemy in hurt_pattern_enemies] == ["Magician", "Magidrakee"]
+    assert enemy_spell_actions_for_pattern(0x02) == ("HURT",)
+    assert all(enemy_spell_actions_for_pattern(pattern_flags) == () for pattern_flags in other_spell_patterns)
+
+
+def test_equipment_bonus_flags_need_canonical_recompute_mapping_review() -> None:
+    items_payload = json.loads((ROOT / "extractor" / "data_out" / "items.json").read_text())
+    bonuses = items_payload["equipment_bonuses"]
+
+    assert bonuses["weapons"][3] == 10
+    assert bonuses["armor"][0] == 0
+    assert FLAG_DRAGON_SCALE == 0x10
+    assert FLAG_FIGHTERS_RING == 0x20

@@ -2,36 +2,36 @@
   "vectors": {
     "shop": {
       "action": "npc_shop_transaction",
-      "screen_mode": "map",
-      "action_detail": "control:1;shop_id:0;item_id:2;result:purchased",
+      "screen_mode": "dialog",
+      "action_detail": "control:1;shop_id:0;item_id:2;result:purchased;price:180;town:Brecconary",
       "gold_after": 120,
       "equipment_byte_after": 98
     },
     "shop_additional": {
       "action": "npc_shop_transaction",
-      "screen_mode": "map",
-      "action_detail": "control:2;shop_id:1;item_id:0;result:purchased",
+      "screen_mode": "dialog",
+      "action_detail": "control:2;shop_id:1;item_id:0;result:purchased;price:10;town:Garinham",
       "gold_after": 20,
       "equipment_byte_after": 34
     },
     "shop_additional_pair": {
       "action": "npc_shop_transaction",
-      "screen_mode": "map",
-      "action_detail": "control:3;shop_id:2;item_id:1;result:purchased",
+      "screen_mode": "dialog",
+      "action_detail": "control:3;shop_id:2;item_id:1;result:purchased;price:60;town:Cantlin",
       "gold_after": 30,
       "equipment_byte_after": 66
     },
     "shop_next_pair": {
       "action": "npc_shop_transaction",
-      "screen_mode": "map",
-      "action_detail": "control:4;shop_id:3;item_id:0;result:purchased",
+      "screen_mode": "dialog",
+      "action_detail": "control:4;shop_id:3;item_id:0;result:purchased;price:10;town:Cantlin",
       "gold_after": 15,
       "equipment_byte_after": 34
     },
     "shop_rejected": {
       "action": "npc_shop_transaction",
-      "screen_mode": "map",
-      "action_detail": "control:2;shop_id:1;item_id:0;result:rejected:not_enough_gold",
+      "screen_mode": "dialog",
+      "action_detail": "control:2;shop_id:1;item_id:0;result:rejected:not_enough_gold;price:10;town:Garinham",
       "gold_before": 9,
       "gold_after": 9,
       "equipment_byte_before": 2,
@@ -39,7 +39,7 @@
     },
     "inn": {
       "action": "npc_inn_transaction",
-      "screen_mode": "map",
+      "screen_mode": "dialog",
       "action_detail": "control:15;inn_index:0;result:inn_stay;cost:20",
       "gold_after": 30,
       "hp_after": 31,
@@ -51,7 +51,7 @@
     },
     "inn_additional": {
       "action": "npc_inn_transaction",
-      "screen_mode": "map",
+      "screen_mode": "dialog",
       "action_detail": "control:16;inn_index:1;result:inn_stay;cost:6",
       "gold_after": 6,
       "hp_after": 31,
@@ -63,7 +63,7 @@
     },
     "inn_additional_pair": {
       "action": "npc_inn_transaction",
-      "screen_mode": "map",
+      "screen_mode": "dialog",
       "action_detail": "control:17;inn_index:2;result:inn_stay;cost:25",
       "gold_after": 15,
       "hp_after": 31,
@@ -75,7 +75,7 @@
     },
     "inn_next_pair": {
       "action": "npc_inn_transaction",
-      "screen_mode": "map",
+      "screen_mode": "dialog",
       "action_detail": "control:18;inn_index:3;result:inn_stay;cost:100",
       "gold_after": 30,
       "hp_after": 31,
@@ -87,7 +87,7 @@
     },
     "inn_additional_pair_rejected": {
       "action": "npc_inn_transaction",
-      "screen_mode": "map",
+      "screen_mode": "dialog",
       "action_detail": "control:17;inn_index:2;result:inn_stay_rejected:not_enough_gold",
       "gold_before": 24,
       "gold_after": 24,
@@ -99,7 +99,7 @@
     },
     "inn_next_pair_rejected": {
       "action": "npc_inn_transaction",
-      "screen_mode": "map",
+      "screen_mode": "dialog",
       "action_detail": "control:18;inn_index:3;result:inn_stay_rejected:not_enough_gold",
       "gold_before": 99,
       "gold_after": 99,
@@ -111,7 +111,7 @@
     },
     "inn_rejected": {
       "action": "npc_inn_transaction",
-      "screen_mode": "map",
+      "screen_mode": "dialog",
       "action_detail": "control:15;inn_index:0;result:inn_stay_rejected:not_enough_gold",
       "gold_before": 10,
       "gold_after": 10,

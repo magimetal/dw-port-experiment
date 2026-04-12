@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
+from functools import lru_cache
+from pathlib import Path
 
 
 def _u8(value: int) -> int:
@@ -13,6 +16,62 @@ def _u16(value: int) -> int:
 
 def _default_npc_data() -> tuple[tuple[int, int, int], ...]:
     return tuple((0, 0, 0) for _ in range(20))
+
+
+_DRAGON_SCALE_FLAG = 0x10
+_FIGHTERS_RING_FLAG = 0x20
+_ITEMS_DATA_PATH = Path(__file__).resolve().parents[1] / "extractor" / "data_out" / "items.json"
+
+
+@lru_cache(maxsize=1)
+def _derived_stat_bonus_tables() -> tuple[tuple[int, ...], tuple[int, ...]]:
+    payload = json.loads(_ITEMS_DATA_PATH.read_text())
+    bonuses = payload.get("equipment_bonuses", {})
+    weapons = tuple(int(value) for value in bonuses.get("weapons", ()))
+    armor = tuple(int(value) for value in bonuses.get("armor", ()))
+    return weapons, armor
+
+
+def _bonus_for_index(table: tuple[int, ...], index: int) -> int:
+    if 0 <= index < len(table):
+        return int(table[index])
+    return 0
+
+
+def _compute_derived_attack_defense(*, strength: int, agility: int, equipment_byte: int, more_spells_quest: int) -> tuple[int, int]:
+    # SOURCE: Bank03.asm LoadStats @ LF050-LF09E
+    # Observed: current port fresh-game baseline stores equipment_byte=0x02 while defense remains base AGI>>1.
+    # Bounded Batch 3: use extracted weapon/armor bonuses plus wearable item flags; preserve existing shield-byte behavior until ROM proof clarifies it.
+    weapon_bonus_table, armor_bonus_table = _derived_stat_bonus_tables()
+    equipment = _u8(equipment_byte)
+    weapon_index = (equipment >> 5) & 0x07
+    armor_index = (equipment >> 2) & 0x07
+
+    attack_bonus = _bonus_for_index(weapon_bonus_table, weapon_index)
+    defense_bonus = _bonus_for_index(armor_bonus_table, armor_index)
+
+    if (_u8(more_spells_quest) & _FIGHTERS_RING_FLAG) != 0:
+        attack_bonus = _u8(attack_bonus + 2)
+    if (_u8(more_spells_quest) & _DRAGON_SCALE_FLAG) != 0:
+        defense_bonus = _u8(defense_bonus + 2)
+
+    attack = _u8(_u8(strength) + attack_bonus)
+    defense = _u8((_u8(agility) >> 1) + defense_bonus)
+    return attack, defense
+
+
+def with_recomputed_derived_stats(state: GameState, **updates: object) -> GameState:
+    data = state.to_dict()
+    data.update(updates)
+    attack, defense = _compute_derived_attack_defense(
+        strength=int(data["str"]),
+        agility=int(data["agi"]),
+        equipment_byte=int(data["equipment_byte"]),
+        more_spells_quest=int(data["more_spells_quest"]),
+    )
+    data["attack"] = attack
+    data["defense"] = defense
+    return GameState(**data)
 
 
 @dataclass(frozen=True, slots=True)

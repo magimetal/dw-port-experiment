@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from engine.rng import DW1RNG
-from engine.state import GameState
+from engine.state import GameState, with_recomputed_derived_stats
 
 
 # SOURCE: Dragon_Warrior_Defines.asm inventory aliases + item cost table mapping.
@@ -191,7 +191,6 @@ class ItemsRuntime:
         updated = self._clone_state(
             state,
             more_spells_quest=(state.more_spells_quest | FLAG_DRAGON_SCALE) & 0xFF,
-            defense=(state.defense + 2) & 0xFF,
         )
         return ItemUseOutcome(state=updated, success=True, consumed=False, reason="ok")
 
@@ -202,7 +201,6 @@ class ItemsRuntime:
         updated = self._clone_state(
             state,
             more_spells_quest=(state.more_spells_quest | FLAG_FIGHTERS_RING) & 0xFF,
-            attack=(state.attack + 2) & 0xFF,
         )
         return ItemUseOutcome(state=updated, success=True, consumed=False, reason="ok")
 
@@ -351,9 +349,7 @@ class ItemsRuntime:
 
     @staticmethod
     def _clone_state(state: GameState, **updates: int | tuple[int, int, int, int]) -> GameState:
-        data = state.to_dict()
-        data.update(updates)
-        return GameState(**data)
+        return with_recomputed_derived_stats(state, **updates)
 
     def _teleport(
         self,

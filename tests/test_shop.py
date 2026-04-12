@@ -28,6 +28,61 @@ def test_shop_inventory_prices_and_inn_costs_match_extracted_tables() -> None:
     assert [runtime.inn_cost(index) for index in range(5)] == [20, 6, 25, 100, 55]
 
 
+def test_magic_key_price_table_is_reviewable_and_not_uniform_across_towns() -> None:
+    runtime = ShopRuntime.from_file(ROOT / "extractor" / "data_out" / "items.json")
+
+    town_prices = {
+        "Cantlin": runtime.key_cost_for_town("Cantlin"),
+        "Rimuldar": runtime.key_cost_for_town("Rimuldar"),
+        "Tantegel castle": runtime.key_cost_for_town("Tantegel castle"),
+    }
+
+    assert town_prices == {
+        "Cantlin": 98,
+        "Rimuldar": 53,
+        "Tantegel castle": 85,
+    }
+    assert len(set(town_prices.values())) == 3
+    assert runtime.price_for_item(18) == 53
+
+
+def test_magic_key_purchase_uses_cantlin_town_price() -> None:
+    runtime = ShopRuntime.from_file(ROOT / "extractor" / "data_out" / "items.json")
+    seeded = _clone_state(GameState.fresh_game("ERDRICK"), gold=98)
+
+    updated, success, message = runtime.buy_magic_key(seeded, town="Cantlin")
+
+    assert success is True
+    assert message == "purchased"
+    assert updated.gold == 0
+    assert updated.magic_keys == 1
+
+
+def test_magic_key_purchase_uses_town_specific_context_prices() -> None:
+    runtime = ShopRuntime.from_file(ROOT / "extractor" / "data_out" / "items.json")
+
+    tantegel_seed = _clone_state(GameState.fresh_game("ERDRICK"), gold=85)
+    tantegel_updated, tantegel_success, tantegel_message = runtime.buy_magic_key(
+        tantegel_seed,
+        town="Tantegel castle",
+    )
+
+    assert tantegel_success is True
+    assert tantegel_message == "purchased"
+    assert tantegel_updated.gold == 0
+    assert tantegel_updated.magic_keys == 1
+
+    cantlin_seed = _clone_state(GameState.fresh_game("ERDRICK"), gold=97)
+    cantlin_updated, cantlin_success, cantlin_message = runtime.buy_magic_key(
+        cantlin_seed,
+        town="Cantlin",
+    )
+
+    assert cantlin_success is False
+    assert cantlin_message == "not enough gold"
+    assert cantlin_updated.to_dict() == cantlin_seed.to_dict()
+
+
 def test_weapon_purchase_applies_buyback_and_equips_new_weapon() -> None:
     runtime = ShopRuntime.from_file(ROOT / "extractor" / "data_out" / "items.json")
     state = _clone_state(GameState.fresh_game("ERDRICK"), gold=200, equipment_byte=0x40)
@@ -38,6 +93,32 @@ def test_weapon_purchase_applies_buyback_and_equips_new_weapon() -> None:
     assert message == "purchased and equipped"
     assert updated.gold == 50
     assert updated.equipment_byte == 0x60
+
+
+def test_weapon_purchase_recomputes_attack_from_equipment_bonus() -> None:
+    runtime = ShopRuntime.from_file(ROOT / "extractor" / "data_out" / "items.json")
+    state = _clone_state(GameState.fresh_game("ERDRICK"), gold=200)
+
+    updated, success, message = runtime.buy(state, 2)
+
+    assert success is True
+    assert message == "purchased and equipped"
+    assert updated.equipment_byte == 0x62
+    assert updated.attack == 14
+    assert updated.defense == 2
+
+
+def test_armor_purchase_recomputes_defense_from_equipment_bonus() -> None:
+    runtime = ShopRuntime.from_file(ROOT / "extractor" / "data_out" / "items.json")
+    state = _clone_state(GameState.fresh_game("ERDRICK"), gold=200)
+
+    updated, success, message = runtime.buy(state, 8)
+
+    assert success is True
+    assert message == "purchased and equipped"
+    assert updated.equipment_byte == 0x0A
+    assert updated.attack == 4
+    assert updated.defense == 6
 
 
 def test_herb_cap_and_inventory_full_block_purchase() -> None:

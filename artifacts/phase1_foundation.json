@@ -1,10 +1,10 @@
 {
-  "phase": "1-foundation",
+  "phase": "4-slice-terrain-step-effects",
   "all_passed": true,
   "checks": {
     "check_python_version": {
       "ok": true,
-      "detail": "3.14.3",
+      "detail": "3.14.4",
       "expected": ">=3.11"
     },
     "check_deps_importable": {
@@ -25,20 +25,151 @@
       "ok": true,
       "missing": []
     },
-    "check_enemy_hurt_fixture": {
+    "run_phase4_slice_map_movement_terrain_step_effects_generator": {
+      "ok": true,
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m ui.run_phase4_slice_map_movement_terrain_step_effects",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "check_main_loop_map_movement_terrain_step_effects_artifacts": {
       "ok": true,
       "detail": {
-        "min": 3,
-        "max": 10,
-        "formula": "rng & 0x07 + 0x03",
-        "source": "Bank03.asm EnCastHurt @ LEC23 (CPU $EC2F-$EC32)"
+        "report": {
+          "slice": "phase4-main-loop-map-movement-terrain-step-effects",
+          "all_passed": true,
+          "checks": {
+            "rom_baseline_match": true,
+            "swamp_step_applies_2hp_damage": true,
+            "force_field_step_applies_15hp_damage": true,
+            "erdricks_armor_step_heal_applies": true,
+            "swamp_with_erdricks_armor_is_immune": true,
+            "magic_armor_4step_heal_applies": true,
+            "neutral_step_has_no_terrain_effect": true
+          },
+          "outputs": {
+            "report": "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
+            "vectors_fixture": "tests/fixtures/main_loop_map_movement_terrain_step_effects_vectors.json"
+          },
+          "rom": {
+            "path": "dragon-warrior-1.nes",
+            "sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "accepted_sha1": "66809063b828197d1fe12232ebd08ec0a498aa04",
+            "baseline_match": true
+          },
+          "scope_note": "Phase 4 bounded terrain-step effects slice: main-loop movement applies swamp/force-field step damage, Erdrick's Armor step-heal with swamp immunity netting to zero, Magic Armor 4-step regeneration, and neutral-tile no-effect behavior."
+        },
+        "vectors": {
+          "vectors": {
+            "swamp_step_applies_2hp_damage": {
+              "action": "move",
+              "action_detail": "68,37",
+              "map_before": [
+                1,
+                68,
+                36
+              ],
+              "map_after": [
+                1,
+                68,
+                37
+              ],
+              "target_tile": 6,
+              "hp_before": 12,
+              "hp_after": 10
+            },
+            "force_field_step_applies_15hp_damage": {
+              "action": "move",
+              "action_detail": "9,1",
+              "map_before": [
+                2,
+                8,
+                1
+              ],
+              "map_after": [
+                2,
+                9,
+                1
+              ],
+              "target_tile": 13,
+              "hp_before": 20,
+              "hp_after": 5
+            },
+            "erdricks_armor_step_heal_applies": {
+              "action": "move",
+              "action_detail": "2,1",
+              "map_before": [
+                4,
+                1,
+                1
+              ],
+              "map_after": [
+                4,
+                2,
+                1
+              ],
+              "target_tile": 4,
+              "hp_before": 12,
+              "hp_after": 13
+            },
+            "swamp_with_erdricks_armor_is_immune": {
+              "action": "move",
+              "action_detail": "68,37",
+              "map_before": [
+                1,
+                68,
+                36
+              ],
+              "map_after": [
+                1,
+                68,
+                37
+              ],
+              "target_tile": 6,
+              "hp_before": 12,
+              "hp_after": 12
+            },
+            "magic_armor_4step_heal_applies": {
+              "step_actions": [
+                "move",
+                "move",
+                "move",
+                "move"
+              ],
+              "hp_before": 12,
+              "hp_after": 13,
+              "counter_after": 4,
+              "position_after": [
+                1,
+                1
+              ]
+            },
+            "neutral_step_has_no_terrain_effect": {
+              "action": "move",
+              "action_detail": "2,1",
+              "map_before": [
+                4,
+                1,
+                1
+              ],
+              "map_after": [
+                4,
+                2,
+                1
+              ],
+              "target_tile": 4,
+              "hp_before": 12,
+              "hp_after": 12
+            }
+          }
+        }
       }
     },
-    "run_pytest_foundation": {
+    "run_pytest_phase4_map_movement_terrain_step_effects_slice": {
       "ok": true,
-      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_phase1_foundation.py -v",
+      "command": "/Users/magimetal/Dev/dw-port/.venv/bin/python3 -m pytest tests/test_main_loop_scaffold.py -k phase4_map_movement_terrain_step_effects_artifacts_exist_and_are_consistent -v",
       "returncode": 0,
-      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 3 items\n\ntests/test_phase1_foundation.py::test_enemy_hurt_fixture_exists_and_matches_corrected_range PASSED [ 33%]\ntests/test_phase1_foundation.py::test_foundation_directories_exist PASSED [ 66%]\ntests/test_phase1_foundation.py::test_rom_baseline_configuration_present PASSED [100%]\n\n============================== 3 passed in 0.05s ===============================\n",
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.4, pytest-9.0.2, pluggy-1.6.0 -- /Users/magimetal/Dev/dw-port/.venv/bin/python3\ncachedir: .pytest_cache\nhypothesis profile 'default'\nrootdir: /Users/magimetal/Dev/dw-port\nplugins: hypothesis-6.151.10\ncollecting ... collected 252 items / 251 deselected / 1 selected\n\ntests/test_main_loop_scaffold.py::test_phase4_map_movement_terrain_step_effects_artifacts_exist_and_are_consistent PASSED [100%]\n\n====================== 1 passed, 251 deselected in 0.07s =======================\n",
       "stderr": ""
     }
   }

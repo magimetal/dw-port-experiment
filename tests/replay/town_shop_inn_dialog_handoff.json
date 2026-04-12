@@ -1,0 +1,118 @@
+{
+  "id": "town-shop-inn-dialog-handoff",
+  "kind": "main_loop_sequence_cases",
+  "cases": [
+    {
+      "id": "shop-dialog-handoff-purchase",
+      "state": {
+        "screen_mode": "map",
+        "fresh_game_name": "ERDRICK",
+        "player_facing": "down",
+        "game_state_updates": {
+          "map_id": 8,
+          "player_x": 5,
+          "player_y": 3,
+          "gold": 300
+        }
+      },
+      "steps": [
+        {
+          "input": "Z",
+          "expected": {
+            "action_kind": "npc_shop_dialog_handoff",
+            "screen_mode": "dialog",
+            "gold": 300,
+            "equipment_byte": 2
+          }
+        },
+        {
+          "input": "ENTER",
+          "expected": {
+            "action_kind": "npc_shop_prompt_ready",
+            "screen_mode": "map",
+            "gold": 300,
+            "equipment_byte": 2
+          }
+        },
+        {
+          "input": "ENTER",
+          "expected": {
+            "action_kind": "npc_shop_menu_opened",
+            "screen_mode": "map"
+          }
+        },
+        {
+          "input": "ENTER",
+          "expected": {
+            "action_kind": "npc_shop_transaction",
+            "screen_mode": "dialog",
+            "action_detail_contains": [
+              "control:1",
+              "shop_id:0",
+              "item_id:2",
+              "result:purchased"
+            ],
+            "gold": 120,
+            "equipment_byte": 98
+          }
+        }
+      ]
+    },
+    {
+      "id": "inn-dialog-handoff-stay-and-save",
+      "use_temp_save_path": true,
+      "state": {
+        "screen_mode": "map",
+        "fresh_game_name": "ERDRICK",
+        "player_facing": "down",
+        "game_state_updates": {
+          "map_id": 8,
+          "player_x": 24,
+          "player_y": 3,
+          "experience": 47,
+          "gold": 50,
+          "hp": 2,
+          "mp": 1,
+          "max_hp": 31,
+          "max_mp": 16
+        }
+      },
+      "steps": [
+        {
+          "input": "Z",
+          "expected": {
+            "action_kind": "npc_inn_dialog_handoff",
+            "screen_mode": "dialog",
+            "gold": 50,
+            "save_exists": false
+          }
+        },
+        {
+          "input": "ENTER",
+          "expected": {
+            "action_kind": "npc_inn_prompt_ready",
+            "screen_mode": "map",
+            "gold": 50,
+            "save_exists": false
+          }
+        },
+        {
+          "input": "ENTER",
+          "expected": {
+            "action_kind": "npc_inn_transaction",
+            "screen_mode": "dialog",
+            "action_detail_contains": [
+              "control:15",
+              "inn_index:0",
+              "result:inn_stay"
+            ],
+            "gold": 30,
+            "hp": 31,
+            "mp": 16,
+            "save_exists": true
+          }
+        }
+      ]
+    }
+  ]
+}

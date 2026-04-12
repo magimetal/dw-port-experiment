@@ -10,6 +10,9 @@ from engine.combat import (
     apply_heal,
     check_run,
     check_spell_fail,
+    enemy_hurt_damage,
+    enemy_hurtmore_damage,
+    enemy_spell_actions_for_pattern,
     enemy_attack_damage,
     enemy_gold_reward,
     excellent_move_check,
@@ -28,6 +31,7 @@ from engine.map_engine import MapEngine
 from engine.movement import (
     AR_ARMOR_MASK,
     AR_ERDK_ARMR,
+    AR_MAGIC_ARMR,
     BLK_SWAMP,
     choose_dungeon_enemy,
     choose_overworld_enemy,
@@ -38,7 +42,7 @@ from engine.movement import (
 from engine.rng import DW1RNG
 from engine.save_load import save_json
 from engine.shop import ShopRuntime
-from engine.state import CombatSessionState, GameState
+from engine.state import CombatSessionState, GameState, with_recomputed_derived_stats
 from ui.combat_view import (
     CombatViewState,
     append_combat_log,
@@ -251,6 +255,16 @@ class MapItemEntry:
 
 
 @dataclass(frozen=True, slots=True)
+class TownInteractionState:
+    kind: Literal["shop", "inn"]
+    control: int
+    shop_id: int | None = None
+    inn_index: int | None = None
+    town: str | None = None
+    selected_item_id: int | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class MainLoopState:
     screen_mode: ScreenMode
     game_state: GameState
@@ -260,6 +274,10 @@ class MainLoopState:
     dialog_box_state: DialogBoxState | None = None
     dialog_return_mode: ScreenMode = "map"
     player_facing: FacingDirection = "down"
+    town_interaction: TownInteractionState | None = None
+    town_yes_no_menu: MenuState | None = None
+    town_shop_menu: MenuState | None = None
+    town_shop_labels: tuple[str, ...] = ()
     map_command_menu: MenuState | None = None
     map_spell_menu: MenuState | None = None
     map_item_menu: MenuState | None = None
@@ -913,6 +931,224 @@ def _single_page_dialog(text: str) -> tuple[DialogSession, DialogBoxState]:
     return next_session, initial_dialog_box_state(page_text)
 
 
+def _yes_no_options() -> tuple[str, str]:
+    return ("YES", "NO")
+
+
+def _town_name_for_map(map_id: int) -> str | None:
+    town_by_map_id = {
+        4: "Tantegel castle",
+        7: "Kol",
+        8: "Brecconary",
+        9: "Garinham",
+        10: "Cantlin",
+        11: "Rimuldar",
+    }
+    return town_by_map_id.get(map_id & 0xFF)
+
+
+def _shop_inventory_for_interaction(
+    shop_runtime: ShopRuntime,
+    interaction: TownInteractionState,
+) -> tuple[dict[str, int | str], ...]:
+    if interaction.shop_id is None:
+        return ()
+    inventory = shop_runtime.shop_inventory(interaction.shop_id)
+    if interaction.town is None:
+        return inventory
+
+    priced_inventory: list[dict[str, int | str]] = []
+    for row in inventory:
+        item_id = int(row["item_id"])
+        priced_inventory.append(
+            {
+                "item_id": item_id,
+                "item_name": str(row["item_name"]),
+                "price": shop_runtime.price_for_purchase(item_id, town=interaction.town),
+            }
+        )
+    return tuple(priced_inventory)
+
+
+def _shop_menu_labels(
+    shop_runtime: ShopRuntime,
+    interaction: TownInteractionState,
+) -> tuple[str, ...]:
+    inventory = _shop_inventory_for_interaction(shop_runtime, interaction)
+    return tuple(f"{row['item_name']} {row['price']}G" for row in inventory)
+
+
+def _open_shop_prompt(
+    state: MainLoopState,
+    *,
+    interaction: TownInteractionState,
+    shop_runtime: ShopRuntime,
+) -> MainLoopState:
+    inventory = _shop_inventory_for_interaction(shop_runtime, interaction)
+    if not inventory:
+        return replace(
+            state,
+            town_interaction=None,
+            town_shop_menu=None,
+            town_yes_no_menu=None,
+            town_shop_labels=(),
+            last_action=LoopAction(
+                kind="npc_shop_prompt_rejected",
+                detail=f"control:{interaction.control};shop_id:{interaction.shop_id};result:no_inventory",
+            ),
+        )
+    return replace(
+        state,
+        town_interaction=interaction,
+        town_shop_menu=initial_menu_state(len(inventory)),
+        town_yes_no_menu=None,
+        town_shop_labels=_shop_menu_labels(shop_runtime, interaction),
+        last_action=LoopAction(
+            kind="npc_shop_prompt_ready",
+            detail=(
+                f"control:{interaction.control};shop_id:{interaction.shop_id};inventory_count:{len(inventory)}"
+            ),
+        ),
+    )
+
+
+def _open_inn_prompt(
+    state: MainLoopState,
+    *,
+    interaction: TownInteractionState,
+    shop_runtime: ShopRuntime,
+) -> MainLoopState:
+    if interaction.inn_index is None:
+        return replace(
+            state,
+            town_interaction=None,
+            town_yes_no_menu=None,
+            town_shop_menu=None,
+            town_shop_labels=(),
+            last_action=LoopAction(kind="npc_inn_prompt_rejected", detail=f"control:{interaction.control};result:unknown_inn"),
+        )
+    inn_cost = shop_runtime.inn_cost(interaction.inn_index)
+    return replace(
+        state,
+        town_interaction=interaction,
+        town_yes_no_menu=initial_menu_state(len(_yes_no_options())),
+        town_shop_menu=None,
+        town_shop_labels=(),
+        last_action=LoopAction(
+            kind="npc_inn_prompt_ready",
+            detail=f"control:{interaction.control};inn_index:{interaction.inn_index};cost:{inn_cost}",
+        ),
+    )
+
+
+def _town_interaction_decline(state: MainLoopState, *, interaction: TownInteractionState) -> MainLoopState:
+    detail = f"control:{interaction.control};result:declined"
+    if interaction.shop_id is not None:
+        detail = f"control:{interaction.control};shop_id:{interaction.shop_id};result:declined"
+    if interaction.inn_index is not None:
+        detail = f"control:{interaction.control};inn_index:{interaction.inn_index};result:declined"
+    return replace(
+        state,
+        town_interaction=None,
+        town_yes_no_menu=None,
+        town_shop_menu=None,
+        town_shop_labels=(),
+        last_action=LoopAction(
+            kind="npc_shop_interaction_cancel" if interaction.kind == "shop" else "npc_inn_interaction_cancel",
+            detail=detail,
+        ),
+    )
+
+
+def _shop_transaction_dialog(
+    state: MainLoopState,
+    *,
+    interaction: TownInteractionState,
+    shop_runtime: ShopRuntime,
+) -> MainLoopState:
+    item_id = interaction.selected_item_id
+    if item_id is None:
+        return _town_interaction_decline(state, interaction=interaction)
+
+    if item_id == 18 and interaction.town is not None:
+        next_state, purchased, reason = shop_runtime.buy_magic_key(state.game_state, town=interaction.town)
+    elif interaction.shop_id is not None:
+        next_state, purchased, reason = shop_runtime.buy_from_shop(
+            state.game_state,
+            interaction.shop_id,
+            item_id,
+            town=interaction.town,
+        )
+    else:
+        next_state, purchased, reason = state.game_state, False, "item not sold here"
+
+    result = "purchased" if purchased else f"rejected:{reason.replace(' ', '_')}"
+    if purchased:
+        message = f"THOU HAST PURCHASED {shop_runtime.item_name_for_item(item_id).upper()}."
+    elif reason == "not enough gold":
+        message = "THOU CANST NOT AFFORD IT."
+    elif reason in {"cannot hold more herbs", "cannot hold more keys", "inventory full"}:
+        message = "THOU CANST CARRY NO MORE."
+    else:
+        message = "THAT ITEM IS NOT AVAILABLE."
+    dialog_session, dialog_box_state = _single_page_dialog(message)
+    detail = (
+        f"control:{interaction.control};shop_id:{interaction.shop_id};item_id:{item_id};"
+        f"result:{result};price:{shop_runtime.price_for_purchase(item_id, town=interaction.town)}"
+    )
+    if interaction.town is not None:
+        detail = f"{detail};town:{interaction.town}"
+    return replace(
+        state,
+        screen_mode="dialog",
+        game_state=next_state,
+        dialog_session=dialog_session,
+        dialog_box_state=dialog_box_state,
+        dialog_return_mode="map",
+        town_interaction=None,
+        town_yes_no_menu=None,
+        town_shop_menu=None,
+        town_shop_labels=(),
+        last_action=LoopAction(kind="npc_shop_transaction", detail=detail),
+    )
+
+
+def _inn_transaction_dialog(
+    state: MainLoopState,
+    *,
+    interaction: TownInteractionState,
+    shop_runtime: ShopRuntime,
+) -> MainLoopState:
+    if interaction.inn_index is None:
+        return _town_interaction_decline(state, interaction=interaction)
+    next_state, inn_action = _apply_inn_stay(
+        state.game_state,
+        inn_index=interaction.inn_index,
+        shop_runtime=shop_runtime,
+    )
+    if inn_action.kind == "inn_stay":
+        detail = f"control:{interaction.control};inn_index:{interaction.inn_index};result:inn_stay;{inn_action.detail}"
+        message = "THOU HAST HAD A GOOD NIGHT'S SLEEP."
+    else:
+        detail = (
+            f"control:{interaction.control};inn_index:{interaction.inn_index};"
+            f"result:{inn_action.kind}:{inn_action.detail}"
+        )
+        message = "NOT ENOUGH GOLD."
+    dialog_session, dialog_box_state = _single_page_dialog(message)
+    return replace(
+        state,
+        screen_mode="dialog",
+        game_state=next_state,
+        dialog_session=dialog_session,
+        dialog_box_state=dialog_box_state,
+        dialog_return_mode="map",
+        town_interaction=None,
+        town_yes_no_menu=None,
+        town_shop_menu=None,
+        town_shop_labels=(),
+        last_action=LoopAction(kind="npc_inn_transaction", detail=detail),
+    )
 def _learned_map_field_spells(state: GameState) -> tuple[str, ...]:
     return tuple(spell for spell in learned_spells_for_state(state) if spell in _MAP_FIELD_SPELLS)
 
@@ -1202,48 +1438,54 @@ def _route_map_talk_input(
     dialog_control = int(facing_npc.get("dialog_control", 0))
     shop_id = _SHOP_DIALOG_CONTROL_TO_SHOP_ID.get(dialog_control)
     if shop_id is not None:
-        inventory = shop_runtime.shop_inventory(shop_id)
-        if not inventory:
-            return replace(
-                state,
-                last_action=LoopAction(
-                    kind="npc_shop_transaction",
-                    detail=f"control:{dialog_control};shop_id:{shop_id};result:no_inventory",
-                ),
-            )
-        item_id = int(inventory[0]["item_id"])
-        shop_state, purchased, reason = shop_runtime.buy_from_shop(state.game_state, shop_id, item_id)
-        result = "purchased" if purchased else f"rejected:{reason.replace(' ', '_')}"
+        interaction = TownInteractionState(
+            kind="shop",
+            control=dialog_control,
+            shop_id=shop_id,
+            town=_town_name_for_map(state.game_state.map_id),
+        )
+        dialog_session, dialog_box_state = _single_page_dialog("WELCOME TO THE SHOP.")
         return replace(
             state,
-            game_state=shop_state,
+            screen_mode="dialog",
+            dialog_session=dialog_session,
+            dialog_box_state=dialog_box_state,
+            dialog_return_mode="map",
+            town_interaction=interaction,
+            town_yes_no_menu=None,
+            town_shop_menu=None,
+            town_shop_labels=(),
             last_action=LoopAction(
-                kind="npc_shop_transaction",
-                detail=f"control:{dialog_control};shop_id:{shop_id};item_id:{item_id};result:{result}",
+                kind="npc_shop_dialog_handoff",
+                detail=f"control:{dialog_control};shop_id:{shop_id}",
             ),
         )
 
     inn_index_for_control = _INN_DIALOG_CONTROL_TO_INN_INDEX.get(dialog_control)
     if inn_index_for_control is not None:
-        inn_state, inn_action = _apply_inn_stay(
-            state.game_state,
-            inn_index=inn_index_for_control,
-            shop_runtime=shop_runtime,
+        inn_cost = shop_runtime.inn_cost(inn_index_for_control)
+        dialog_session, dialog_box_state = _single_page_dialog(
+            f"THOU MAYEST STAY FOR {inn_cost} GOLD."
         )
-        if inn_action.kind == "inn_stay":
-            detail = (
-                f"control:{dialog_control};inn_index:{inn_index_for_control};"
-                f"result:inn_stay;{inn_action.detail}"
-            )
-        else:
-            detail = (
-                f"control:{dialog_control};inn_index:{inn_index_for_control};"
-                f"result:{inn_action.kind}:{inn_action.detail}"
-            )
         return replace(
             state,
-            game_state=inn_state,
-            last_action=LoopAction(kind="npc_inn_transaction", detail=detail),
+            screen_mode="dialog",
+            dialog_session=dialog_session,
+            dialog_box_state=dialog_box_state,
+            dialog_return_mode="map",
+            town_interaction=TownInteractionState(
+                kind="inn",
+                control=dialog_control,
+                inn_index=inn_index_for_control,
+                town=_town_name_for_map(state.game_state.map_id),
+            ),
+            town_yes_no_menu=None,
+            town_shop_menu=None,
+            town_shop_labels=(),
+            last_action=LoopAction(
+                kind="npc_inn_dialog_handoff",
+                detail=f"control:{dialog_control};inn_index:{inn_index_for_control};cost:{inn_cost}",
+            ),
         )
 
     dialog_session, dialog_box_state, dialog_state, _, dialog_detail = _build_npc_dialog(
@@ -1543,6 +1785,10 @@ def build_render_request(state: MainLoopState) -> RenderFrameRequest:
         menu_overlay = ""
         if state.map_status_overlay_open:
             menu_overlay = _render_map_status_overlay(state.game_state)
+        elif state.town_yes_no_menu is not None:
+            menu_overlay = render_menu_box(_yes_no_options(), state.town_yes_no_menu, title="CONFIRM")
+        elif state.town_shop_menu is not None and state.town_shop_labels:
+            menu_overlay = render_menu_box(state.town_shop_labels, state.town_shop_menu, title="BUY")
         elif state.map_command_menu is not None:
             menu_overlay = render_menu_box(_MAP_COMMAND_OPTIONS, state.map_command_menu, title="COMMAND")
         elif state.map_spell_menu is not None:
@@ -1678,6 +1924,53 @@ def route_input(
             state,
             last_action=LoopAction(kind="map_status_input", detail=token or "noop"),
         )
+
+    if state.town_yes_no_menu is not None and state.town_interaction is not None:
+        next_menu, menu_event = apply_menu_input(state.town_yes_no_menu, token, item_count=len(_yes_no_options()))
+        if menu_event is None:
+            return replace(
+                state,
+                town_yes_no_menu=next_menu,
+                last_action=LoopAction(
+                    kind="npc_shop_confirm_input" if state.town_interaction.kind == "shop" else "npc_inn_confirm_input",
+                    detail=token or "noop",
+                ),
+            )
+        if menu_event.kind == "cancel" or menu_event.index == 1:
+            return _town_interaction_decline(state, interaction=state.town_interaction)
+        if state.town_interaction.kind == "shop":
+            return _shop_transaction_dialog(state, interaction=state.town_interaction, shop_runtime=shop_runtime)
+        return _inn_transaction_dialog(state, interaction=state.town_interaction, shop_runtime=shop_runtime)
+
+    if state.town_shop_menu is not None and state.town_interaction is not None:
+        inventory = _shop_inventory_for_interaction(shop_runtime, state.town_interaction)
+        if not inventory:
+            return _town_interaction_decline(state, interaction=state.town_interaction)
+        next_menu, menu_event = apply_menu_input(state.town_shop_menu, token, item_count=len(inventory))
+        if menu_event is None:
+            return replace(
+                state,
+                town_shop_menu=next_menu,
+                last_action=LoopAction(kind="npc_shop_prompt_input", detail=token or "noop"),
+            )
+        if menu_event.kind == "cancel":
+            return _town_interaction_decline(state, interaction=state.town_interaction)
+        if menu_event.kind == "select" and menu_event.index is not None:
+            selected_item_id = int(inventory[menu_event.index]["item_id"])
+            return replace(
+                state,
+                town_interaction=replace(state.town_interaction, selected_item_id=selected_item_id),
+                town_shop_menu=None,
+                town_yes_no_menu=initial_menu_state(len(_yes_no_options())),
+                last_action=LoopAction(
+                    kind="npc_shop_menu_opened",
+                    detail=(
+                        f"control:{state.town_interaction.control};shop_id:{state.town_interaction.shop_id};"
+                        f"item_id:{selected_item_id}"
+                    ),
+                ),
+            )
+        return replace(state, town_shop_menu=None)
 
     if state.map_command_menu is not None:
         next_menu, menu_event = apply_menu_input(
@@ -2213,11 +2506,30 @@ def _resolve_combat_action(
             skip_enemy_attack = True
 
         if not skip_enemy_attack:
-            if next_session.enemy_stopspell and _enemy_attempts_spell_action(next_session, rng):
+            enemy_cast_attempt = _enemy_attempts_spell_action(next_session, rng)
+            if next_session.enemy_stopspell and enemy_cast_attempt:
                 view_state = append_combat_log(view_state, f"{next_session.enemy_name}'s spell has been stopped.")
-            enemy_damage = enemy_attack_damage(next_session.enemy_atk, state.game_state.defense, rng)
-            next_player_hp = apply_damage(next_player_hp, enemy_damage)
-            view_state = append_combat_log(view_state, f"{next_session.enemy_name.upper()} STRIKES {enemy_damage}.")
+                enemy_damage = enemy_attack_damage(next_session.enemy_atk, state.game_state.defense, rng)
+                next_player_hp = apply_damage(next_player_hp, enemy_damage)
+                view_state = append_combat_log(view_state, f"{next_session.enemy_name.upper()} STRIKES {enemy_damage}.")
+            elif enemy_cast_attempt:
+                next_player_hp, next_session, view_state, spell_resolved = _resolve_enemy_spell_action(
+                    player_hp=next_player_hp,
+                    equipment_byte=state.game_state.equipment_byte,
+                    combat_session=next_session,
+                    rng=rng,
+                    view_state=view_state,
+                )
+                if spell_resolved:
+                    enemy_damage = None
+                else:
+                    enemy_damage = enemy_attack_damage(next_session.enemy_atk, state.game_state.defense, rng)
+                    next_player_hp = apply_damage(next_player_hp, enemy_damage)
+                    view_state = append_combat_log(view_state, f"{next_session.enemy_name.upper()} STRIKES {enemy_damage}.")
+            else:
+                enemy_damage = enemy_attack_damage(next_session.enemy_atk, state.game_state.defense, rng)
+                next_player_hp = apply_damage(next_player_hp, enemy_damage)
+                view_state = append_combat_log(view_state, f"{next_session.enemy_name.upper()} STRIKES {enemy_damage}.")
             if next_player_hp <= 0:
                 view_state = append_combat_log(view_state, "THOU ART SLAIN.")
                 next_player_hp = state.game_state.max_hp
@@ -2236,7 +2548,7 @@ def _resolve_combat_action(
                     level_after=state.game_state.level,
                 )
 
-    updated_game_state = _clone_state(
+    updated_game_state = with_recomputed_derived_stats(
         state.game_state,
         map_id=_REVIVE_MAP_ID if action_kind == "combat_defeat" else state.game_state.map_id,
         player_x=_REVIVE_X if action_kind == "combat_defeat" else state.game_state.player_x,
@@ -2371,6 +2683,17 @@ def _route_dialog_input(state: MainLoopState, token: str) -> MainLoopState:
             dialog_box_state=initial_dialog_box_state(page_text),
             last_action=LoopAction(kind="dialog_page_advance", detail="post_combat"),
         )
+
+    if state.town_interaction is not None:
+        base_state = replace(
+            state,
+            screen_mode="map",
+            dialog_session=None,
+            dialog_box_state=None,
+        )
+        if state.town_interaction.kind == "shop":
+            return _open_shop_prompt(base_state, interaction=state.town_interaction, shop_runtime=ShopRuntime.from_file(Path(__file__).resolve().parent / "extractor" / "data_out" / "items.json"))
+        return _open_inn_prompt(base_state, interaction=state.town_interaction, shop_runtime=ShopRuntime.from_file(Path(__file__).resolve().parent / "extractor" / "data_out" / "items.json"))
 
     return replace(
         state,
@@ -2529,10 +2852,74 @@ def _resolve_spell_action(
 
 
 def _enemy_attempts_spell_action(combat_session: CombatSessionState, rng: DW1RNG) -> bool:
-    if (combat_session.enemy_pattern_flags & 0xFF) == 0:
+    if not enemy_spell_actions_for_pattern(combat_session.enemy_pattern_flags):
         return False
     rng.tick()
     return (rng.rng_ub & 0x01) == 0
+
+
+def _enemy_spell_armor_reduction(equipment_byte: int) -> bool:
+    return (equipment_byte & AR_ARMOR_MASK) == AR_MAGIC_ARMR
+
+
+def _resolve_enemy_spell_action(
+    *,
+    player_hp: int,
+    equipment_byte: int,
+    combat_session: CombatSessionState,
+    rng: DW1RNG,
+    view_state: CombatViewState,
+) -> tuple[int, CombatSessionState, CombatViewState, bool]:
+    spell_actions = enemy_spell_actions_for_pattern(combat_session.enemy_pattern_flags)
+    if not spell_actions:
+        return player_hp, combat_session, view_state, False
+
+    spell_name = spell_actions[0]
+    if spell_name == "HURT":
+        damage = enemy_hurt_damage(rng, armor_reduction=_enemy_spell_armor_reduction(equipment_byte))
+        next_player_hp = apply_damage(player_hp, damage)
+        next_view_state = append_combat_log(view_state, f"{combat_session.enemy_name.upper()} CASTS HURT.")
+        next_view_state = append_combat_log(next_view_state, f"HURT DAMAGES THEE {damage}.")
+        return next_player_hp, combat_session, next_view_state, True
+
+    if spell_name == "HURTMORE":
+        damage = enemy_hurtmore_damage(rng, armor_reduction=_enemy_spell_armor_reduction(equipment_byte))
+        next_player_hp = apply_damage(player_hp, damage)
+        next_view_state = append_combat_log(view_state, f"{combat_session.enemy_name.upper()} CASTS HURTMORE.")
+        next_view_state = append_combat_log(next_view_state, f"HURTMORE DAMAGES THEE {damage}.")
+        return next_player_hp, combat_session, next_view_state, True
+
+    if spell_name == "HEAL":
+        healing = heal_spell_hp(rng)
+        next_session = replace(
+            combat_session,
+            enemy_hp=apply_heal(combat_session.enemy_hp, healing, combat_session.enemy_max_hp),
+        )
+        next_view_state = append_combat_log(view_state, f"{combat_session.enemy_name.upper()} CASTS HEAL.")
+        next_view_state = append_combat_log(next_view_state, f"{combat_session.enemy_name.upper()} HEALS {healing}.")
+        return player_hp, next_session, next_view_state, True
+
+    if spell_name == "HEALMORE":
+        healing = healmore_spell_hp(rng)
+        next_session = replace(
+            combat_session,
+            enemy_hp=apply_heal(combat_session.enemy_hp, healing, combat_session.enemy_max_hp),
+        )
+        next_view_state = append_combat_log(view_state, f"{combat_session.enemy_name.upper()} CASTS HEALMORE.")
+        next_view_state = append_combat_log(next_view_state, f"{combat_session.enemy_name.upper()} HEALS {healing}.")
+        return player_hp, next_session, next_view_state, True
+
+    return player_hp, combat_session, view_state, False
+
+
+def _should_tick_field_timers(previous_state: MainLoopState, routed_state: MainLoopState, key: str) -> bool:
+    if previous_state.quit_requested or routed_state.quit_requested:
+        return False
+    if previous_state.screen_mode != "map":
+        return False
+    if normalize_input_key(key) not in _MOVE_KEYS:
+        return False
+    return routed_state.last_action.kind in {"move", "warp", "encounter_triggered", "combat_defeat"}
 
 
 def tick(state: MainLoopState) -> MainLoopState:
@@ -2608,7 +2995,10 @@ class MainLoopSession:
             search_runtime=self._search_runtime,
             save_path=self._save_path,
         )
-        self._state = tick(routed)
+        if _should_tick_field_timers(previous_state, routed, key):
+            self._state = tick(routed)
+        else:
+            self._state = routed
         should_save_on_quit = (
             not previous_state.quit_requested
             and self._state.quit_requested

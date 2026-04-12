@@ -4,7 +4,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from engine.state import GameState
+from engine.state import GameState, with_recomputed_derived_stats
 
 
 _MAX_KEYS_OR_HERBS = 6
@@ -55,6 +55,10 @@ class ShopRuntime:
         self._inn_costs: tuple[int, ...] = tuple(
             int(row["gold"]) for row in items_payload.get("inn_costs", [])
         )
+        self._key_costs: dict[str, int] = {
+            str(row["town"]): int(row["gold"])
+            for row in items_payload.get("key_costs", [])
+        }
 
     @classmethod
     def from_file(cls, items_path: Path) -> ShopRuntime:
@@ -76,17 +80,38 @@ class ShopRuntime:
     def price_for_item(self, item_id: int) -> int:
         return self._item_costs[item_id & 0xFF].price
 
+    def item_name_for_item(self, item_id: int) -> str:
+        return self._item_costs[item_id & 0xFF].name
+
+    def price_for_purchase(self, item_id: int, *, town: str | None = None) -> int:
+        item_u8 = item_id & 0xFF
+        if item_u8 == _ITEM_KEY and town is not None:
+            return self.key_cost_for_town(town)
+        return self.price_for_item(item_u8)
+
     def inn_cost(self, inn_index: int) -> int:
         idx = inn_index & 0xFF
         if idx >= len(self._inn_costs):
             raise KeyError(f"unknown inn index: {idx}")
         return self._inn_costs[idx]
 
+    def key_cost_for_town(self, town: str) -> int:
+        town_name = str(town)
+        if town_name not in self._key_costs:
+            raise KeyError(f"unknown key town: {town_name}")
+        return self._key_costs[town_name]
+
+    def key_cost_table(self) -> tuple[dict[str, int | str], ...]:
+        return tuple(
+            {"town": town, "gold": gold}
+            for town, gold in self._key_costs.items()
+        )
+
     def is_item_sold_in_shop(self, shop_id: int, item_id: int) -> bool:
         return (item_id & 0xFF) in self._shop_item_ids.get(shop_id & 0xFF, ())
 
-    def can_afford(self, state: GameState, item_id: int) -> bool:
-        return int(state.gold) >= self.price_for_item(item_id)
+    def can_afford(self, state: GameState, item_id: int, *, town: str | None = None) -> bool:
+        return int(state.gold) >= self.price_for_purchase(item_id, town=town)
 
     def buy_eligibility(self, state: GameState, item_id: int) -> tuple[bool, str]:
         item_u8 = item_id & 0xFF
@@ -115,21 +140,23 @@ class ShopRuntime:
         state: GameState,
         shop_id: int,
         item_id: int,
+        *,
+        town: str | None = None,
     ) -> tuple[GameState, bool, str]:
         if not self.is_item_sold_in_shop(shop_id, item_id):
             return state, False, "item not sold here"
-        return self.buy(state, item_id)
+        return self.buy(state, item_id, town=town)
 
-    def buy(self, state: GameState, item_id: int) -> tuple[GameState, bool, str]:
+    def buy(self, state: GameState, item_id: int, *, town: str | None = None) -> tuple[GameState, bool, str]:
         item_u8 = item_id & 0xFF
         eligible, reason = self.buy_eligibility(state, item_u8)
         if not eligible:
             return state, False, reason
 
-        if not self.can_afford(state, item_u8):
+        if not self.can_afford(state, item_u8, town=town):
             return state, False, "not enough gold"
 
-        price = self.price_for_item(item_u8)
+        price = self.price_for_purchase(item_u8, town=town)
         new_state = self._clone_state(state, gold=(state.gold - price) & 0xFFFF)
 
         if _WEAPON_MIN <= item_u8 <= _WEAPON_MAX:
@@ -177,6 +204,9 @@ class ShopRuntime:
         if not added:
             return state, False, "inventory full"
         return self._clone_state(new_state, inventory_slots=packed), True, "purchased"
+
+    def buy_magic_key(self, state: GameState, *, town: str) -> tuple[GameState, bool, str]:
+        return self.buy(state, _ITEM_KEY, town=town)
 
     def sell(self, state: GameState, item_id: int) -> tuple[GameState, int]:
         item_u8 = item_id & 0xFF
@@ -244,9 +274,7 @@ class ShopRuntime:
 
     @staticmethod
     def _clone_state(state: GameState, **updates: int | tuple[int, int, int, int]) -> GameState:
-        data = state.to_dict()
-        data.update(updates)
-        return GameState(**data)
+        return with_recomputed_derived_stats(state, **updates)
 
     @staticmethod
     def _inventory_code_for_item(item_id: int) -> int:

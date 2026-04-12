@@ -2163,7 +2163,10 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_shop_result = npc_shop_session.step("Z")
+    npc_shop_session.step("Z")
+    npc_shop_session.step("ENTER")
+    npc_shop_session.step("ENTER")
+    npc_shop_result = npc_shop_session.step("ENTER")
 
     npc_shop_additional_session = MainLoopSession(
         terminal=terminal,
@@ -2182,7 +2185,10 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_shop_additional_result = npc_shop_additional_session.step("Z")
+    npc_shop_additional_session.step("Z")
+    npc_shop_additional_session.step("ENTER")
+    npc_shop_additional_session.step("ENTER")
+    npc_shop_additional_result = npc_shop_additional_session.step("ENTER")
 
     npc_shop_additional_pair_session = MainLoopSession(
         terminal=terminal,
@@ -2201,7 +2207,10 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_shop_additional_pair_result = npc_shop_additional_pair_session.step("Z")
+    npc_shop_additional_pair_session.step("Z")
+    npc_shop_additional_pair_session.step("ENTER")
+    npc_shop_additional_pair_session.step("ENTER")
+    npc_shop_additional_pair_result = npc_shop_additional_pair_session.step("ENTER")
 
     npc_shop_next_pair_session = MainLoopSession(
         terminal=terminal,
@@ -2220,7 +2229,10 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_shop_next_pair_result = npc_shop_next_pair_session.step("Z")
+    npc_shop_next_pair_session.step("Z")
+    npc_shop_next_pair_session.step("ENTER")
+    npc_shop_next_pair_session.step("ENTER")
+    npc_shop_next_pair_result = npc_shop_next_pair_session.step("ENTER")
 
     npc_shop_reject_session = MainLoopSession(
         terminal=terminal,
@@ -2240,7 +2252,10 @@ def main() -> int:
         ),
     )
     npc_shop_reject_before = npc_shop_reject_session.state.game_state
-    npc_shop_reject_result = npc_shop_reject_session.step("Z")
+    npc_shop_reject_session.step("Z")
+    npc_shop_reject_session.step("ENTER")
+    npc_shop_reject_session.step("ENTER")
+    npc_shop_reject_result = npc_shop_reject_session.step("ENTER")
     npc_shop_reject_after = npc_shop_reject_session.state.game_state
 
     npc_inn_save_path = artifacts_dir / "phase4_npc_shop_inn_handoff_runtime_save.json"
@@ -2270,7 +2285,9 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_inn_result = npc_inn_session.step("Z")
+    npc_inn_session.step("Z")
+    npc_inn_session.step("ENTER")
+    npc_inn_result = npc_inn_session.step("ENTER")
     npc_inn_loaded = load_json(slot=0, path=npc_inn_save_path)
 
     npc_inn_additional_save_path = artifacts_dir / "phase4_npc_shop_inn_handoff_additional_runtime_save.json"
@@ -2300,7 +2317,9 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_inn_additional_result = npc_inn_additional_session.step("Z")
+    npc_inn_additional_session.step("Z")
+    npc_inn_additional_session.step("ENTER")
+    npc_inn_additional_result = npc_inn_additional_session.step("ENTER")
     npc_inn_additional_loaded = load_json(slot=0, path=npc_inn_additional_save_path)
 
     npc_inn_additional_pair_save_path = artifacts_dir / "phase4_npc_shop_inn_handoff_additional_pair_runtime_save.json"
@@ -2330,7 +2349,9 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_inn_additional_pair_result = npc_inn_additional_pair_session.step("Z")
+    npc_inn_additional_pair_session.step("Z")
+    npc_inn_additional_pair_session.step("ENTER")
+    npc_inn_additional_pair_result = npc_inn_additional_pair_session.step("ENTER")
     npc_inn_additional_pair_loaded = load_json(slot=0, path=npc_inn_additional_pair_save_path)
 
     npc_inn_additional_pair_reject_save_path = (
@@ -2363,7 +2384,9 @@ def main() -> int:
         ),
     )
     npc_inn_additional_pair_reject_before = npc_inn_additional_pair_reject_session.state.game_state
-    npc_inn_additional_pair_reject_result = npc_inn_additional_pair_reject_session.step("Z")
+    npc_inn_additional_pair_reject_session.step("Z")
+    npc_inn_additional_pair_reject_session.step("ENTER")
+    npc_inn_additional_pair_reject_result = npc_inn_additional_pair_reject_session.step("ENTER")
     npc_inn_additional_pair_reject_after = npc_inn_additional_pair_reject_session.state.game_state
 
     npc_inn_next_pair_save_path = artifacts_dir / "phase4_npc_shop_inn_handoff_next_pair_runtime_save.json"
@@ -2393,7 +2416,9 @@ def main() -> int:
             player_facing="down",
         ),
     )
-    npc_inn_next_pair_result = npc_inn_next_pair_session.step("Z")
+    npc_inn_next_pair_session.step("Z")
+    npc_inn_next_pair_session.step("ENTER")
+    npc_inn_next_pair_result = npc_inn_next_pair_session.step("ENTER")
     npc_inn_next_pair_loaded = load_json(slot=0, path=npc_inn_next_pair_save_path)
 
     npc_inn_next_pair_reject_save_path = (
@@ -2426,7 +2451,9 @@ def main() -> int:
         ),
     )
     npc_inn_next_pair_reject_before = npc_inn_next_pair_reject_session.state.game_state
-    npc_inn_next_pair_reject_result = npc_inn_next_pair_reject_session.step("Z")
+    npc_inn_next_pair_reject_session.step("Z")
+    npc_inn_next_pair_reject_session.step("ENTER")
+    npc_inn_next_pair_reject_result = npc_inn_next_pair_reject_session.step("ENTER")
     npc_inn_next_pair_reject_after = npc_inn_next_pair_reject_session.state.game_state
 
     npc_inn_reject_save_path = artifacts_dir / "phase4_npc_shop_inn_handoff_rejected_runtime_save.json"
@@ -2457,7 +2484,9 @@ def main() -> int:
         ),
     )
     npc_inn_reject_before = npc_inn_reject_session.state.game_state
-    npc_inn_reject_result = npc_inn_reject_session.step("Z")
+    npc_inn_reject_session.step("Z")
+    npc_inn_reject_session.step("ENTER")
+    npc_inn_reject_result = npc_inn_reject_session.step("ENTER")
     npc_inn_reject_after = npc_inn_reject_session.state.game_state
 
     npc_shop_inn_vectors = {
@@ -2601,7 +2630,7 @@ def main() -> int:
         "rom_baseline_match": rom_sha1 == baseline["accepted_sha1"],
         "npc_shop_control_handoff_runs_bounded_purchase": (
             npc_shop_inn_vectors["shop"]["action"] == "npc_shop_transaction"
-            and npc_shop_inn_vectors["shop"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["shop"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["shop"]["action_detail"]).startswith(
                 "control:1;shop_id:0;item_id:2;result:purchased"
             )
@@ -2610,7 +2639,7 @@ def main() -> int:
         ),
         "npc_shop_additional_control_handoff_runs_bounded_purchase": (
             npc_shop_inn_vectors["shop_additional"]["action"] == "npc_shop_transaction"
-            and npc_shop_inn_vectors["shop_additional"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["shop_additional"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["shop_additional"]["action_detail"]).startswith(
                 "control:2;shop_id:1;item_id:0;result:purchased"
             )
@@ -2619,7 +2648,7 @@ def main() -> int:
         ),
         "npc_shop_additional_pair_control_handoff_runs_bounded_purchase": (
             npc_shop_inn_vectors["shop_additional_pair"]["action"] == "npc_shop_transaction"
-            and npc_shop_inn_vectors["shop_additional_pair"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["shop_additional_pair"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["shop_additional_pair"]["action_detail"]).startswith(
                 "control:3;shop_id:2;item_id:1;result:purchased"
             )
@@ -2628,7 +2657,7 @@ def main() -> int:
         ),
         "npc_shop_next_pair_control_handoff_runs_bounded_purchase": (
             npc_shop_inn_vectors["shop_next_pair"]["action"] == "npc_shop_transaction"
-            and npc_shop_inn_vectors["shop_next_pair"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["shop_next_pair"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["shop_next_pair"]["action_detail"]).startswith(
                 "control:4;shop_id:3;item_id:0;result:purchased"
             )
@@ -2637,7 +2666,7 @@ def main() -> int:
         ),
         "npc_shop_control_handoff_rejects_when_gold_insufficient": (
             npc_shop_inn_vectors["shop_rejected"]["action"] == "npc_shop_transaction"
-            and npc_shop_inn_vectors["shop_rejected"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["shop_rejected"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["shop_rejected"]["action_detail"]).startswith(
                 "control:2;shop_id:1;item_id:0;result:rejected:not_enough_gold"
             )
@@ -2648,7 +2677,7 @@ def main() -> int:
         ),
         "npc_inn_control_handoff_runs_inn_transaction_and_save": (
             npc_shop_inn_vectors["inn"]["action"] == "npc_inn_transaction"
-            and npc_shop_inn_vectors["inn"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["inn"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["inn"]["action_detail"]).startswith(
                 "control:15;inn_index:0;result:inn_stay"
             )
@@ -2660,7 +2689,7 @@ def main() -> int:
         ),
         "npc_inn_additional_control_handoff_runs_inn_transaction_and_save": (
             npc_shop_inn_vectors["inn_additional"]["action"] == "npc_inn_transaction"
-            and npc_shop_inn_vectors["inn_additional"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["inn_additional"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["inn_additional"]["action_detail"]).startswith(
                 "control:16;inn_index:1;result:inn_stay"
             )
@@ -2674,7 +2703,7 @@ def main() -> int:
         ),
         "npc_inn_additional_pair_control_handoff_runs_inn_transaction_and_save": (
             npc_shop_inn_vectors["inn_additional_pair"]["action"] == "npc_inn_transaction"
-            and npc_shop_inn_vectors["inn_additional_pair"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["inn_additional_pair"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["inn_additional_pair"]["action_detail"]).startswith(
                 "control:17;inn_index:2;result:inn_stay"
             )
@@ -2688,7 +2717,7 @@ def main() -> int:
         ),
         "npc_inn_next_pair_control_handoff_runs_inn_transaction_and_save": (
             npc_shop_inn_vectors["inn_next_pair"]["action"] == "npc_inn_transaction"
-            and npc_shop_inn_vectors["inn_next_pair"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["inn_next_pair"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["inn_next_pair"]["action_detail"]).startswith(
                 "control:18;inn_index:3;result:inn_stay"
             )
@@ -2702,7 +2731,7 @@ def main() -> int:
         ),
         "npc_inn_additional_pair_control_handoff_rejects_when_gold_insufficient": (
             npc_shop_inn_vectors["inn_additional_pair_rejected"]["action"] == "npc_inn_transaction"
-            and npc_shop_inn_vectors["inn_additional_pair_rejected"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["inn_additional_pair_rejected"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["inn_additional_pair_rejected"]["action_detail"]).startswith(
                 "control:17;inn_index:2;result:inn_stay_rejected:not_enough_gold"
             )
@@ -2716,7 +2745,7 @@ def main() -> int:
         ),
         "npc_inn_next_pair_control_handoff_rejects_when_gold_insufficient": (
             npc_shop_inn_vectors["inn_next_pair_rejected"]["action"] == "npc_inn_transaction"
-            and npc_shop_inn_vectors["inn_next_pair_rejected"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["inn_next_pair_rejected"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["inn_next_pair_rejected"]["action_detail"]).startswith(
                 "control:18;inn_index:3;result:inn_stay_rejected:not_enough_gold"
             )
@@ -2730,7 +2759,7 @@ def main() -> int:
         ),
         "npc_inn_control_handoff_rejects_when_gold_insufficient": (
             npc_shop_inn_vectors["inn_rejected"]["action"] == "npc_inn_transaction"
-            and npc_shop_inn_vectors["inn_rejected"]["screen_mode"] == "map"
+            and npc_shop_inn_vectors["inn_rejected"]["screen_mode"] == "dialog"
             and str(npc_shop_inn_vectors["inn_rejected"]["action_detail"]).startswith(
                 "control:15;inn_index:0;result:inn_stay_rejected:not_enough_gold"
             )
@@ -3129,7 +3158,7 @@ def main() -> int:
             field_spell_vectors["repel"]["action"] == "map_spell_cast"
             and field_spell_vectors["repel"]["action_detail"] == "REPEL:ok"
             and field_spell_vectors["repel"]["screen_mode"] == "dialog"
-            and field_spell_vectors["repel"]["repel_timer_after"] == 0xFE
+            and field_spell_vectors["repel"]["repel_timer_after"] == 0xFF
             and field_spell_vectors["repel"]["mp_after"] == 6
         ),
         "radiant_cast_sets_light_in_dungeon": (
@@ -3137,7 +3166,7 @@ def main() -> int:
             and field_spell_vectors["radiant"]["action_detail"] == "RADIANT:ok"
             and field_spell_vectors["radiant"]["screen_mode"] == "dialog"
             and field_spell_vectors["radiant"]["light_radius_after"] == 5
-            and field_spell_vectors["radiant"]["light_timer_after"] == 0xFE
+            and field_spell_vectors["radiant"]["light_timer_after"] == 0xFF
             and field_spell_vectors["radiant"]["mp_after"] == 5
         ),
         "not_enough_mp_rejected_without_state_change": (

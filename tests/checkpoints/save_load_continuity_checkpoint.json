@@ -1,0 +1,43 @@
+{
+  "id": "save-load-continuity-checkpoint",
+  "kind": "save_load_roundtrip_cases",
+  "cases": [
+    {
+      "id": "save-load-roundtrip-preserves-canonical-save-and-world-state",
+      "state": {
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "experience": 0,
+          "gold": 140,
+          "attack": 14,
+          "defense": 2,
+          "equipment_byte": 98,
+          "hp": 15,
+          "mp": 0,
+          "max_hp": 15,
+          "max_mp": 0
+        }
+      },
+      "opened_chest_indices": [0],
+      "opened_doors": [
+        [4, 18, 6]
+      ],
+      "expected": {
+        "save_exists": true,
+        "save_data_equal": true,
+        "opened_chest_indices": [0],
+        "opened_doors": [
+          [4, 18, 6]
+        ],
+        "loaded_fields": {
+          "player_name": "ERDRICK",
+          "experience": 0,
+          "gold": 140,
+          "equipment_byte": 98,
+          "attack": 14,
+          "defense": 2
+        }
+      }
+    }
+  ]
+}

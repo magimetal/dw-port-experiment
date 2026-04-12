@@ -115,6 +115,25 @@ def _select_stairs(session: MainLoopSession) -> StepResult:
     return session.step("ENTER")
 
 
+def _advance_single_page_dialog(session: MainLoopSession) -> StepResult:
+    return session.step("ENTER")
+
+
+def _confirm_town_interaction(session: MainLoopSession) -> StepResult:
+    _advance_single_page_dialog(session)
+    return session.step("ENTER")
+
+
+def _buy_first_shop_item(session: MainLoopSession) -> StepResult:
+    _confirm_town_interaction(session)
+    return session.step("ENTER")
+
+
+def _confirm_inn_stay(session: MainLoopSession) -> StepResult:
+    _advance_single_page_dialog(session)
+    return session.step("ENTER")
+
+
 def _find_step_for_tile(*, map_id: int, tile_id: int) -> tuple[int, int, str, int, int]:
     engine = _map_engine()
     seeded = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id)
@@ -164,6 +183,8 @@ def _combat_seed_state(
     player_hp: int = 15,
     player_mp: int = 0,
     player_defense: int = 2,
+    enemy_id: int = 3,
+    enemy_name: str = "Ghost",
     enemy_hp: int = 7,
     enemy_atk: int = 11,
     enemy_agi: int = 15,
@@ -191,8 +212,8 @@ def _combat_seed_state(
         rng_lb=rng_lb,
         rng_ub=rng_ub,
         combat_session=CombatSessionState(
-            enemy_id=3,
-            enemy_name="Ghost",
+            enemy_id=enemy_id,
+            enemy_name=enemy_name,
             enemy_hp=enemy_hp,
             enemy_max_hp=enemy_hp,
             enemy_base_hp=7,
@@ -306,6 +327,82 @@ def test_map_mode_routes_deterministic_movement_and_tick_timers() -> None:
     assert session.state.game_state.repel_timer == 1
     assert session.state.game_state.light_timer == 0
     assert result.action.kind in {"move", "warp"}
+
+
+def test_map_nonmovement_command_input_does_not_tick_field_timers() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=1,
+            player_x=46,
+            player_y=1,
+            rng_lb=0,
+            rng_ub=1,
+            repel_timer=2,
+            light_timer=1,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    result = session.step("C")
+
+    assert result.screen_mode == "map"
+    assert result.action.kind == "map_command_menu_opened"
+    assert session.state.game_state.repel_timer == 2
+    assert session.state.game_state.light_timer == 1
+
+
+def test_map_menu_navigation_input_does_not_tick_field_timers() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=1,
+            player_x=46,
+            player_y=1,
+            rng_lb=0,
+            rng_ub=1,
+            repel_timer=2,
+            light_timer=1,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    session.step("C")
+    result = session.step("DOWN")
+
+    assert result.screen_mode == "map"
+    assert result.action.kind == "map_command_menu_input"
+    assert result.action.detail == "DOWN"
+    assert session.state.game_state.repel_timer == 2
+    assert session.state.game_state.light_timer == 1
+
+
+def test_map_blocked_input_does_not_tick_field_timers() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=4,
+            player_x=29,
+            player_y=14,
+            repel_timer=2,
+            light_timer=1,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    result = session.step("RIGHT")
+
+    assert result.screen_mode == "map"
+    assert result.action.kind == "blocked"
+    assert result.action.detail == "30,14"
+    assert session.state.game_state.repel_timer == 2
+    assert session.state.game_state.light_timer == 1
 
 
 def test_map_movement_can_trigger_deterministic_encounter_transition() -> None:
@@ -489,7 +586,7 @@ def test_map_spell_repel_sets_repel_timer() -> None:
     assert result.screen_mode == "dialog"
     assert result.action.kind == "map_spell_cast"
     assert result.action.detail == "REPEL:ok"
-    assert session.state.game_state.repel_timer == 0xFE
+    assert session.state.game_state.repel_timer == 0xFF
     assert session.state.game_state.mp == 6
 
 
@@ -502,7 +599,7 @@ def test_map_spell_radiant_sets_light_in_dungeon() -> None:
     assert result.action.kind == "map_spell_cast"
     assert result.action.detail == "RADIANT:ok"
     assert session.state.game_state.light_radius == 5
-    assert session.state.game_state.light_timer == 0xFE
+    assert session.state.game_state.light_timer == 0xFF
     assert session.state.game_state.mp == 5
 
 
@@ -1846,7 +1943,7 @@ def test_map_item_menu_select_item_uses_supported_path_and_enters_dialog() -> No
     assert selected.action.kind == "map_item_used"
     assert selected.action.detail == "TORCH:ok"
     assert session.state.game_state.light_radius == 5
-    assert session.state.game_state.light_timer == 15
+    assert session.state.game_state.light_timer == 16
     assert session.state.game_state.inventory_slots == (0, 0, 0, 0)
     assert "THOU HAST USED TORCH." in selected.frame
 
@@ -1902,7 +1999,7 @@ def test_map_item_menu_select_fairy_water_sets_repel_timer_and_consumes_item() -
     assert selected.screen_mode == "dialog"
     assert selected.action.kind == "map_item_used"
     assert selected.action.detail == "FAIRY WATER:ok"
-    assert session.state.game_state.repel_timer == 0xFD
+    assert session.state.game_state.repel_timer == 0xFE
     assert session.state.game_state.inventory_slots == (0, 0, 0, 0)
     assert "THOU HAST USED FAIRY WATER." in selected.frame
 
@@ -2286,8 +2383,8 @@ def test_map_command_death_necklace_step_triggers_death_outcome() -> None:
             more_spells_quest=FLAG_DEATH_NECKLACE,
             rng_lb=0,
             rng_ub=1,
-            repel_timer=0,
-            light_timer=0,
+            repel_timer=2,
+            light_timer=1,
         ),
         title_state=initial_title_state(),
     )
@@ -2306,6 +2403,8 @@ def test_map_command_death_necklace_step_triggers_death_outcome() -> None:
     assert session.state.game_state.hp == 31
     assert session.state.game_state.mp == 10
     assert session.state.game_state.gold == 61
+    assert session.state.game_state.repel_timer == 1
+    assert session.state.game_state.light_timer == 0
     assert "THOU ART SLAIN." in result.frame
     assert page_two.action.kind == "dialog_page_advance"
     assert "THOU ART RETURNED TO TANTEGEL." in page_two.frame
@@ -3814,6 +3913,56 @@ def test_combat_stopspelled_enemy_spell_attempt_is_downgraded_to_physical_attack
     assert "STRIKES" in result.frame
 
 
+def test_combat_enemy_magician_casts_hurt_instead_of_always_physically_attacking() -> None:
+    session = _session(
+        state=_combat_seed_state(
+            player_hp=15,
+            enemy_hp=13,
+            enemy_atk=11,
+            enemy_agi=0,
+            enemy_mdef=1,
+            enemy_pattern_flags=0x02,
+            enemy_name="Magician",
+            rng_lb=0,
+            rng_ub=0,
+        )
+    )
+
+    result = session.step("ITEM")
+
+    assert result.screen_mode == "combat"
+    assert result.action.kind == "combat_turn"
+    assert result.action.detail == "ITEM"
+    assert session.state.game_state.hp == 7
+    assert "MAGICIAN CASTS HURT." in result.frame
+    assert "MAGICIAN STRIKES" not in result.frame
+
+
+def test_combat_stopspelled_magician_hurt_attempt_reports_block_and_falls_back_to_attack() -> None:
+    session = _session(
+        state=_combat_seed_state(
+            player_hp=15,
+            enemy_hp=13,
+            enemy_atk=11,
+            enemy_agi=0,
+            enemy_mdef=1,
+            enemy_pattern_flags=0x02,
+            enemy_name="Magician",
+            enemy_stopspell=True,
+            rng_lb=0,
+            rng_ub=0,
+        )
+    )
+
+    result = session.step("ITEM")
+
+    assert result.screen_mode == "combat"
+    assert result.action.kind == "combat_turn"
+    assert session.state.game_state.hp < 15
+    assert "Magician's spell has been stopped." in result.frame
+    assert "MAGICIAN STRIKES" in result.frame
+
+
 def test_combat_player_stopspell_blocks_spell_without_mp_cost_and_enemy_counterturn() -> None:
     session = _session(
         state=_combat_seed_state(
@@ -4383,6 +4532,34 @@ def test_combat_victory_applies_rewards_and_level_progression() -> None:
     assert "GHOST IS DEFEATED." in result.frame
 
 
+def test_combat_victory_level_progression_recomputes_wearable_derived_stats() -> None:
+    seeded = _combat_seed_state(enemy_hp=1, rng_lb=0, rng_ub=0)
+    seeded = MainLoopState(
+        screen_mode=seeded.screen_mode,
+        game_state=_clone_state(
+            seeded.game_state,
+            experience=6,
+            attack=6,
+            defense=4,
+            more_spells_quest=FLAG_FIGHTERS_RING | FLAG_DRAGON_SCALE,
+        ),
+        title_state=seeded.title_state,
+    )
+    session = _session(state=seeded)
+
+    result = session.step("FIGHT")
+
+    assert result.screen_mode == "dialog"
+    assert result.action.kind == "combat_victory"
+    assert session.state.game_state.level == 2
+    assert session.state.game_state.str == 5
+    assert session.state.game_state.agi == 4
+    assert session.state.game_state.attack == 7
+    assert session.state.game_state.defense == 4
+    assert session.state.game_state.more_spells_quest & FLAG_FIGHTERS_RING == FLAG_FIGHTERS_RING
+    assert session.state.game_state.more_spells_quest & FLAG_DRAGON_SCALE == FLAG_DRAGON_SCALE
+
+
 def test_combat_defeat_routes_through_revive_handoff_hook() -> None:
     session = _session(state=_combat_seed_state(player_hp=1, rng_lb=0, rng_ub=1))
 
@@ -4765,13 +4942,46 @@ def test_map_npc_shop_control_handoff_executes_bounded_purchase() -> None:
     )
     session = _session(state=seeded)
 
+    talked = session.step("Z")
+    prompt_done = _advance_single_page_dialog(session)
+    confirm = session.step("ENTER")
+    result = session.step("ENTER")
+
+    assert talked.screen_mode == "dialog"
+    assert talked.action.kind == "npc_shop_dialog_handoff"
+    assert session.state.game_state.gold == 120
+    assert prompt_done.screen_mode == "map"
+    assert prompt_done.action.kind == "npc_shop_prompt_ready"
+    assert confirm.screen_mode == "map"
+    assert confirm.action.kind == "npc_shop_menu_opened"
+    assert result.action.kind == "npc_shop_transaction"
+    assert result.screen_mode == "dialog"
+    assert "control:1;shop_id:0;item_id:2;result:purchased" in result.action.detail
+    assert session.state.game_state.equipment_byte == 0x62
+
+
+def test_map_npc_shop_control_handoff_opens_dialog_before_side_effects() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=8,
+            player_x=5,
+            player_y=3,
+            gold=300,
+        ),
+        title_state=initial_title_state(),
+        player_facing="down",
+    )
+    session = _session(state=seeded)
+
     result = session.step("Z")
 
-    assert result.screen_mode == "map"
-    assert result.action.kind == "npc_shop_transaction"
-    assert "control:1;shop_id:0;item_id:2;result:purchased" in result.action.detail
-    assert session.state.game_state.gold == 120
-    assert session.state.game_state.equipment_byte == 0x62
+    assert result.screen_mode == "dialog"
+    assert result.action.kind == "npc_shop_dialog_handoff"
+    assert session.state.dialog_session is not None
+    assert session.state.game_state.gold == 300
+    assert session.state.game_state.equipment_byte == 0x02
 
 
 def test_map_npc_shop_control_0x02_handoff_executes_bounded_purchase() -> None:
@@ -4789,9 +4999,12 @@ def test_map_npc_shop_control_0x02_handoff_executes_bounded_purchase() -> None:
     )
     session = _session(state=seeded)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    session.step("ENTER")
+    result = session.step("ENTER")
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_shop_transaction"
     assert "control:2;shop_id:1;item_id:0;result:purchased" in result.action.detail
     assert session.state.game_state.gold == 20
@@ -4813,9 +5026,12 @@ def test_map_npc_shop_control_0x03_handoff_executes_bounded_purchase() -> None:
     )
     session = _session(state=seeded)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    session.step("ENTER")
+    result = session.step("ENTER")
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_shop_transaction"
     assert "control:3;shop_id:2;item_id:1;result:purchased" in result.action.detail
     assert session.state.game_state.gold == 30
@@ -4837,9 +5053,12 @@ def test_map_npc_shop_control_0x04_handoff_executes_bounded_purchase() -> None:
     )
     session = _session(state=seeded)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    session.step("ENTER")
+    result = session.step("ENTER")
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_shop_transaction"
     assert "control:4;shop_id:3;item_id:0;result:purchased" in result.action.detail
     assert session.state.game_state.gold == 15
@@ -4861,9 +5080,12 @@ def test_map_npc_shop_control_handoff_rejects_when_gold_is_insufficient() -> Non
     )
     session = _session(state=seeded)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    session.step("ENTER")
+    result = session.step("ENTER")
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_shop_transaction"
     assert "control:2;shop_id:1;item_id:0;result:rejected:not_enough_gold" in result.action.detail
     assert session.state.game_state.gold == 9
@@ -4944,10 +5166,16 @@ def test_map_npc_inn_control_handoff_routes_into_inn_transaction_and_save(tmp_pa
     )
     session = _session(state=seeded, save_path=save_path)
 
-    result = session.step("Z")
+    talked = session.step("Z")
+    prompt_done = _advance_single_page_dialog(session)
+    result = session.step("ENTER")
     loaded = load_json(slot=0, path=save_path)
 
-    assert result.screen_mode == "map"
+    assert talked.screen_mode == "dialog"
+    assert talked.action.kind == "npc_inn_dialog_handoff"
+    assert prompt_done.screen_mode == "map"
+    assert prompt_done.action.kind == "npc_inn_prompt_ready"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_inn_transaction"
     assert "control:15;inn_index:0;result:inn_stay" in result.action.detail
     assert session.state.game_state.gold == 30
@@ -4955,6 +5183,35 @@ def test_map_npc_inn_control_handoff_routes_into_inn_transaction_and_save(tmp_pa
     assert session.state.game_state.mp == 16
     assert save_path.exists() is True
     assert loaded.to_save_dict() == session.state.game_state.to_save_dict()
+
+
+def test_map_npc_inn_control_handoff_opens_dialog_before_side_effects(tmp_path: Path) -> None:
+    save_path = tmp_path / "phase4_npc_inn_handoff_dialog_before_side_effects.json"
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=8,
+            player_x=24,
+            player_y=3,
+            gold=50,
+            hp=2,
+            mp=1,
+            max_hp=31,
+            max_mp=16,
+        ),
+        title_state=initial_title_state(),
+        player_facing="down",
+    )
+    session = _session(state=seeded, save_path=save_path)
+
+    result = session.step("Z")
+
+    assert result.screen_mode == "dialog"
+    assert result.action.kind == "npc_inn_dialog_handoff"
+    assert session.state.dialog_session is not None
+    assert session.state.game_state.gold == 50
+    assert save_path.exists() is False
 
 
 def test_map_npc_inn_control_0x10_handoff_routes_into_inn_transaction_and_save(tmp_path: Path) -> None:
@@ -4978,10 +5235,12 @@ def test_map_npc_inn_control_0x10_handoff_routes_into_inn_transaction_and_save(t
     )
     session = _session(state=seeded, save_path=save_path)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    result = session.step("ENTER")
     loaded = load_json(slot=0, path=save_path)
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_inn_transaction"
     assert "control:16;inn_index:1;result:inn_stay" in result.action.detail
     assert session.state.game_state.gold == 6
@@ -5012,10 +5271,12 @@ def test_map_npc_inn_control_0x11_handoff_routes_into_inn_transaction_and_save(t
     )
     session = _session(state=seeded, save_path=save_path)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    result = session.step("ENTER")
     loaded = load_json(slot=0, path=save_path)
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_inn_transaction"
     assert "control:17;inn_index:2;result:inn_stay" in result.action.detail
     assert session.state.game_state.gold == 15
@@ -5046,10 +5307,12 @@ def test_map_npc_inn_control_0x12_handoff_routes_into_inn_transaction_and_save(t
     )
     session = _session(state=seeded, save_path=save_path)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    result = session.step("ENTER")
     loaded = load_json(slot=0, path=save_path)
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_inn_transaction"
     assert "control:18;inn_index:3;result:inn_stay" in result.action.detail
     assert session.state.game_state.gold == 30
@@ -5079,9 +5342,11 @@ def test_map_npc_inn_control_handoff_rejects_when_gold_is_insufficient() -> None
     )
     session = _session(state=seeded)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    result = session.step("ENTER")
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_inn_transaction"
     assert "control:15;inn_index:0;result:inn_stay_rejected:not_enough_gold" in result.action.detail
     assert session.state.game_state.gold == 10
@@ -5110,9 +5375,11 @@ def test_map_npc_inn_control_0x11_handoff_rejects_when_gold_is_insufficient(tmp_
     )
     session = _session(state=seeded, save_path=save_path)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    result = session.step("ENTER")
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_inn_transaction"
     assert "control:17;inn_index:2;result:inn_stay_rejected:not_enough_gold" in result.action.detail
     assert session.state.game_state.gold == 24
@@ -5142,9 +5409,11 @@ def test_map_npc_inn_control_0x12_handoff_rejects_when_gold_is_insufficient(tmp_
     )
     session = _session(state=seeded, save_path=save_path)
 
-    result = session.step("Z")
+    session.step("Z")
+    _advance_single_page_dialog(session)
+    result = session.step("ENTER")
 
-    assert result.screen_mode == "map"
+    assert result.screen_mode == "dialog"
     assert result.action.kind == "npc_inn_transaction"
     assert "control:18;inn_index:3;result:inn_stay_rejected:not_enough_gold" in result.action.detail
     assert session.state.game_state.gold == 99
@@ -5493,8 +5762,13 @@ def test_phase4_encounter_trigger_artifacts_exist_and_are_consistent() -> None:
         "enemy_def": 8,
         "enemy_agi": 15,
         "enemy_mdef": 4,
+        "enemy_pattern_flags": 0,
+        "enemy_s_ss_resist": 0,
         "enemy_xp": 3,
         "enemy_gp": 5,
+        "enemy_asleep": False,
+        "enemy_stopspell": False,
+        "player_stopspell": False,
     }
 
     no_encounter = vectors["vectors"]["no_encounter"]
@@ -5537,8 +5811,13 @@ def test_phase4_dungeon_encounter_runtime_artifacts_exist_and_are_consistent() -
         "enemy_def": 70,
         "enemy_agi": 247,
         "enemy_mdef": 242,
+        "enemy_pattern_flags": 6,
+        "enemy_s_ss_resist": 240,
         "enemy_xp": 50,
         "enemy_gp": 165,
+        "enemy_asleep": False,
+        "enemy_stopspell": False,
+        "player_stopspell": False,
     }
 
 
@@ -6033,19 +6312,19 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
 
     v = vectors["vectors"]
     assert v["shop"]["action"] == "npc_shop_transaction"
-    assert v["shop"]["screen_mode"] == "map"
+    assert v["shop"]["screen_mode"] == "dialog"
     assert v["shop"]["gold_after"] == 120
     assert v["shop"]["equipment_byte_after"] == 0x62
     assert v["shop"]["action_detail"].startswith("control:1;shop_id:0;item_id:2;result:purchased")
 
     assert v["shop_additional"]["action"] == "npc_shop_transaction"
-    assert v["shop_additional"]["screen_mode"] == "map"
+    assert v["shop_additional"]["screen_mode"] == "dialog"
     assert v["shop_additional"]["gold_after"] == 20
     assert v["shop_additional"]["equipment_byte_after"] == 0x22
     assert v["shop_additional"]["action_detail"].startswith("control:2;shop_id:1;item_id:0;result:purchased")
 
     assert v["shop_additional_pair"]["action"] == "npc_shop_transaction"
-    assert v["shop_additional_pair"]["screen_mode"] == "map"
+    assert v["shop_additional_pair"]["screen_mode"] == "dialog"
     assert v["shop_additional_pair"]["gold_after"] == 30
     assert v["shop_additional_pair"]["equipment_byte_after"] == 0x42
     assert v["shop_additional_pair"]["action_detail"].startswith(
@@ -6053,7 +6332,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     )
 
     assert v["shop_next_pair"]["action"] == "npc_shop_transaction"
-    assert v["shop_next_pair"]["screen_mode"] == "map"
+    assert v["shop_next_pair"]["screen_mode"] == "dialog"
     assert v["shop_next_pair"]["gold_after"] == 15
     assert v["shop_next_pair"]["equipment_byte_after"] == 0x22
     assert v["shop_next_pair"]["action_detail"].startswith(
@@ -6061,7 +6340,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     )
 
     assert v["shop_rejected"]["action"] == "npc_shop_transaction"
-    assert v["shop_rejected"]["screen_mode"] == "map"
+    assert v["shop_rejected"]["screen_mode"] == "dialog"
     assert v["shop_rejected"]["gold_after"] == v["shop_rejected"]["gold_before"]
     assert v["shop_rejected"]["equipment_byte_after"] == v["shop_rejected"]["equipment_byte_before"]
     assert v["shop_rejected"]["action_detail"].startswith(
@@ -6069,7 +6348,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     )
 
     assert v["inn"]["action"] == "npc_inn_transaction"
-    assert v["inn"]["screen_mode"] == "map"
+    assert v["inn"]["screen_mode"] == "dialog"
     assert v["inn"]["gold_after"] == 30
     assert v["inn"]["hp_after"] == v["inn"]["max_hp"]
     assert v["inn"]["mp_after"] == v["inn"]["max_mp"]
@@ -6078,7 +6357,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     assert v["inn"]["action_detail"].startswith("control:15;inn_index:0;result:inn_stay")
 
     assert v["inn_additional"]["action"] == "npc_inn_transaction"
-    assert v["inn_additional"]["screen_mode"] == "map"
+    assert v["inn_additional"]["screen_mode"] == "dialog"
     assert v["inn_additional"]["gold_after"] == 6
     assert v["inn_additional"]["hp_after"] == v["inn_additional"]["max_hp"]
     assert v["inn_additional"]["mp_after"] == v["inn_additional"]["max_mp"]
@@ -6087,7 +6366,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     assert v["inn_additional"]["action_detail"].startswith("control:16;inn_index:1;result:inn_stay")
 
     assert v["inn_additional_pair"]["action"] == "npc_inn_transaction"
-    assert v["inn_additional_pair"]["screen_mode"] == "map"
+    assert v["inn_additional_pair"]["screen_mode"] == "dialog"
     assert v["inn_additional_pair"]["gold_after"] == 15
     assert v["inn_additional_pair"]["hp_after"] == v["inn_additional_pair"]["max_hp"]
     assert v["inn_additional_pair"]["mp_after"] == v["inn_additional_pair"]["max_mp"]
@@ -6096,7 +6375,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     assert v["inn_additional_pair"]["action_detail"].startswith("control:17;inn_index:2;result:inn_stay")
 
     assert v["inn_next_pair"]["action"] == "npc_inn_transaction"
-    assert v["inn_next_pair"]["screen_mode"] == "map"
+    assert v["inn_next_pair"]["screen_mode"] == "dialog"
     assert v["inn_next_pair"]["gold_after"] == 30
     assert v["inn_next_pair"]["hp_after"] == v["inn_next_pair"]["max_hp"]
     assert v["inn_next_pair"]["mp_after"] == v["inn_next_pair"]["max_mp"]
@@ -6105,7 +6384,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     assert v["inn_next_pair"]["action_detail"].startswith("control:18;inn_index:3;result:inn_stay")
 
     assert v["inn_additional_pair_rejected"]["action"] == "npc_inn_transaction"
-    assert v["inn_additional_pair_rejected"]["screen_mode"] == "map"
+    assert v["inn_additional_pair_rejected"]["screen_mode"] == "dialog"
     assert (
         v["inn_additional_pair_rejected"]["gold_after"]
         == v["inn_additional_pair_rejected"]["gold_before"]
@@ -6122,7 +6401,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     )
 
     assert v["inn_next_pair_rejected"]["action"] == "npc_inn_transaction"
-    assert v["inn_next_pair_rejected"]["screen_mode"] == "map"
+    assert v["inn_next_pair_rejected"]["screen_mode"] == "dialog"
     assert v["inn_next_pair_rejected"]["gold_after"] == v["inn_next_pair_rejected"]["gold_before"]
     assert v["inn_next_pair_rejected"]["hp_after"] == v["inn_next_pair_rejected"]["hp_before"]
     assert v["inn_next_pair_rejected"]["mp_after"] == v["inn_next_pair_rejected"]["mp_before"]
@@ -6132,7 +6411,7 @@ def test_phase4_npc_shop_inn_handoff_artifacts_exist_and_are_consistent() -> Non
     )
 
     assert v["inn_rejected"]["action"] == "npc_inn_transaction"
-    assert v["inn_rejected"]["screen_mode"] == "map"
+    assert v["inn_rejected"]["screen_mode"] == "dialog"
     assert v["inn_rejected"]["gold_after"] == v["inn_rejected"]["gold_before"]
     assert v["inn_rejected"]["hp_after"] == v["inn_rejected"]["hp_before"]
     assert v["inn_rejected"]["mp_after"] == v["inn_rejected"]["mp_before"]
@@ -6220,11 +6499,11 @@ def test_phase4_map_field_spell_casting_artifacts_exist_and_are_consistent() -> 
     assert v["return"]["map_after"] == [1, 0x2A, 0x2B]
 
     assert v["repel"]["action_detail"] == "REPEL:ok"
-    assert v["repel"]["repel_timer_after"] == 0xFE
+    assert v["repel"]["repel_timer_after"] == 0xFF
 
     assert v["radiant"]["action_detail"] == "RADIANT:ok"
     assert v["radiant"]["light_radius_after"] == 5
-    assert v["radiant"]["light_timer_after"] == 0xFE
+    assert v["radiant"]["light_timer_after"] == 0xFF
 
     assert v["not_enough_mp"]["action"] == "map_spell_rejected"
     assert v["not_enough_mp"]["action_detail"] == "HEAL:not_enough_mp"

@@ -1,0 +1,116 @@
+{
+  "id": "combat-enemy-spellcaster-turn",
+  "kind": "main_loop_sequence_cases",
+  "cases": [
+    {
+      "id": "magician-casts-hurt-live",
+      "state": {
+        "screen_mode": "combat",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 1,
+          "player_x": 47,
+          "player_y": 1,
+          "hp": 15,
+          "mp": 0,
+          "max_hp": 15,
+          "max_mp": 15,
+          "defense": 2,
+          "spells_known": 3,
+          "more_spells_quest": 3,
+          "rng_lb": 0,
+          "rng_ub": 0,
+          "combat_session": {
+            "enemy_id": 3,
+            "enemy_name": "Magician",
+            "enemy_hp": 13,
+            "enemy_max_hp": 13,
+            "enemy_base_hp": 7,
+            "enemy_atk": 11,
+            "enemy_def": 8,
+            "enemy_agi": 0,
+            "enemy_mdef": 1,
+            "enemy_pattern_flags": 2,
+            "enemy_s_ss_resist": 0,
+            "enemy_xp": 3,
+            "enemy_gp": 5,
+            "enemy_asleep": false,
+            "enemy_stopspell": false,
+            "player_stopspell": false
+          }
+        }
+      },
+      "steps": [
+        {
+          "input": "ITEM",
+          "expected": {
+            "action_kind": "combat_turn",
+            "action_detail": "ITEM",
+            "screen_mode": "combat",
+            "hp": 7,
+            "frame_contains": [
+              "MAGICIAN CASTS HURT."
+            ],
+            "frame_not_contains": [
+              "MAGICIAN STRIKES"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "stopspelled-magician-falls-back-to-physical-attack",
+      "state": {
+        "screen_mode": "combat",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 1,
+          "player_x": 47,
+          "player_y": 1,
+          "hp": 15,
+          "mp": 0,
+          "max_hp": 15,
+          "max_mp": 15,
+          "defense": 2,
+          "spells_known": 3,
+          "more_spells_quest": 3,
+          "rng_lb": 0,
+          "rng_ub": 0,
+          "combat_session": {
+            "enemy_id": 3,
+            "enemy_name": "Magician",
+            "enemy_hp": 13,
+            "enemy_max_hp": 13,
+            "enemy_base_hp": 7,
+            "enemy_atk": 11,
+            "enemy_def": 8,
+            "enemy_agi": 0,
+            "enemy_mdef": 1,
+            "enemy_pattern_flags": 2,
+            "enemy_s_ss_resist": 0,
+            "enemy_xp": 3,
+            "enemy_gp": 5,
+            "enemy_asleep": false,
+            "enemy_stopspell": true,
+            "player_stopspell": false
+          }
+        }
+      },
+      "steps": [
+        {
+          "input": "ITEM",
+          "expected": {
+            "action_kind": "combat_turn",
+            "action_detail": "ITEM",
+            "screen_mode": "combat",
+            "hp": 12,
+            "frame_contains": [
+              "Magician's spell has been stopped.",
+              "MAGICIAN STRIKES"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

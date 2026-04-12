@@ -1,15 +1,15 @@
 {
   "phase": "5-slice-parity-matrix-gate",
-  "all_passed": true,
+  "all_passed": false,
   "checks": {
     "check_phase5_parity_matrix_gate": {
-      "ok": true,
+      "ok": false,
       "detail": {
-        "row_count": 56,
-        "all_passed": true,
+        "row_count": 67,
+        "all_passed": false,
         "artifact": "artifacts/phase5_parity.json",
         "report": "PARITY_REPORT.md",
-        "parity_report_sha256": "39716bb14389819e0f240add1157bd5dd70bf01a8a0e4b52db9073b1727e7f25"
+        "parity_report_sha256": "63e65e30dee84fbc511f8d9398d563cc87f434c549d168d2d78db9c7c3d2afca"
       }
     }
   }

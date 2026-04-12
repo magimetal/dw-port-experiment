@@ -1,0 +1,41 @@
+{
+  "id": "dungeon-light-timer-checkpoint",
+  "kind": "main_loop_sequence_cases",
+  "cases": [
+    {
+      "id": "dungeon-checkpoint-resume-step-triggers-encounter",
+      "state": {
+        "screen_mode": "map",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 15,
+          "player_x": 0,
+          "player_y": 0,
+          "rng_lb": 0,
+          "rng_ub": 0,
+          "repel_timer": 0,
+          "light_timer": 4,
+          "light_radius": 5
+        }
+      },
+      "steps": [
+        {
+          "input": "RIGHT",
+          "expected": {
+            "action_kind": "encounter_triggered",
+            "action_detail": "enemy:32",
+            "screen_mode": "combat",
+            "player_x": 1,
+            "player_y": 0,
+            "light_timer": 3,
+            "combat_enemy_id": 32,
+            "combat_enemy_name": "Wizard",
+            "frame_contains": [
+              "WIZARD"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

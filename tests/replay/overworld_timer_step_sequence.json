@@ -1,0 +1,62 @@
+{
+  "id": "overworld-timer-step-sequence",
+  "kind": "main_loop_sequence_cases",
+  "cases": [
+    {
+      "id": "command-input-preserves-field-timers",
+      "state": {
+        "screen_mode": "map",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 1,
+          "player_x": 46,
+          "player_y": 1,
+          "rng_lb": 0,
+          "rng_ub": 1,
+          "repel_timer": 2,
+          "light_timer": 1
+        }
+      },
+      "steps": [
+        {
+          "input": "C",
+          "expected": {
+            "action_kind": "map_command_menu_opened",
+            "screen_mode": "map",
+            "repel_timer": 2,
+            "light_timer": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "overworld-step-decrements-field-timers",
+      "state": {
+        "screen_mode": "map",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 1,
+          "player_x": 46,
+          "player_y": 1,
+          "rng_lb": 0,
+          "rng_ub": 1,
+          "repel_timer": 2,
+          "light_timer": 1
+        }
+      },
+      "steps": [
+        {
+          "input": "RIGHT",
+          "expected": {
+            "action_kind": "move",
+            "screen_mode": "map",
+            "player_x": 47,
+            "player_y": 1,
+            "repel_timer": 1,
+            "light_timer": 0
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from engine.level_up import BASE_STATS, level_for_xp, stats_for_level
-from engine.state import GameState
+from engine.state import GameState, with_recomputed_derived_stats
 
 
 _SAVE_DATA_SIZE = 30
@@ -27,6 +27,21 @@ def _u8(value: int) -> int:
 
 def _u16(value: int) -> int:
     return int(value) & 0xFFFF
+
+
+def _default_json_store() -> dict[str, object]:
+    return {"version": 2, "slots": {}}
+
+
+def _load_json_store_for_save(save_path: Path) -> dict[str, object]:
+    try:
+        store = json.loads(save_path.read_text())
+    except json.JSONDecodeError:
+        return _default_json_store()
+
+    if not isinstance(store, dict):
+        return _default_json_store()
+    return store
 
 
 def _encode_name(name: str) -> bytes:
@@ -115,7 +130,8 @@ def _save_data_to_state(save_data: bytes) -> GameState:
     player_name = _decode_name(save_data[14:22])
     hp = min(_u8(save_data[23]), stat_block.max_hp)
     mp = min(_u8(save_data[24]), stat_block.max_mp)
-    return GameState(
+    return with_recomputed_derived_stats(
+        GameState(
         player_name=player_name,
         map_id=4,
         player_x=5,
@@ -141,6 +157,7 @@ def _save_data_to_state(save_data: bytes) -> GameState:
         story_flags=save_data[13],
         quest_flags=save_data[25],
         display_level=level,
+        )
     )
 
 
@@ -227,9 +244,9 @@ def save_json(
 
     store: dict[str, object]
     if save_path.exists():
-        store = json.loads(save_path.read_text())
+        store = _load_json_store_for_save(save_path)
     else:
-        store = {"version": 2, "slots": {}}
+        store = _default_json_store()
 
     slots = dict(store.get("slots", {}))
     serialized_opened_chests = sorted({_u8(index) for index in (opened_chest_indices or frozenset())})

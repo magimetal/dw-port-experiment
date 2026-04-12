@@ -1,0 +1,61 @@
+{
+  "fixtures": [
+    {
+      "id": "overworld-timer-step-sequence",
+      "domain": "overworld_traversal",
+      "type": "executable_fixture",
+      "status": "implemented",
+      "fixture_file": "overworld_timer_step_sequence.json",
+      "seed_setup": {
+        "state": "MainLoopState map seed with nonzero repel/light timers",
+        "rng": "deterministic fixed seed"
+      },
+      "expected_assertions": [
+        "command input leaves timers unchanged",
+        "successful overworld step decrements timers deterministically"
+      ],
+      "verification_commands": [
+        "python3 -m pytest tests/test_main_loop_scaffold.py"
+      ],
+      "owner": "phase5-parity-remediation"
+    },
+    {
+      "id": "combat-enemy-spellcaster-turn",
+      "domain": "combat_encounter_resolution",
+      "type": "executable_fixture",
+      "status": "implemented",
+      "fixture_file": "combat_enemy_spellcaster_turn.json",
+      "seed_setup": {
+        "state": "combat seed for spell-capable enemy",
+        "rng": "deterministic fixed seed"
+      },
+      "expected_assertions": [
+        "Magician live-casts HURT under deterministic seed",
+        "stopspelled Magician reports blocked cast then falls back to physical attack"
+      ],
+      "verification_commands": [
+        "python3 -m pytest tests/test_main_loop_scaffold.py tests/test_combat.py"
+      ],
+      "owner": "phase5-parity-remediation"
+    },
+    {
+      "id": "town-shop-inn-dialog-handoff",
+      "domain": "town_purchase_stay_flow",
+      "type": "executable_fixture",
+      "status": "implemented",
+      "fixture_file": "town_shop_inn_dialog_handoff.json",
+      "seed_setup": {
+        "state": "map seed facing shop or inn NPC",
+        "rng": "not required"
+      },
+      "expected_assertions": [
+        "shop TALK handoff opens dialog before purchase side effects",
+        "inn TALK handoff restores resources and writes save after confirmation"
+      ],
+      "verification_commands": [
+        "python3 -m pytest tests/test_main_loop_scaffold.py tests/test_dialog_engine.py tests/test_shop.py"
+      ],
+      "owner": "phase5-parity-remediation"
+    }
+  ]
+}
