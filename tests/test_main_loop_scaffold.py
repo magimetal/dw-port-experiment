@@ -108,6 +108,13 @@ def _session(state: MainLoopState | None = None, *, save_path: Path | None = Non
     )
 
 
+def _select_stairs(session: MainLoopSession) -> StepResult:
+    session.step("C")
+    for _ in range(5):
+        session.step("DOWN")
+    return session.step("ENTER")
+
+
 def _find_step_for_tile(*, map_id: int, tile_id: int) -> tuple[int, int, str, int, int]:
     engine = _map_engine()
     seeded = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id)
@@ -894,33 +901,7 @@ def test_map_command_menu_select_stairs_with_cursed_belt_sets_hp_to_1_on_load() 
     assert session.state.game_state.hp == 1
 
 
-def test_map_command_menu_select_stairs_works_in_tantegel_castle() -> None:
-    seeded = MainLoopState(
-        screen_mode="map",
-        game_state=_clone_state(
-            GameState.fresh_game("ERDRICK"),
-            map_id=4,
-            player_x=29,
-            player_y=29,
-        ),
-        title_state=initial_title_state(),
-    )
-    session = _session(state=seeded)
-
-    session.step("C")
-    for _ in range(5):
-        session.step("DOWN")
-    selected = session.step("ENTER")
-
-    assert selected.screen_mode == "map"
-    assert selected.action.kind == "map_stairs"
-    assert selected.action.detail == "warp:17"
-    assert session.state.game_state.map_id == 12
-    assert session.state.game_state.player_x == 0
-    assert session.state.game_state.player_y == 4
-
-
-def test_map_command_menu_select_stairs_works_on_tantegel_throne_room_stairs() -> None:
+def test_tantegel_castle_stairs_match_rom_parity() -> None:
     seeded = MainLoopState(
         screen_mode="map",
         game_state=_clone_state(
@@ -944,6 +925,736 @@ def test_map_command_menu_select_stairs_works_on_tantegel_throne_room_stairs() -
     assert session.state.game_state.map_id == 5
     assert session.state.game_state.player_x == 8
     assert session.state.game_state.player_y == 8
+
+
+def test_tantegel_throne_room_return_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=5,
+            player_x=8,
+            player_y=8,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    session.step("C")
+    for _ in range(5):
+        session.step("DOWN")
+    selected = session.step("ENTER")
+
+    assert selected.screen_mode == "map"
+    assert selected.action.kind == "map_stairs"
+    assert selected.action.detail == "warp:18"
+    assert session.state.game_state.map_id == 4
+    assert session.state.game_state.player_x == 7
+    assert session.state.game_state.player_y == 7
+
+
+def test_tantegel_sublevel_stairs_match_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=4,
+            player_x=29,
+            player_y=29,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    session.step("C")
+    for _ in range(5):
+        session.step("DOWN")
+    down = session.step("ENTER")
+
+    assert down.screen_mode == "map"
+    assert down.action.kind == "map_stairs"
+    assert down.action.detail == "warp:17"
+    assert session.state.game_state.map_id == 12
+    assert session.state.game_state.player_x == 0
+    assert session.state.game_state.player_y == 4
+
+    session.step("C")
+    for _ in range(5):
+        session.step("DOWN")
+    up = session.step("ENTER")
+
+    assert up.screen_mode == "map"
+    assert up.action.kind == "map_stairs"
+    assert up.action.detail == "warp:17"
+    assert session.state.game_state.map_id == 4
+    assert session.state.game_state.player_x == 29
+    assert session.state.game_state.player_y == 29
+
+
+def test_tantegel_castle_edge_exit_matches_rom_parity() -> None:
+    exit_seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=4,
+            player_x=11,
+            player_y=29,
+        ),
+        title_state=initial_title_state(),
+    )
+    exit_session = _session(state=exit_seeded)
+
+    exited = exit_session.step("DOWN")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "4"
+    assert exit_session.state.game_state.map_id == 1
+    assert exit_session.state.game_state.player_x == 43
+    assert exit_session.state.game_state.player_y == 43
+
+    blocked_seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=4,
+            player_x=29,
+            player_y=14,
+        ),
+        title_state=initial_title_state(),
+    )
+    blocked_session = _session(state=blocked_seeded)
+
+    blocked = blocked_session.step("RIGHT")
+
+    assert blocked.screen_mode == "map"
+    assert blocked.action.kind == "blocked"
+    assert blocked.action.detail == "30,14"
+    assert blocked_session.state.game_state.map_id == 4
+    assert blocked_session.state.game_state.player_x == 29
+    assert blocked_session.state.game_state.player_y == 14
+
+
+def test_tantegel_fresh_game_throne_room_constraints_match_rom() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=5,
+            player_x=8,
+            player_y=8,
+            player_flags=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    session.step("C")
+    for _ in range(5):
+        session.step("DOWN")
+    first_exit = session.step("ENTER")
+
+    assert first_exit.action.kind == "map_stairs"
+    assert first_exit.action.detail == "warp:18"
+    assert (session.state.game_state.player_flags & 0x08) != 0
+    assert session.state.game_state.map_id == 4
+    assert session.state.game_state.player_x == 7
+    assert session.state.game_state.player_y == 7
+
+    session.step("C")
+    for _ in range(5):
+        session.step("DOWN")
+    returned = session.step("ENTER")
+
+    assert returned.action.kind == "map_stairs"
+    assert returned.action.detail == "warp:18"
+    assert (session.state.game_state.player_flags & 0x08) != 0
+    assert session.state.game_state.map_id == 5
+    assert session.state.game_state.player_x == 8
+    assert session.state.game_state.player_y == 8
+
+
+def test_tantegel_sublevel_left_edge_does_not_auto_exit_without_rom_proof() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=12,
+            player_x=0,
+            player_y=4,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    blocked = session.step("LEFT")
+
+    assert blocked.screen_mode == "map"
+    assert blocked.action.kind == "blocked"
+    assert blocked.action.detail == "255,4"
+    assert session.state.game_state.map_id == 12
+    assert session.state.game_state.player_x == 0
+    assert session.state.game_state.player_y == 4
+
+
+def test_brecconary_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=8,
+            player_x=0,
+            player_y=15,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("LEFT")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "3"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 48
+    assert session.state.game_state.player_y == 41
+
+
+def test_garinham_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=9,
+            player_x=0,
+            player_y=14,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("LEFT")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "0"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 2
+    assert session.state.game_state.player_y == 2
+
+
+def test_kol_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=7,
+            player_x=19,
+            player_y=23,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("DOWN")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "2"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 104
+    assert session.state.game_state.player_y == 10
+
+
+def test_dragonlords_castle_ground_floor_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=2,
+            player_x=10,
+            player_y=19,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("DOWN")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "6"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 48
+    assert session.state.game_state.player_y == 48
+
+
+def test_rimuldar_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=11,
+            player_x=29,
+            player_y=14,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("RIGHT")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "9"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 102
+    assert session.state.game_state.player_y == 72
+
+
+def test_hauksness_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=3,
+            player_x=0,
+            player_y=10,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("LEFT")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "10"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 25
+    assert session.state.game_state.player_y == 89
+
+
+def test_cantlin_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=10,
+            player_x=15,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("UP")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "11"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 73
+    assert session.state.game_state.player_y == 102
+
+
+def test_swamp_cave_reverse_edge_exits_match_rom_parity() -> None:
+    top_seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=21,
+            player_x=0,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    top_session = _session(state=top_seeded)
+
+    top_exit = top_session.step("LEFT")
+
+    assert top_exit.screen_mode == "map"
+    assert top_exit.action.kind == "warp"
+    assert top_exit.action.detail == "5"
+    assert top_session.state.game_state.map_id == 1
+    assert top_session.state.game_state.player_x == 104
+    assert top_session.state.game_state.player_y == 44
+
+    bottom_seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=21,
+            player_x=0,
+            player_y=29,
+        ),
+        title_state=initial_title_state(),
+    )
+    bottom_session = _session(state=bottom_seeded)
+
+    bottom_exit = bottom_session.step("LEFT")
+
+    assert bottom_exit.screen_mode == "map"
+    assert bottom_exit.action.kind == "warp"
+    assert bottom_exit.action.detail == "7"
+    assert bottom_session.state.game_state.map_id == 1
+    assert bottom_session.state.game_state.player_x == 104
+    assert bottom_session.state.game_state.player_y == 49
+
+
+def test_swamp_cave_wrong_direction_edge_walk_offs_remain_blocked() -> None:
+    top_seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=21,
+            player_x=0,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    top_session = _session(state=top_seeded)
+
+    top_blocked = top_session.step("UP")
+
+    assert top_blocked.screen_mode == "map"
+    assert top_blocked.action.kind == "blocked"
+    assert top_blocked.action.detail == "0,255"
+    assert top_session.state.game_state.map_id == 21
+    assert top_session.state.game_state.player_x == 0
+    assert top_session.state.game_state.player_y == 0
+
+    bottom_seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=21,
+            player_x=0,
+            player_y=29,
+        ),
+        title_state=initial_title_state(),
+    )
+    bottom_session = _session(state=bottom_seeded)
+
+    bottom_blocked = bottom_session.step("DOWN")
+
+    assert bottom_blocked.screen_mode == "map"
+    assert bottom_blocked.action.kind == "blocked"
+    assert bottom_blocked.action.detail == "0,30"
+    assert bottom_session.state.game_state.map_id == 21
+    assert bottom_session.state.game_state.player_x == 0
+    assert bottom_session.state.game_state.player_y == 29
+
+
+def test_rock_mountain_b1_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=22,
+            player_x=0,
+            player_y=7,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("LEFT")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "8"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 29
+    assert session.state.game_state.player_y == 57
+
+
+def test_erdricks_cave_b1_reverse_edge_exit_matches_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=28,
+            player_x=0,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    exited = session.step("LEFT")
+
+    assert exited.screen_mode == "map"
+    assert exited.action.kind == "warp"
+    assert exited.action.detail == "13"
+    assert session.state.game_state.map_id == 1
+    assert session.state.game_state.player_x == 28
+    assert session.state.game_state.player_y == 12
+
+
+def test_rock_mountain_b2_reverse_stairs_match_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=23,
+            player_x=0,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    selected = _select_stairs(session)
+
+    assert selected.screen_mode == "map"
+    assert selected.action.kind == "map_stairs"
+    assert selected.action.detail == "warp:39"
+    assert session.state.game_state.map_id == 22
+    assert session.state.game_state.player_x == 0
+    assert session.state.game_state.player_y == 0
+
+
+def test_cave_of_garinham_b2_reverse_stairs_match_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=25,
+            player_x=11,
+            player_y=2,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    selected = _select_stairs(session)
+
+    assert selected.screen_mode == "map"
+    assert selected.action.kind == "map_stairs"
+    assert selected.action.detail == "warp:42"
+    assert session.state.game_state.map_id == 24
+    assert session.state.game_state.player_x == 1
+    assert session.state.game_state.player_y == 18
+
+
+def test_cave_of_garinham_b4_reverse_stairs_match_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=27,
+            player_x=0,
+            player_y=4,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    selected = _select_stairs(session)
+
+    assert selected.screen_mode == "map"
+    assert selected.action.kind == "map_stairs"
+    assert selected.action.detail == "warp:48"
+    assert session.state.game_state.map_id == 26
+    assert session.state.game_state.player_x == 9
+    assert session.state.game_state.player_y == 5
+
+
+def test_erdricks_cave_b2_reverse_stairs_match_rom_parity() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=29,
+            player_x=8,
+            player_y=9,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    selected = _select_stairs(session)
+
+    assert selected.screen_mode == "map"
+    assert selected.action.kind == "map_stairs"
+    assert selected.action.detail == "warp:50"
+    assert session.state.game_state.map_id == 28
+    assert session.state.game_state.player_x == 9
+    assert session.state.game_state.player_y == 9
+
+
+def test_rock_mountain_b2_left_edge_walk_off_remains_blocked() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=23,
+            player_x=0,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    blocked = session.step("LEFT")
+
+    assert blocked.screen_mode == "map"
+    assert blocked.action.kind == "blocked"
+    assert blocked.action.detail == "255,0"
+    assert session.state.game_state.map_id == 23
+    assert session.state.game_state.player_x == 0
+    assert session.state.game_state.player_y == 0
+
+
+def test_reverse_stairs_lookup_ignores_ambiguous_duplicate_destinations() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=20,
+            player_x=0,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    session.step("C")
+    for _ in range(5):
+        session.step("DOWN")
+    rejected = session.step("ENTER")
+
+    assert rejected.screen_mode == "dialog"
+    assert rejected.action.kind == "map_stairs_rejected"
+    assert rejected.action.detail == "no_stairs"
+    assert session.state.game_state.map_id == 20
+    assert session.state.game_state.player_x == 0
+    assert session.state.game_state.player_y == 0
+
+
+def test_charlock_reverse_stairs_match_late_region_locked_scope() -> None:
+    cases = (
+        ((6, 10, 29), "38", (20, 9, 6)),
+        ((15, 8, 13), "15", (2, 4, 14)),
+        ((16, 0, 0), "25", (15, 2, 4)),
+        ((16, 0, 1), "24", (15, 2, 14)),
+        ((16, 4, 4), "21", (15, 13, 7)),
+        ((16, 8, 9), "23", (15, 14, 9)),
+        ((16, 9, 8), "22", (15, 19, 7)),
+    )
+
+    for (map_id, player_x, player_y), warp_index, expected in cases:
+        seeded = MainLoopState(
+            screen_mode="map",
+            game_state=_clone_state(
+                GameState.fresh_game("ERDRICK"),
+                map_id=map_id,
+                player_x=player_x,
+                player_y=player_y,
+            ),
+            title_state=initial_title_state(),
+        )
+        session = _session(state=seeded)
+
+        selected = _select_stairs(session)
+
+        assert selected.screen_mode == "map"
+        assert selected.action.kind == "map_stairs"
+        assert selected.action.detail == f"warp:{warp_index}"
+        assert (
+            session.state.game_state.map_id,
+            session.state.game_state.player_x,
+            session.state.game_state.player_y,
+        ) == expected
+
+
+def test_garinham_late_floor_reverse_stairs_match_locked_scope() -> None:
+    cases = (
+        ((26, 6, 11), "45", (25, 5, 6)),
+        ((26, 14, 1), "43", (25, 1, 1)),
+        ((26, 18, 1), "44", (25, 12, 1)),
+        ((26, 18, 13), "47", (25, 12, 10)),
+        ((27, 5, 4), "49", (26, 10, 9)),
+    )
+
+    for (map_id, player_x, player_y), warp_index, expected in cases:
+        seeded = MainLoopState(
+            screen_mode="map",
+            game_state=_clone_state(
+                GameState.fresh_game("ERDRICK"),
+                map_id=map_id,
+                player_x=player_x,
+                player_y=player_y,
+            ),
+            title_state=initial_title_state(),
+        )
+        session = _session(state=seeded)
+
+        selected = _select_stairs(session)
+
+        assert selected.screen_mode == "map"
+        assert selected.action.kind == "map_stairs"
+        assert selected.action.detail == f"warp:{warp_index}"
+        assert (
+            session.state.game_state.map_id,
+            session.state.game_state.player_x,
+            session.state.game_state.player_y,
+        ) == expected
+
+
+def test_dragonlord_sublevel_six_duplicate_destination_remains_rejected() -> None:
+    seeded = MainLoopState(
+        screen_mode="map",
+        game_state=_clone_state(
+            GameState.fresh_game("ERDRICK"),
+            map_id=20,
+            player_x=0,
+            player_y=0,
+        ),
+        title_state=initial_title_state(),
+    )
+    session = _session(state=seeded)
+
+    rejected = _select_stairs(session)
+
+    assert rejected.screen_mode == "dialog"
+    assert rejected.action.kind == "map_stairs_rejected"
+    assert rejected.action.detail == "no_stairs"
+    assert session.state.game_state.map_id == 20
+    assert session.state.game_state.player_x == 0
+    assert session.state.game_state.player_y == 0
+
+
+def test_deferred_late_region_stairs_attempts_remain_rejected() -> None:
+    cases = (
+        (15, 9, 0),
+        (23, 6, 5),
+        (24, 6, 11),
+        (26, 2, 17),
+    )
+
+    for map_id, player_x, player_y in cases:
+        seeded = MainLoopState(
+            screen_mode="map",
+            game_state=_clone_state(
+                GameState.fresh_game("ERDRICK"),
+                map_id=map_id,
+                player_x=player_x,
+                player_y=player_y,
+            ),
+            title_state=initial_title_state(),
+        )
+        session = _session(state=seeded)
+
+        rejected = _select_stairs(session)
+
+        assert rejected.screen_mode == "dialog"
+        assert rejected.action.kind == "map_stairs_rejected"
+        assert rejected.action.detail == "no_stairs"
+        assert session.state.game_state.map_id == map_id
+        assert session.state.game_state.player_x == player_x
+        assert session.state.game_state.player_y == player_y
 
 
 def test_map_command_menu_select_stairs_rejects_when_no_stairs_available() -> None:

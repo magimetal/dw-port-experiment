@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -17,6 +18,12 @@ BLK_HILL = 0x02
 OVERWORLD_MAP_ID = 0x01
 RAINBOW_BRIDGE_X = 0x3F
 RAINBOW_BRIDGE_Y = 0x31
+_ENTRY_DIR_DOWN = 0
+_ENTRY_DIR_LEFT = 1
+_ENTRY_DIR_UP = 2
+_ENTRY_DIR_RIGHT = 3
+_REVERSE_EDGE_WARP_INDEXES = frozenset({0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13})
+_REVERSE_STAIRS_WARP_INDEXES = frozenset({15, 17, 18, 21, 22, 23, 24, 25, 38, 39, 42, 43, 44, 45, 47, 48, 49, 50})
 
 
 def _u8(value: int) -> int:
@@ -42,9 +49,8 @@ class MapEngine:
         maps = maps_payload.get("maps", [])
         warps = warps_payload.get("warps", [])
         self._maps_by_id: dict[int, dict] = {int(entry["id"]): entry for entry in maps}
-        self._warps_by_src: dict[tuple[int, int, int], WarpDest] = {}
-        for row in warps:
-            warp = WarpDest(
+        self._warps: tuple[WarpDest, ...] = tuple(
+            WarpDest(
                 index=int(row["index"]),
                 src_map=_u8(row["src_map"]),
                 src_x=_u8(row["src_x"]),
@@ -54,7 +60,23 @@ class MapEngine:
                 dst_y=_u8(row["dst_y"]),
                 entry_dir=_u8(row["entry_dir"]),
             )
+            for row in warps
+        )
+        self._warps_by_src: dict[tuple[int, int, int], WarpDest] = {}
+        for warp in self._warps:
             self._warps_by_src[(warp.src_map, warp.src_x, warp.src_y)] = warp
+        destination_counts = Counter((warp.dst_map, warp.dst_x, warp.dst_y) for warp in self._warps)
+        self._reverse_edge_by_exit: dict[tuple[int, int, int, int], WarpDest] = {}
+        self._reverse_stairs_by_dst: dict[tuple[int, int, int], WarpDest] = {}
+        for warp in self._warps:
+            destination_key = (warp.dst_map, warp.dst_x, warp.dst_y)
+            if destination_counts[destination_key] != 1:
+                continue
+            reverse_warp = self._reverse_warp(warp)
+            if warp.index in _REVERSE_STAIRS_WARP_INDEXES:
+                self._reverse_stairs_by_dst[destination_key] = reverse_warp
+            if warp.index in _REVERSE_EDGE_WARP_INDEXES and self._is_reverse_edge_candidate(warp):
+                self._reverse_edge_by_exit[(warp.dst_map, warp.dst_x, warp.dst_y, warp.entry_dir)] = reverse_warp
 
     @classmethod
     def from_files(cls, maps_path: Path, warps_path: Path) -> MapEngine:
@@ -138,6 +160,29 @@ class MapEngine:
         key = (_u8(state.map_id), _u8(x), _u8(y))
         return self._warps_by_src.get(key)
 
+    def check_stairs_warp(self, state: GameState, x: int, y: int) -> WarpDest | None:
+        # SOURCE: Bank03.asm CheckStairs/MapCheckLoop1/MapCheckLoop2 @ LD9AF-LDA04
+        # SOURCE: Bank03.asm MapEntryTbl/MapTargetTbl semantics @ LF3C8-LF4FB
+        key = (_u8(state.map_id), _u8(x), _u8(y))
+        warp = self._warps_by_src.get(key)
+        if warp is not None:
+            return warp
+        return self._reverse_stairs_by_dst.get(key)
+
+    def check_edge_exit(self, state: GameState, *, next_x: int, next_y: int) -> WarpDest | None:
+        # SOURCE: Bank00.asm ChkSpecialLoc/CheckMapExit @ LB219-LB23B
+        exit_dir = self._oob_exit_dir(
+            current_x=state.player_x,
+            current_y=state.player_y,
+            next_x=next_x,
+            next_y=next_y,
+        )
+        if exit_dir is None:
+            return None
+        return self._reverse_edge_by_exit.get(
+            (_u8(state.map_id), _u8(state.player_x), _u8(state.player_y), exit_dir)
+        )
+
     def handle_warp(self, state: GameState, warp: WarpDest) -> GameState:
         # SOURCE: Bank03.asm ChangeMaps @ LD9E2 and map-target load path @ LD95E-LD97F
         state_after_map = self._clone_state(
@@ -153,3 +198,46 @@ class MapEngine:
         data = state.to_dict()
         data.update(updates)
         return GameState(**data)
+
+    @staticmethod
+    def _reverse_warp(warp: WarpDest) -> WarpDest:
+        return WarpDest(
+            index=warp.index,
+            src_map=warp.dst_map,
+            src_x=warp.dst_x,
+            src_y=warp.dst_y,
+            dst_map=warp.src_map,
+            dst_x=warp.src_x,
+            dst_y=warp.src_y,
+            entry_dir=warp.entry_dir,
+        )
+
+    def _is_reverse_edge_candidate(self, warp: WarpDest) -> bool:
+        # SOURCE: Bank00.asm ChkSpecialLoc/CheckMapExit @ LB219-LB23B
+        if warp.src_map != OVERWORLD_MAP_ID:
+            return False
+        map_entry = self.map_by_id(warp.dst_map)
+        width = int(map_entry["width"])
+        height = int(map_entry["height"])
+        if warp.entry_dir == _ENTRY_DIR_DOWN:
+            return warp.dst_y == height - 1
+        if warp.entry_dir == _ENTRY_DIR_LEFT:
+            return warp.dst_x == 0
+        if warp.entry_dir == _ENTRY_DIR_UP:
+            return warp.dst_y == 0
+        if warp.entry_dir == _ENTRY_DIR_RIGHT:
+            return warp.dst_x == width - 1
+        return False
+
+    @staticmethod
+    def _oob_exit_dir(*, current_x: int, current_y: int, next_x: int, next_y: int) -> int | None:
+        # SOURCE: Bank00.asm ChkSpecialLoc/CheckMapExit @ LB219-LB23B
+        if next_x < current_x:
+            return _ENTRY_DIR_LEFT
+        if next_x > current_x:
+            return _ENTRY_DIR_RIGHT
+        if next_y < current_y:
+            return _ENTRY_DIR_UP
+        if next_y > current_y:
+            return _ENTRY_DIR_DOWN
+        return None

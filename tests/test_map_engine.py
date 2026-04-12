@@ -21,6 +21,13 @@ def _load_fixture(path: Path) -> dict:
     return json.loads(path.read_text())
 
 
+def _engine() -> MapEngine:
+    return MapEngine(
+        maps_payload=json.loads(MAPS_PATH.read_text()),
+        warps_payload=json.loads(WARPS_PATH.read_text()),
+    )
+
+
 def test_tile_lookup_and_oob_border_tile() -> None:
     maps_payload = json.loads(MAPS_PATH.read_text())
     warps_payload = json.loads(WARPS_PATH.read_text())
@@ -86,6 +93,135 @@ def test_warp_detection_and_transition_to_tantegel() -> None:
 
     transitioned = engine.handle_warp(state, warp)
     assert (transitioned.map_id, transitioned.player_x, transitioned.player_y) == (4, 11, 29)
+
+
+def test_reverse_edge_exit_lookup_matches_locked_scope() -> None:
+    engine = _engine()
+    cases = (
+        ((8, 0, 15, -1, 15), (3, 1, 48, 41)),
+        ((9, 0, 14, -1, 14), (0, 1, 2, 2)),
+        ((21, 0, 0, -1, 0), (5, 1, 104, 44)),
+        ((21, 0, 29, -1, 29), (7, 1, 104, 49)),
+        ((22, 0, 7, -1, 7), (8, 1, 29, 57)),
+        ((28, 0, 0, -1, 0), (13, 1, 28, 12)),
+    )
+
+    for (map_id, player_x, player_y, next_x, next_y), expected in cases:
+        state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id, player_x=player_x, player_y=player_y)
+        warp = engine.check_edge_exit(state, next_x=next_x, next_y=next_y)
+
+        assert isinstance(warp, WarpDest)
+        assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == expected
+
+
+def test_reverse_edge_exit_lookup_matches_late_region_locked_scope() -> None:
+    engine = _engine()
+    cases = (
+        ((2, 10, 19, 10, 20), (6, 1, 48, 48)),
+        ((3, 0, 10, -1, 10), (10, 1, 25, 89)),
+        ((7, 19, 23, 19, 24), (2, 1, 104, 10)),
+        ((10, 15, 0, 15, -1), (11, 1, 73, 102)),
+        ((11, 29, 14, 30, 14), (9, 1, 102, 72)),
+    )
+
+    for (map_id, player_x, player_y, next_x, next_y), expected in cases:
+        state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id, player_x=player_x, player_y=player_y)
+        warp = engine.check_edge_exit(state, next_x=next_x, next_y=next_y)
+
+        assert isinstance(warp, WarpDest)
+        assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == expected
+
+
+def test_reverse_stairs_lookup_matches_locked_scope() -> None:
+    engine = _engine()
+    cases = (
+        ((23, 0, 0), (39, 22, 0, 0)),
+        ((25, 11, 2), (42, 24, 1, 18)),
+        ((27, 0, 4), (48, 26, 9, 5)),
+        ((29, 8, 9), (50, 28, 9, 9)),
+    )
+
+    for (map_id, player_x, player_y), expected in cases:
+        state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id, player_x=player_x, player_y=player_y)
+        warp = engine.check_stairs_warp(state, x=player_x, y=player_y)
+
+        assert isinstance(warp, WarpDest)
+        assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == expected
+
+
+def test_reverse_stairs_lookup_matches_late_region_locked_scope() -> None:
+    engine = _engine()
+    cases = (
+        ((6, 10, 29), (38, 20, 9, 6)),
+        ((15, 8, 13), (15, 2, 4, 14)),
+        ((16, 0, 0), (25, 15, 2, 4)),
+        ((16, 0, 1), (24, 15, 2, 14)),
+        ((16, 4, 4), (21, 15, 13, 7)),
+        ((16, 8, 9), (23, 15, 14, 9)),
+        ((16, 9, 8), (22, 15, 19, 7)),
+        ((26, 6, 11), (45, 25, 5, 6)),
+        ((26, 14, 1), (43, 25, 1, 1)),
+        ((26, 18, 1), (44, 25, 12, 1)),
+        ((26, 18, 13), (47, 25, 12, 10)),
+        ((27, 5, 4), (49, 26, 10, 9)),
+    )
+
+    for (map_id, player_x, player_y), expected in cases:
+        state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id, player_x=player_x, player_y=player_y)
+        warp = engine.check_stairs_warp(state, x=player_x, y=player_y)
+
+        assert isinstance(warp, WarpDest)
+        assert (warp.index, warp.dst_map, warp.dst_x, warp.dst_y) == expected
+
+
+def test_reverse_edge_exit_lookup_ignores_non_overworld_origin_edge_destinations() -> None:
+    engine = _engine()
+
+    tantegel_sublevel = _clone_state(GameState.fresh_game("ERDRICK"), map_id=12, player_x=0, player_y=4)
+    assert engine.check_edge_exit(tantegel_sublevel, next_x=-1, next_y=4) is None
+
+    rock_mountain_b2 = _clone_state(GameState.fresh_game("ERDRICK"), map_id=23, player_x=0, player_y=0)
+    assert engine.check_edge_exit(rock_mountain_b2, next_x=-1, next_y=0) is None
+
+
+def test_reverse_edge_exit_lookup_requires_correct_direction_on_corner_maps() -> None:
+    engine = _engine()
+
+    top_corner = _clone_state(GameState.fresh_game("ERDRICK"), map_id=21, player_x=0, player_y=0)
+    assert engine.check_edge_exit(top_corner, next_x=-1, next_y=0) is not None
+    assert engine.check_edge_exit(top_corner, next_x=0, next_y=-1) is None
+
+    bottom_corner = _clone_state(GameState.fresh_game("ERDRICK"), map_id=21, player_x=0, player_y=29)
+    assert engine.check_edge_exit(bottom_corner, next_x=-1, next_y=29) is not None
+    assert engine.check_edge_exit(bottom_corner, next_x=0, next_y=30) is None
+
+
+def test_reverse_stairs_lookup_rejects_ambiguous_duplicate_destination() -> None:
+    engine = _engine()
+    state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=20, player_x=0, player_y=0)
+
+    assert engine.check_stairs_warp(state, x=0, y=0) is None
+
+
+def test_reverse_stairs_lookup_preserves_late_region_ambiguity_guard() -> None:
+    engine = _engine()
+    state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=20, player_x=0, player_y=0)
+
+    assert engine.check_stairs_warp(state, x=0, y=0) is None
+
+
+def test_deferred_late_region_reverse_stairs_destinations_remain_unresolved() -> None:
+    engine = _engine()
+    cases = (
+        (15, 9, 0),
+        (23, 6, 5),
+        (24, 6, 11),
+        (26, 2, 17),
+    )
+
+    for map_id, player_x, player_y in cases:
+        state = _clone_state(GameState.fresh_game("ERDRICK"), map_id=map_id, player_x=player_x, player_y=player_y)
+        assert engine.check_stairs_warp(state, x=player_x, y=player_y) is None
 
 
 def test_load_map_clamps_coordinates() -> None:

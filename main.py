@@ -185,6 +185,9 @@ _MAP_COMMAND_OPTIONS: tuple[str, ...] = (
 _MAP_COMMAND_OPEN_KEYS: set[str] = {"C", "COMMAND", "MENU"}
 _MAP_STATUS_CLOSE_KEYS: set[str] = {"ESC", "ENTER", "B"}
 _MAP_TILE_DOOR = 0x11
+_MAP_TILE_TOWN = 0x07
+_MAP_TILE_CAVE = 0x08
+_MAP_TILE_CASTLE = 0x09
 _CHEST_GOLD_CONTENT_ID = 19
 _CHEST_GOLD_REWARD = 120
 _CHEST_HERB_CONTENT_IDS: frozenset[int] = frozenset({2, 17})
@@ -311,6 +314,18 @@ def _apply_map_load_cursed_belt_hook(state: GameState) -> tuple[GameState, bool]
     if (state.more_spells_quest & _FLAG_CURSED_BELT) == 0:
         return state, False
     return _clone_state(state, hp=1), True
+
+
+def _apply_map_load_player_flag_hook(state: GameState) -> GameState:
+    # SOURCE: Bank00.asm ChkThRoomMap @ LAF1F-LAF29
+    if _u8(state.map_id) == 0x05:
+        return state
+    return _clone_state(state, player_flags=state.player_flags | _F_LEFT_THROOM)
+
+
+def _apply_map_load_hooks(state: GameState) -> tuple[GameState, bool]:
+    state = _apply_map_load_player_flag_hook(state)
+    return _apply_map_load_cursed_belt_hook(state)
 
 
 def _load_encounter_runtime(*, zones_path: Path, enemies_path: Path) -> EncounterRuntime:
@@ -1054,7 +1069,7 @@ def _route_map_stairs_input(
     *,
     map_engine: MapEngine,
 ) -> MainLoopState:
-    warp = map_engine.check_warp(
+    warp = map_engine.check_stairs_warp(
         state.game_state,
         x=state.game_state.player_x,
         y=state.game_state.player_y,
@@ -1071,7 +1086,7 @@ def _route_map_stairs_input(
         )
 
     next_game_state = map_engine.handle_warp(state.game_state, warp)
-    next_game_state, cursed_on_load = _apply_map_load_cursed_belt_hook(next_game_state)
+    next_game_state, cursed_on_load = _apply_map_load_hooks(next_game_state)
     detail = f"warp:{warp.index}"
     if cursed_on_load:
         detail = f"{detail};cursed_belt:hp_set_to_1_on_load"
@@ -1811,6 +1826,35 @@ def route_input(
     if delta is None:
         return replace(state, last_action=LoopAction(kind="ignored_input", detail=token or "noop"))
     next_facing = _FACING_BY_MOVE_KEY.get(token, state.player_facing)
+    map_entry = map_engine.map_by_id(state.game_state.map_id)
+    map_width = int(map_entry["width"])
+    map_height = int(map_entry["height"])
+    next_x_raw = state.game_state.player_x + delta[0]
+    next_y_raw = state.game_state.player_y + delta[1]
+
+    if next_x_raw < 0 or next_y_raw < 0 or next_x_raw >= map_width or next_y_raw >= map_height:
+        edge_exit = map_engine.check_edge_exit(
+            state.game_state,
+            next_x=next_x_raw,
+            next_y=next_y_raw,
+        )
+        if edge_exit is None:
+            return replace(
+                state,
+                player_facing=next_facing,
+                last_action=LoopAction(kind="blocked", detail=f"{_u8(next_x_raw)},{_u8(next_y_raw)}"),
+            )
+        moved_state = map_engine.handle_warp(state.game_state, edge_exit)
+        moved_state, cursed_on_load = _apply_map_load_hooks(moved_state)
+        detail = str(edge_exit.index)
+        if cursed_on_load:
+            detail = f"{detail};cursed_belt:hp_set_to_1_on_load"
+        return replace(
+            state,
+            game_state=moved_state,
+            player_facing=next_facing,
+            last_action=LoopAction(kind="warp", detail=detail),
+        )
 
     next_x = _u8(state.game_state.player_x + delta[0])
     next_y = _u8(state.game_state.player_y + delta[1])
@@ -1887,13 +1931,16 @@ def route_input(
             last_action=LoopAction(kind="combat_defeat", detail="revive"),
         )
 
-    warp = map_engine.check_warp(moved_state, x=moved_state.player_x, y=moved_state.player_y)
+    if tile in {_MAP_TILE_TOWN, _MAP_TILE_CAVE, _MAP_TILE_CASTLE}:
+        warp = map_engine.check_warp(moved_state, x=moved_state.player_x, y=moved_state.player_y)
+    else:
+        warp = None
     if warp is not None:
         detail = str(warp.index)
         if step_effects:
             detail = f"{detail};{';'.join(step_effects)}"
         moved_state = map_engine.handle_warp(moved_state, warp)
-        moved_state, cursed_on_load = _apply_map_load_cursed_belt_hook(moved_state)
+        moved_state, cursed_on_load = _apply_map_load_hooks(moved_state)
         if cursed_on_load:
             detail = f"{detail};cursed_belt:hp_set_to_1_on_load"
         return replace(
