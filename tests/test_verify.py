@@ -148,6 +148,35 @@ def test_phase5_parity_matrix_gate_quarantines_shield_derived_defense_scope_as_u
     assert row["status"] == "UNKNOWN"
     assert row["evidence_tier"] == "unknown"
     assert row["passed"] is False
+    assert row["actual"]["equipment_bonus_evidence"]["shield_index"] == 2
+    assert row["actual"]["equipment_bonus_evidence"]["shield_bonus"] == 10
+    assert row["actual"]["candidate_defense_if_shield_bonus_applied"] == 12
+
+
+def test_phase5_parity_matrix_gate_keeps_resistance_decode_honest_but_more_reviewable() -> None:
+    verify.check_phase5_parity_matrix_gate()
+
+    artifact = json.loads((ROOT / "artifacts" / "phase5_parity.json").read_text())
+    row = next(row for row in artifact["row_results"] if row["test"] == "ROM-backed resistance mapping availability")
+
+    assert row["status"] == "UNKNOWN"
+    assert row["passed"] is False
+    assert row["actual"]["s_ss_resist_present"] is True
+    assert row["actual"]["spell_fail_threshold_present"] is True
+    assert row["actual"]["resistance_statuses"] == ["inferred_from_mdef_high_nibble"]
+
+
+def test_phase5_parity_matrix_gate_reports_unknown_enemy_spell_patterns_with_explicit_blockers() -> None:
+    verify.check_phase5_parity_matrix_gate()
+
+    artifact = json.loads((ROOT / "artifacts" / "phase5_parity.json").read_text())
+    row = next(row for row in artifact["row_results"] if row["test"] == "Enemy spell action mapping availability")
+
+    assert row["status"] == "PASS"
+    assert row["actual"]["proven_pattern_flags"] == [2]
+    assert row["actual"]["unknown_pattern_flags"]
+    assert row["actual"]["unknown_spell_blockers"]
+    assert row["actual"]["unknown_spell_blocker_count"] == len(row["actual"]["unknown_spell_blockers"])
 
 
 def test_replay_and_checkpoint_manifests_cover_batch1_domains() -> None:
@@ -157,8 +186,17 @@ def test_replay_and_checkpoint_manifests_cover_batch1_domains() -> None:
     replay_domains = {entry["domain"] for entry in replay_manifest["fixtures"]}
     checkpoint_domains = {entry["domain"] for entry in checkpoint_manifest["fixtures"]}
 
-    assert {"overworld_traversal", "combat_encounter_resolution", "town_purchase_stay_flow"}.issubset(replay_domains)
-    assert {"dungeon_traversal", "save_load_resume_continuity"}.issubset(checkpoint_domains)
+    assert {
+        "overworld_traversal",
+        "combat_encounter_resolution",
+        "town_purchase_stay_flow",
+        "item_command_resolution",
+    } == replay_domains
+    assert {
+        "dungeon_traversal",
+        "save_load_resume_continuity",
+        "equipment_modifier_resume_continuity",
+    } == checkpoint_domains
 
 
 def test_replay_manifest_fixture_entries_are_executable_and_pass() -> None:
@@ -169,11 +207,29 @@ def test_replay_manifest_fixture_entries_are_executable_and_pass() -> None:
     assert all("fixture_file" in entry for entry in manifest["fixtures"])
 
     result = evaluate_manifest(ROOT / "tests" / "replay" / "manifest.json", root=ROOT)
+    case_ids_by_fixture = {
+        fixture_result["id"]: [case_result["id"] for case_result in fixture_result["result"]["case_results"]]
+        for fixture_result in result["fixture_results"]
+    }
 
     assert result["ok"] is True
-    assert result["fixture_count"] == 3
-    assert result["case_count"] >= 5
-    assert {"overworld_traversal", "combat_encounter_resolution", "town_purchase_stay_flow"} == set(result["executable_domains"])
+    assert result["fixture_count"] == 4
+    assert result["case_count"] == 9
+    assert {
+        "overworld_traversal",
+        "combat_encounter_resolution",
+        "town_purchase_stay_flow",
+        "item_command_resolution",
+    } == set(result["executable_domains"])
+    assert case_ids_by_fixture["combat-enemy-spellcaster-turn"] == [
+        "magician-casts-hurt-live",
+        "stopspelled-magician-falls-back-to-physical-attack",
+        "magidrakee-casts-hurt-live",
+    ]
+    assert case_ids_by_fixture["item-command-resolution"] == [
+        "fairy-water-sets-rom-repel-window",
+        "dragons-scale-recomputes-defense-without-consuming-item",
+    ]
 
 
 def test_checkpoint_manifest_fixture_entries_are_executable_and_pass() -> None:
@@ -184,11 +240,23 @@ def test_checkpoint_manifest_fixture_entries_are_executable_and_pass() -> None:
     assert all("fixture_file" in entry for entry in manifest["fixtures"])
 
     result = evaluate_manifest(ROOT / "tests" / "checkpoints" / "manifest.json", root=ROOT)
+    case_ids_by_fixture = {
+        fixture_result["id"]: [case_result["id"] for case_result in fixture_result["result"]["case_results"]]
+        for fixture_result in result["fixture_results"]
+    }
 
     assert result["ok"] is True
-    assert result["fixture_count"] == 2
-    assert result["case_count"] == 2
-    assert {"dungeon_traversal", "save_load_resume_continuity"} == set(result["executable_domains"])
+    assert result["fixture_count"] == 3
+    assert result["case_count"] == 4
+    assert {
+        "dungeon_traversal",
+        "save_load_resume_continuity",
+        "equipment_modifier_resume_continuity",
+    } == set(result["executable_domains"])
+    assert case_ids_by_fixture["equipment-modifier-continuity-checkpoint"] == [
+        "fighters-ring-roundtrip-preserves-attack-bonus",
+        "dragons-scale-roundtrip-preserves-defense-bonus",
+    ]
 
 
 def test_phase5_parity_matrix_gate_promotes_replay_and_checkpoint_rows_to_executable_proof() -> None:
@@ -203,16 +271,22 @@ def test_phase5_parity_matrix_gate_promotes_replay_and_checkpoint_rows_to_execut
     assert replay_row["evidence_tier"] == "replay-proven"
     assert set(replay_row["actual"]["executable_domains"]) == {
         "combat_encounter_resolution",
+        "item_command_resolution",
         "overworld_traversal",
         "town_purchase_stay_flow",
     }
+    assert replay_row["actual"]["fixture_count"] == 4
+    assert replay_row["actual"]["case_count"] == 9
     assert checkpoint_row["status"] == "PASS"
     assert checkpoint_row["passed"] is True
     assert checkpoint_row["evidence_tier"] == "checkpoint-proven"
     assert set(checkpoint_row["actual"]["executable_domains"]) == {
         "dungeon_traversal",
+        "equipment_modifier_resume_continuity",
         "save_load_resume_continuity",
     }
+    assert checkpoint_row["actual"]["fixture_count"] == 3
+    assert checkpoint_row["actual"]["case_count"] == 4
 
 
 def test_phase5_foundation_suite_is_reproducible_without_pytest_module() -> None:

@@ -24,12 +24,13 @@ _ITEMS_DATA_PATH = Path(__file__).resolve().parents[1] / "extractor" / "data_out
 
 
 @lru_cache(maxsize=1)
-def _derived_stat_bonus_tables() -> tuple[tuple[int, ...], tuple[int, ...]]:
+def _derived_stat_bonus_tables() -> tuple[tuple[int, ...], tuple[int, ...], tuple[int, ...]]:
     payload = json.loads(_ITEMS_DATA_PATH.read_text())
     bonuses = payload.get("equipment_bonuses", {})
     weapons = tuple(int(value) for value in bonuses.get("weapons", ()))
     armor = tuple(int(value) for value in bonuses.get("armor", ()))
-    return weapons, armor
+    shields = tuple(int(value) for value in bonuses.get("shields", ()))
+    return weapons, armor, shields
 
 
 def _bonus_for_index(table: tuple[int, ...], index: int) -> int:
@@ -38,22 +39,43 @@ def _bonus_for_index(table: tuple[int, ...], index: int) -> int:
     return 0
 
 
-def _compute_derived_attack_defense(*, strength: int, agility: int, equipment_byte: int, more_spells_quest: int) -> tuple[int, int]:
-    # SOURCE: Bank03.asm LoadStats @ LF050-LF09E
-    # Observed: current port fresh-game baseline stores equipment_byte=0x02 while defense remains base AGI>>1.
-    # Bounded Batch 3: use extracted weapon/armor bonuses plus wearable item flags; preserve existing shield-byte behavior until ROM proof clarifies it.
-    weapon_bonus_table, armor_bonus_table = _derived_stat_bonus_tables()
+def inspect_equipment_bonus_evidence(*, equipment_byte: int, more_spells_quest: int) -> dict[str, int]:
+    # SOURCE: extractor/data_out/items.json equipment_bonuses/equipment_encoding
+    # backed by WeaponsBonusTbl/ArmorBonusTbl/ShieldBonusTbl extraction.
+    # Shield bonus is reported here as evidence only; canonical LoadStats parity for
+    # fresh-game equipment_byte 0x02 remains unresolved and is not applied below.
+    weapon_bonus_table, armor_bonus_table, shield_bonus_table = _derived_stat_bonus_tables()
     equipment = _u8(equipment_byte)
     weapon_index = (equipment >> 5) & 0x07
     armor_index = (equipment >> 2) & 0x07
+    shield_index = equipment & 0x03
 
-    attack_bonus = _bonus_for_index(weapon_bonus_table, weapon_index)
-    defense_bonus = _bonus_for_index(armor_bonus_table, armor_index)
+    wearable_attack_bonus = 2 if (_u8(more_spells_quest) & _FIGHTERS_RING_FLAG) != 0 else 0
+    wearable_defense_bonus = 2 if (_u8(more_spells_quest) & _DRAGON_SCALE_FLAG) != 0 else 0
 
-    if (_u8(more_spells_quest) & _FIGHTERS_RING_FLAG) != 0:
-        attack_bonus = _u8(attack_bonus + 2)
-    if (_u8(more_spells_quest) & _DRAGON_SCALE_FLAG) != 0:
-        defense_bonus = _u8(defense_bonus + 2)
+    return {
+        "weapon_index": weapon_index,
+        "armor_index": armor_index,
+        "shield_index": shield_index,
+        "weapon_bonus": _bonus_for_index(weapon_bonus_table, weapon_index),
+        "armor_bonus": _bonus_for_index(armor_bonus_table, armor_index),
+        "shield_bonus": _bonus_for_index(shield_bonus_table, shield_index),
+        "wearable_attack_bonus": wearable_attack_bonus,
+        "wearable_defense_bonus": wearable_defense_bonus,
+    }
+
+
+def _compute_derived_attack_defense(*, strength: int, agility: int, equipment_byte: int, more_spells_quest: int) -> tuple[int, int]:
+    # SOURCE: Bank03.asm LoadStats @ LF050-LF09E
+    # Observed: current port fresh-game baseline stores equipment_byte=0x02 while defense remains base AGI>>1.
+    # Bounded parity remediation: apply extracted weapon/armor bonuses plus wearable item flags.
+    # Keep shield bonus quarantined until the fresh-game 0x02 anomaly is ROM-proven or falsified.
+    evidence = inspect_equipment_bonus_evidence(
+        equipment_byte=equipment_byte,
+        more_spells_quest=more_spells_quest,
+    )
+    attack_bonus = _u8(evidence["weapon_bonus"] + evidence["wearable_attack_bonus"])
+    defense_bonus = _u8(evidence["armor_bonus"] + evidence["wearable_defense_bonus"])
 
     attack = _u8(_u8(strength) + attack_bonus)
     defense = _u8((_u8(agility) >> 1) + defense_bonus)

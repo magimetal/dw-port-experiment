@@ -37,6 +37,25 @@
         "python3 -m pytest tests/test_save_load.py tests/test_shop.py"
       ],
       "owner": "phase5-parity-remediation"
+    },
+    {
+      "id": "equipment-modifier-continuity-checkpoint",
+      "domain": "equipment_modifier_resume_continuity",
+      "type": "executable_fixture",
+      "status": "implemented",
+      "fixture_file": "equipment_modifier_continuity_checkpoint.json",
+      "seed_setup": {
+        "state": "save/load seeds with wearable-only derived stat modifiers",
+        "rng": "not required"
+      },
+      "expected_assertions": [
+        "Fighter's Ring attack bonus survives canonical save/load roundtrip",
+        "Dragon's Scale defense bonus survives canonical save/load roundtrip without inferring shield parity"
+      ],
+      "verification_commands": [
+        "python3 -m pytest tests/test_save_load.py tests/test_verify.py"
+      ],
+      "owner": "phase5-parity-remediation"
     }
   ]
 }

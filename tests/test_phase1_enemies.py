@@ -30,8 +30,16 @@ def test_enemy_table_count_and_shape() -> None:
         "def",
         "hp",
         "pattern_flags",
+        "spell_action",
+        "spell_action_status",
+        "spell_action_blocker",
         "agi",
         "mdef",
+        "mdef_high_nibble",
+        "mdef_low_nibble",
+        "spell_fail_threshold",
+        "s_ss_resist",
+        "s_ss_resist_status",
         "xp",
         "gp",
         "name_bytes",
@@ -70,8 +78,32 @@ def test_enemy_spot_checks_from_enstattbl() -> None:
     assert dragonlord_true_form["atk"] == 0x8C
     assert dragonlord_true_form["def"] == 0xC8
     assert dragonlord_true_form["hp"] == 0x82
+    assert dragonlord_true_form["mdef_high_nibble"] == 0x0F
+    assert dragonlord_true_form["spell_fail_threshold"] == 0x0F
+    assert dragonlord_true_form["s_ss_resist"] == 0xF0
     assert dragonlord_true_form["xp"] == 0x00
     assert dragonlord_true_form["gp"] == 0x00
+
+
+def test_enemy_extractor_emits_explicit_spell_action_and_resistance_evidence() -> None:
+    rom = DW1ROM.from_baseline(ROOT)
+    enemies = extract_enemies(rom)
+
+    magician = enemies[4]
+    poltergeist = enemies[8]
+
+    assert magician["spell_action"] == "HURT"
+    assert magician["spell_action_status"] == "proven"
+    assert magician["spell_action_blocker"] is None
+    assert magician["mdef_high_nibble"] == 0
+    assert magician["mdef_low_nibble"] == 1
+    assert magician["spell_fail_threshold"] == 0
+    assert magician["s_ss_resist"] == 0
+
+    assert poltergeist["spell_action"] is None
+    assert poltergeist["spell_action_status"] == "unknown"
+    assert isinstance(poltergeist["spell_action_blocker"], str)
+    assert poltergeist["s_ss_resist_status"] == "inferred_from_mdef_high_nibble"
 
 
 def test_enemies_data_output_and_artifact_exist() -> None:

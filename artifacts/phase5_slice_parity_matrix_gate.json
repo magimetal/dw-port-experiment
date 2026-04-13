@@ -9,7 +9,7 @@
         "all_passed": false,
         "artifact": "artifacts/phase5_parity.json",
         "report": "PARITY_REPORT.md",
-        "parity_report_sha256": "63e65e30dee84fbc511f8d9398d563cc87f434c549d168d2d78db9c7c3d2afca"
+        "parity_report_sha256": "c4dabaa88c57e82395dd616107b24f1d7dcaf109c676c0d8b3873365049a5f51"
       }
     }
   }

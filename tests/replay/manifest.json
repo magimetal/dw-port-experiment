@@ -56,6 +56,25 @@
         "python3 -m pytest tests/test_main_loop_scaffold.py tests/test_dialog_engine.py tests/test_shop.py"
       ],
       "owner": "phase5-parity-remediation"
+    },
+    {
+      "id": "item-command-resolution",
+      "domain": "item_command_resolution",
+      "type": "executable_fixture",
+      "status": "implemented",
+      "fixture_file": "item_command_resolution.json",
+      "seed_setup": {
+        "state": "map seed with bounded item inventory and deterministic item menu navigation",
+        "rng": "not required"
+      },
+      "expected_assertions": [
+        "Fairy Water sets the ROM repel timer window and consumes inventory",
+        "Dragon's Scale sets the wearable flag and recomputes defense without shield overclaim"
+      ],
+      "verification_commands": [
+        "python3 -m pytest tests/test_main_loop_scaffold.py tests/test_verify.py"
+      ],
+      "owner": "phase5-parity-remediation"
     }
   ]
 }

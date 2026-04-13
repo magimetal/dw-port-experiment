@@ -8589,7 +8589,7 @@ def check_phase5_parity_matrix_gate() -> dict:
         from engine.map_engine import MapEngine
         from engine.save_load import state_to_save_data, state_from_save_dict, state_to_save_dict
         from engine.shop import ShopRuntime
-        from engine.state import GameState
+        from engine.state import GameState, inspect_equipment_bonus_evidence
         from main import MainLoopSession, MainLoopState, initial_title_state
 
         class _VerifyStream:
@@ -9487,31 +9487,47 @@ def check_phase5_parity_matrix_gate() -> dict:
             enemy for enemy in enemies["enemies"] if int(enemy.get("pattern_flags", 0)) != 0
         ]
         proven_spell_mapping = {
-            enemy["name"]: list(enemy_spell_actions_for_pattern(int(enemy.get("pattern_flags", 0))))
+            enemy["name"]: [str(enemy["spell_action"])]
             for enemy in spellcapable_enemies
-            if enemy_spell_actions_for_pattern(int(enemy.get("pattern_flags", 0)))
+            if enemy.get("spell_action_status") == "proven" and enemy.get("spell_action")
         }
+        unknown_spell_blockers = {
+            enemy["name"]: str(enemy["spell_action_blocker"])
+            for enemy in spellcapable_enemies
+            if enemy.get("spell_action_status") == "unknown" and enemy.get("spell_action_blocker")
+        }
+        unknown_pattern_flags = sorted(
+            {int(enemy.get("pattern_flags", 0)) for enemy in spellcapable_enemies if enemy.get("spell_action_status") == "unknown"}
+        )
         spell_mapping_actual = {
             "spellcapable_enemy_count": len(spellcapable_enemies),
             "sample_enemy_ids": [int(enemy["enemy_id"]) for enemy in spellcapable_enemies[:5]],
             "pattern_flags_present": all("pattern_flags" in enemy for enemy in spellcapable_enemies),
+            "spell_action_statuses": sorted({str(enemy.get("spell_action_status", "unknown")) for enemy in spellcapable_enemies}),
             "proven_pattern_flags": sorted(
-                {int(enemy.get("pattern_flags", 0)) for enemy in spellcapable_enemies if enemy_spell_actions_for_pattern(int(enemy.get("pattern_flags", 0)))}
+                {int(enemy.get("pattern_flags", 0)) for enemy in spellcapable_enemies if enemy.get("spell_action_status") == "proven"}
             ),
             "proven_enemy_spell_actions": proven_spell_mapping,
-            "unknown_pattern_flags": sorted(
-                {int(enemy.get("pattern_flags", 0)) for enemy in spellcapable_enemies if not enemy_spell_actions_for_pattern(int(enemy.get("pattern_flags", 0)))}
+            "unknown_pattern_flags": unknown_pattern_flags,
+            "unknown_spell_blockers": unknown_spell_blockers,
+            "unknown_spell_blocker_count": len(unknown_spell_blockers),
+            "runtime_mapping_consistent": all(
+                list(enemy_spell_actions_for_pattern(int(enemy.get("pattern_flags", 0))))
+                == ([str(enemy["spell_action"])] if enemy.get("spell_action") else [])
+                for enemy in spellcapable_enemies
             ),
         }
         add_row(
             "Combat",
             "Enemy spell action mapping availability",
-            "Current repo proves only pattern_flags 0x02 -> HURT for Magician/Magidrakee; all other enemy spell patterns remain explicit UNKNOWN",
+            "Current repo proves only pattern_flags 0x02 -> HURT for Magician/Magidrakee; all other enemy spell patterns remain explicit UNKNOWN with per-enemy blocker text",
             spell_mapping_actual,
             spell_mapping_actual["proven_pattern_flags"] == [2]
-            and spell_mapping_actual["proven_enemy_spell_actions"] == {"Magician": ["HURT"], "Magidrakee": ["HURT"]},
+            and spell_mapping_actual["proven_enemy_spell_actions"] == {"Magician": ["HURT"], "Magidrakee": ["HURT"]}
+            and spell_mapping_actual["runtime_mapping_consistent"] is True
+            and spell_mapping_actual["unknown_spell_blocker_count"] == len(spell_mapping_actual["unknown_spell_blockers"]),
             "extractor/data_out/enemies.json + engine.combat.enemy_spell_actions_for_pattern + tests/test_combat.py mapping regression",
-            "Extractor-backed pattern_flags subset proves Magician/Magidrakee use HURT; remaining spell-pattern decode stays UNKNOWN",
+            "Extractor-backed pattern_flags subset proves Magician/Magidrakee use HURT; remaining spell-pattern decode stays UNKNOWN with explicit blocker strings",
             evidence_tier="runtime-state",
         )
 
@@ -9541,13 +9557,21 @@ def check_phase5_parity_matrix_gate() -> dict:
             evidence_tier="runtime-state",
         )
 
+        fresh_game = GameState.fresh_game("ERDRICK")
+        shield_evidence = inspect_equipment_bonus_evidence(
+            equipment_byte=fresh_game.equipment_byte,
+            more_spells_quest=fresh_game.more_spells_quest,
+        )
         add_row(
             "Stats",
             "Shield-derived defense parity scope",
-            "fresh-game small-shield defense remains unresolved; Batch 3 proves weapon/armor/wearable recompute only and quarantines shield-derived defense until ROM-backed proof exists",
+            "fresh-game shield-derived defense remains unresolved; extracted shield encoding now makes the checkpoint/runtime mismatch reviewable without overclaiming parity",
             {
-                "fresh_game_equipment_byte": GameState.fresh_game("ERDRICK").equipment_byte,
-                "fresh_game_defense": GameState.fresh_game("ERDRICK").defense,
+                "fresh_game_equipment_byte": fresh_game.equipment_byte,
+                "fresh_game_defense": fresh_game.defense,
+                "base_agility_defense": fresh_game.agi >> 1,
+                "equipment_bonus_evidence": shield_evidence,
+                "candidate_defense_if_shield_bonus_applied": (fresh_game.agi >> 1) + int(shield_evidence["shield_bonus"]),
                 "scope_proven_in_batch3": [
                     "weapon bonuses",
                     "armor bonuses",
@@ -9558,7 +9582,7 @@ def check_phase5_parity_matrix_gate() -> dict:
             },
             False,
             "engine/state.py canonical derived-stat helper + PARITY_REPORT.md scoped Batch 3 evidence",
-            "Observed fresh-game baseline keeps equipment_byte=0x02 with defense=2; shield-derived defense remains UNKNOWN until ROM-backed proof resolves the mismatch",
+            "Observed fresh-game baseline keeps equipment_byte=0x02 with defense=2 while extracted shield encoding decodes low bits as shield index 2 (+10 defense candidate); semantics remain UNKNOWN until ROM-backed proof resolves whether the checkpoint byte is canonical shield state or another artifact",
             evidence_tier="unknown",
             status="UNKNOWN",
         )
@@ -9630,58 +9654,83 @@ def check_phase5_parity_matrix_gate() -> dict:
         add_row(
             "Replay/Checkpoint",
             "Replay executable fixture proof availability",
-            "representative executable replay fixtures prove overworld traversal, combat encounter resolution, and town purchase/stay flow",
+            "representative executable replay fixtures prove overworld traversal, combat encounter resolution, town purchase/stay flow, and bounded item command resolution",
             {
                 "declared_domains": sorted(str(domain) for domain in replay_domains),
                 "executable_domains": replay_manifest_proof["executable_domains"],
                 "fixture_count": replay_manifest_proof["fixture_count"],
                 "case_count": replay_manifest_proof["case_count"],
+                "fixture_ids": [
+                    str(result.get("id"))
+                    for result in replay_manifest_proof.get("fixture_results", [])
+                    if isinstance(result, dict)
+                ],
             },
             replay_manifest_proof["ok"]
             and {
                 "overworld_traversal",
                 "combat_encounter_resolution",
                 "town_purchase_stay_flow",
+                "item_command_resolution",
             }.issubset(set(replay_manifest_proof["executable_domains"])),
             "tests/replay/manifest.json + tests/replay/*.json + parity_proof.py",
-            "Bounded executable replay proof for current implemented overworld/combat/town behaviors",
+            "Bounded executable replay proof for current implemented overworld/combat/town/item behaviors",
             evidence_tier="replay-proven",
             status="PASS" if replay_manifest_proof["ok"] else "FAIL",
         )
         add_row(
             "Replay/Checkpoint",
             "Checkpoint executable fixture proof availability",
-            "representative executable checkpoint fixtures prove dungeon traversal resume and save/load resume continuity",
+            "representative executable checkpoint fixtures prove dungeon traversal resume, save/load resume continuity, and wearable modifier continuity",
             {
                 "declared_domains": sorted(str(domain) for domain in checkpoint_domains),
                 "executable_domains": checkpoint_manifest_proof["executable_domains"],
                 "fixture_count": checkpoint_manifest_proof["fixture_count"],
                 "case_count": checkpoint_manifest_proof["case_count"],
+                "fixture_ids": [
+                    str(result.get("id"))
+                    for result in checkpoint_manifest_proof.get("fixture_results", [])
+                    if isinstance(result, dict)
+                ],
             },
             checkpoint_manifest_proof["ok"]
             and {
                 "dungeon_traversal",
                 "save_load_resume_continuity",
+                "equipment_modifier_resume_continuity",
             }.issubset(set(checkpoint_manifest_proof["executable_domains"])),
             "tests/checkpoints/manifest.json + tests/checkpoints/*.json + parity_proof.py",
-            "Bounded executable checkpoint proof for current implemented dungeon resume and canonical save/load continuity",
+            "Bounded executable checkpoint proof for current implemented dungeon resume, canonical save/load continuity, and proven wearable modifier carry-through",
             evidence_tier="checkpoint-proven",
             status="PASS" if checkpoint_manifest_proof["ok"] else "FAIL",
         )
 
+        resistance_samples = {
+            row["name"]: {
+                "mdef": int(row["mdef"]),
+                "spell_fail_threshold": int(row["spell_fail_threshold"]),
+                "s_ss_resist": int(row["s_ss_resist"]),
+                "s_ss_resist_status": str(row["s_ss_resist_status"]),
+            }
+            for row in enemies["enemies"]
+            if row["name"] in {"Golem", "Wizard", "Red Dragon", "Dragonlord", "Dragonlord's True Form"}
+        }
         resistance_fields_present = {
-            "pattern_flags": all("pattern_flags" in row for row in enemies["enemies"]),
-            "mdef": all("mdef" in row for row in enemies["enemies"]),
-            "s_ss_resist": all("s_ss_resist" in row for row in enemies["enemies"]),
+            "pattern_flags_present": all("pattern_flags" in row for row in enemies["enemies"]),
+            "mdef_present": all("mdef" in row for row in enemies["enemies"]),
+            "spell_fail_threshold_present": all("spell_fail_threshold" in row for row in enemies["enemies"]),
+            "s_ss_resist_present": all("s_ss_resist" in row for row in enemies["enemies"]),
+            "resistance_statuses": sorted({str(row.get("s_ss_resist_status", "missing")) for row in enemies["enemies"]}),
+            "immunity_samples": resistance_samples,
         }
         add_row(
             "Resistance Decode",
             "ROM-backed resistance mapping availability",
-            "decoded resistance mapping present or explicit blocker surfaced",
+            "decoded resistance mapping present or explicit blocker surfaced; raw mdef nibble evidence must stay reviewable even if semantics remain unresolved",
             resistance_fields_present,
             False,
             "extractor/data_out/enemies.json",
-            "Resistance decode remains unresolved pending ROM-backed mapping",
+            "Extractor now preserves mdef high/low nibble evidence, spell-fail threshold, and inferred sleep/stopspell mask; authoritative ROM mapping remains UNKNOWN",
             evidence_tier="unknown",
             status="UNKNOWN",
         )

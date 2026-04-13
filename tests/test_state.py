@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from engine.state import GameState
+from engine.state import GameState, inspect_equipment_bonus_evidence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -69,6 +69,18 @@ def test_state_save_api_roundtrip_is_wired_to_canonical_save_dict() -> None:
     assert loaded.player_name == "ERDRICK"
     assert loaded.experience == state.experience
     assert loaded.gold == state.gold
+
+
+def test_fresh_game_shield_semantics_remain_explicitly_unresolved_but_reviewable() -> None:
+    state = GameState.fresh_game("ERDRICK")
+    evidence = inspect_equipment_bonus_evidence(equipment_byte=state.equipment_byte, more_spells_quest=state.more_spells_quest)
+
+    assert evidence["weapon_index"] == 0
+    assert evidence["armor_index"] == 0
+    assert evidence["shield_index"] == 2
+    assert evidence["shield_bonus"] == 10
+    assert evidence["wearable_defense_bonus"] == 0
+    assert state.defense == 2
 
 
 def test_state_slice_artifacts_exist_and_are_consistent() -> None:

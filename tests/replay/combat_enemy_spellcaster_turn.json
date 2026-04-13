@@ -111,6 +111,62 @@
           }
         }
       ]
+    },
+    {
+      "id": "magidrakee-casts-hurt-live",
+      "state": {
+        "screen_mode": "combat",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 1,
+          "player_x": 47,
+          "player_y": 1,
+          "hp": 15,
+          "mp": 0,
+          "max_hp": 15,
+          "max_mp": 15,
+          "defense": 2,
+          "spells_known": 3,
+          "more_spells_quest": 3,
+          "rng_lb": 0,
+          "rng_ub": 0,
+          "combat_session": {
+            "enemy_id": 5,
+            "enemy_name": "Magidrakee",
+            "enemy_hp": 15,
+            "enemy_max_hp": 15,
+            "enemy_base_hp": 7,
+            "enemy_atk": 14,
+            "enemy_def": 8,
+            "enemy_agi": 0,
+            "enemy_mdef": 1,
+            "enemy_pattern_flags": 2,
+            "enemy_s_ss_resist": 0,
+            "enemy_xp": 5,
+            "enemy_gp": 12,
+            "enemy_asleep": false,
+            "enemy_stopspell": false,
+            "player_stopspell": false
+          }
+        }
+      },
+      "steps": [
+        {
+          "input": "ITEM",
+          "expected": {
+            "action_kind": "combat_turn",
+            "action_detail": "ITEM",
+            "screen_mode": "combat",
+            "hp": 7,
+            "frame_contains": [
+              "MAGIDRAKEE CASTS HURT."
+            ],
+            "frame_not_contains": [
+              "MAGIDRAKEE STRIKES"
+            ]
+          }
+        }
+      ]
     }
   ]
 }

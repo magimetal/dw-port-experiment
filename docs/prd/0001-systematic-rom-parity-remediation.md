@@ -44,8 +44,8 @@ The current port presents a narrow parity matrix that reports broad success whil
 ## Current Implementation Outcome
 
 - `PARITY_REPORT.md` and `artifacts/phase5_parity.json` now report 67 parity rows with 65 `PASS` and 2 `UNKNOWN`, replacing manifest-only replay/checkpoint scaffolding with bounded executable representative proof where current implementation evidence exists.
-- Representative executable replay proof now exists for overworld traversal, combat encounter resolution, and town purchase/stay flow.
-- Representative executable checkpoint proof now exists for dungeon traversal resume and save/load resume continuity.
+- Representative executable replay proof now exists for overworld traversal, combat encounter resolution, town purchase/stay flow, and bounded item command resolution.
+- Representative executable checkpoint proof now exists for dungeon traversal resume, save/load resume continuity, and wearable modifier continuity.
 - The current proof remains intentionally bounded. It demonstrates executable representative coverage for the listed domains, not blanket proof that every path in those domains is ROM-proven.
 - Remaining explicitly deferred scope items, pending stronger ROM evidence:
   - Shield-derived defense parity, specifically fresh-game `equipment_byte == 0x02` semantics, remains unresolved. Current repo evidence observes a fresh-game baseline of `equipment_byte=0x02` with defense `2`, but does not prove whether that byte encodes small-shield defense parity or another ROM-aligned interpretation.
@@ -115,3 +115,4 @@ This PRD targets behavioral fidelity, not cosmetic redesign. User-visible change
 - 2026-04-12: Linked ADR-0001 for the durable Batch 1 verification-contract change affecting parity artifact/report semantics and replay/checkpoint governance.
 - 2026-04-12: Recorded bounded executable replay/checkpoint proof status and narrowed remaining deferred scope to shield-derived defense `equipment_byte == 0x02` semantics and resistance decode mapping provenance pending stronger ROM evidence.
 - 2026-04-12: Status changed from Active to Completed for the bounded remediation scope after final execution review passed; completion notes retain the two intentionally deferred UNKNOWN parity rows in `PARITY_REPORT.md` and `artifacts/phase5_parity.json`.
+- 2026-04-13: Widened executable replay/checkpoint coverage to include item command resolution, Magidrakee live spell replay, and wearable modifier continuity while preserving the two explicit UNKNOWN parity rows.

@@ -1,0 +1,46 @@
+{
+  "id": "equipment-modifier-continuity-checkpoint",
+  "kind": "save_load_roundtrip_cases",
+  "cases": [
+    {
+      "id": "fighters-ring-roundtrip-preserves-attack-bonus",
+      "state": {
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "attack": 6,
+          "more_spells_quest": 32
+        }
+      },
+      "expected": {
+        "save_exists": true,
+        "save_data_equal": true,
+        "opened_chest_indices": [],
+        "opened_doors": [],
+        "loaded_fields": {
+          "attack": 6,
+          "more_spells_quest": 32
+        }
+      }
+    },
+    {
+      "id": "dragons-scale-roundtrip-preserves-defense-bonus",
+      "state": {
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "defense": 4,
+          "more_spells_quest": 16
+        }
+      },
+      "expected": {
+        "save_exists": true,
+        "save_data_equal": true,
+        "opened_chest_indices": [],
+        "opened_doors": [],
+        "loaded_fields": {
+          "defense": 4,
+          "more_spells_quest": 16
+        }
+      }
+    }
+  ]
+}

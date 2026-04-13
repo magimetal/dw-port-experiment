@@ -4,7 +4,7 @@
 [![Tests](https://img.shields.io/badge/tests-pytest-green.svg)]()
 [![NES](https://img.shields.io/badge/NES-Dragon%20Warrior%201-red.svg)]()
 
-A faithful, assembly-accurate Python reimplementation of **Dragon Warrior** (1986 NES) with ROM data extraction, terminal-based UI, and comprehensive verification.
+A faithful, assembly-accurate Python reimplementation of **Dragon Warrior** (1986 NES) with ROM data extraction, terminal-based UI, and phase-gated verification.
 
 > "Thou art the descendant of Erdrick. The ball of light has fallen into the hands of the Dragonlord, and his evil shadow has spread across the land. Go now, and restore peace to Alefgard!"
 
@@ -171,7 +171,7 @@ Every non-trivial function includes a `SOURCE: BankXX.asm @ $ADDR` comment linki
 
 ### Phase-Gated Development
 
-88 verification phases ensure correctness:
+88 verification phases track implemented behavior and bounded parity evidence:
 
 ```bash
 # Run all verification phases
@@ -207,7 +207,7 @@ rng = ScriptedRNG(sequence=[0x55, 0xAA, 0x33])
 
 ## Verification Status
 
-See [PARITY_REPORT.md](PARITY_REPORT.md) for 56 verified parity checks including:
+See [PARITY_REPORT.md](PARITY_REPORT.md) for the current parity matrix (67 rows: 65 `PASS`, 2 `UNKNOWN`) including bounded executable replay/checkpoint proof across overworld traversal, combat encounter resolution, town purchase/stay flow, item command resolution, dungeon traversal, save/load resume continuity, and wearable modifier continuity. The remaining honest unknowns are fresh-game shield semantics and ROM-backed resistance decode provenance.
 
 | System | Status | Evidence |
 |--------|--------|----------|

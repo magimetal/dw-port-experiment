@@ -14,7 +14,7 @@ from engine.save_load import (
     state_to_save_data,
 )
 from engine.shop import ShopRuntime
-from engine.state import GameState
+from engine.state import GameState, inspect_equipment_bonus_evidence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -176,6 +176,18 @@ def test_save_load_roundtrip_preserves_dragons_scale_defense_bonus() -> None:
 
     assert decoded.defense == 4
     assert decoded.more_spells_quest & 0x10 == 0x10
+
+
+def test_save_load_roundtrip_preserves_reviewable_fresh_game_shield_byte_evidence() -> None:
+    fresh = GameState.fresh_game("ERDRICK")
+    decoded = state_from_save_dict(state_to_save_dict(fresh))
+
+    assert decoded.equipment_byte == 0x02
+    assert decoded.defense == 2
+    assert inspect_equipment_bonus_evidence(
+        equipment_byte=decoded.equipment_byte,
+        more_spells_quest=decoded.more_spells_quest,
+    )["shield_bonus"] == 10
 
 
 def test_save_load_roundtrip_preserves_shop_bought_weapon_attack_bonus() -> None:

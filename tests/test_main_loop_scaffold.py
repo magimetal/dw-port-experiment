@@ -3938,6 +3938,32 @@ def test_combat_enemy_magician_casts_hurt_instead_of_always_physically_attacking
     assert "MAGICIAN STRIKES" not in result.frame
 
 
+def test_combat_enemy_magidrakee_casts_hurt_instead_of_always_physically_attacking() -> None:
+    session = _session(
+        state=_combat_seed_state(
+            player_hp=15,
+            enemy_hp=15,
+            enemy_atk=14,
+            enemy_agi=0,
+            enemy_mdef=1,
+            enemy_pattern_flags=0x02,
+            enemy_name="Magidrakee",
+            enemy_id=5,
+            rng_lb=0,
+            rng_ub=0,
+        )
+    )
+
+    result = session.step("ITEM")
+
+    assert result.screen_mode == "combat"
+    assert result.action.kind == "combat_turn"
+    assert result.action.detail == "ITEM"
+    assert session.state.game_state.hp == 7
+    assert "MAGIDRAKEE CASTS HURT." in result.frame
+    assert "MAGIDRAKEE STRIKES" not in result.frame
+
+
 def test_combat_stopspelled_magician_hurt_attempt_reports_block_and_falls_back_to_attack() -> None:
     session = _session(
         state=_combat_seed_state(

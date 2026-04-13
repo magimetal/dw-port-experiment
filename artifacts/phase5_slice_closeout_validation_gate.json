@@ -62,7 +62,7 @@
       "ok": true,
       "command": "phase5-batch1-foundation-suite",
       "returncode": 0,
-      "stdout": "{\n  \"replay_manifest_entries\": 3,\n  \"checkpoint_manifest_entries\": 2\n}",
+      "stdout": "{\n  \"replay_manifest_entries\": 4,\n  \"checkpoint_manifest_entries\": 3\n}",
       "stderr": ""
     }
   }

@@ -888,7 +888,7 @@
       "row": 59,
       "system": "Combat",
       "test": "Enemy spell action mapping availability",
-      "expected": "Current repo proves only pattern_flags 0x02 -> HURT for Magician/Magidrakee; all other enemy spell patterns remain explicit UNKNOWN",
+      "expected": "Current repo proves only pattern_flags 0x02 -> HURT for Magician/Magidrakee; all other enemy spell patterns remain explicit UNKNOWN with per-enemy blocker text",
       "actual": {
         "spellcapable_enemy_count": 23,
         "sample_enemy_ids": [
@@ -899,6 +899,10 @@
           12
         ],
         "pattern_flags_present": true,
+        "spell_action_statuses": [
+          "proven",
+          "unknown"
+        ],
         "proven_pattern_flags": [
           2
         ],
@@ -928,13 +932,38 @@
           177,
           245,
           249
-        ]
+        ],
+        "unknown_spell_blockers": {
+          "Poltergeist": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Drakeema": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Warlock": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Wraith": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Metal Slime": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Specter": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Wolflord": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Druinlord": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Drollmagi": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Wraith Knight": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Knight": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Magiwyvern": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Green Dragon": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Starwyvern": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Wizard": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Axe Knight": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Blue Dragon": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Armored Knight": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Red Dragon": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Dragonlord": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands.",
+          "Dragonlord's True Form": "Non-zero pattern_flags observed, but repo evidence only proves 0x02 -> HURT; preserve raw byte until stronger ROM proof lands."
+        },
+        "unknown_spell_blocker_count": 21,
+        "runtime_mapping_consistent": true
       },
       "passed": true,
       "status": "PASS",
       "evidence": "extractor/data_out/enemies.json + engine.combat.enemy_spell_actions_for_pattern + tests/test_combat.py mapping regression",
       "evidence_tier": "runtime-state",
-      "rom_source": "Extractor-backed pattern_flags subset proves Magician/Magidrakee use HURT; remaining spell-pattern decode stays UNKNOWN"
+      "rom_source": "Extractor-backed pattern_flags subset proves Magician/Magidrakee use HURT; remaining spell-pattern decode stays UNKNOWN with explicit blocker strings"
     },
     {
       "row": 60,
@@ -958,10 +987,22 @@
       "row": 61,
       "system": "Stats",
       "test": "Shield-derived defense parity scope",
-      "expected": "fresh-game small-shield defense remains unresolved; Batch 3 proves weapon/armor/wearable recompute only and quarantines shield-derived defense until ROM-backed proof exists",
+      "expected": "fresh-game shield-derived defense remains unresolved; extracted shield encoding now makes the checkpoint/runtime mismatch reviewable without overclaiming parity",
       "actual": {
         "fresh_game_equipment_byte": 2,
         "fresh_game_defense": 2,
+        "base_agility_defense": 2,
+        "equipment_bonus_evidence": {
+          "weapon_index": 0,
+          "armor_index": 0,
+          "shield_index": 2,
+          "weapon_bonus": 0,
+          "armor_bonus": 0,
+          "shield_bonus": 10,
+          "wearable_attack_bonus": 0,
+          "wearable_defense_bonus": 0
+        },
+        "candidate_defense_if_shield_bonus_applied": 12,
         "scope_proven_in_batch3": [
           "weapon bonuses",
           "armor bonuses",
@@ -977,7 +1018,7 @@
       "status": "UNKNOWN",
       "evidence": "engine/state.py canonical derived-stat helper + PARITY_REPORT.md scoped Batch 3 evidence",
       "evidence_tier": "unknown",
-      "rom_source": "Observed fresh-game baseline keeps equipment_byte=0x02 with defense=2; shield-derived defense remains UNKNOWN until ROM-backed proof resolves the mismatch"
+      "rom_source": "Observed fresh-game baseline keeps equipment_byte=0x02 with defense=2 while extracted shield encoding decodes low bits as shield index 2 (+10 defense candidate); semantics remain UNKNOWN until ROM-backed proof resolves whether the checkpoint byte is canonical shield state or another artifact"
     },
     {
       "row": 62,
@@ -1041,65 +1082,116 @@
       "row": 65,
       "system": "Replay/Checkpoint",
       "test": "Replay executable fixture proof availability",
-      "expected": "representative executable replay fixtures prove overworld traversal, combat encounter resolution, and town purchase/stay flow",
+      "expected": "representative executable replay fixtures prove overworld traversal, combat encounter resolution, town purchase/stay flow, and bounded item command resolution",
       "actual": {
         "declared_domains": [
           "combat_encounter_resolution",
+          "item_command_resolution",
           "overworld_traversal",
           "town_purchase_stay_flow"
         ],
         "executable_domains": [
           "combat_encounter_resolution",
+          "item_command_resolution",
           "overworld_traversal",
           "town_purchase_stay_flow"
         ],
-        "fixture_count": 3,
-        "case_count": 6
+        "fixture_count": 4,
+        "case_count": 9,
+        "fixture_ids": [
+          "overworld-timer-step-sequence",
+          "combat-enemy-spellcaster-turn",
+          "town-shop-inn-dialog-handoff",
+          "item-command-resolution"
+        ]
       },
       "passed": true,
       "status": "PASS",
       "evidence": "tests/replay/manifest.json + tests/replay/*.json + parity_proof.py",
       "evidence_tier": "replay-proven",
-      "rom_source": "Bounded executable replay proof for current implemented overworld/combat/town behaviors"
+      "rom_source": "Bounded executable replay proof for current implemented overworld/combat/town/item behaviors"
     },
     {
       "row": 66,
       "system": "Replay/Checkpoint",
       "test": "Checkpoint executable fixture proof availability",
-      "expected": "representative executable checkpoint fixtures prove dungeon traversal resume and save/load resume continuity",
+      "expected": "representative executable checkpoint fixtures prove dungeon traversal resume, save/load resume continuity, and wearable modifier continuity",
       "actual": {
         "declared_domains": [
           "dungeon_traversal",
+          "equipment_modifier_resume_continuity",
           "save_load_resume_continuity"
         ],
         "executable_domains": [
           "dungeon_traversal",
+          "equipment_modifier_resume_continuity",
           "save_load_resume_continuity"
         ],
-        "fixture_count": 2,
-        "case_count": 2
+        "fixture_count": 3,
+        "case_count": 4,
+        "fixture_ids": [
+          "dungeon-light-timer-checkpoint",
+          "save-load-continuity-checkpoint",
+          "equipment-modifier-continuity-checkpoint"
+        ]
       },
       "passed": true,
       "status": "PASS",
       "evidence": "tests/checkpoints/manifest.json + tests/checkpoints/*.json + parity_proof.py",
       "evidence_tier": "checkpoint-proven",
-      "rom_source": "Bounded executable checkpoint proof for current implemented dungeon resume and canonical save/load continuity"
+      "rom_source": "Bounded executable checkpoint proof for current implemented dungeon resume, canonical save/load continuity, and proven wearable modifier carry-through"
     },
     {
       "row": 67,
       "system": "Resistance Decode",
       "test": "ROM-backed resistance mapping availability",
-      "expected": "decoded resistance mapping present or explicit blocker surfaced",
+      "expected": "decoded resistance mapping present or explicit blocker surfaced; raw mdef nibble evidence must stay reviewable even if semantics remain unresolved",
       "actual": {
-        "pattern_flags": true,
-        "mdef": true,
-        "s_ss_resist": false
+        "pattern_flags_present": true,
+        "mdef_present": true,
+        "spell_fail_threshold_present": true,
+        "s_ss_resist_present": true,
+        "resistance_statuses": [
+          "inferred_from_mdef_high_nibble"
+        ],
+        "immunity_samples": {
+          "Golem": {
+            "mdef": 240,
+            "spell_fail_threshold": 15,
+            "s_ss_resist": 240,
+            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+          },
+          "Wizard": {
+            "mdef": 242,
+            "spell_fail_threshold": 15,
+            "s_ss_resist": 240,
+            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+          },
+          "Red Dragon": {
+            "mdef": 242,
+            "spell_fail_threshold": 15,
+            "s_ss_resist": 240,
+            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+          },
+          "Dragonlord": {
+            "mdef": 240,
+            "spell_fail_threshold": 15,
+            "s_ss_resist": 240,
+            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+          },
+          "Dragonlord's True Form": {
+            "mdef": 240,
+            "spell_fail_threshold": 15,
+            "s_ss_resist": 240,
+            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+          }
+        }
       },
       "passed": false,
       "status": "UNKNOWN",
       "evidence": "extractor/data_out/enemies.json",
       "evidence_tier": "unknown",
-      "rom_source": "Resistance decode remains unresolved pending ROM-backed mapping"
+      "rom_source": "Extractor now preserves mdef high/low nibble evidence, spell-fail threshold, and inferred sleep/stopspell mask; authoritative ROM mapping remains UNKNOWN"
     }
   ],
   "all_passed": false,
@@ -1118,5 +1210,5 @@
     },
     "all_passed": false
   },
-  "parity_report_sha256": "63e65e30dee84fbc511f8d9398d563cc87f434c549d168d2d78db9c7c3d2afca"
+  "parity_report_sha256": "c4dabaa88c57e82395dd616107b24f1d7dcaf109c676c0d8b3873365049a5f51"
 }

@@ -1,0 +1,78 @@
+{
+  "id": "item-command-resolution",
+  "kind": "main_loop_sequence_cases",
+  "cases": [
+    {
+      "id": "fairy-water-sets-rom-repel-window",
+      "state": {
+        "screen_mode": "map",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 1,
+          "player_x": 10,
+          "player_y": 10,
+          "repel_timer": 0,
+          "inventory_slots": [2, 0, 0, 0]
+        }
+      },
+      "steps": [
+        {"input": "C", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "ENTER", "expected": {}},
+        {
+          "input": "ENTER",
+          "expected": {
+            "action_kind": "map_item_used",
+            "action_detail": "FAIRY WATER:ok",
+            "screen_mode": "dialog",
+            "repel_timer": 254,
+            "inventory_slots": [0, 0, 0, 0],
+            "frame_contains": [
+              "THOU HAST USED FAIRY WATER."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dragons-scale-recomputes-defense-without-consuming-item",
+      "state": {
+        "screen_mode": "map",
+        "fresh_game_name": "ERDRICK",
+        "game_state_updates": {
+          "map_id": 1,
+          "player_x": 10,
+          "player_y": 10,
+          "defense": 2,
+          "more_spells_quest": 0,
+          "inventory_slots": [4, 0, 0, 0]
+        }
+      },
+      "steps": [
+        {"input": "C", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "DOWN", "expected": {}},
+        {"input": "ENTER", "expected": {}},
+        {
+          "input": "ENTER",
+          "expected": {
+            "action_kind": "map_item_used",
+            "action_detail": "DRAGON'S SCALE:ok",
+            "screen_mode": "dialog",
+            "defense": 4,
+            "more_spells_quest": 16,
+            "inventory_slots": [4, 0, 0, 0],
+            "frame_contains": [
+              "THOU HAST USED DRAGON'S SCALE."
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

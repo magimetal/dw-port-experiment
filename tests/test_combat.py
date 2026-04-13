@@ -150,18 +150,51 @@ def test_enemy_spell_mapping_presence_or_blocker_visibility() -> None:
 
     assert spellcasters
     assert all("pattern_flags" in enemy for enemy in spellcasters)
+    assert all("spell_action" in enemy for enemy in spellcasters)
+    assert all("spell_action_status" in enemy for enemy in spellcasters)
+    assert all("spell_action_blocker" in enemy for enemy in spellcasters)
     assert all("mdef" in enemy for enemy in spellcasters)
-    assert all("s_ss_resist" not in enemy for enemy in spellcasters)
+    assert all("mdef_high_nibble" in enemy for enemy in spellcasters)
+    assert all("mdef_low_nibble" in enemy for enemy in spellcasters)
+    assert all("spell_fail_threshold" in enemy for enemy in spellcasters)
+    assert all("s_ss_resist" in enemy for enemy in spellcasters)
+    assert all("s_ss_resist_status" in enemy for enemy in spellcasters)
 
 
 def test_enemy_spell_mapping_is_explicit_only_for_proven_pattern_subset() -> None:
     enemies = json.loads((ROOT / "extractor" / "data_out" / "enemies.json").read_text())["enemies"]
     hurt_pattern_enemies = [enemy for enemy in enemies if enemy["pattern_flags"] == 0x02]
-    other_spell_patterns = sorted({int(enemy["pattern_flags"]) for enemy in enemies if enemy["pattern_flags"] not in (0, 0x02)})
+    unresolved_spellcasters = [enemy for enemy in enemies if enemy["pattern_flags"] not in (0, 0x02)]
 
     assert [enemy["name"] for enemy in hurt_pattern_enemies] == ["Magician", "Magidrakee"]
     assert enemy_spell_actions_for_pattern(0x02) == ("HURT",)
-    assert all(enemy_spell_actions_for_pattern(pattern_flags) == () for pattern_flags in other_spell_patterns)
+    assert all(enemy["spell_action"] == "HURT" for enemy in hurt_pattern_enemies)
+    assert all(enemy["spell_action_status"] == "proven" for enemy in hurt_pattern_enemies)
+    assert all(enemy["spell_action_blocker"] is None for enemy in hurt_pattern_enemies)
+    assert unresolved_spellcasters
+    assert all(enemy_spell_actions_for_pattern(int(enemy["pattern_flags"])) == () for enemy in unresolved_spellcasters)
+    assert all(enemy["spell_action"] is None for enemy in unresolved_spellcasters)
+    assert all(enemy["spell_action_status"] == "unknown" for enemy in unresolved_spellcasters)
+    assert all(isinstance(enemy["spell_action_blocker"], str) and enemy["spell_action_blocker"] for enemy in unresolved_spellcasters)
+
+
+def test_enemy_resistance_decode_fields_preserve_raw_mdef_evidence() -> None:
+    enemies = json.loads((ROOT / "extractor" / "data_out" / "enemies.json").read_text())["enemies"]
+    golem = next(enemy for enemy in enemies if enemy["name"] == "Golem")
+    magician = next(enemy for enemy in enemies if enemy["name"] == "Magician")
+
+    assert golem["mdef"] == 0xF0
+    assert golem["mdef_high_nibble"] == 0x0F
+    assert golem["mdef_low_nibble"] == 0x00
+    assert golem["spell_fail_threshold"] == 0x0F
+    assert golem["s_ss_resist"] == 0xF0
+    assert golem["s_ss_resist_status"] == "inferred_from_mdef_high_nibble"
+
+    assert magician["mdef"] == 0x01
+    assert magician["mdef_high_nibble"] == 0x00
+    assert magician["mdef_low_nibble"] == 0x01
+    assert magician["spell_fail_threshold"] == 0x00
+    assert magician["s_ss_resist"] == 0x00
 
 
 def test_equipment_bonus_flags_need_canonical_recompute_mapping_review() -> None:
