@@ -71,9 +71,13 @@ def test_state_save_api_roundtrip_is_wired_to_canonical_save_dict() -> None:
     assert loaded.gold == state.gold
 
 
-def test_fresh_game_shield_semantics_remain_explicitly_unresolved_but_reviewable() -> None:
+def test_fresh_game_shield_byte_evidence_stays_reviewable_without_runtime_defense_bonus() -> (
+    None
+):
     state = GameState.fresh_game("ERDRICK")
-    evidence = inspect_equipment_bonus_evidence(equipment_byte=state.equipment_byte, more_spells_quest=state.more_spells_quest)
+    evidence = inspect_equipment_bonus_evidence(
+        equipment_byte=state.equipment_byte, more_spells_quest=state.more_spells_quest
+    )
 
     assert evidence["weapon_index"] == 0
     assert evidence["armor_index"] == 0

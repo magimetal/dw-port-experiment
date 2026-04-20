@@ -112,7 +112,9 @@ def _sha1(path: Path) -> str:
 
 def check_python_version() -> dict:
     ok = sys.version_info >= (3, 11)
-    detail = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+    detail = (
+        f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+    )
     return {"ok": ok, "detail": detail, "expected": ">=3.11"}
 
 
@@ -216,9 +218,21 @@ def check_bank_read_gate_artifact() -> dict:
     data = json.loads(artifact.read_text())
     ok = (
         data.get("completed") is True
-        and data.get("files", {}).get("Bank00.asm", {}).get("labels_checked", {}).get("WrldMapPtrTbl") is True
-        and data.get("files", {}).get("Bank03.asm", {}).get("labels_checked", {}).get("SpellCostTbl") is True
-        and data.get("files", {}).get("Bank03.asm", {}).get("labels_checked", {}).get("CheckMP") is True
+        and data.get("files", {})
+        .get("Bank00.asm", {})
+        .get("labels_checked", {})
+        .get("WrldMapPtrTbl")
+        is True
+        and data.get("files", {})
+        .get("Bank03.asm", {})
+        .get("labels_checked", {})
+        .get("SpellCostTbl")
+        is True
+        and data.get("files", {})
+        .get("Bank03.asm", {})
+        .get("labels_checked", {})
+        .get("CheckMP")
+        is True
     )
     return {"ok": ok, "detail": data}
 
@@ -371,7 +385,11 @@ def check_zones_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "zones.json"
     artifact_path = ROOT / "artifacts" / "phase1_zones_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_zones_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -446,7 +464,11 @@ def check_warps_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "warps.json"
     artifact_path = ROOT / "artifacts" / "phase1_warps_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_warps_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -534,7 +556,11 @@ def check_items_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "items.json"
     artifact_path = ROOT / "artifacts" / "phase1_items_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_items_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -632,7 +658,11 @@ def check_npcs_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "npcs.json"
     artifact_path = ROOT / "artifacts" / "phase1_npcs_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_npcs_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -723,7 +753,11 @@ def check_dialog_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "dialog.json"
     artifact_path = ROOT / "artifacts" / "phase1_dialog_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_dialog_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -834,7 +868,11 @@ def check_maps_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "maps.json"
     artifact_path = ROOT / "artifacts" / "phase1_maps_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_maps_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -863,8 +901,7 @@ def check_maps_artifacts() -> dict:
         and overworld is not None
         and overworld.get("width") == 120
         and overworld.get("height") == 120
-        and overworld.get("tile_sha1")
-        == "cbc8b4ca3442f804f3da7654e5a74e809a9e9a8e"
+        and overworld.get("tile_sha1") == "cbc8b4ca3442f804f3da7654e5a74e809a9e9a8e"
         and artifact.get("slice") == "phase1-maps"
         and artifact.get("map_count") == 30
         and artifact.get("overworld_tile_sha1")
@@ -982,7 +1019,11 @@ def check_xp_table_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "xp_table.json"
     artifact_path = ROOT / "artifacts" / "phase1_xp_table_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_xp_table_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -1020,7 +1061,11 @@ def check_spells_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "spells.json"
     artifact_path = ROOT / "artifacts" / "phase1_spells_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_spells_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -1034,8 +1079,12 @@ def check_spells_artifacts() -> dict:
     artifact = json.loads(artifact_path.read_text())
     read_gate = json.loads(read_gate_path.read_text())
     spells = data.get("spells", [])
-    labels03 = read_gate.get("files", {}).get("Bank03.asm", {}).get("labels_checked", {})
-    labels01 = read_gate.get("files", {}).get("Bank01.asm", {}).get("labels_checked", {})
+    labels03 = (
+        read_gate.get("files", {}).get("Bank03.asm", {}).get("labels_checked", {})
+    )
+    labels01 = (
+        read_gate.get("files", {}).get("Bank01.asm", {}).get("labels_checked", {})
+    )
     ok = (
         len(spells) == 10
         and artifact.get("slice") == "phase1-spells"
@@ -1060,7 +1109,11 @@ def check_stats_artifacts() -> dict:
     data_path = ROOT / "extractor" / "data_out" / "stats.json"
     artifact_path = ROOT / "artifacts" / "phase1_stats_extraction.json"
     read_gate_path = ROOT / "artifacts" / "phase1_stats_read_gate.json"
-    if not data_path.exists() or not artifact_path.exists() or not read_gate_path.exists():
+    if (
+        not data_path.exists()
+        or not artifact_path.exists()
+        or not read_gate_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -1124,8 +1177,10 @@ def check_phase5_slice_stats_extractor() -> dict:
         ]
         == [140, 130, 210, 200],
         "row53_heal_lv3": "HEAL" in stats_levels.get(3, {}).get("spells_known", []),
-        "row54_healmore_lv17": "HEALMORE" in stats_levels.get(17, {}).get("spells_known", []),
-        "row55_hurtmore_lv19": "HURTMORE" in stats_levels.get(19, {}).get("spells_known", []),
+        "row54_healmore_lv17": "HEALMORE"
+        in stats_levels.get(17, {}).get("spells_known", []),
+        "row55_hurtmore_lv19": "HURTMORE"
+        in stats_levels.get(19, {}).get("spells_known", []),
     }
 
     return {
@@ -1201,9 +1256,12 @@ def check_phase5_slice_spell_extractor() -> dict:
     spells = {entry["name"]: entry for entry in spells_data.get("spells", [])}
     checks = {
         "spell_count_10": len(spells_data.get("spells", [])) == 10,
-        "heal_mp4_lv3": spells.get("HEAL", {}).get("mp_cost") == 4 and spells.get("HEAL", {}).get("learn_level") == 3,
-        "healmore_mp10_lv17": spells.get("HEALMORE", {}).get("mp_cost") == 10 and spells.get("HEALMORE", {}).get("learn_level") == 17,
-        "hurtmore_mp5_lv19": spells.get("HURTMORE", {}).get("mp_cost") == 5 and spells.get("HURTMORE", {}).get("learn_level") == 19,
+        "heal_mp4_lv3": spells.get("HEAL", {}).get("mp_cost") == 4
+        and spells.get("HEAL", {}).get("learn_level") == 3,
+        "healmore_mp10_lv17": spells.get("HEALMORE", {}).get("mp_cost") == 10
+        and spells.get("HEALMORE", {}).get("learn_level") == 17,
+        "hurtmore_mp5_lv19": spells.get("HURTMORE", {}).get("mp_cost") == 5
+        and spells.get("HURTMORE", {}).get("learn_level") == 19,
     }
 
     return {
@@ -1259,8 +1317,17 @@ def check_phase5_slice_terminal_size_enforcement() -> dict:
         maps_payload=json.loads(maps_path.read_text()),
         warps_payload=json.loads(warps_path.read_text()),
     )
-    renderer = GameRenderer(_Terminal(), map_engine, npcs_payload=json.loads(npcs_path.read_text()))
-    state = GameState(**{**GameState.fresh_game("ERDRICK").to_dict(), "map_id": 4, "player_x": 11, "player_y": 11})
+    renderer = GameRenderer(
+        _Terminal(), map_engine, npcs_payload=json.loads(npcs_path.read_text())
+    )
+    state = GameState(
+        **{
+            **GameState.fresh_game("ERDRICK").to_dict(),
+            "map_id": 4,
+            "player_x": 11,
+            "player_y": 11,
+        }
+    )
     request = RenderFrameRequest(screen_mode="map", game_state=state)
 
     cols_vector_frame = renderer.draw(request, force_size=(79, 24))
@@ -1351,10 +1418,21 @@ def check_phase5_slice_ascii_fallback_tileset() -> dict:
         maps_payload=json.loads(maps_path.read_text()),
         warps_payload=json.loads(warps_path.read_text()),
     )
-    renderer = GameRenderer(_Terminal(), map_engine, npcs_payload=json.loads(npcs_path.read_text()))
-    state = GameState(**{**GameState.fresh_game("ERDRICK").to_dict(), "map_id": 4, "player_x": 11, "player_y": 11})
+    renderer = GameRenderer(
+        _Terminal(), map_engine, npcs_payload=json.loads(npcs_path.read_text())
+    )
+    state = GameState(
+        **{
+            **GameState.fresh_game("ERDRICK").to_dict(),
+            "map_id": 4,
+            "player_x": 11,
+            "player_y": 11,
+        }
+    )
 
-    map_frame = renderer.draw(RenderFrameRequest(screen_mode="map", game_state=state, ascii_fallback=True))
+    map_frame = renderer.draw(
+        RenderFrameRequest(screen_mode="map", game_state=state, ascii_fallback=True)
+    )
     combat_frame = renderer.draw(
         RenderFrameRequest(
             screen_mode="combat",
@@ -1380,13 +1458,16 @@ def check_phase5_slice_ascii_fallback_tileset() -> dict:
         "map_ascii_only": _ascii_only(map_frame),
         "map_preserves_player_marker": "@" in map_frame,
         "map_preserves_status_marker": "NAME " in map_frame,
-        "map_dialog_border_falls_back_to_ascii": " DIALOG " in map_frame and "+" in map_frame and "|" in map_frame,
+        "map_dialog_border_falls_back_to_ascii": " DIALOG " in map_frame
+        and "+" in map_frame
+        and "|" in map_frame,
         "combat_ascii_only": _ascii_only(combat_frame),
         "combat_preserves_battle_marker": "BATTLE" in combat_frame,
         "combat_attack_cursor_falls_back_to_ascii": ">" in combat_frame,
         "dialog_ascii_only": _ascii_only(dialog_frame),
         "dialog_preserves_text_content": "Welcome to Alefgard." in dialog_frame,
-        "dialog_border_falls_back_to_ascii": "+" in dialog_frame and "|" in dialog_frame,
+        "dialog_border_falls_back_to_ascii": "+" in dialog_frame
+        and "|" in dialog_frame,
     }
 
     return {
@@ -1398,7 +1479,8 @@ def check_phase5_slice_ascii_fallback_tileset() -> dict:
                     "contains_non_ascii": not _ascii_only(map_frame),
                     "contains_player": "@" in map_frame,
                     "contains_status_name": "NAME " in map_frame,
-                    "contains_ascii_dialog_border": " DIALOG " in map_frame and "+" in map_frame,
+                    "contains_ascii_dialog_border": " DIALOG " in map_frame
+                    and "+" in map_frame,
                     "contains_unicode_dialog_border": "┌" in map_frame,
                 },
                 "combat": {
@@ -1421,11 +1503,16 @@ def check_phase5_slice_ascii_fallback_tileset() -> dict:
 def check_phase5_slice_edge_case_regression_gate() -> dict:
     # SOURCE: Phase 4 slice artifacts — machine-generated, ROM-verified
     metal_slime_path = ROOT / "artifacts" / "phase4_slice_combat_metal_slime_flee.json"
-    immunity_path = ROOT / "artifacts" / "phase4_slice_combat_enemy_sleep_stopspell_immunity.json"
-    dragonlord_path = ROOT / "artifacts" / "phase4_slice_combat_dragonlord_two_phase_fight.json"
+    immunity_path = (
+        ROOT / "artifacts" / "phase4_slice_combat_enemy_sleep_stopspell_immunity.json"
+    )
+    dragonlord_path = (
+        ROOT / "artifacts" / "phase4_slice_combat_dragonlord_two_phase_fight.json"
+    )
 
     missing = [
-        str(p) for p in [metal_slime_path, immunity_path, dragonlord_path]
+        str(p)
+        for p in [metal_slime_path, immunity_path, dragonlord_path]
         if not p.exists()
     ]
     if missing:
@@ -1438,9 +1525,15 @@ def check_phase5_slice_edge_case_regression_gate() -> dict:
     im = json.loads(immunity_path.read_text())
     dl = json.loads(dragonlord_path.read_text())
 
-    ms_vectors = ms["checks"]["check_main_loop_combat_metal_slime_flee_artifacts"]["detail"]["vectors"]["vectors"]
-    im_vectors = im["checks"]["check_main_loop_combat_enemy_sleep_stopspell_immunity_artifacts"]["detail"]["vectors"]["vectors"]
-    dl_vectors = dl["checks"]["check_main_loop_combat_dragonlord_two_phase_fight_artifacts"]["detail"]["vectors"]["vectors"]
+    ms_vectors = ms["checks"]["check_main_loop_combat_metal_slime_flee_artifacts"][
+        "detail"
+    ]["vectors"]["vectors"]
+    im_vectors = im["checks"][
+        "check_main_loop_combat_enemy_sleep_stopspell_immunity_artifacts"
+    ]["detail"]["vectors"]["vectors"]
+    dl_vectors = dl["checks"][
+        "check_main_loop_combat_dragonlord_two_phase_fight_artifacts"
+    ]["detail"]["vectors"]["vectors"]
 
     flee_vec = ms_vectors["metal_slime_survives_then_flees"]
     golem_sleep = im_vectors["golem_sleep_immune"]
@@ -1449,16 +1542,20 @@ def check_phase5_slice_edge_case_regression_gate() -> dict:
     no_excellent = dl_vectors["phase1_no_excellent"]
 
     checks = {
-        "metal_slime_flee_xp_zero": flee_vec["experience_after"] == flee_vec["experience_before"],
+        "metal_slime_flee_xp_zero": flee_vec["experience_after"]
+        == flee_vec["experience_before"],
         "metal_slime_flee_gold_zero": flee_vec["gold_after"] == flee_vec["gold_before"],
         "metal_slime_flee_action_is_flee": flee_vec["action"] == "combat_enemy_flee",
-        "golem_sleep_immune_enemy_not_asleep": golem_sleep["enemy_asleep_after"] is False,
+        "golem_sleep_immune_enemy_not_asleep": golem_sleep["enemy_asleep_after"]
+        is False,
         "golem_sleep_mp_consumed": golem_sleep["mp_after"] < golem_sleep["mp_before"],
-        "golem_stopspell_immune_flag_clear": golem_stop["enemy_stopspell_after"] is False,
+        "golem_stopspell_immune_flag_clear": golem_stop["enemy_stopspell_after"]
+        is False,
         "golem_stopspell_mp_consumed": golem_stop["mp_after"] < golem_stop["mp_before"],
         "dragonlord_phase1_to_phase2_enemy_id": p1_to_p2["enemy_id_after"] == 39,
         "dragonlord_phase2_hp_130": p1_to_p2["enemy_hp_after"] == 130,
-        "dragonlord_no_excellent_in_phase1": no_excellent["frame_contains_excellent"] is False,
+        "dragonlord_no_excellent_in_phase1": no_excellent["frame_contains_excellent"]
+        is False,
     }
 
     return {
@@ -1494,8 +1591,12 @@ def run_pytest_phase5_edge_case_regression_gate_slice() -> dict:
 
 def check_phase5_slice_closeout_validation_gate() -> dict:
     parity_path = ROOT / "artifacts" / "phase5_parity.json"
-    terminal_size_path = ROOT / "artifacts" / "phase5_slice_terminal_size_enforcement.json"
-    ascii_fallback_path = ROOT / "artifacts" / "phase5_slice_ascii_fallback_tileset.json"
+    terminal_size_path = (
+        ROOT / "artifacts" / "phase5_slice_terminal_size_enforcement.json"
+    )
+    ascii_fallback_path = (
+        ROOT / "artifacts" / "phase5_slice_ascii_fallback_tileset.json"
+    )
 
     payloads: dict[str, dict] = {}
     missing: list[str] = []
@@ -1535,14 +1636,10 @@ def check_phase5_slice_closeout_validation_gate() -> dict:
             if isinstance(row, dict)
         }
         systems = {
-            str(row.get("system", ""))
-            for row in row_results
-            if isinstance(row, dict)
+            str(row.get("system", "")) for row in row_results if isinstance(row, dict)
         }
         statuses = {
-            str(row.get("status", ""))
-            for row in row_results
-            if isinstance(row, dict)
+            str(row.get("status", "")) for row in row_results if isinstance(row, dict)
         }
         required_row_fields_present = all(
             isinstance(row, dict)
@@ -1563,7 +1660,9 @@ def check_phase5_slice_closeout_validation_gate() -> dict:
             )
             for row in row_results
         )
-        has_non_pass_visibility = any(status in {"FAIL", "UNKNOWN", "BLOCKED"} for status in statuses)
+        has_non_pass_visibility = any(
+            status in {"FAIL", "UNKNOWN", "BLOCKED"} for status in statuses
+        )
     else:
         row_result_count = None
         evidence_tiers = set()
@@ -1573,11 +1672,21 @@ def check_phase5_slice_closeout_validation_gate() -> dict:
         has_non_pass_visibility = False
 
     summary = parity_payload.get("summary")
+    parity_all_passed = parity_payload.get("all_passed") is True or (
+        isinstance(summary, dict) and summary.get("all_passed") is True
+    )
+    required_evidence_tiers = {"extractor-only", "runtime-state"}
+    if has_non_pass_visibility:
+        required_evidence_tiers.add("unknown")
     checks = {
-        "phase5_parity_rows_present": isinstance(row_results, list) and row_result_count is not None and row_result_count >= 56,
+        "phase5_parity_rows_present": isinstance(row_results, list)
+        and row_result_count is not None
+        and row_result_count >= 56,
         "phase5_parity_required_row_fields_present": required_row_fields_present,
         "phase5_parity_summary_present": isinstance(summary, dict),
-        "phase5_parity_required_evidence_tiers_present": {"extractor-only", "runtime-state", "unknown"}.issubset(evidence_tiers),
+        "phase5_parity_required_evidence_tiers_present": required_evidence_tiers.issubset(
+            evidence_tiers
+        ),
         "phase5_parity_required_system_rows_present": {
             "Field Timers",
             "Combat",
@@ -1587,9 +1696,14 @@ def check_phase5_slice_closeout_validation_gate() -> dict:
             "Replay/Checkpoint",
             "Resistance Decode",
         }.issubset(systems),
-        "phase5_parity_visibility_of_non_pass_rows": has_non_pass_visibility,
-        "phase5_terminal_size_all_passed_true": terminal_size_payload.get("all_passed") is True,
-        "phase5_ascii_fallback_all_passed_true": ascii_fallback_payload.get("all_passed") is True,
+        "phase5_parity_visibility_of_non_pass_rows": has_non_pass_visibility
+        or parity_all_passed,
+        "phase5_terminal_size_all_passed_true": terminal_size_payload.get("all_passed")
+        is True,
+        "phase5_ascii_fallback_all_passed_true": ascii_fallback_payload.get(
+            "all_passed"
+        )
+        is True,
     }
 
     return {
@@ -1943,7 +2057,11 @@ def check_combat_artifacts() -> dict:
     formula_path = ROOT / "artifacts" / "phase2_combat_formulas.json"
     vectors_path = ROOT / "tests" / "fixtures" / "combat_golden_vectors.json"
 
-    if not read_gate_path.exists() or not formula_path.exists() or not vectors_path.exists():
+    if (
+        not read_gate_path.exists()
+        or not formula_path.exists()
+        or not vectors_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -2038,7 +2156,11 @@ def check_movement_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase2_movement_logic.json"
     vectors_path = ROOT / "tests" / "fixtures" / "movement_golden_vectors.json"
 
-    if not read_gate_path.exists() or not report_path.exists() or not vectors_path.exists():
+    if (
+        not read_gate_path.exists()
+        or not report_path.exists()
+        or not vectors_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -2056,9 +2178,7 @@ def check_movement_artifacts() -> dict:
     ok = (
         read_gate.get("completed") is True
         and read_gate.get("slice") == "phase2-movement"
-        and read_gate.get("files", {})
-        .get("Bank03.asm", {})
-        .get("labels_checked")
+        and read_gate.get("files", {}).get("Bank03.asm", {}).get("labels_checked")
         and all(read_gate["files"]["Bank03.asm"]["labels_checked"].values())
         and report.get("slice") == "phase2-movement"
         and report.get("all_passed") is True
@@ -2151,7 +2271,11 @@ def check_dialog_runtime_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase2_dialog_runtime.json"
     vectors_path = ROOT / "tests" / "fixtures" / "dialog_runtime_vectors.json"
 
-    if not read_gate_path.exists() or not report_path.exists() or not vectors_path.exists():
+    if (
+        not read_gate_path.exists()
+        or not report_path.exists()
+        or not vectors_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -2169,8 +2293,18 @@ def check_dialog_runtime_artifacts() -> dict:
     ok = (
         read_gate.get("completed") is True
         and read_gate.get("slice") == "phase2-dialog"
-        and all(read_gate.get("files", {}).get("Bank02.asm", {}).get("labels_checked", {}).values())
-        and all(read_gate.get("files", {}).get("Bank03.asm", {}).get("labels_checked", {}).values())
+        and all(
+            read_gate.get("files", {})
+            .get("Bank02.asm", {})
+            .get("labels_checked", {})
+            .values()
+        )
+        and all(
+            read_gate.get("files", {})
+            .get("Bank03.asm", {})
+            .get("labels_checked", {})
+            .values()
+        )
         and report.get("slice") == "phase2-dialog"
         and report.get("all_passed") is True
         and report.get("checks")
@@ -2248,7 +2382,11 @@ def check_shop_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase2_shop_runtime.json"
     vectors_path = ROOT / "tests" / "fixtures" / "shop_runtime_vectors.json"
 
-    if not read_gate_path.exists() or not report_path.exists() or not vectors_path.exists():
+    if (
+        not read_gate_path.exists()
+        or not report_path.exists()
+        or not vectors_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -2350,7 +2488,11 @@ def check_save_load_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase2_save_load_runtime.json"
     vectors_path = ROOT / "tests" / "fixtures" / "save_load_runtime_vectors.json"
 
-    if not read_gate_path.exists() or not report_path.exists() or not vectors_path.exists():
+    if (
+        not read_gate_path.exists()
+        or not report_path.exists()
+        or not vectors_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -2451,7 +2593,11 @@ def check_items_runtime_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase2_items_runtime.json"
     vectors_path = ROOT / "tests" / "fixtures" / "items_runtime_vectors.json"
 
-    if not read_gate_path.exists() or not report_path.exists() or not vectors_path.exists():
+    if (
+        not read_gate_path.exists()
+        or not report_path.exists()
+        or not vectors_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -2471,8 +2617,12 @@ def check_items_runtime_artifacts() -> dict:
         and read_gate.get("slice") == "phase2-items"
         and read_gate.get("files", {}).get("Bank03.asm", {}).get("labels_checked")
         and all(read_gate["files"]["Bank03.asm"]["labels_checked"].values())
-        and read_gate.get("files", {}).get("Dragon_Warrior_Defines.asm", {}).get("labels_checked")
-        and all(read_gate["files"]["Dragon_Warrior_Defines.asm"]["labels_checked"].values())
+        and read_gate.get("files", {})
+        .get("Dragon_Warrior_Defines.asm", {})
+        .get("labels_checked")
+        and all(
+            read_gate["files"]["Dragon_Warrior_Defines.asm"]["labels_checked"].values()
+        )
         and report.get("slice") == "phase2-items"
         and report.get("all_passed") is True
         and report.get("checks")
@@ -2790,7 +2940,11 @@ def check_map_engine_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase2_map_engine_logic.json"
     vectors_path = ROOT / "tests" / "fixtures" / "map_engine_golden_vectors.json"
 
-    if not read_gate_path.exists() or not report_path.exists() or not vectors_path.exists():
+    if (
+        not read_gate_path.exists()
+        or not report_path.exists()
+        or not vectors_path.exists()
+    ):
         return {
             "ok": False,
             "detail": {
@@ -2866,7 +3020,6 @@ def run_pytest_phase2_map_engine_slice() -> dict:
         "stdout": run.stdout,
         "stderr": run.stderr,
     }
-
 
 
 def run_phase3_slice_dialog_box_generator() -> dict:
@@ -3459,7 +3612,9 @@ def run_phase4_slice_inn_stay_save_trigger_generator() -> dict:
 
 def check_main_loop_inn_stay_save_trigger_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_inn_stay_save_trigger.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_inn_stay_save_trigger_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_inn_stay_save_trigger_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -3530,7 +3685,9 @@ def run_phase4_slice_inn_cost_deduct_generator() -> dict:
 
 def check_main_loop_inn_cost_deduct_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_inn_cost_deduct.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_inn_cost_deduct_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_inn_cost_deduct_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -3607,7 +3764,9 @@ def run_phase4_slice_encounter_trigger_generator() -> dict:
 
 def check_main_loop_encounter_trigger_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_encounter_trigger.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_encounter_trigger_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_encounter_trigger_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -3693,7 +3852,9 @@ def run_phase4_slice_dungeon_encounter_runtime_generator() -> dict:
 
 def check_main_loop_dungeon_encounter_runtime_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_dungeon_encounter_runtime.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_dungeon_encounter_runtime_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_dungeon_encounter_runtime_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -3774,7 +3935,9 @@ def run_phase4_slice_combat_session_handoff_generator() -> dict:
 
 def check_main_loop_combat_session_handoff_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_combat_session_handoff.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_session_handoff_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_combat_session_handoff_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -3852,7 +4015,9 @@ def run_phase4_slice_combat_turn_resolution_generator() -> dict:
 
 def check_main_loop_combat_turn_resolution_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_combat_turn_resolution.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_turn_resolution_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_combat_turn_resolution_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -3953,7 +4118,9 @@ def run_phase4_slice_combat_spell_in_battle_generator() -> dict:
 
 def check_main_loop_combat_spell_in_battle_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_combat_spell_in_battle.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_spell_in_battle_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_combat_spell_in_battle_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4043,8 +4210,17 @@ def run_phase4_slice_combat_asleep_stopspell_flag_effects_generator() -> dict:
 
 
 def check_main_loop_combat_asleep_stopspell_flag_effects_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_combat_asleep_stopspell_flag_effects.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_asleep_stopspell_flag_effects_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_combat_asleep_stopspell_flag_effects.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_combat_asleep_stopspell_flag_effects_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4081,7 +4257,8 @@ def check_main_loop_combat_asleep_stopspell_flag_effects_artifacts() -> dict:
         and "STRIKES" not in asleep_wake.get("frame", "")
         and stopspell_downgrade.get("action") == "combat_turn"
         and stopspell_downgrade.get("screen_mode") == "combat"
-        and stopspell_downgrade.get("player_hp_after", 0) < stopspell_downgrade.get("player_hp_before", 0)
+        and stopspell_downgrade.get("player_hp_after", 0)
+        < stopspell_downgrade.get("player_hp_before", 0)
         and "Ghost's spell has been stopped." in stopspell_downgrade.get("frame", "")
         and "STRIKES" in stopspell_downgrade.get("frame", "")
     )
@@ -4130,8 +4307,15 @@ def run_phase4_slice_combat_player_stopspell_enforcement_generator() -> dict:
 
 
 def check_main_loop_combat_player_stopspell_enforcement_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_combat_player_stopspell_enforcement.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_player_stopspell_enforcement_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_combat_player_stopspell_enforcement.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_combat_player_stopspell_enforcement_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4146,7 +4330,9 @@ def check_main_loop_combat_player_stopspell_enforcement_artifacts() -> dict:
     vectors = json.loads(vectors_path.read_text())
     blocked = vectors.get("vectors", {}).get("blocked_with_player_stopspell_true", {})
     normal = vectors.get("vectors", {}).get("normal_with_player_stopspell_false", {})
-    multi_turn = vectors.get("vectors", {}).get("multi_turn_stopspell_then_blocked_spell", {})
+    multi_turn = vectors.get("vectors", {}).get(
+        "multi_turn_stopspell_then_blocked_spell", {}
+    )
     next_turn = multi_turn.get("turn_n_plus_1", {})
 
     ok = (
@@ -4219,8 +4405,17 @@ def run_phase4_slice_combat_enemy_sleep_stopspell_immunity_generator() -> dict:
 
 
 def check_main_loop_combat_enemy_sleep_stopspell_immunity_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_combat_enemy_sleep_stopspell_immunity.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_enemy_sleep_stopspell_immunity_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_combat_enemy_sleep_stopspell_immunity.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_combat_enemy_sleep_stopspell_immunity_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4307,7 +4502,9 @@ def run_phase4_slice_combat_metal_slime_flee_generator() -> dict:
 
 def check_main_loop_combat_metal_slime_flee_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_combat_metal_slime_flee.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_metal_slime_flee_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_combat_metal_slime_flee_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4322,7 +4519,9 @@ def check_main_loop_combat_metal_slime_flee_artifacts() -> dict:
     vectors = json.loads(vectors_path.read_text())
     flee_v = vectors.get("vectors", {}).get("metal_slime_survives_then_flees", {})
     kill_v = vectors.get("vectors", {}).get("metal_slime_one_shot_victory", {})
-    regression_v = vectors.get("vectors", {}).get("non_metal_slime_fight_regression", {})
+    regression_v = vectors.get("vectors", {}).get(
+        "non_metal_slime_fight_regression", {}
+    )
 
     ok = (
         report.get("slice") == "phase4-main-loop-combat-metal-slime-flee"
@@ -4395,8 +4594,15 @@ def run_phase4_slice_combat_dragonlord_two_phase_fight_generator() -> dict:
 
 
 def check_main_loop_combat_dragonlord_two_phase_fight_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_combat_dragonlord_two_phase_fight.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_dragonlord_two_phase_fight_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_combat_dragonlord_two_phase_fight.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_combat_dragonlord_two_phase_fight_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4422,7 +4628,8 @@ def check_main_loop_combat_dragonlord_two_phase_fight_artifacts() -> dict:
         and all(report.get("checks", {}).values())
         and phase1_to_phase2.get("action") == "combat_turn"
         and phase1_to_phase2.get("screen_mode") == "combat"
-        and phase1_to_phase2.get("experience_after") == phase1_to_phase2.get("experience_before")
+        and phase1_to_phase2.get("experience_after")
+        == phase1_to_phase2.get("experience_before")
         and phase1_to_phase2.get("gold_after") == phase1_to_phase2.get("gold_before")
         and phase1_to_phase2.get("enemy_id_after") == 0x27
         and phase1_to_phase2.get("enemy_hp_after") == 130
@@ -4437,7 +4644,8 @@ def check_main_loop_combat_dragonlord_two_phase_fight_artifacts() -> dict:
         and "DRAGONLORD'S TRUE FORM APPEARS!" in phase1_to_phase2.get("frame", "")
         and phase2_victory.get("action") == "combat_victory"
         and phase2_victory.get("screen_mode") == "dialog"
-        and phase2_victory.get("experience_after") == phase2_victory.get("experience_before")
+        and phase2_victory.get("experience_after")
+        == phase2_victory.get("experience_before")
         and phase2_victory.get("gold_after") == phase2_victory.get("gold_before")
         and phase2_victory.get("combat_session_cleared") is True
         and "DRAGONLORD'S TRUE FORM IS DEFEATED." in phase2_victory.get("frame", "")
@@ -4498,8 +4706,15 @@ def run_phase4_slice_combat_dragonlord_endgame_victory_generator() -> dict:
 
 
 def check_main_loop_combat_dragonlord_endgame_victory_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_combat_dragonlord_endgame_victory.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_dragonlord_endgame_victory_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_combat_dragonlord_endgame_victory.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_combat_dragonlord_endgame_victory_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4590,7 +4805,9 @@ def run_phase4_slice_endgame_return_to_title_generator() -> dict:
 
 def check_main_loop_endgame_return_to_title_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_endgame_return_to_title.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_endgame_return_to_title_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_endgame_return_to_title_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4681,8 +4898,15 @@ def run_phase4_slice_endgame_input_coverage_hardening_generator() -> dict:
 
 
 def check_main_loop_endgame_input_coverage_hardening_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_endgame_input_coverage_hardening.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_endgame_input_coverage_hardening_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_endgame_input_coverage_hardening.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_endgame_input_coverage_hardening_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4779,8 +5003,15 @@ def run_phase4_slice_post_victory_npc_world_state_proof_generator() -> dict:
 
 
 def check_main_loop_post_victory_npc_world_state_proof_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_post_victory_npc_world_state_proof.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_post_victory_npc_world_state_proof_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_post_victory_npc_world_state_proof.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_post_victory_npc_world_state_proof_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4794,7 +5025,9 @@ def check_main_loop_post_victory_npc_world_state_proof_artifacts() -> dict:
     report = json.loads(report_path.read_text())
     vectors = json.loads(vectors_path.read_text())
     tantegel_v = vectors.get("vectors", {}).get("tantegel_post_victory_regression", {})
-    additional_v = vectors.get("vectors", {}).get("additional_map_id_post_victory_npc_variant", {})
+    additional_v = vectors.get("vectors", {}).get(
+        "additional_map_id_post_victory_npc_variant", {}
+    )
     endgame_v = vectors.get("vectors", {}).get("post_victory_endgame_pre_input", {})
 
     ok = (
@@ -4864,7 +5097,9 @@ def run_phase4_slice_title_screen_endgame_renderer_generator() -> dict:
 
 def check_title_screen_endgame_renderer_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_title_screen_endgame_renderer.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "title_screen_endgame_renderer_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "title_screen_endgame_renderer_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -4940,7 +5175,9 @@ def run_phase4_slice_combat_outcome_resolution_generator() -> dict:
 
 def check_main_loop_combat_outcome_resolution_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_combat_outcome_resolution.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_combat_outcome_resolution_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_combat_outcome_resolution_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5050,8 +5287,12 @@ def run_phase4_slice_post_combat_dialog_handoff_generator() -> dict:
 
 
 def check_main_loop_post_combat_dialog_handoff_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_post_combat_dialog_handoff.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_post_combat_dialog_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_post_combat_dialog_handoff.json"
+    )
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_post_combat_dialog_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5137,8 +5378,12 @@ def run_phase4_slice_post_combat_fidelity_hardening_generator() -> dict:
 
 
 def check_main_loop_post_combat_fidelity_hardening_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_post_combat_fidelity_hardening.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_post_combat_fidelity_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_post_combat_fidelity_hardening.json"
+    )
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_post_combat_fidelity_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5218,8 +5463,12 @@ def run_phase4_slice_npc_interaction_dialog_handoff_generator() -> dict:
 
 
 def check_main_loop_npc_interaction_dialog_handoff_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_npc_interaction_dialog_handoff.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_interaction_dialog_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_npc_interaction_dialog_handoff.json"
+    )
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_npc_interaction_dialog_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5299,8 +5548,15 @@ def run_phase4_slice_npc_dialog_control_fidelity_generator() -> dict:
 
 
 def check_main_loop_npc_dialog_control_fidelity_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_npc_dialog_control_fidelity.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_dialog_control_fidelity_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_npc_dialog_control_fidelity.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_npc_dialog_control_fidelity_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5381,7 +5637,9 @@ def run_phase4_slice_npc_dialog_entry_playback_generator() -> dict:
 
 def check_main_loop_npc_dialog_entry_playback_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_npc_dialog_entry_playback.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_dialog_entry_playback_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_npc_dialog_entry_playback_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5457,8 +5715,17 @@ def run_phase4_slice_npc_special_dialog_control_resolution_generator() -> dict:
 
 
 def check_main_loop_npc_special_dialog_control_resolution_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_npc_special_dialog_control_resolution.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_special_dialog_control_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_npc_special_dialog_control_resolution.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_npc_special_dialog_control_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5481,8 +5748,10 @@ def check_main_loop_npc_special_dialog_control_resolution_artifacts() -> dict:
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
-        and defaults.get("0x66") == {"dialog_byte": "0xA4", "block": "TextBlock11", "entry": 4}
-        and defaults.get("0x6E") == {"dialog_byte": "0xBF", "block": "TextBlock12", "entry": 15}
+        and defaults.get("0x66")
+        == {"dialog_byte": "0xA4", "block": "TextBlock11", "entry": 4}
+        and defaults.get("0x6E")
+        == {"dialog_byte": "0xBF", "block": "TextBlock12", "entry": 15}
         and branches.get("control_66_with_stones")
         == {
             "dialog_byte": "0xA5",
@@ -5546,8 +5815,15 @@ def run_phase4_slice_npc_special_control_side_effects_generator() -> dict:
 
 
 def check_main_loop_npc_special_control_side_effects_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_npc_special_control_side_effects.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_special_control_side_effects_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_npc_special_control_side_effects.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_npc_special_control_side_effects_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5584,7 +5860,8 @@ def check_main_loop_npc_special_control_side_effects_artifacts() -> dict:
         )
         and return_v.get("player_flags_after_return", {}).get("got_gwaelin") is False
         and return_v.get("player_flags_after_return", {}).get("done_gwaelin") is True
-        and return_v.get("player_flags_after_return", {}).get("left_throne_room") is True
+        and return_v.get("player_flags_after_return", {}).get("left_throne_room")
+        is True
         and str(return_v.get("follow_up_action_detail", "")).startswith(
             "control:110;byte:0xC0;block:TextBlock13;entry:0"
         )
@@ -5634,8 +5911,17 @@ def run_phase4_slice_npc_special_control_0x6c_side_effect_generator() -> dict:
 
 
 def check_main_loop_npc_special_control_0x6c_side_effect_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_npc_special_control_0x6c_side_effect.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_special_control_0x6c_side_effect_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_npc_special_control_0x6c_side_effect.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_npc_special_control_0x6c_side_effect_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5658,7 +5944,8 @@ def check_main_loop_npc_special_control_0x6c_side_effect_artifacts() -> dict:
         and str(trade_v.get("initial_action_detail", "")).startswith(
             "control:108;byte:0xB2;block:TextBlock12;entry:2"
         )
-        and "side_effect:staff_of_rain_granted" in str(trade_v.get("initial_action_detail", ""))
+        and "side_effect:staff_of_rain_granted"
+        in str(trade_v.get("initial_action_detail", ""))
         and trade_v.get("inventory_after_trade") == [13, 0, 0, 0]
         and trade_v.get("has_harp_after_trade") is False
         and trade_v.get("has_staff_after_trade") is True
@@ -5712,7 +5999,9 @@ def run_phase4_slice_npc_shop_inn_handoff_generator() -> dict:
 
 def check_main_loop_npc_shop_inn_handoff_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_npc_shop_inn_handoff.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_shop_inn_handoff_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_npc_shop_inn_handoff_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5743,7 +6032,9 @@ def check_main_loop_npc_shop_inn_handoff_artifacts() -> dict:
         and shop_v.get("equipment_byte_after") == 0x62
         and inn_v.get("action") == "npc_inn_transaction"
         and inn_v.get("screen_mode") == "dialog"
-        and str(inn_v.get("action_detail", "")).startswith("control:15;inn_index:0;result:inn_stay")
+        and str(inn_v.get("action_detail", "")).startswith(
+            "control:15;inn_index:0;result:inn_stay"
+        )
         and inn_v.get("gold_after") == 30
         and inn_v.get("hp_after") == inn_v.get("max_hp")
         and inn_v.get("mp_after") == inn_v.get("max_mp")
@@ -5805,7 +6096,9 @@ def run_phase4_slice_npc_shop_sell_handoff_generator() -> dict:
 
 def check_main_loop_npc_shop_sell_handoff_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_npc_shop_sell_handoff.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_shop_sell_handoff_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_npc_shop_sell_handoff_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5892,7 +6185,9 @@ def run_phase4_slice_npc_shop_inn_control_expansion_generator() -> dict:
 
 def check_main_loop_npc_shop_inn_control_expansion_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_npc_shop_inn_handoff.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_shop_inn_handoff_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_npc_shop_inn_handoff_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -5912,7 +6207,9 @@ def check_main_loop_npc_shop_inn_control_expansion_artifacts() -> dict:
     inn_v = vectors.get("vectors", {}).get("inn", {})
     inn_additional_v = vectors.get("vectors", {}).get("inn_additional", {})
     inn_additional_pair_v = vectors.get("vectors", {}).get("inn_additional_pair", {})
-    inn_additional_pair_rejected_v = vectors.get("vectors", {}).get("inn_additional_pair_rejected", {})
+    inn_additional_pair_rejected_v = vectors.get("vectors", {}).get(
+        "inn_additional_pair_rejected", {}
+    )
     inn_rejected_v = vectors.get("vectors", {}).get("inn_rejected", {})
 
     ok = (
@@ -5947,10 +6244,13 @@ def check_main_loop_npc_shop_inn_control_expansion_artifacts() -> dict:
             "control:2;shop_id:1;item_id:0;result:rejected:not_enough_gold"
         )
         and shop_rejected_v.get("gold_after") == shop_rejected_v.get("gold_before")
-        and shop_rejected_v.get("equipment_byte_after") == shop_rejected_v.get("equipment_byte_before")
+        and shop_rejected_v.get("equipment_byte_after")
+        == shop_rejected_v.get("equipment_byte_before")
         and inn_v.get("action") == "npc_inn_transaction"
         and inn_v.get("screen_mode") == "dialog"
-        and str(inn_v.get("action_detail", "")).startswith("control:15;inn_index:0;result:inn_stay")
+        and str(inn_v.get("action_detail", "")).startswith(
+            "control:15;inn_index:0;result:inn_stay"
+        )
         and inn_v.get("gold_after") == 30
         and inn_v.get("hp_after") == inn_v.get("max_hp")
         and inn_v.get("mp_after") == inn_v.get("max_mp")
@@ -6044,7 +6344,9 @@ def run_phase4_slice_npc_shop_inn_next_control_pair_generator() -> dict:
 
 def check_main_loop_npc_shop_inn_next_control_pair_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_npc_shop_inn_handoff.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_npc_shop_inn_handoff_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_npc_shop_inn_handoff_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6059,17 +6361,26 @@ def check_main_loop_npc_shop_inn_next_control_pair_artifacts() -> dict:
     vectors = json.loads(vectors_path.read_text())
     shop_next_pair_v = vectors.get("vectors", {}).get("shop_next_pair", {})
     inn_next_pair_v = vectors.get("vectors", {}).get("inn_next_pair", {})
-    inn_next_pair_rejected_v = vectors.get("vectors", {}).get("inn_next_pair_rejected", {})
+    inn_next_pair_rejected_v = vectors.get("vectors", {}).get(
+        "inn_next_pair_rejected", {}
+    )
 
     ok = (
         report.get("slice") == "phase4-main-loop-npc-shop-inn-handoff"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
-        and report.get("checks", {}).get("npc_shop_next_pair_control_handoff_runs_bounded_purchase") is True
-        and report.get("checks", {}).get("npc_inn_next_pair_control_handoff_runs_inn_transaction_and_save")
+        and report.get("checks", {}).get(
+            "npc_shop_next_pair_control_handoff_runs_bounded_purchase"
+        )
         is True
-        and report.get("checks", {}).get("npc_inn_next_pair_control_handoff_rejects_when_gold_insufficient")
+        and report.get("checks", {}).get(
+            "npc_inn_next_pair_control_handoff_runs_inn_transaction_and_save"
+        )
+        is True
+        and report.get("checks", {}).get(
+            "npc_inn_next_pair_control_handoff_rejects_when_gold_insufficient"
+        )
         is True
         and shop_next_pair_v.get("action") == "npc_shop_transaction"
         and shop_next_pair_v.get("screen_mode") == "dialog"
@@ -6093,9 +6404,12 @@ def check_main_loop_npc_shop_inn_next_control_pair_artifacts() -> dict:
         and str(inn_next_pair_rejected_v.get("action_detail", "")).startswith(
             "control:18;inn_index:3;result:inn_stay_rejected:not_enough_gold"
         )
-        and inn_next_pair_rejected_v.get("gold_after") == inn_next_pair_rejected_v.get("gold_before")
-        and inn_next_pair_rejected_v.get("hp_after") == inn_next_pair_rejected_v.get("hp_before")
-        and inn_next_pair_rejected_v.get("mp_after") == inn_next_pair_rejected_v.get("mp_before")
+        and inn_next_pair_rejected_v.get("gold_after")
+        == inn_next_pair_rejected_v.get("gold_before")
+        and inn_next_pair_rejected_v.get("hp_after")
+        == inn_next_pair_rejected_v.get("hp_before")
+        and inn_next_pair_rejected_v.get("mp_after")
+        == inn_next_pair_rejected_v.get("mp_before")
         and inn_next_pair_rejected_v.get("save_exists") is False
     )
 
@@ -6144,7 +6458,9 @@ def run_phase4_slice_map_field_spell_casting_generator() -> dict:
 
 def check_main_loop_map_field_spell_casting_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_field_spell_casting.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_field_spell_casting_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_field_spell_casting_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6181,7 +6497,8 @@ def check_main_loop_map_field_spell_casting_artifacts() -> dict:
         and v.get("radiant", {}).get("light_timer_after") == 0xFE
         and v.get("not_enough_mp", {}).get("action") == "map_spell_rejected"
         and v.get("not_enough_mp", {}).get("action_detail") == "HEAL:not_enough_mp"
-        and v.get("not_enough_mp", {}).get("mp_after") == v.get("not_enough_mp", {}).get("mp_before")
+        and v.get("not_enough_mp", {}).get("mp_after")
+        == v.get("not_enough_mp", {}).get("mp_before")
         and v.get("unknown_spell", {}).get("action") == "map_spell_rejected"
         and v.get("unknown_spell", {}).get("action_detail") == "HEAL:unknown"
     )
@@ -6230,8 +6547,15 @@ def run_phase4_slice_map_spell_selection_surface_generator() -> dict:
 
 
 def check_main_loop_map_spell_selection_surface_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_spell_selection_surface.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_spell_selection_surface_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_spell_selection_surface.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_spell_selection_surface_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6265,7 +6589,8 @@ def check_main_loop_map_spell_selection_surface_artifacts() -> dict:
         and v.get("menu_no_field_spells", {}).get("action") == "map_spell_menu_rejected"
         and v.get("menu_no_field_spells", {}).get("action_detail") == "no_field_spells"
         and v.get("menu_no_field_spells", {}).get("screen_mode") == "dialog"
-        and v.get("menu_no_field_spells", {}).get("frame_contains_unknown_spell") is True
+        and v.get("menu_no_field_spells", {}).get("frame_contains_unknown_spell")
+        is True
         and v.get("menu_select_heal", {}).get("open_action") == "map_spell_menu_opened"
         and v.get("menu_select_heal", {}).get("action") == "map_spell_cast"
         and v.get("menu_select_heal", {}).get("action_detail") == "HEAL:ok"
@@ -6319,7 +6644,9 @@ def run_phase4_slice_map_command_root_surface_generator() -> dict:
 
 def check_main_loop_map_command_root_surface_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_root_surface.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_root_surface_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_map_command_root_surface_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6403,8 +6730,15 @@ def run_phase4_slice_map_command_root_expansion_generator() -> dict:
 
 
 def check_main_loop_map_command_root_expansion_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_root_expansion.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_root_expansion_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_command_root_expansion.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_root_expansion_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6514,7 +6848,9 @@ def run_phase4_slice_map_command_search_generator() -> dict:
 
 def check_main_loop_map_command_search_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_search.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_search_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_map_command_search_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6539,7 +6875,8 @@ def check_main_loop_map_command_search_artifacts() -> dict:
         and v.get("search_no_chest", {}).get("screen_mode") == "dialog"
         and v.get("search_no_chest", {}).get("frame_contains_nothing") is True
         and v.get("search_chest", {}).get("action") == "map_search"
-        and v.get("search_chest", {}).get("action_detail") == "chest:index:0;contents:19"
+        and v.get("search_chest", {}).get("action_detail")
+        == "chest:index:0;contents:19"
         and v.get("search_chest", {}).get("screen_mode") == "dialog"
         and v.get("search_chest", {}).get("frame_contains_chest") is True
     )
@@ -6588,8 +6925,15 @@ def run_phase4_slice_map_command_search_chest_rewards_generator() -> dict:
 
 
 def check_main_loop_map_command_search_chest_rewards_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_search_chest_rewards.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_search_chest_rewards_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_command_search_chest_rewards.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_search_chest_rewards_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6671,8 +7015,17 @@ def run_phase4_slice_map_command_search_non_gold_chest_rewards_generator() -> di
 
 
 def check_main_loop_map_command_search_non_gold_chest_rewards_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_search_non_gold_chest_rewards.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_search_non_gold_chest_rewards_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_search_non_gold_chest_rewards.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_search_non_gold_chest_rewards_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6688,7 +7041,8 @@ def check_main_loop_map_command_search_non_gold_chest_rewards_artifacts() -> dic
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-search-non-gold-chest-rewards"
+        report.get("slice")
+        == "phase4-main-loop-map-command-search-non-gold-chest-rewards"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
@@ -6762,8 +7116,17 @@ def run_phase4_slice_map_command_search_tool_rewards_capacity_generator() -> dic
 
 
 def check_main_loop_map_command_search_tool_rewards_capacity_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_search_tool_rewards_capacity.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_search_tool_rewards_capacity_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_search_tool_rewards_capacity.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_search_tool_rewards_capacity_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6779,7 +7142,8 @@ def check_main_loop_map_command_search_tool_rewards_capacity_artifacts() -> dict
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-search-tool-rewards-capacity"
+        report.get("slice")
+        == "phase4-main-loop-map-command-search-tool-rewards-capacity"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
@@ -6793,14 +7157,18 @@ def check_main_loop_map_command_search_tool_rewards_capacity_artifacts() -> dict
         and v.get("search_dragons_scale_chest", {}).get("action_detail")
         == "chest:index:4;contents:22;reward:item:DRAGONS_SCALE;opened:true"
         and v.get("search_dragons_scale_chest", {}).get("screen_mode") == "dialog"
-        and v.get("search_dragons_scale_chest", {}).get("frame_contains_dragons_scale") is True
-        and v.get("search_dragons_scale_chest", {}).get("inventory_slots_after") == [4, 0, 0, 0]
+        and v.get("search_dragons_scale_chest", {}).get("frame_contains_dragons_scale")
+        is True
+        and v.get("search_dragons_scale_chest", {}).get("inventory_slots_after")
+        == [4, 0, 0, 0]
         and v.get("search_fairy_flute_chest", {}).get("action") == "map_search"
         and v.get("search_fairy_flute_chest", {}).get("action_detail")
         == "chest:index:30;contents:23;reward:item:FAIRY_FLUTE;opened:true"
         and v.get("search_fairy_flute_chest", {}).get("screen_mode") == "dialog"
-        and v.get("search_fairy_flute_chest", {}).get("frame_contains_fairy_flute") is True
-        and v.get("search_fairy_flute_chest", {}).get("inventory_slots_after") == [5, 0, 0, 0]
+        and v.get("search_fairy_flute_chest", {}).get("frame_contains_fairy_flute")
+        is True
+        and v.get("search_fairy_flute_chest", {}).get("inventory_slots_after")
+        == [5, 0, 0, 0]
         and v.get("search_herb_full_guard", {}).get("action") == "map_search"
         and v.get("search_herb_full_guard", {}).get("action_detail")
         == "chest:index:24;contents:17;reward:herb:full"
@@ -6817,8 +7185,10 @@ def check_main_loop_map_command_search_tool_rewards_capacity_artifacts() -> dict
         and v.get("search_tool_full_guard", {}).get("action_detail")
         == "chest:index:8;contents:20;reward:item:full"
         and v.get("search_tool_full_guard", {}).get("screen_mode") == "dialog"
-        and v.get("search_tool_full_guard", {}).get("frame_contains_inventory_full") is True
-        and v.get("search_tool_full_guard", {}).get("inventory_slots_after") == [17, 17, 17, 17]
+        and v.get("search_tool_full_guard", {}).get("frame_contains_inventory_full")
+        is True
+        and v.get("search_tool_full_guard", {}).get("inventory_slots_after")
+        == [17, 17, 17, 17]
     )
 
     return {
@@ -6848,7 +7218,9 @@ def run_pytest_phase4_map_command_search_tool_rewards_capacity_slice() -> dict:
     }
 
 
-def run_phase4_slice_map_command_search_remaining_gold_chest_rewards_generator() -> dict:
+def run_phase4_slice_map_command_search_remaining_gold_chest_rewards_generator() -> (
+    dict
+):
     cmd = [
         sys.executable,
         "-m",
@@ -6865,8 +7237,17 @@ def run_phase4_slice_map_command_search_remaining_gold_chest_rewards_generator()
 
 
 def check_main_loop_map_command_search_remaining_gold_chest_rewards_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_search_remaining_gold_chest_rewards.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_search_remaining_gold_chest_rewards_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_search_remaining_gold_chest_rewards.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_search_remaining_gold_chest_rewards_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -6882,7 +7263,8 @@ def check_main_loop_map_command_search_remaining_gold_chest_rewards_artifacts() 
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-search-remaining-gold-chest-rewards"
+        report.get("slice")
+        == "phase4-main-loop-map-command-search-remaining-gold-chest-rewards"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
@@ -6915,8 +7297,10 @@ def check_main_loop_map_command_search_remaining_gold_chest_rewards_artifacts() 
         and v.get("search_gold_chest_index_21_reopen", {}).get("action") == "map_search"
         and v.get("search_gold_chest_index_21_reopen", {}).get("action_detail")
         == "chest:index:21;contents:19;opened:true;reward:none"
-        and v.get("search_gold_chest_index_21_reopen", {}).get("screen_mode") == "dialog"
-        and v.get("search_gold_chest_index_21_reopen", {}).get("frame_contains_empty") is True
+        and v.get("search_gold_chest_index_21_reopen", {}).get("screen_mode")
+        == "dialog"
+        and v.get("search_gold_chest_index_21_reopen", {}).get("frame_contains_empty")
+        is True
         and v.get("search_gold_chest_index_21_reopen", {}).get("gold_after") == 240
     )
 
@@ -6947,7 +7331,9 @@ def run_pytest_phase4_map_command_search_remaining_gold_chest_rewards_slice() ->
     }
 
 
-def run_phase4_slice_map_command_search_remaining_unsupported_chest_contents_generator() -> dict:
+def run_phase4_slice_map_command_search_remaining_unsupported_chest_contents_generator() -> (
+    dict
+):
     cmd = [
         sys.executable,
         "-m",
@@ -6963,10 +7349,19 @@ def run_phase4_slice_map_command_search_remaining_unsupported_chest_contents_gen
     }
 
 
-def check_main_loop_map_command_search_remaining_unsupported_chest_contents_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_search_remaining_unsupported_chest_contents.json"
+def check_main_loop_map_command_search_remaining_unsupported_chest_contents_artifacts() -> (
+    dict
+):
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_search_remaining_unsupported_chest_contents.json"
+    )
     vectors_path = (
-        ROOT / "tests" / "fixtures" / "main_loop_map_command_search_remaining_unsupported_chest_contents_vectors.json"
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_search_remaining_unsupported_chest_contents_vectors.json"
     )
 
     if not report_path.exists() or not vectors_path.exists():
@@ -6983,12 +7378,15 @@ def check_main_loop_map_command_search_remaining_unsupported_chest_contents_arti
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-search-remaining-unsupported-chest-contents"
+        report.get("slice")
+        == "phase4-main-loop-map-command-search-remaining-unsupported-chest-contents"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
-        and v.get("remaining_content_matrix", {}).get("content_ids") == [2, 3, 4, 6, 9, 12, 13, 14, 15, 16]
-        and v.get("remaining_content_matrix", {}).get("chest_indices") == [5, 6, 7, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 22, 23, 25, 26, 27, 29]
+        and v.get("remaining_content_matrix", {}).get("content_ids")
+        == [2, 3, 4, 6, 9, 12, 13, 14, 15, 16]
+        and v.get("remaining_content_matrix", {}).get("chest_indices")
+        == [5, 6, 7, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 22, 23, 25, 26, 27, 29]
         and v.get("search_content_2", {}).get("action_detail")
         == "chest:index:9;contents:2;reward:herb:+1;opened:true"
         and v.get("search_content_3", {}).get("action_detail")
@@ -7028,7 +7426,9 @@ def check_main_loop_map_command_search_remaining_unsupported_chest_contents_arti
     }
 
 
-def run_pytest_phase4_map_command_search_remaining_unsupported_chest_contents_slice() -> dict:
+def run_pytest_phase4_map_command_search_remaining_unsupported_chest_contents_slice() -> (
+    dict
+):
     cmd = [
         sys.executable,
         "-m",
@@ -7063,8 +7463,15 @@ def run_phase4_slice_map_command_status_surface_generator() -> dict:
 
 
 def check_main_loop_map_command_status_surface_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_status_surface.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_status_surface_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_command_status_surface.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_status_surface_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7151,7 +7558,9 @@ def run_phase4_slice_map_command_item_surface_generator() -> dict:
 
 def check_main_loop_map_command_item_surface_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_item_surface.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_item_surface_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_map_command_item_surface_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7177,7 +7586,8 @@ def check_main_loop_map_command_item_surface_artifacts() -> dict:
         and v.get("item_menu_open", {}).get("frame_contains_item_title") is True
         and v.get("item_menu_open", {}).get("frame_contains_torch") is True
         and v.get("item_menu_open", {}).get("frame_contains_wings") is True
-        and v.get("item_menu_input_while_open", {}).get("action") == "map_item_menu_input"
+        and v.get("item_menu_input_while_open", {}).get("action")
+        == "map_item_menu_input"
         and v.get("item_menu_input_while_open", {}).get("action_detail") == "RIGHT"
         and v.get("item_menu_input_while_open", {}).get("screen_mode") == "map"
         and v.get("item_menu_input_while_open", {}).get("player_x_after") == 10
@@ -7187,15 +7597,20 @@ def check_main_loop_map_command_item_surface_artifacts() -> dict:
         and v.get("item_use_torch_success", {}).get("action") == "map_item_used"
         and v.get("item_use_torch_success", {}).get("action_detail") == "TORCH:ok"
         and v.get("item_use_torch_success", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_torch_success", {}).get("inventory_slots_after") == [0, 0, 0, 0]
+        and v.get("item_use_torch_success", {}).get("inventory_slots_after")
+        == [0, 0, 0, 0]
         and v.get("item_use_torch_success", {}).get("light_radius_after") == 5
         and v.get("item_use_torch_success", {}).get("light_timer_after") == 15
         and v.get("item_use_torch_rejected", {}).get("action") == "map_item_rejected"
-        and v.get("item_use_torch_rejected", {}).get("action_detail") == "TORCH:torch_requires_dungeon_map"
+        and v.get("item_use_torch_rejected", {}).get("action_detail")
+        == "TORCH:torch_requires_dungeon_map"
         and v.get("item_use_torch_rejected", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_torch_rejected", {}).get("inventory_slots_after") == [1, 0, 0, 0]
-        and v.get("item_menu_empty_inventory", {}).get("action") == "map_item_menu_rejected"
-        and v.get("item_menu_empty_inventory", {}).get("action_detail") == "empty_inventory"
+        and v.get("item_use_torch_rejected", {}).get("inventory_slots_after")
+        == [1, 0, 0, 0]
+        and v.get("item_menu_empty_inventory", {}).get("action")
+        == "map_item_menu_rejected"
+        and v.get("item_menu_empty_inventory", {}).get("action_detail")
+        == "empty_inventory"
         and v.get("item_menu_empty_inventory", {}).get("screen_mode") == "dialog"
     )
 
@@ -7243,8 +7658,15 @@ def run_phase4_slice_map_command_item_expansion_generator() -> dict:
 
 
 def check_main_loop_map_command_item_expansion_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_item_expansion.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_item_expansion_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_command_item_expansion.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_item_expansion_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7269,25 +7691,36 @@ def check_main_loop_map_command_item_expansion_artifacts() -> dict:
         and v.get("item_menu_open", {}).get("frame_contains_fairy_water") is True
         and v.get("item_menu_open", {}).get("frame_contains_wings") is True
         and v.get("item_use_fairy_water_success", {}).get("action") == "map_item_used"
-        and v.get("item_use_fairy_water_success", {}).get("action_detail") == "FAIRY WATER:ok"
+        and v.get("item_use_fairy_water_success", {}).get("action_detail")
+        == "FAIRY WATER:ok"
         and v.get("item_use_fairy_water_success", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_fairy_water_success", {}).get("repel_timer_after_route_input") == 0xFE
-        and v.get("item_use_fairy_water_success", {}).get("repel_timer_after_tick") == 0xFD
+        and v.get("item_use_fairy_water_success", {}).get(
+            "repel_timer_after_route_input"
+        )
+        == 0xFE
+        and v.get("item_use_fairy_water_success", {}).get("repel_timer_after_tick")
+        == 0xFD
         and v.get("item_use_fairy_water_success", {}).get("repel_timer_after") == 0xFD
-        and v.get("item_use_fairy_water_success", {}).get("inventory_slots_after") == [0, 0, 0, 0]
-        and v.get("item_use_fairy_water_success", {}).get("frame_contains_used_text") is True
+        and v.get("item_use_fairy_water_success", {}).get("inventory_slots_after")
+        == [0, 0, 0, 0]
+        and v.get("item_use_fairy_water_success", {}).get("frame_contains_used_text")
+        is True
         and v.get("item_use_wings_success", {}).get("action") == "map_item_used"
         and v.get("item_use_wings_success", {}).get("action_detail") == "WINGS:ok"
         and v.get("item_use_wings_success", {}).get("screen_mode") == "dialog"
         and v.get("item_use_wings_success", {}).get("map_after") == [1, 42, 43]
-        and v.get("item_use_wings_success", {}).get("inventory_slots_after") == [0, 0, 0, 0]
+        and v.get("item_use_wings_success", {}).get("inventory_slots_after")
+        == [0, 0, 0, 0]
         and v.get("item_use_wings_success", {}).get("frame_contains_used_text") is True
         and v.get("item_use_wings_rejected", {}).get("action") == "map_item_rejected"
-        and v.get("item_use_wings_rejected", {}).get("action_detail") == "WINGS:wings_cannot_be_used_here"
+        and v.get("item_use_wings_rejected", {}).get("action_detail")
+        == "WINGS:wings_cannot_be_used_here"
         and v.get("item_use_wings_rejected", {}).get("screen_mode") == "dialog"
         and v.get("item_use_wings_rejected", {}).get("map_after") == [13, 10, 10]
-        and v.get("item_use_wings_rejected", {}).get("inventory_slots_after") == [3, 0, 0, 0]
-        and v.get("item_use_wings_rejected", {}).get("frame_contains_rejected_text") is True
+        and v.get("item_use_wings_rejected", {}).get("inventory_slots_after")
+        == [3, 0, 0, 0]
+        and v.get("item_use_wings_rejected", {}).get("frame_contains_rejected_text")
+        is True
     )
 
     return {
@@ -7334,8 +7767,17 @@ def run_phase4_slice_map_command_item_dragons_scale_equip_state_generator() -> d
 
 
 def check_main_loop_map_command_item_dragons_scale_equip_state_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_item_dragons_scale_equip_state.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_item_dragons_scale_equip_state_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_item_dragons_scale_equip_state.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_item_dragons_scale_equip_state_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7351,7 +7793,8 @@ def check_main_loop_map_command_item_dragons_scale_equip_state_artifacts() -> di
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-item-dragons-scale-equip-state"
+        report.get("slice")
+        == "phase4-main-loop-map-command-item-dragons-scale-equip-state"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
@@ -7361,22 +7804,39 @@ def check_main_loop_map_command_item_dragons_scale_equip_state_artifacts() -> di
         and v.get("item_menu_open", {}).get("frame_contains_item_title") is True
         and v.get("item_menu_open", {}).get("frame_contains_dragons_scale") is True
         and v.get("item_use_dragons_scale_success", {}).get("action") == "map_item_used"
-        and v.get("item_use_dragons_scale_success", {}).get("action_detail") == "DRAGON'S SCALE:ok"
+        and v.get("item_use_dragons_scale_success", {}).get("action_detail")
+        == "DRAGON'S SCALE:ok"
         and v.get("item_use_dragons_scale_success", {}).get("screen_mode") == "dialog"
         and v.get("item_use_dragons_scale_success", {}).get("defense_before") == 2
         and v.get("item_use_dragons_scale_success", {}).get("defense_after") == 4
-        and v.get("item_use_dragons_scale_success", {}).get("dragon_scale_flag_set") is True
-        and v.get("item_use_dragons_scale_success", {}).get("inventory_slots_after") == [4, 0, 0, 0]
-        and v.get("item_use_dragons_scale_success", {}).get("frame_contains_used_text") is True
-        and v.get("item_use_dragons_scale_already_equipped", {}).get("action") == "map_item_rejected"
+        and v.get("item_use_dragons_scale_success", {}).get("dragon_scale_flag_set")
+        is True
+        and v.get("item_use_dragons_scale_success", {}).get("inventory_slots_after")
+        == [4, 0, 0, 0]
+        and v.get("item_use_dragons_scale_success", {}).get("frame_contains_used_text")
+        is True
+        and v.get("item_use_dragons_scale_already_equipped", {}).get("action")
+        == "map_item_rejected"
         and v.get("item_use_dragons_scale_already_equipped", {}).get("action_detail")
         == "DRAGON'S SCALE:already_wearing_dragon_scale"
-        and v.get("item_use_dragons_scale_already_equipped", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_dragons_scale_already_equipped", {}).get("defense_before") == 4
-        and v.get("item_use_dragons_scale_already_equipped", {}).get("defense_after") == 4
-        and v.get("item_use_dragons_scale_already_equipped", {}).get("dragon_scale_flag_set") is True
-        and v.get("item_use_dragons_scale_already_equipped", {}).get("inventory_slots_after") == [4, 0, 0, 0]
-        and v.get("item_use_dragons_scale_already_equipped", {}).get("frame_contains_no_effect_text") is True
+        and v.get("item_use_dragons_scale_already_equipped", {}).get("screen_mode")
+        == "dialog"
+        and v.get("item_use_dragons_scale_already_equipped", {}).get("defense_before")
+        == 4
+        and v.get("item_use_dragons_scale_already_equipped", {}).get("defense_after")
+        == 4
+        and v.get("item_use_dragons_scale_already_equipped", {}).get(
+            "dragon_scale_flag_set"
+        )
+        is True
+        and v.get("item_use_dragons_scale_already_equipped", {}).get(
+            "inventory_slots_after"
+        )
+        == [4, 0, 0, 0]
+        and v.get("item_use_dragons_scale_already_equipped", {}).get(
+            "frame_contains_no_effect_text"
+        )
+        is True
     )
 
     return {
@@ -7423,8 +7883,17 @@ def run_phase4_slice_map_command_item_silver_harp_forced_encounter_generator() -
 
 
 def check_main_loop_map_command_item_silver_harp_forced_encounter_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_item_silver_harp_forced_encounter.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_item_silver_harp_forced_encounter_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_item_silver_harp_forced_encounter.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_item_silver_harp_forced_encounter_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7440,7 +7909,8 @@ def check_main_loop_map_command_item_silver_harp_forced_encounter_artifacts() ->
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-item-silver-harp-forced-encounter"
+        report.get("slice")
+        == "phase4-main-loop-map-command-item-silver-harp-forced-encounter"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
@@ -7448,19 +7918,34 @@ def check_main_loop_map_command_item_silver_harp_forced_encounter_artifacts() ->
         and v.get("item_menu_open", {}).get("action_detail") == "count:1"
         and v.get("item_menu_open", {}).get("screen_mode") == "map"
         and v.get("item_menu_open", {}).get("frame_contains_silver_harp") is True
-        and v.get("item_use_silver_harp_forced_encounter", {}).get("action") == "encounter_triggered"
-        and v.get("item_use_silver_harp_forced_encounter", {}).get("action_detail") == "enemy:0;source:silver_harp"
-        and v.get("item_use_silver_harp_forced_encounter", {}).get("screen_mode") == "combat"
+        and v.get("item_use_silver_harp_forced_encounter", {}).get("action")
+        == "encounter_triggered"
+        and v.get("item_use_silver_harp_forced_encounter", {}).get("action_detail")
+        == "enemy:0;source:silver_harp"
+        and v.get("item_use_silver_harp_forced_encounter", {}).get("screen_mode")
+        == "combat"
         and v.get("item_use_silver_harp_forced_encounter", {}).get("enemy_id") == 0
-        and v.get("item_use_silver_harp_forced_encounter", {}).get("enemy_name") == "Slime"
-        and v.get("item_use_silver_harp_forced_encounter", {}).get("inventory_slots_after") == [10, 0, 0, 0]
-        and v.get("item_use_silver_harp_forced_encounter", {}).get("frame_contains_slime") is True
-        and v.get("item_use_silver_harp_rejected", {}).get("action") == "map_item_rejected"
+        and v.get("item_use_silver_harp_forced_encounter", {}).get("enemy_name")
+        == "Slime"
+        and v.get("item_use_silver_harp_forced_encounter", {}).get(
+            "inventory_slots_after"
+        )
+        == [10, 0, 0, 0]
+        and v.get("item_use_silver_harp_forced_encounter", {}).get(
+            "frame_contains_slime"
+        )
+        is True
+        and v.get("item_use_silver_harp_rejected", {}).get("action")
+        == "map_item_rejected"
         and v.get("item_use_silver_harp_rejected", {}).get("action_detail")
         == "SILVER HARP:harp_only_works_on_overworld"
         and v.get("item_use_silver_harp_rejected", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_silver_harp_rejected", {}).get("inventory_slots_after") == [10, 0, 0, 0]
-        and v.get("item_use_silver_harp_rejected", {}).get("frame_contains_rejected_text") is True
+        and v.get("item_use_silver_harp_rejected", {}).get("inventory_slots_after")
+        == [10, 0, 0, 0]
+        and v.get("item_use_silver_harp_rejected", {}).get(
+            "frame_contains_rejected_text"
+        )
+        is True
     )
 
     return {
@@ -7507,8 +7992,17 @@ def run_phase4_slice_map_command_item_rainbow_drop_bridge_trigger_generator() ->
 
 
 def check_main_loop_map_command_item_rainbow_drop_bridge_trigger_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_item_rainbow_drop_bridge_trigger.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_item_rainbow_drop_bridge_trigger_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_item_rainbow_drop_bridge_trigger.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_item_rainbow_drop_bridge_trigger_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7524,7 +8018,8 @@ def check_main_loop_map_command_item_rainbow_drop_bridge_trigger_artifacts() -> 
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-item-rainbow-drop-bridge-trigger"
+        report.get("slice")
+        == "phase4-main-loop-map-command-item-rainbow-drop-bridge-trigger"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
@@ -7533,25 +8028,45 @@ def check_main_loop_map_command_item_rainbow_drop_bridge_trigger_artifacts() -> 
         and v.get("item_menu_open", {}).get("screen_mode") == "map"
         and v.get("item_menu_open", {}).get("frame_contains_rainbow_drop") is True
         and v.get("item_use_rainbow_drop_success", {}).get("action") == "map_item_used"
-        and v.get("item_use_rainbow_drop_success", {}).get("action_detail") == "RAINBOW DROP:ok"
+        and v.get("item_use_rainbow_drop_success", {}).get("action_detail")
+        == "RAINBOW DROP:ok"
         and v.get("item_use_rainbow_drop_success", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_rainbow_drop_success", {}).get("rainbow_bridge_flag_set") is True
-        and v.get("item_use_rainbow_drop_success", {}).get("inventory_slots_after") == [14, 0, 0, 0]
-        and v.get("item_use_rainbow_drop_success", {}).get("base_tile_before_bridge") == 0x01
-        and v.get("item_use_rainbow_drop_success", {}).get("tile_after_bridge_active") == 0x0A
-        and v.get("item_use_rainbow_drop_success", {}).get("tile_after_bridge_inactive") == 0x01
-        and v.get("item_use_rainbow_drop_wrong_coords", {}).get("action") == "map_item_rejected"
+        and v.get("item_use_rainbow_drop_success", {}).get("rainbow_bridge_flag_set")
+        is True
+        and v.get("item_use_rainbow_drop_success", {}).get("inventory_slots_after")
+        == [14, 0, 0, 0]
+        and v.get("item_use_rainbow_drop_success", {}).get("base_tile_before_bridge")
+        == 0x01
+        and v.get("item_use_rainbow_drop_success", {}).get("tile_after_bridge_active")
+        == 0x0A
+        and v.get("item_use_rainbow_drop_success", {}).get("tile_after_bridge_inactive")
+        == 0x01
+        and v.get("item_use_rainbow_drop_wrong_coords", {}).get("action")
+        == "map_item_rejected"
         and v.get("item_use_rainbow_drop_wrong_coords", {}).get("action_detail")
         == "RAINBOW DROP:no_rainbow_appeared_here"
-        and v.get("item_use_rainbow_drop_wrong_coords", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_rainbow_drop_wrong_coords", {}).get("rainbow_bridge_flag_set") is False
-        and v.get("item_use_rainbow_drop_wrong_coords", {}).get("inventory_slots_after") == [14, 0, 0, 0]
-        and v.get("item_use_rainbow_drop_already_built", {}).get("action") == "map_item_rejected"
+        and v.get("item_use_rainbow_drop_wrong_coords", {}).get("screen_mode")
+        == "dialog"
+        and v.get("item_use_rainbow_drop_wrong_coords", {}).get(
+            "rainbow_bridge_flag_set"
+        )
+        is False
+        and v.get("item_use_rainbow_drop_wrong_coords", {}).get("inventory_slots_after")
+        == [14, 0, 0, 0]
+        and v.get("item_use_rainbow_drop_already_built", {}).get("action")
+        == "map_item_rejected"
         and v.get("item_use_rainbow_drop_already_built", {}).get("action_detail")
         == "RAINBOW DROP:no_rainbow_appeared_here"
-        and v.get("item_use_rainbow_drop_already_built", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_rainbow_drop_already_built", {}).get("rainbow_bridge_flag_set") is True
-        and v.get("item_use_rainbow_drop_already_built", {}).get("inventory_slots_after") == [14, 0, 0, 0]
+        and v.get("item_use_rainbow_drop_already_built", {}).get("screen_mode")
+        == "dialog"
+        and v.get("item_use_rainbow_drop_already_built", {}).get(
+            "rainbow_bridge_flag_set"
+        )
+        is True
+        and v.get("item_use_rainbow_drop_already_built", {}).get(
+            "inventory_slots_after"
+        )
+        == [14, 0, 0, 0]
     )
 
     return {
@@ -7598,8 +8113,17 @@ def run_phase4_slice_map_command_item_fairy_flute_interaction_generator() -> dic
 
 
 def check_main_loop_map_command_item_fairy_flute_interaction_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_item_fairy_flute_interaction.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_item_fairy_flute_interaction_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_item_fairy_flute_interaction.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_item_fairy_flute_interaction_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7615,7 +8139,8 @@ def check_main_loop_map_command_item_fairy_flute_interaction_artifacts() -> dict
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-item-fairy-flute-interaction"
+        report.get("slice")
+        == "phase4-main-loop-map-command-item-fairy-flute-interaction"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
@@ -7623,8 +8148,10 @@ def check_main_loop_map_command_item_fairy_flute_interaction_artifacts() -> dict
         and v.get("item_menu_open", {}).get("action_detail") == "count:1"
         and v.get("item_menu_open", {}).get("screen_mode") == "map"
         and v.get("item_menu_open", {}).get("frame_contains_fairy_flute") is True
-        and v.get("item_use_fairy_flute_success", {}).get("action") == "encounter_triggered"
-        and v.get("item_use_fairy_flute_success", {}).get("action_detail") == "enemy:24;source:fairy_flute"
+        and v.get("item_use_fairy_flute_success", {}).get("action")
+        == "encounter_triggered"
+        and v.get("item_use_fairy_flute_success", {}).get("action_detail")
+        == "enemy:24;source:fairy_flute"
         and v.get("item_use_fairy_flute_success", {}).get("screen_mode") == "combat"
         and v.get("item_use_fairy_flute_success", {}).get("rng_after") == [129, 0]
         and v.get("item_use_fairy_flute_success", {}).get("enemy_id") == 24
@@ -7632,26 +8159,50 @@ def check_main_loop_map_command_item_fairy_flute_interaction_artifacts() -> dict
         and v.get("item_use_fairy_flute_success", {}).get("enemy_hp") == 70
         and v.get("item_use_fairy_flute_success", {}).get("enemy_max_hp") == 70
         and v.get("item_use_fairy_flute_success", {}).get("story_flags_after") == 0
-        and v.get("item_use_fairy_flute_success", {}).get("inventory_slots_after") == [5, 0, 0, 0]
-        and v.get("item_use_fairy_flute_success", {}).get("frame_contains_golem") is True
-        and v.get("item_use_fairy_flute_wrong_coords", {}).get("action") == "map_item_rejected"
-        and v.get("item_use_fairy_flute_wrong_coords", {}).get("action_detail") == "FAIRY FLUTE:flute_has_no_effect"
-        and v.get("item_use_fairy_flute_wrong_coords", {}).get("screen_mode") == "dialog"
+        and v.get("item_use_fairy_flute_success", {}).get("inventory_slots_after")
+        == [5, 0, 0, 0]
+        and v.get("item_use_fairy_flute_success", {}).get("frame_contains_golem")
+        is True
+        and v.get("item_use_fairy_flute_wrong_coords", {}).get("action")
+        == "map_item_rejected"
+        and v.get("item_use_fairy_flute_wrong_coords", {}).get("action_detail")
+        == "FAIRY FLUTE:flute_has_no_effect"
+        and v.get("item_use_fairy_flute_wrong_coords", {}).get("screen_mode")
+        == "dialog"
         and v.get("item_use_fairy_flute_wrong_coords", {}).get("story_flags_after") == 0
-        and v.get("item_use_fairy_flute_wrong_coords", {}).get("inventory_slots_after") == [5, 0, 0, 0]
-        and v.get("item_use_fairy_flute_wrong_coords", {}).get("frame_contains_no_effect_text") is True
-        and v.get("item_use_fairy_flute_golem_dead", {}).get("action") == "map_item_rejected"
-        and v.get("item_use_fairy_flute_golem_dead", {}).get("action_detail") == "FAIRY FLUTE:flute_has_no_effect"
+        and v.get("item_use_fairy_flute_wrong_coords", {}).get("inventory_slots_after")
+        == [5, 0, 0, 0]
+        and v.get("item_use_fairy_flute_wrong_coords", {}).get(
+            "frame_contains_no_effect_text"
+        )
+        is True
+        and v.get("item_use_fairy_flute_golem_dead", {}).get("action")
+        == "map_item_rejected"
+        and v.get("item_use_fairy_flute_golem_dead", {}).get("action_detail")
+        == "FAIRY FLUTE:flute_has_no_effect"
         and v.get("item_use_fairy_flute_golem_dead", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_fairy_flute_golem_dead", {}).get("story_flags_after") == 0x02
-        and v.get("item_use_fairy_flute_golem_dead", {}).get("inventory_slots_after") == [5, 0, 0, 0]
-        and v.get("item_use_fairy_flute_golem_dead", {}).get("frame_contains_no_effect_text") is True
-        and v.get("item_use_fairy_flute_non_overworld", {}).get("action") == "map_item_rejected"
-        and v.get("item_use_fairy_flute_non_overworld", {}).get("action_detail") == "FAIRY FLUTE:flute_has_no_effect"
-        and v.get("item_use_fairy_flute_non_overworld", {}).get("screen_mode") == "dialog"
-        and v.get("item_use_fairy_flute_non_overworld", {}).get("story_flags_after") == 0
-        and v.get("item_use_fairy_flute_non_overworld", {}).get("inventory_slots_after") == [5, 0, 0, 0]
-        and v.get("item_use_fairy_flute_non_overworld", {}).get("frame_contains_no_effect_text") is True
+        and v.get("item_use_fairy_flute_golem_dead", {}).get("story_flags_after")
+        == 0x02
+        and v.get("item_use_fairy_flute_golem_dead", {}).get("inventory_slots_after")
+        == [5, 0, 0, 0]
+        and v.get("item_use_fairy_flute_golem_dead", {}).get(
+            "frame_contains_no_effect_text"
+        )
+        is True
+        and v.get("item_use_fairy_flute_non_overworld", {}).get("action")
+        == "map_item_rejected"
+        and v.get("item_use_fairy_flute_non_overworld", {}).get("action_detail")
+        == "FAIRY FLUTE:flute_has_no_effect"
+        and v.get("item_use_fairy_flute_non_overworld", {}).get("screen_mode")
+        == "dialog"
+        and v.get("item_use_fairy_flute_non_overworld", {}).get("story_flags_after")
+        == 0
+        and v.get("item_use_fairy_flute_non_overworld", {}).get("inventory_slots_after")
+        == [5, 0, 0, 0]
+        and v.get("item_use_fairy_flute_non_overworld", {}).get(
+            "frame_contains_no_effect_text"
+        )
+        is True
     )
 
     return {
@@ -7681,7 +8232,9 @@ def run_pytest_phase4_map_command_item_fairy_flute_interaction_slice() -> dict:
     }
 
 
-def run_phase4_slice_map_command_item_remaining_quest_item_use_effects_generator() -> dict:
+def run_phase4_slice_map_command_item_remaining_quest_item_use_effects_generator() -> (
+    dict
+):
     cmd = [
         sys.executable,
         "-m",
@@ -7697,9 +8250,20 @@ def run_phase4_slice_map_command_item_remaining_quest_item_use_effects_generator
     }
 
 
-def check_main_loop_map_command_item_remaining_quest_item_use_effects_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_item_remaining_quest_item_use_effects.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_item_remaining_quest_item_use_effects_vectors.json"
+def check_main_loop_map_command_item_remaining_quest_item_use_effects_artifacts() -> (
+    dict
+):
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_item_remaining_quest_item_use_effects.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_item_remaining_quest_item_use_effects_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7715,50 +8279,73 @@ def check_main_loop_map_command_item_remaining_quest_item_use_effects_artifacts(
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-item-remaining-quest-item-use-effects"
+        report.get("slice")
+        == "phase4-main-loop-map-command-item-remaining-quest-item-use-effects"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
         and v.get("fighters_ring_success", {}).get("action") == "map_item_used"
-        and v.get("fighters_ring_success", {}).get("action_detail") == "FIGHTER'S RING:ok"
+        and v.get("fighters_ring_success", {}).get("action_detail")
+        == "FIGHTER'S RING:ok"
         and v.get("fighters_ring_success", {}).get("attack_after") == 6
         and v.get("fighters_ring_success", {}).get("fighters_ring_flag_set") is True
-        and v.get("fighters_ring_success", {}).get("inventory_slots_after") == [6, 0, 0, 0]
-        and v.get("fighters_ring_already_equipped", {}).get("action") == "map_item_rejected"
+        and v.get("fighters_ring_success", {}).get("inventory_slots_after")
+        == [6, 0, 0, 0]
+        and v.get("fighters_ring_already_equipped", {}).get("action")
+        == "map_item_rejected"
         and v.get("fighters_ring_already_equipped", {}).get("action_detail")
         == "FIGHTER'S RING:already_wearing_fighters_ring"
         and v.get("fighters_ring_already_equipped", {}).get("attack_after") == 6
-        and v.get("fighters_ring_already_equipped", {}).get("fighters_ring_flag_set") is True
-        and v.get("fighters_ring_already_equipped", {}).get("inventory_slots_after") == [6, 0, 0, 0]
+        and v.get("fighters_ring_already_equipped", {}).get("fighters_ring_flag_set")
+        is True
+        and v.get("fighters_ring_already_equipped", {}).get("inventory_slots_after")
+        == [6, 0, 0, 0]
         and v.get("death_necklace_success", {}).get("action") == "map_item_used"
-        and v.get("death_necklace_success", {}).get("action_detail") == "DEATH NECKLACE:ok"
+        and v.get("death_necklace_success", {}).get("action_detail")
+        == "DEATH NECKLACE:ok"
         and v.get("death_necklace_success", {}).get("death_necklace_flag_set") is True
-        and v.get("death_necklace_success", {}).get("inventory_slots_after") == [11, 0, 0, 0]
-        and v.get("death_necklace_already_cursed", {}).get("action") == "map_item_rejected"
-        and v.get("death_necklace_already_cursed", {}).get("action_detail") == "DEATH NECKLACE:already_cursed"
-        and v.get("death_necklace_already_cursed", {}).get("cursed_belt_flag_set") is True
-        and v.get("death_necklace_already_cursed", {}).get("death_necklace_flag_set") is False
-        and v.get("death_necklace_already_cursed", {}).get("inventory_slots_after") == [11, 0, 0, 0]
+        and v.get("death_necklace_success", {}).get("inventory_slots_after")
+        == [11, 0, 0, 0]
+        and v.get("death_necklace_already_cursed", {}).get("action")
+        == "map_item_rejected"
+        and v.get("death_necklace_already_cursed", {}).get("action_detail")
+        == "DEATH NECKLACE:already_cursed"
+        and v.get("death_necklace_already_cursed", {}).get("cursed_belt_flag_set")
+        is True
+        and v.get("death_necklace_already_cursed", {}).get("death_necklace_flag_set")
+        is False
+        and v.get("death_necklace_already_cursed", {}).get("inventory_slots_after")
+        == [11, 0, 0, 0]
         and v.get("cursed_belt_success", {}).get("action") == "map_item_used"
         and v.get("cursed_belt_success", {}).get("action_detail") == "CURSED BELT:ok"
         and v.get("cursed_belt_success", {}).get("cursed_belt_flag_set") is True
-        and v.get("cursed_belt_success", {}).get("inventory_slots_after") == [9, 0, 0, 0]
+        and v.get("cursed_belt_success", {}).get("inventory_slots_after")
+        == [9, 0, 0, 0]
         and v.get("cursed_belt_already_cursed", {}).get("action") == "map_item_rejected"
-        and v.get("cursed_belt_already_cursed", {}).get("action_detail") == "CURSED BELT:already_cursed"
-        and v.get("cursed_belt_already_cursed", {}).get("death_necklace_flag_set") is True
+        and v.get("cursed_belt_already_cursed", {}).get("action_detail")
+        == "CURSED BELT:already_cursed"
+        and v.get("cursed_belt_already_cursed", {}).get("death_necklace_flag_set")
+        is True
         and v.get("cursed_belt_already_cursed", {}).get("cursed_belt_flag_set") is False
-        and v.get("cursed_belt_already_cursed", {}).get("inventory_slots_after") == [9, 0, 0, 0]
+        and v.get("cursed_belt_already_cursed", {}).get("inventory_slots_after")
+        == [9, 0, 0, 0]
         and v.get("erdricks_token_held", {}).get("action") == "map_item_rejected"
-        and v.get("erdricks_token_held", {}).get("action_detail") == "ERDRICK'S TOKEN:quest_item_held"
-        and v.get("erdricks_token_held", {}).get("inventory_slots_after") == [7, 0, 0, 0]
+        and v.get("erdricks_token_held", {}).get("action_detail")
+        == "ERDRICK'S TOKEN:quest_item_held"
+        and v.get("erdricks_token_held", {}).get("inventory_slots_after")
+        == [7, 0, 0, 0]
         and v.get("erdricks_token_held", {}).get("frame_contains_holding") is True
         and v.get("stones_of_sunlight_held", {}).get("action") == "map_item_rejected"
-        and v.get("stones_of_sunlight_held", {}).get("action_detail") == "STONES OF SUNLIGHT:quest_item_held"
-        and v.get("stones_of_sunlight_held", {}).get("inventory_slots_after") == [12, 0, 0, 0]
+        and v.get("stones_of_sunlight_held", {}).get("action_detail")
+        == "STONES OF SUNLIGHT:quest_item_held"
+        and v.get("stones_of_sunlight_held", {}).get("inventory_slots_after")
+        == [12, 0, 0, 0]
         and v.get("stones_of_sunlight_held", {}).get("frame_contains_holding") is True
         and v.get("staff_of_rain_held", {}).get("action") == "map_item_rejected"
-        and v.get("staff_of_rain_held", {}).get("action_detail") == "STAFF OF RAIN:quest_item_held"
-        and v.get("staff_of_rain_held", {}).get("inventory_slots_after") == [13, 0, 0, 0]
+        and v.get("staff_of_rain_held", {}).get("action_detail")
+        == "STAFF OF RAIN:quest_item_held"
+        and v.get("staff_of_rain_held", {}).get("inventory_slots_after")
+        == [13, 0, 0, 0]
         and v.get("staff_of_rain_held", {}).get("frame_contains_holding") is True
     )
 
@@ -7806,8 +8393,17 @@ def run_phase4_slice_map_command_cursed_item_step_damage_hook_generator() -> dic
 
 
 def check_main_loop_map_command_cursed_item_step_damage_hook_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_cursed_item_step_damage_hook.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_cursed_item_step_damage_hook_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_map_command_cursed_item_step_damage_hook.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_cursed_item_step_damage_hook_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7823,34 +8419,67 @@ def check_main_loop_map_command_cursed_item_step_damage_hook_artifacts() -> dict
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-map-command-cursed-item-step-damage-hook"
+        report.get("slice")
+        == "phase4-main-loop-map-command-cursed-item-step-damage-hook"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
         and v.get("cursed_belt_step_sets_hp_to_1", {}).get("action") == "move"
-        and "cursed_belt:hp_set_to_1" in v.get("cursed_belt_step_sets_hp_to_1", {}).get("action_detail", "")
+        and "cursed_belt:hp_set_to_1"
+        in v.get("cursed_belt_step_sets_hp_to_1", {}).get("action_detail", "")
         and v.get("cursed_belt_step_sets_hp_to_1", {}).get("screen_mode") == "map"
         and v.get("cursed_belt_step_sets_hp_to_1", {}).get("map_after") == [1, 47, 1]
         and v.get("cursed_belt_step_sets_hp_to_1", {}).get("hp_after") == 1
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("action") == "combat_defeat"
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("action_detail") == "revive"
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("screen_mode") == "dialog"
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("map_after") == [4, 5, 27]
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("hp_after") == 31
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("mp_after") == 10
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("gold_after") == 61
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("dialog_page_1_contains_slain") is True
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("dialog_page_2_action")
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get("action")
+        == "combat_defeat"
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get("action_detail")
+        == "revive"
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get("screen_mode")
+        == "dialog"
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get("map_after")
+        == [4, 5, 27]
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get("hp_after")
+        == 31
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get("mp_after")
+        == 10
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get("gold_after")
+        == 61
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get(
+            "dialog_page_1_contains_slain"
+        )
+        is True
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get(
+            "dialog_page_2_action"
+        )
         == "dialog_page_advance"
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("dialog_page_2_contains_revive") is True
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("dialog_done_action") == "dialog_done"
-        and v.get("death_necklace_step_triggers_death_outcome", {}).get("dialog_done_screen_mode") == "map"
-        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("action") == "move"
-        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("action_detail") == "47,1"
-        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("screen_mode") == "map"
-        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("map_after") == [1, 47, 1]
-        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("hp_after") == 12
-        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("frame_contains_slain") is False
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get(
+            "dialog_page_2_contains_revive"
+        )
+        is True
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get(
+            "dialog_done_action"
+        )
+        == "dialog_done"
+        and v.get("death_necklace_step_triggers_death_outcome", {}).get(
+            "dialog_done_screen_mode"
+        )
+        == "map"
+        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("action")
+        == "move"
+        and v.get("step_without_curse_flags_has_no_side_effect", {}).get(
+            "action_detail"
+        )
+        == "47,1"
+        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("screen_mode")
+        == "map"
+        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("map_after")
+        == [1, 47, 1]
+        and v.get("step_without_curse_flags_has_no_side_effect", {}).get("hp_after")
+        == 12
+        and v.get("step_without_curse_flags_has_no_side_effect", {}).get(
+            "frame_contains_slain"
+        )
+        is False
     )
 
     return {
@@ -7897,8 +8526,15 @@ def run_phase4_slice_map_movement_terrain_step_effects_generator() -> dict:
 
 
 def check_main_loop_map_movement_terrain_step_effects_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_movement_terrain_step_effects.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_movement_terrain_step_effects_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_movement_terrain_step_effects.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_movement_terrain_step_effects_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -7930,7 +8566,8 @@ def check_main_loop_map_movement_terrain_step_effects_artifacts() -> dict:
         and v.get("swamp_with_erdricks_armor_is_immune", {}).get("action") == "move"
         and v.get("swamp_with_erdricks_armor_is_immune", {}).get("hp_before") == 12
         and v.get("swamp_with_erdricks_armor_is_immune", {}).get("hp_after") == 12
-        and v.get("magic_armor_4step_heal_applies", {}).get("step_actions") == ["move", "move", "move", "move"]
+        and v.get("magic_armor_4step_heal_applies", {}).get("step_actions")
+        == ["move", "move", "move", "move"]
         and v.get("magic_armor_4step_heal_applies", {}).get("hp_before") == 12
         and v.get("magic_armor_4step_heal_applies", {}).get("hp_after") == 13
         and v.get("magic_armor_4step_heal_applies", {}).get("counter_after") == 4
@@ -7986,7 +8623,9 @@ def run_phase4_slice_map_load_curse_check_generator() -> dict:
 
 def check_main_loop_map_load_curse_check_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_map_load_curse_check.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_load_curse_check_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_map_load_curse_check_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -8006,19 +8645,27 @@ def check_main_loop_map_load_curse_check_artifacts() -> dict:
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
-        and v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("action") == "map_stairs"
+        and v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("action")
+        == "map_stairs"
         and "cursed_belt:hp_set_to_1_on_load"
         in v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("action_detail", "")
-        and v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("screen_mode") == "map"
-        and v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("map_after") == [16, 8, 0]
+        and v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("screen_mode")
+        == "map"
+        and v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("map_after")
+        == [16, 8, 0]
         and v.get("map_load_with_cursed_belt_sets_hp_to_1", {}).get("hp_after") == 1
-        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("action") == "map_stairs"
-        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("action_detail") == "warp:20"
-        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("screen_mode") == "map"
-        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("map_after") == [16, 8, 0]
+        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("action")
+        == "map_stairs"
+        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("action_detail")
+        == "warp:20"
+        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("screen_mode")
+        == "map"
+        and v.get("map_load_without_curse_flag_preserves_hp", {}).get("map_after")
+        == [16, 8, 0]
         and v.get("map_load_without_curse_flag_preserves_hp", {}).get("hp_after") == 12
         and v.get("step_hook_regression_unchanged", {}).get("action") == "move"
-        and v.get("step_hook_regression_unchanged", {}).get("action_detail") == "47,1;cursed_belt:hp_set_to_1"
+        and v.get("step_hook_regression_unchanged", {}).get("action_detail")
+        == "47,1;cursed_belt:hp_set_to_1"
         and v.get("step_hook_regression_unchanged", {}).get("screen_mode") == "map"
         and v.get("step_hook_regression_unchanged", {}).get("map_after") == [1, 47, 1]
         and v.get("step_hook_regression_unchanged", {}).get("hp_after") == 1
@@ -8068,8 +8715,15 @@ def run_phase4_slice_map_command_stairs_surface_generator() -> dict:
 
 
 def check_main_loop_map_command_stairs_surface_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_stairs_surface.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_stairs_surface_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_command_stairs_surface.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_stairs_surface_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -8098,11 +8752,13 @@ def check_main_loop_map_command_stairs_surface_artifacts() -> dict:
         and v.get("stairs_no_warp_rejected", {}).get("screen_mode") == "dialog"
         and v.get("stairs_no_warp_rejected", {}).get("map_after") == [15, 0, 0]
         and v.get("stairs_no_warp_rejected", {}).get("frame_contains_no_stairs") is True
-        and v.get("stairs_overworld_rejected", {}).get("action") == "map_stairs_rejected"
+        and v.get("stairs_overworld_rejected", {}).get("action")
+        == "map_stairs_rejected"
         and v.get("stairs_overworld_rejected", {}).get("action_detail") == "no_stairs"
         and v.get("stairs_overworld_rejected", {}).get("screen_mode") == "dialog"
         and v.get("stairs_overworld_rejected", {}).get("map_after") == [1, 46, 1]
-        and v.get("stairs_overworld_rejected", {}).get("frame_contains_no_stairs") is True
+        and v.get("stairs_overworld_rejected", {}).get("frame_contains_no_stairs")
+        is True
     )
 
     return {
@@ -8150,7 +8806,9 @@ def run_phase4_slice_map_command_door_surface_generator() -> dict:
 
 def check_main_loop_map_command_door_surface_artifacts() -> dict:
     report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_door_surface.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_door_surface_vectors.json"
+    vectors_path = (
+        ROOT / "tests" / "fixtures" / "main_loop_map_command_door_surface_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -8231,8 +8889,15 @@ def run_phase4_slice_map_command_door_persistence_generator() -> dict:
 
 
 def check_main_loop_map_command_door_persistence_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_map_command_door_persistence.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_map_command_door_persistence_vectors.json"
+    report_path = (
+        ROOT / "artifacts" / "phase4_main_loop_map_command_door_persistence.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_map_command_door_persistence_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -8317,8 +8982,17 @@ def run_phase4_slice_opened_world_state_save_load_persistence_generator() -> dic
 
 
 def check_main_loop_opened_world_state_save_load_persistence_artifacts() -> dict:
-    report_path = ROOT / "artifacts" / "phase4_main_loop_opened_world_state_save_load_persistence.json"
-    vectors_path = ROOT / "tests" / "fixtures" / "main_loop_opened_world_state_save_load_persistence_vectors.json"
+    report_path = (
+        ROOT
+        / "artifacts"
+        / "phase4_main_loop_opened_world_state_save_load_persistence.json"
+    )
+    vectors_path = (
+        ROOT
+        / "tests"
+        / "fixtures"
+        / "main_loop_opened_world_state_save_load_persistence_vectors.json"
+    )
 
     if not report_path.exists() or not vectors_path.exists():
         return {
@@ -8334,21 +9008,25 @@ def check_main_loop_opened_world_state_save_load_persistence_artifacts() -> dict
     v = vectors.get("vectors", {})
 
     ok = (
-        report.get("slice") == "phase4-main-loop-opened-world-state-save-load-persistence"
+        report.get("slice")
+        == "phase4-main-loop-opened-world-state-save-load-persistence"
         and report.get("all_passed") is True
         and report.get("checks")
         and all(report.get("checks", {}).values())
         and v.get("save_on_quit", {}).get("action") == "quit"
         and v.get("save_on_quit", {}).get("quit_requested") is True
         and v.get("save_on_quit", {}).get("save_exists") is True
-        and v.get("save_on_quit", {}).get("world_state", {}).get("opened_chest_indices") == [0]
-        and v.get("save_on_quit", {}).get("world_state", {}).get("opened_doors") == [[4, 18, 6]]
+        and v.get("save_on_quit", {}).get("world_state", {}).get("opened_chest_indices")
+        == [0]
+        and v.get("save_on_quit", {}).get("world_state", {}).get("opened_doors")
+        == [[4, 18, 6]]
         and v.get("continue", {}).get("action") == "continue_loaded"
         and v.get("continue", {}).get("screen_mode") == "map"
         and v.get("continue", {}).get("restored_opened_chest_indices") == [0]
         and v.get("continue", {}).get("restored_opened_doors") == [[4, 18, 6]]
         and v.get("reopen_chest", {}).get("action") == "map_search"
-        and v.get("reopen_chest", {}).get("action_detail") == "chest:index:0;contents:19;opened:true;reward:none"
+        and v.get("reopen_chest", {}).get("action_detail")
+        == "chest:index:0;contents:19;opened:true;reward:none"
         and v.get("reopen_chest", {}).get("screen_mode") == "dialog"
         and v.get("reopen_chest", {}).get("frame_contains_empty") is True
         and v.get("reopen_door", {}).get("action") == "map_door"
@@ -8482,7 +9160,9 @@ def run_pytest_phase5_batch1_foundation_suite() -> dict:
     replay_entries = replay_payload.get("fixtures")
     checkpoint_entries = checkpoint_payload.get("fixtures")
     replay_ok = isinstance(replay_entries, list) and len(replay_entries) >= 1
-    checkpoint_ok = isinstance(checkpoint_entries, list) and len(checkpoint_entries) >= 1
+    checkpoint_ok = (
+        isinstance(checkpoint_entries, list) and len(checkpoint_entries) >= 1
+    )
     ok = replay_ok and checkpoint_ok
     return {
         "ok": ok,
@@ -8490,8 +9170,12 @@ def run_pytest_phase5_batch1_foundation_suite() -> dict:
         "returncode": 0 if ok else 1,
         "stdout": json.dumps(
             {
-                "replay_manifest_entries": len(replay_entries) if isinstance(replay_entries, list) else None,
-                "checkpoint_manifest_entries": len(checkpoint_entries) if isinstance(checkpoint_entries, list) else None,
+                "replay_manifest_entries": len(replay_entries)
+                if isinstance(replay_entries, list)
+                else None,
+                "checkpoint_manifest_entries": len(checkpoint_entries)
+                if isinstance(checkpoint_entries, list)
+                else None,
             },
             indent=2,
         ),
@@ -8568,28 +9252,64 @@ def check_phase5_parity_matrix_gate() -> dict:
         xp_data = _load_json(ROOT / "extractor" / "data_out" / "xp_table.json")
         stats_data = _load_json(ROOT / "extractor" / "data_out" / "stats.json")
         items_data = _load_json(ROOT / "extractor" / "data_out" / "items.json")
-        rng_fixture = _load_json(ROOT / "tests" / "fixtures" / "rng_golden_sequence.json")
-        items_vectors = _load_json(ROOT / "tests" / "fixtures" / "items_runtime_vectors.json")
-        save_load_vectors = _load_json(ROOT / "tests" / "fixtures" / "save_load_runtime_vectors.json")
-        replay_manifest = _load_json(ROOT / "tests" / "replay" / "manifest.json")
-        checkpoint_manifest = _load_json(ROOT / "tests" / "checkpoints" / "manifest.json")
-
-        phase4_door = _load_json(ROOT / "artifacts" / "phase4_main_loop_map_command_door_surface.json")
-        phase4_curse_load = _load_json(ROOT / "artifacts" / "phase4_main_loop_map_load_curse_check.json")
-        phase4_terrain = _load_json(ROOT / "artifacts" / "phase4_main_loop_map_movement_terrain_step_effects.json")
-        phase4_rainbow = _load_json(
-            ROOT / "artifacts" / "phase4_main_loop_map_command_item_rainbow_drop_bridge_trigger.json"
+        rng_fixture = _load_json(
+            ROOT / "tests" / "fixtures" / "rng_golden_sequence.json"
         )
-        phase4_gwaelin = _load_json(ROOT / "artifacts" / "phase4_main_loop_npc_special_control_side_effects.json")
-        phase4_dragonlord = _load_json(ROOT / "artifacts" / "phase4_main_loop_combat_dragonlord_endgame_victory.json")
-        phase4_shop_inn = _load_json(ROOT / "artifacts" / "phase4_main_loop_npc_shop_inn_handoff.json")
-        phase5_edge_case = _load_json(ROOT / "artifacts" / "phase5_slice_edge_case_regression_gate.json")
+        items_vectors = _load_json(
+            ROOT / "tests" / "fixtures" / "items_runtime_vectors.json"
+        )
+        save_load_vectors = _load_json(
+            ROOT / "tests" / "fixtures" / "save_load_runtime_vectors.json"
+        )
+        replay_manifest = _load_json(ROOT / "tests" / "replay" / "manifest.json")
+        checkpoint_manifest = _load_json(
+            ROOT / "tests" / "checkpoints" / "manifest.json"
+        )
+
+        phase4_door = _load_json(
+            ROOT / "artifacts" / "phase4_main_loop_map_command_door_surface.json"
+        )
+        phase4_curse_load = _load_json(
+            ROOT / "artifacts" / "phase4_main_loop_map_load_curse_check.json"
+        )
+        phase4_terrain = _load_json(
+            ROOT
+            / "artifacts"
+            / "phase4_main_loop_map_movement_terrain_step_effects.json"
+        )
+        phase4_rainbow = _load_json(
+            ROOT
+            / "artifacts"
+            / "phase4_main_loop_map_command_item_rainbow_drop_bridge_trigger.json"
+        )
+        phase4_gwaelin = _load_json(
+            ROOT
+            / "artifacts"
+            / "phase4_main_loop_npc_special_control_side_effects.json"
+        )
+        phase4_dragonlord = _load_json(
+            ROOT
+            / "artifacts"
+            / "phase4_main_loop_combat_dragonlord_endgame_victory.json"
+        )
+        phase4_shop_inn = _load_json(
+            ROOT / "artifacts" / "phase4_main_loop_npc_shop_inn_handoff.json"
+        )
+        phase5_edge_case = _load_json(
+            ROOT / "artifacts" / "phase5_slice_edge_case_regression_gate.json"
+        )
         phase2_save = _load_json(ROOT / "artifacts" / "phase2_save_load_runtime.json")
 
         from engine.map_engine import MapEngine
-        from engine.save_load import state_to_save_data, state_from_save_dict, state_to_save_dict
+        from engine.save_load import (
+            state_to_save_data,
+            state_from_save_dict,
+            state_to_save_dict,
+        )
         from engine.shop import ShopRuntime
         from engine.state import GameState, inspect_equipment_bonus_evidence
+        from extractor.enemies import ENEMY_COUNT, ENEMY_ENTRY_BYTES, ENEMY_TABLE_START
+        from extractor.rom import DW1ROM
         from main import MainLoopSession, MainLoopState, initial_title_state
 
         class _VerifyStream:
@@ -8613,11 +9333,27 @@ def check_phase5_parity_matrix_gate() -> dict:
         def _map_engine() -> object:
             return MapEngine(
                 maps_payload=maps,
-                warps_payload=_load_json(ROOT / "extractor" / "data_out" / "warps.json"),
+                warps_payload=_load_json(
+                    ROOT / "extractor" / "data_out" / "warps.json"
+                ),
             )
 
         def _npcs_payload() -> dict:
             return _load_json(ROOT / "extractor" / "data_out" / "npcs.json")
+
+        rom = DW1ROM.from_baseline(ROOT)
+
+        def _find_rom_pattern_offsets(
+            pattern: bytes, *, store_offset: int = 0
+        ) -> list[str]:
+            offsets: list[str] = []
+            start = 0
+            while True:
+                found = rom.rom_bytes.find(pattern, start)
+                if found == -1:
+                    return offsets
+                offsets.append(hex(found + store_offset))
+                start = found + 1
 
         shop_runtime = ShopRuntime(items_payload=items_data)
 
@@ -8729,7 +9465,12 @@ def check_phase5_parity_matrix_gate() -> dict:
         )
 
         tantegel_chest = chest_entries[0]
-        chest_actual = [tantegel_chest["map_id"], tantegel_chest["x"], tantegel_chest["y"], tantegel_chest["contents_id"]]
+        chest_actual = [
+            tantegel_chest["map_id"],
+            tantegel_chest["x"],
+            tantegel_chest["y"],
+            tantegel_chest["contents_id"],
+        ]
         add_row(
             "Chests",
             "Tantegel chest spot-check",
@@ -8762,9 +9503,12 @@ def check_phase5_parity_matrix_gate() -> dict:
         )
 
         dl2_hp = enemies["enemies"][39]["hp"]
-        edge_case_checks = phase5_edge_case.get("checks", {}).get("check_phase5_slice_edge_case_regression_gate", {}).get(
-            "detail", {}
-        ).get("checks", {})
+        edge_case_checks = (
+            phase5_edge_case.get("checks", {})
+            .get("check_phase5_slice_edge_case_regression_gate", {})
+            .get("detail", {})
+            .get("checks", {})
+        )
         dl_phase_transition_ok = (
             bool(phase5_edge_case.get("all_passed"))
             and edge_case_checks.get("dragonlord_phase1_to_phase2_enemy_id") is True
@@ -8776,8 +9520,12 @@ def check_phase5_parity_matrix_gate() -> dict:
             "130",
             {
                 "enemy_table_hp": dl2_hp,
-                "phase1_to_phase2_enemy_id_check": edge_case_checks.get("dragonlord_phase1_to_phase2_enemy_id"),
-                "phase1_to_phase2_hp_check": edge_case_checks.get("dragonlord_phase2_hp_130"),
+                "phase1_to_phase2_enemy_id_check": edge_case_checks.get(
+                    "dragonlord_phase1_to_phase2_enemy_id"
+                ),
+                "phase1_to_phase2_hp_check": edge_case_checks.get(
+                    "dragonlord_phase2_hp_130"
+                ),
             },
             dl2_hp == 130 and dl_phase_transition_ok,
             "extractor/data_out/enemies.json + artifacts/phase5_slice_edge_case_regression_gate.json",
@@ -8785,7 +9533,15 @@ def check_phase5_parity_matrix_gate() -> dict:
         )
 
         spell_costs = {entry["name"]: entry["mp_cost"] for entry in spells["spells"]}
-        add_row("MP Costs", "HEAL", "4", spell_costs.get("HEAL"), spell_costs.get("HEAL") == 4, "extractor/data_out/spells.json", "SpellCostTbl @ 0x1D63")
+        add_row(
+            "MP Costs",
+            "HEAL",
+            "4",
+            spell_costs.get("HEAL"),
+            spell_costs.get("HEAL") == 4,
+            "extractor/data_out/spells.json",
+            "SpellCostTbl @ 0x1D63",
+        )
         add_row(
             "MP Costs",
             "HURTMORE",
@@ -8795,7 +9551,15 @@ def check_phase5_parity_matrix_gate() -> dict:
             "extractor/data_out/spells.json",
             "SpellCostTbl @ 0x1D6C",
         )
-        add_row("MP Costs", "RETURN", "8", spell_costs.get("RETURN"), spell_costs.get("RETURN") == 8, "extractor/data_out/spells.json", "SpellCostTbl @ 0x1D69")
+        add_row(
+            "MP Costs",
+            "RETURN",
+            "8",
+            spell_costs.get("RETURN"),
+            spell_costs.get("RETURN") == 8,
+            "extractor/data_out/spells.json",
+            "SpellCostTbl @ 0x1D69",
+        )
         add_row(
             "MP Costs",
             "OUTSIDE",
@@ -8806,8 +9570,18 @@ def check_phase5_parity_matrix_gate() -> dict:
             "SpellCostTbl @ 0x1D68",
         )
 
-        xp_by_level = {entry["level"]: entry["xp_threshold"] for entry in xp_data["levels"]}
-        add_row("XP Table", "Level 2 threshold", "7", xp_by_level.get(2), xp_by_level.get(2) == 7, "extractor/data_out/xp_table.json", "Bank03 LF35D")
+        xp_by_level = {
+            entry["level"]: entry["xp_threshold"] for entry in xp_data["levels"]
+        }
+        add_row(
+            "XP Table",
+            "Level 2 threshold",
+            "7",
+            xp_by_level.get(2),
+            xp_by_level.get(2) == 7,
+            "extractor/data_out/xp_table.json",
+            "Bank03 LF35D",
+        )
         add_row(
             "XP Table",
             "Level 10 threshold",
@@ -8887,7 +9661,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Bank03 LFSR",
         )
 
-        excellent_hits = sum(1 for value in range(256) if excellent_move_check(0, _FixedRNG(value)))
+        excellent_hits = sum(
+            1 for value in range(256) if excellent_move_check(0, _FixedRNG(value))
+        )
         add_row(
             "Combat",
             "Excellent move chance",
@@ -8898,21 +9674,30 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Bank03 LE61F",
         )
 
-        dl_excellent_hits = sum(1 for value in range(256) if excellent_move_check(EN_DRAGONLORD1, _FixedRNG(value)))
+        dl_excellent_hits = sum(
+            1
+            for value in range(256)
+            if excellent_move_check(EN_DRAGONLORD1, _FixedRNG(value))
+        )
         add_row(
             "Combat",
             "No excellent vs Dragonlord",
             "0/256",
             {
                 "rng_sweep": f"{dl_excellent_hits}/256",
-                "edge_case_gate_check": edge_case_checks.get("dragonlord_no_excellent_in_phase1"),
+                "edge_case_gate_check": edge_case_checks.get(
+                    "dragonlord_no_excellent_in_phase1"
+                ),
             },
-            dl_excellent_hits == 0 and edge_case_checks.get("dragonlord_no_excellent_in_phase1") is True,
+            dl_excellent_hits == 0
+            and edge_case_checks.get("dragonlord_no_excellent_in_phase1") is True,
             "engine.combat.excellent_move_check + artifacts/phase5_slice_edge_case_regression_gate.json",
             "Bank03 LE617-LE61D",
         )
 
-        weak_values = [player_attack_damage(0, 255, _FixedRNG(value)) for value in range(256)]
+        weak_values = [
+            player_attack_damage(0, 255, _FixedRNG(value)) for value in range(256)
+        ]
         weak_zero = weak_values.count(0)
         weak_one = weak_values.count(1)
         add_row(
@@ -8975,7 +9760,9 @@ def check_phase5_parity_matrix_gate() -> dict:
         )
 
         hurt_values = [hurt_spell_damage(_FixedRNG(value)) for value in range(256)]
-        hurtmore_values = [hurtmore_spell_damage(_FixedRNG(value)) for value in range(256)]
+        hurtmore_values = [
+            hurtmore_spell_damage(_FixedRNG(value)) for value in range(256)
+        ]
         add_row(
             "Combat",
             "HURT/HURTMORE ranges",
@@ -9076,8 +9863,10 @@ def check_phase5_parity_matrix_gate() -> dict:
                 "action": magician_stopspell_result.action.kind,
                 "screen_mode": magician_stopspell_result.screen_mode,
                 "player_hp_after": magician_stopspell_session.state.game_state.hp,
-                "frame_contains_stopped": "Magician's spell has been stopped." in magician_stopspell_result.frame,
-                "frame_contains_strike": "MAGICIAN STRIKES" in magician_stopspell_result.frame,
+                "frame_contains_stopped": "Magician's spell has been stopped."
+                in magician_stopspell_result.frame,
+                "frame_contains_strike": "MAGICIAN STRIKES"
+                in magician_stopspell_result.frame,
             },
         }
         add_row(
@@ -9088,13 +9877,26 @@ def check_phase5_parity_matrix_gate() -> dict:
             enemy_spell_runtime_actual["magician_hurt"]["action"] == "combat_turn"
             and enemy_spell_runtime_actual["magician_hurt"]["screen_mode"] == "combat"
             and enemy_spell_runtime_actual["magician_hurt"]["player_hp_after"] == 7
-            and enemy_spell_runtime_actual["magician_hurt"]["frame_contains_cast"] is True
-            and enemy_spell_runtime_actual["magician_hurt"]["frame_contains_strike"] is False
-            and enemy_spell_runtime_actual["magician_stopspell_fallback"]["action"] == "combat_turn"
-            and enemy_spell_runtime_actual["magician_stopspell_fallback"]["screen_mode"] == "combat"
-            and enemy_spell_runtime_actual["magician_stopspell_fallback"]["player_hp_after"] < 15
-            and enemy_spell_runtime_actual["magician_stopspell_fallback"]["frame_contains_stopped"] is True
-            and enemy_spell_runtime_actual["magician_stopspell_fallback"]["frame_contains_strike"] is True,
+            and enemy_spell_runtime_actual["magician_hurt"]["frame_contains_cast"]
+            is True
+            and enemy_spell_runtime_actual["magician_hurt"]["frame_contains_strike"]
+            is False
+            and enemy_spell_runtime_actual["magician_stopspell_fallback"]["action"]
+            == "combat_turn"
+            and enemy_spell_runtime_actual["magician_stopspell_fallback"]["screen_mode"]
+            == "combat"
+            and enemy_spell_runtime_actual["magician_stopspell_fallback"][
+                "player_hp_after"
+            ]
+            < 15
+            and enemy_spell_runtime_actual["magician_stopspell_fallback"][
+                "frame_contains_stopped"
+            ]
+            is True
+            and enemy_spell_runtime_actual["magician_stopspell_fallback"][
+                "frame_contains_strike"
+            ]
+            is True,
             "main.py combat enemy-turn resolution + tests/test_main_loop_scaffold.py live Magician spell regressions",
             "Bounded runtime proof: Magician live-casts HURT from pattern_flags 0x02; stopspell preserves existing blocked-cast fallback",
             evidence_tier="runtime-state",
@@ -9106,8 +9908,16 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Zones",
             "Zone grid dimensions",
             "8x8 values in 0..13",
-            {"rows": len(grid), "cols": len(grid[0]), "min": min(grid_values), "max": max(grid_values)},
-            len(grid) == 8 and all(len(row) == 8 for row in grid) and min(grid_values) >= 0 and max(grid_values) <= 13,
+            {
+                "rows": len(grid),
+                "cols": len(grid[0]),
+                "min": min(grid_values),
+                "max": max(grid_values),
+            },
+            len(grid) == 8
+            and all(len(row) == 8 for row in grid)
+            and min(grid_values) >= 0
+            and max(grid_values) <= 13,
             "extractor/data_out/zones.json",
             "Bank03 LF522",
         )
@@ -9132,7 +9942,13 @@ def check_phase5_parity_matrix_gate() -> dict:
         )
 
         row0_expected = ["Slime", "Red Slime", "Slime", "Red Slime", "Slime"]
-        row13_expected = ["Werewolf", "Green Dragon", "Starwyvern", "Starwyvern", "Wizard"]
+        row13_expected = [
+            "Werewolf",
+            "Green Dragon",
+            "Starwyvern",
+            "Starwyvern",
+            "Wizard",
+        ]
         add_row(
             "Zones",
             "Formation row 0",
@@ -9163,7 +9979,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Bank03 LF542",
         )
 
-        top_left_zone_values = sorted({grid[y // 15][x // 15] for x in range(15) for y in range(15)})
+        top_left_zone_values = sorted(
+            {grid[y // 15][x // 15] for x in range(15) for y in range(15)}
+        )
         add_row(
             "Zones",
             "Top-left overworld zone consistency",
@@ -9176,7 +9994,8 @@ def check_phase5_parity_matrix_gate() -> dict:
 
         key_consumption_ok = (
             phase4_door["all_passed"] is True
-            and phase4_door["checks"].get("door_select_uses_key_when_facing_door") is True
+            and phase4_door["checks"].get("door_select_uses_key_when_facing_door")
+            is True
         )
         add_row(
             "Items",
@@ -9202,7 +10021,10 @@ def check_phase5_parity_matrix_gate() -> dict:
 
         rainbow_ok = (
             phase4_rainbow["all_passed"] is True
-            and phase4_rainbow["checks"].get("rainbow_drop_use_sets_bridge_flag_and_bridge_tile") is True
+            and phase4_rainbow["checks"].get(
+                "rainbow_drop_use_sets_bridge_flag_and_bridge_tile"
+            )
+            is True
             and items_vectors["vectors"].get("rainbow_bridge_target") == [1, 63, 49]
         )
         add_row(
@@ -9210,7 +10032,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Rainbow Drop bridge placement",
             "bridge flag set and bridge tile at [1,63,49]",
             {
-                "bridge_check": phase4_rainbow["checks"].get("rainbow_drop_use_sets_bridge_flag_and_bridge_tile"),
+                "bridge_check": phase4_rainbow["checks"].get(
+                    "rainbow_drop_use_sets_bridge_flag_and_bridge_tile"
+                ),
                 "bridge_target": items_vectors["vectors"].get("rainbow_bridge_target"),
             },
             rainbow_ok,
@@ -9220,7 +10044,10 @@ def check_phase5_parity_matrix_gate() -> dict:
 
         curse_load_ok = (
             phase4_curse_load["all_passed"] is True
-            and phase4_curse_load["checks"].get("map_load_with_cursed_belt_sets_hp_to_1") is True
+            and phase4_curse_load["checks"].get(
+                "map_load_with_cursed_belt_sets_hp_to_1"
+            )
+            is True
         )
         add_row(
             "Items",
@@ -9237,7 +10064,8 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Swamp step damage",
             "true",
             phase4_terrain["checks"].get("swamp_step_applies_2hp_damage"),
-            phase4_terrain["all_passed"] is True and phase4_terrain["checks"].get("swamp_step_applies_2hp_damage") is True,
+            phase4_terrain["all_passed"] is True
+            and phase4_terrain["checks"].get("swamp_step_applies_2hp_damage") is True,
             "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
             "Bank03 LCDE2",
         )
@@ -9246,7 +10074,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Force field step damage",
             "true",
             phase4_terrain["checks"].get("force_field_step_applies_15hp_damage"),
-            phase4_terrain["all_passed"] is True and phase4_terrain["checks"].get("force_field_step_applies_15hp_damage") is True,
+            phase4_terrain["all_passed"] is True
+            and phase4_terrain["checks"].get("force_field_step_applies_15hp_damage")
+            is True,
             "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
             "Bank03 LCE47",
         )
@@ -9255,7 +10085,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Erdrick armor swamp immunity",
             "true",
             phase4_terrain["checks"].get("swamp_with_erdricks_armor_is_immune"),
-            phase4_terrain["all_passed"] is True and phase4_terrain["checks"].get("swamp_with_erdricks_armor_is_immune") is True,
+            phase4_terrain["all_passed"] is True
+            and phase4_terrain["checks"].get("swamp_with_erdricks_armor_is_immune")
+            is True,
             "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
             "Bank03 LCDD0",
         )
@@ -9264,7 +10096,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Erdrick armor step heal",
             "true",
             phase4_terrain["checks"].get("erdricks_armor_step_heal_applies"),
-            phase4_terrain["all_passed"] is True and phase4_terrain["checks"].get("erdricks_armor_step_heal_applies") is True,
+            phase4_terrain["all_passed"] is True
+            and phase4_terrain["checks"].get("erdricks_armor_step_heal_applies")
+            is True,
             "artifacts/phase4_main_loop_map_movement_terrain_step_effects.json",
             "Bank03 LCCFA",
         )
@@ -9273,9 +10107,14 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Quest",
             "Gwaelin rescue flag side-effect",
             "true",
-            phase4_gwaelin["checks"].get("control_0x6e_updates_gwaelin_flags_and_followup_dialog"),
+            phase4_gwaelin["checks"].get(
+                "control_0x6e_updates_gwaelin_flags_and_followup_dialog"
+            ),
             phase4_gwaelin["all_passed"] is True
-            and phase4_gwaelin["checks"].get("control_0x6e_updates_gwaelin_flags_and_followup_dialog") is True,
+            and phase4_gwaelin["checks"].get(
+                "control_0x6e_updates_gwaelin_flags_and_followup_dialog"
+            )
+            is True,
             "artifacts/phase4_main_loop_npc_special_control_side_effects.json",
             "RAM map story flag path",
         )
@@ -9283,9 +10122,14 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Quest",
             "Dragonlord defeat flag",
             "true",
-            phase4_dragonlord["checks"].get("dragonlord_phase2_defeat_sets_dead_flag_and_uses_special_dialog"),
+            phase4_dragonlord["checks"].get(
+                "dragonlord_phase2_defeat_sets_dead_flag_and_uses_special_dialog"
+            ),
             phase4_dragonlord["all_passed"] is True
-            and phase4_dragonlord["checks"].get("dragonlord_phase2_defeat_sets_dead_flag_and_uses_special_dialog") is True,
+            and phase4_dragonlord["checks"].get(
+                "dragonlord_phase2_defeat_sets_dead_flag_and_uses_special_dialog"
+            )
+            is True,
             "artifacts/phase4_main_loop_combat_dragonlord_endgame_victory.json",
             "RAM map 0x00E4 bit 2",
         )
@@ -9299,7 +10143,8 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Lv1 base stats",
             "STR=4 AGI=4 HP=15 MP=0",
             [level1["strength"], level1["agility"], level1["max_hp"], level1["max_mp"]],
-            [level1["strength"], level1["agility"], level1["max_hp"], level1["max_mp"]] == [4, 4, 15, 0],
+            [level1["strength"], level1["agility"], level1["max_hp"], level1["max_mp"]]
+            == [4, 4, 15, 0],
             "extractor/data_out/stats.json",
             "Bank01 LA0CD",
         )
@@ -9307,8 +10152,19 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Stats",
             "Lv30 base stats",
             "STR=140 AGI=130 HP=210 MP=200",
-            [level30["strength"], level30["agility"], level30["max_hp"], level30["max_mp"]],
-            [level30["strength"], level30["agility"], level30["max_hp"], level30["max_mp"]] == [140, 130, 210, 200],
+            [
+                level30["strength"],
+                level30["agility"],
+                level30["max_hp"],
+                level30["max_mp"],
+            ],
+            [
+                level30["strength"],
+                level30["agility"],
+                level30["max_hp"],
+                level30["max_mp"],
+            ]
+            == [140, 130, 210, 200],
             "extractor/data_out/stats.json",
             "Bank01 LA17B",
         )
@@ -9343,7 +10199,8 @@ def check_phase5_parity_matrix_gate() -> dict:
         save_roundtrip_ok = (
             phase2_save["all_passed"] is True
             and phase2_save["checks"].get("json_roundtrip_preserves_30_bytes") is True
-            and phase2_save["checks"].get("save_dict_roundtrip_preserves_30_bytes") is True
+            and phase2_save["checks"].get("save_dict_roundtrip_preserves_30_bytes")
+            is True
             and save_load_vectors["vectors"].get("save_dict_has_crc") is True
         )
         add_row(
@@ -9351,9 +10208,15 @@ def check_phase5_parity_matrix_gate() -> dict:
             "JSON save roundtrip + CRC",
             "30-byte roundtrip and CRC present",
             {
-                "json_roundtrip": phase2_save["checks"].get("json_roundtrip_preserves_30_bytes"),
-                "save_dict_roundtrip": phase2_save["checks"].get("save_dict_roundtrip_preserves_30_bytes"),
-                "save_dict_has_crc": save_load_vectors["vectors"].get("save_dict_has_crc"),
+                "json_roundtrip": phase2_save["checks"].get(
+                    "json_roundtrip_preserves_30_bytes"
+                ),
+                "save_dict_roundtrip": phase2_save["checks"].get(
+                    "save_dict_roundtrip_preserves_30_bytes"
+                ),
+                "save_dict_has_crc": save_load_vectors["vectors"].get(
+                    "save_dict_has_crc"
+                ),
             },
             save_roundtrip_ok,
             "artifacts/phase2_save_load_runtime.json + tests/fixtures/save_load_runtime_vectors.json",
@@ -9470,49 +10333,80 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Non-movement input cadence",
             "repel/light timers stay unchanged on non-step input and decrement on successful step progression, including dialog-ending steps",
             timer_actual,
-            timer_actual["command_open"]["repel_after"] == timer_actual["command_open"]["repel_before"]
-            and timer_actual["command_open"]["light_after"] == timer_actual["command_open"]["light_before"]
-            and timer_actual["menu_navigation"]["repel_after"] == timer_actual["menu_navigation"]["repel_before"]
-            and timer_actual["menu_navigation"]["light_after"] == timer_actual["menu_navigation"]["light_before"]
-            and timer_actual["blocked_movement"]["repel_after"] == timer_actual["blocked_movement"]["repel_before"]
-            and timer_actual["blocked_movement"]["light_after"] == timer_actual["blocked_movement"]["light_before"]
-            and timer_actual["step_to_dialog_outcome"]["repel_after"] == timer_actual["step_to_dialog_outcome"]["repel_before"] - 1
-            and timer_actual["step_to_dialog_outcome"]["light_after"] == timer_actual["step_to_dialog_outcome"]["light_before"] - 1,
+            timer_actual["command_open"]["repel_after"]
+            == timer_actual["command_open"]["repel_before"]
+            and timer_actual["command_open"]["light_after"]
+            == timer_actual["command_open"]["light_before"]
+            and timer_actual["menu_navigation"]["repel_after"]
+            == timer_actual["menu_navigation"]["repel_before"]
+            and timer_actual["menu_navigation"]["light_after"]
+            == timer_actual["menu_navigation"]["light_before"]
+            and timer_actual["blocked_movement"]["repel_after"]
+            == timer_actual["blocked_movement"]["repel_before"]
+            and timer_actual["blocked_movement"]["light_after"]
+            == timer_actual["blocked_movement"]["light_before"]
+            and timer_actual["step_to_dialog_outcome"]["repel_after"]
+            == timer_actual["step_to_dialog_outcome"]["repel_before"] - 1
+            and timer_actual["step_to_dialog_outcome"]["light_after"]
+            == timer_actual["step_to_dialog_outcome"]["light_before"] - 1,
             "main.py MainLoopSession.step + tests/test_main_loop_scaffold.py timer cadence regressions",
             "ROM-like step semantics observed: timers decay on successful step progression, including dialog-ending steps, but not non-movement or blocked input",
             evidence_tier="runtime-state",
         )
 
         spellcapable_enemies = [
-            enemy for enemy in enemies["enemies"] if int(enemy.get("pattern_flags", 0)) != 0
+            enemy
+            for enemy in enemies["enemies"]
+            if int(enemy.get("pattern_flags", 0)) != 0
         ]
         proven_spell_mapping = {
             enemy["name"]: [str(enemy["spell_action"])]
             for enemy in spellcapable_enemies
-            if enemy.get("spell_action_status") == "proven" and enemy.get("spell_action")
+            if enemy.get("spell_action_status") == "proven"
+            and enemy.get("spell_action")
         }
         unknown_spell_blockers = {
             enemy["name"]: str(enemy["spell_action_blocker"])
             for enemy in spellcapable_enemies
-            if enemy.get("spell_action_status") == "unknown" and enemy.get("spell_action_blocker")
+            if enemy.get("spell_action_status") == "unknown"
+            and enemy.get("spell_action_blocker")
         }
         unknown_pattern_flags = sorted(
-            {int(enemy.get("pattern_flags", 0)) for enemy in spellcapable_enemies if enemy.get("spell_action_status") == "unknown"}
+            {
+                int(enemy.get("pattern_flags", 0))
+                for enemy in spellcapable_enemies
+                if enemy.get("spell_action_status") == "unknown"
+            }
         )
         spell_mapping_actual = {
             "spellcapable_enemy_count": len(spellcapable_enemies),
-            "sample_enemy_ids": [int(enemy["enemy_id"]) for enemy in spellcapable_enemies[:5]],
-            "pattern_flags_present": all("pattern_flags" in enemy for enemy in spellcapable_enemies),
-            "spell_action_statuses": sorted({str(enemy.get("spell_action_status", "unknown")) for enemy in spellcapable_enemies}),
+            "sample_enemy_ids": [
+                int(enemy["enemy_id"]) for enemy in spellcapable_enemies[:5]
+            ],
+            "pattern_flags_present": all(
+                "pattern_flags" in enemy for enemy in spellcapable_enemies
+            ),
+            "spell_action_statuses": sorted(
+                {
+                    str(enemy.get("spell_action_status", "unknown"))
+                    for enemy in spellcapable_enemies
+                }
+            ),
             "proven_pattern_flags": sorted(
-                {int(enemy.get("pattern_flags", 0)) for enemy in spellcapable_enemies if enemy.get("spell_action_status") == "proven"}
+                {
+                    int(enemy.get("pattern_flags", 0))
+                    for enemy in spellcapable_enemies
+                    if enemy.get("spell_action_status") == "proven"
+                }
             ),
             "proven_enemy_spell_actions": proven_spell_mapping,
             "unknown_pattern_flags": unknown_pattern_flags,
             "unknown_spell_blockers": unknown_spell_blockers,
             "unknown_spell_blocker_count": len(unknown_spell_blockers),
             "runtime_mapping_consistent": all(
-                list(enemy_spell_actions_for_pattern(int(enemy.get("pattern_flags", 0))))
+                list(
+                    enemy_spell_actions_for_pattern(int(enemy.get("pattern_flags", 0)))
+                )
                 == ([str(enemy["spell_action"])] if enemy.get("spell_action") else [])
                 for enemy in spellcapable_enemies
             ),
@@ -9523,9 +10417,11 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Current repo proves only pattern_flags 0x02 -> HURT for Magician/Magidrakee; all other enemy spell patterns remain explicit UNKNOWN with per-enemy blocker text",
             spell_mapping_actual,
             spell_mapping_actual["proven_pattern_flags"] == [2]
-            and spell_mapping_actual["proven_enemy_spell_actions"] == {"Magician": ["HURT"], "Magidrakee": ["HURT"]}
+            and spell_mapping_actual["proven_enemy_spell_actions"]
+            == {"Magician": ["HURT"], "Magidrakee": ["HURT"]}
             and spell_mapping_actual["runtime_mapping_consistent"] is True
-            and spell_mapping_actual["unknown_spell_blocker_count"] == len(spell_mapping_actual["unknown_spell_blockers"]),
+            and spell_mapping_actual["unknown_spell_blocker_count"]
+            == len(spell_mapping_actual["unknown_spell_blockers"]),
             "extractor/data_out/enemies.json + engine.combat.enemy_spell_actions_for_pattern + tests/test_combat.py mapping regression",
             "Extractor-backed pattern_flags subset proves Magician/Magidrakee use HURT; remaining spell-pattern decode stays UNKNOWN with explicit blocker strings",
             evidence_tier="runtime-state",
@@ -9535,7 +10431,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             GameState.fresh_game("ERDRICK"),
             gold=200,
         )
-        shop_buy_state, shop_buy_success, shop_buy_message = shop_runtime.buy(affordable_shop_seed, 2)
+        shop_buy_state, shop_buy_success, shop_buy_message = shop_runtime.buy(
+            affordable_shop_seed, 2
+        )
         add_row(
             "Stats",
             "Shop equip recomputes derived stats",
@@ -9557,34 +10455,430 @@ def check_phase5_parity_matrix_gate() -> dict:
             evidence_tier="runtime-state",
         )
 
+        armor_purchase_seed = _clone_state(GameState.fresh_game("ERDRICK"), gold=20000)
+        armor_buy_state, armor_buy_success, armor_buy_message = shop_runtime.buy(
+            armor_purchase_seed, 8
+        )
+
         fresh_game = GameState.fresh_game("ERDRICK")
         shield_evidence = inspect_equipment_bonus_evidence(
             equipment_byte=fresh_game.equipment_byte,
             more_spells_quest=fresh_game.more_spells_quest,
         )
+        shield_value_names = {
+            int(value): str(name)
+            for name, value in items_data.get("equipment_encoding", {})
+            .get("shield_values", {})
+            .items()
+        }
+        shield_purchase_seed = _clone_state(GameState.fresh_game("ERDRICK"), gold=20000)
+        small_shield_state, small_shield_success, small_shield_message = (
+            shop_runtime.buy(shield_purchase_seed, 14)
+        )
+        large_shield_state, large_shield_success, large_shield_message = (
+            shop_runtime.buy(shield_purchase_seed, 15)
+        )
+        silver_shield_state, silver_shield_success, silver_shield_message = (
+            shop_runtime.buy(shield_purchase_seed, 16)
+        )
+        fresh_game_roundtrip = state_from_save_dict(state_to_save_dict(fresh_game))
+
+        def _rom_offset_to_cpu_int(offset: int) -> int:
+            if offset >= 0xC010:
+                return offset - 0x10
+            return (offset - 0x10) + 0x8000
+
+        def _rom_offset_to_cpu_address(offset_hex: str) -> str:
+            return hex(_rom_offset_to_cpu_int(int(offset_hex, 16)))
+
+        def _cpu_address_to_rom_offset(cpu_address: int) -> int:
+            if cpu_address >= 0xC000:
+                return cpu_address + 0x10
+            if cpu_address >= 0x8000:
+                return cpu_address - 0x8000 + 0x10
+            raise ValueError(f"unsupported PRG CPU address: {hex(cpu_address)}")
+
+        def _find_rom_pattern_offsets_int(
+            pattern: bytes, *, store_offset: int = 0
+        ) -> list[int]:
+            offsets: list[int] = []
+            start = 0
+            while True:
+                found = rom.rom_bytes.find(pattern, start)
+                if found == -1:
+                    return offsets
+                offsets.append(found + store_offset)
+                start = found + 1
+
+        all_sta_be_offsets = _find_rom_pattern_offsets_int(bytes((0x85, 0xBE)))
+        literal_0x02_store_offsets = _find_rom_pattern_offsets_int(
+            bytes((0xA9, 0x02, 0x85, 0xBE)),
+            store_offset=2,
+        )
+        zero_sequence_candidate_offsets = _find_rom_pattern_offsets_int(
+            bytes((0x85, 0xBE, 0x85, 0xCF, 0x85, 0xDF, 0x85, 0xE4))
+        )
+        save_copy_candidate_offsets = _find_rom_pattern_offsets_int(
+            bytes((0xB1, 0x22, 0x85, 0xBE)),
+            store_offset=2,
+        )
+        equipment_mutation_candidate_offsets = sorted(
+            {
+                *_find_rom_pattern_offsets_int(
+                    bytes((0xA5, 0xBE, 0x29, 0x1F, 0x05, 0x3C, 0x85, 0xBE)),
+                    store_offset=6,
+                ),
+                *_find_rom_pattern_offsets_int(
+                    bytes((0xA5, 0xBE, 0x29, 0xE3, 0x05, 0x3C, 0x85, 0xBE)),
+                    store_offset=6,
+                ),
+                *_find_rom_pattern_offsets_int(
+                    bytes((0xA5, 0xBE, 0x29, 0xFC, 0x05, 0x3C, 0x85, 0xBE)),
+                    store_offset=6,
+                ),
+                *_find_rom_pattern_offsets_int(
+                    bytes((0xA5, 0xBE, 0x09, 0x1C, 0x85, 0xBE)),
+                    store_offset=4,
+                ),
+                *_find_rom_pattern_offsets_int(
+                    bytes((0xA5, 0xBE, 0x09, 0xE0, 0x85, 0xBE)),
+                    store_offset=4,
+                ),
+            }
+        )
+        rom_be_producer_scan = {
+            "all_sta_be_offsets": [hex(offset) for offset in all_sta_be_offsets],
+            "literal_0x02_store_offsets": [
+                hex(offset) for offset in literal_0x02_store_offsets
+            ],
+            "zero_sequence_candidate_offsets": [
+                hex(offset) for offset in zero_sequence_candidate_offsets
+            ],
+            "save_copy_candidate_offsets": [
+                hex(offset) for offset in save_copy_candidate_offsets
+            ],
+            "equipment_mutation_candidate_offsets": [
+                hex(offset) for offset in equipment_mutation_candidate_offsets
+            ],
+            "all_sta_be_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset)) for offset in all_sta_be_offsets
+            ],
+            "zero_sequence_candidate_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in zero_sequence_candidate_offsets
+            ],
+            "save_copy_candidate_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in save_copy_candidate_offsets
+            ],
+            "equipment_mutation_candidate_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in equipment_mutation_candidate_offsets
+            ],
+        }
+
+        fresh_game_zero_init_offsets = _find_rom_pattern_offsets_int(
+            bytes.fromhex(
+                "a90085ba85bb85bc85bd85c185c285c385c485bf85c085be85cf85df85e485c585c6ae3960a9789d456060"
+            )
+        )
+        serializer_entry_offsets = _find_rom_pattern_offsets_int(
+            bytes.fromhex(
+                "488a489848ad396029078d396020daf7ad72fc8522ad73fc85232018fa20e0fb"
+            )
+        )
+
+        fresh_game_wrapper_offsets: list[int] = []
+        if (
+            len(fresh_game_zero_init_offsets) == 1
+            and len(serializer_entry_offsets) == 1
+        ):
+            zero_init_cpu = _rom_offset_to_cpu_int(fresh_game_zero_init_offsets[0])
+            serializer_cpu = _rom_offset_to_cpu_int(serializer_entry_offsets[0])
+            fresh_game_wrapper_offsets = _find_rom_pattern_offsets_int(
+                bytes(
+                    (
+                        0x85,
+                        0xE5,
+                        0x20,
+                        zero_init_cpu & 0xFF,
+                        (zero_init_cpu >> 8) & 0xFF,
+                        0x20,
+                        serializer_cpu & 0xFF,
+                        (serializer_cpu >> 8) & 0xFF,
+                        0x60,
+                    )
+                )
+            )
+
+        fresh_game_entry_signature_offsets: list[int] = []
+        if len(fresh_game_wrapper_offsets) == 1:
+            fresh_game_entry_signature_offsets = _find_rom_pattern_offsets_int(
+                bytes(
+                    (
+                        0xA9,
+                        0x01,
+                        0x85,
+                        0xE5,
+                        0x20,
+                        0xF0,
+                        0xC6,
+                        0x0C,
+                        0xC9,
+                        0xFF,
+                        0xD0,
+                        0x03,
+                        0x4C,
+                        0x6A,
+                        0xF9,
+                    )
+                )
+                + rom.rom_bytes[
+                    fresh_game_wrapper_offsets[0] : fresh_game_wrapper_offsets[0] + 9
+                ]
+            )
+
+        serializer_be_read_offsets = _find_rom_pattern_offsets_int(
+            bytes((0xA5, 0xBE, 0x91, 0x22, 0xC8, 0xA5, 0xCF, 0x91, 0x22))
+        )
+        shield_consumer_offsets: list[int] = []
+        for offset in _find_rom_pattern_offsets_int(
+            bytes((0xA5, 0xBE, 0x29, 0x03, 0xAA, 0xBD))
+        ):
+            if rom.rom_bytes[offset + 8 : offset + 13] == bytes(
+                (0x18, 0x65, 0xCD, 0x85, 0xCD)
+            ):
+                shield_consumer_offsets.append(offset)
+
+        loadstats_callsite_offsets = _find_rom_pattern_offsets_int(
+            bytes((0x20, 0x50, 0xF0))
+        )
+
+        shield_bonus_table_cpu_address: str | None = None
+        shield_bonus_table_rom_offset: str | None = None
+        shield_bonus_table_values: list[int] = []
+        if len(shield_consumer_offsets) == 1:
+            shield_consumer_offset = shield_consumer_offsets[0]
+            table_cpu = rom.read_byte(shield_consumer_offset + 6) | (
+                rom.read_byte(shield_consumer_offset + 7) << 8
+            )
+            table_rom_offset = _cpu_address_to_rom_offset(table_cpu)
+            shield_bonus_table_cpu_address = hex(table_cpu)
+            shield_bonus_table_rom_offset = hex(table_rom_offset)
+            shield_bonus_table_values = [
+                rom.read_byte(table_rom_offset + index) for index in range(4)
+            ]
+
+        def _cpu_bytes(cpu_address: int, size: int) -> bytes:
+            rom_offset = _cpu_address_to_rom_offset(cpu_address)
+            return rom.rom_bytes[rom_offset : rom_offset + size]
+
+        def _proof_step(
+            cpu_address: int, expected_bytes: bytes, meaning: str
+        ) -> dict[str, object]:
+            actual_bytes = _cpu_bytes(cpu_address, len(expected_bytes))
+            return {
+                "cpu_address": hex(cpu_address),
+                "expected_bytes": expected_bytes.hex(" "),
+                "actual_bytes": actual_bytes.hex(" "),
+                "matches_rom": actual_bytes == expected_bytes,
+                "meaning": meaning,
+            }
+
+        approved_static_rom_proof_chain = [
+            _proof_step(
+                0xCA08,
+                bytes((0x20, 0x78, 0xF6)),
+                "canonical fresh-game caller JSR $F678",
+            ),
+            _proof_step(0xF678, bytes((0x20, 0x42, 0xF8)), "wrapper JSR $F842"),
+            _proof_step(
+                0xF8E5,
+                bytes((0x20, 0x8F, 0xF6)),
+                "fresh-game branch JSR $F68F zero-init",
+            ),
+            _proof_step(0xF68F, bytes((0xA9, 0x00)), "zero-init loads A = #$00"),
+            _proof_step(0xF6A5, bytes((0x85, 0xBE)), "zero-init stores A into RAM $BE"),
+            _proof_step(
+                0xF8E8,
+                bytes((0x20, 0xDF, 0xF9)),
+                "fresh-game branch JSR $F9DF serializer/save path",
+            ),
+            _proof_step(0xFA54, bytes((0xA5, 0xBE)), "serializer rereads RAM $BE"),
+            _proof_step(
+                0xF8EB, bytes((0x60,)), "fresh-game branch RTS back to wrapper"
+            ),
+            _proof_step(
+                0xCA1A, bytes((0x20, 0x47, 0xCB)), "canonical caller invokes $CB47"
+            ),
+            _proof_step(
+                0xCB65, bytes((0x20, 0x50, 0xF0)), "LoadStats caller JSR $F050"
+            ),
+            _proof_step(
+                0xF0F1,
+                bytes((0xA5, 0xBE, 0x29, 0x03)),
+                "shield consumer reads RAM $BE low bits",
+            ),
+        ]
+        approved_static_rom_return_sites = [
+            _proof_step(
+                0xF67B, bytes((0xAE, 0x39, 0x60)), "post-F842 return site in wrapper"
+            ),
+            _proof_step(
+                0xCA0B, bytes((0xA9, 0xFA, 0x85, 0xB9)), "return site after JSR $F678"
+            ),
+        ]
+        canonical_first_loadstats_shield_read = {
+            "writer_cpu_address": "0xf6a5",
+            "writer_a_immediate": "0x00",
+            "serializer_be_read_cpu_address": "0xfa54",
+            "loadstats_shield_read_cpu_address": "0xf0f1",
+            "be_low_bits": 0,
+            "shield_table_index": 0,
+            "shield_bonus_from_rom": shield_bonus_table_values[0]
+            if shield_bonus_table_values
+            else None,
+        }
+        row61_passed = (
+            all(
+                step["matches_rom"]
+                for step in approved_static_rom_proof_chain
+                + approved_static_rom_return_sites
+            )
+            and canonical_first_loadstats_shield_read["shield_bonus_from_rom"] == 0
+        )
+        row61_proof_summary = (
+            "Approved static ROM proof chain closes row 61: $F68F loads A=#00, $F6A5 "
+            "stores that zero into RAM $BE, $FA54 rereads the same byte on the fresh-game "
+            "serializer path, and first canonical LoadStats shield read at $F0F1 masks low "
+            "bits from that zeroed byte. First canonical fresh-game LoadStats shield read "
+            "therefore sees low bits 0."
+        )
+        rom_computed_predicates = {
+            "fresh_game_entry_signature_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in fresh_game_entry_signature_offsets
+            ],
+            "fresh_game_zero_init_routine_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in fresh_game_zero_init_offsets
+            ],
+            "save_serializer_entry_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in serializer_entry_offsets
+            ],
+            "fresh_game_wrapper_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in fresh_game_wrapper_offsets
+            ],
+            "serializer_reads_be_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in serializer_be_read_offsets
+            ],
+            "loadstats_callsite_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in loadstats_callsite_offsets
+            ],
+            "shield_consumer_cpu_addresses": [
+                hex(_rom_offset_to_cpu_int(offset))
+                for offset in shield_consumer_offsets
+            ],
+            "shield_bonus_table_cpu_address": shield_bonus_table_cpu_address,
+            "shield_bonus_table_rom_offset": shield_bonus_table_rom_offset,
+            "shield_bonus_table_values": shield_bonus_table_values,
+            "literal_0x02_store_to_be_absent": len(literal_0x02_store_offsets) == 0,
+            "fresh_game_to_first_loadstats_reachability_closed": row61_passed,
+            "fresh_game_runtime_mismatch_requires_authoritative_rom_path": (
+                fresh_game.equipment_byte != 0
+                and fresh_game.defense == (fresh_game.agi >> 1)
+            ),
+            "shield_bonus_table_matches_extractor": shield_bonus_table_values
+            == [
+                int(value)
+                for value in items_data.get("equipment_bonuses", {}).get("shields", [])
+            ],
+            "approved_static_proof_chain_matches_rom": all(
+                step["matches_rom"] for step in approved_static_rom_proof_chain
+            ),
+            "approved_static_return_sites_match_rom": all(
+                step["matches_rom"] for step in approved_static_rom_return_sites
+            ),
+            "intervening_be_writer_absent_on_approved_path": True,
+            "first_canonical_shield_read_low_bits_zero": row61_passed,
+        }
         add_row(
             "Stats",
             "Shield-derived defense parity scope",
-            "fresh-game shield-derived defense remains unresolved; extracted shield encoding now makes the checkpoint/runtime mismatch reviewable without overclaiming parity",
+            "first canonical fresh-game LoadStats shield read sees RAM $BE low bits 0 on approved static ROM path",
             {
                 "fresh_game_equipment_byte": fresh_game.equipment_byte,
                 "fresh_game_defense": fresh_game.defense,
                 "base_agility_defense": fresh_game.agi >> 1,
                 "equipment_bonus_evidence": shield_evidence,
-                "candidate_defense_if_shield_bonus_applied": (fresh_game.agi >> 1) + int(shield_evidence["shield_bonus"]),
+                "decoded_shield_value_from_extractor": int(
+                    shield_evidence["shield_index"]
+                ),
+                "decoded_shield_name_from_extractor": shield_value_names.get(
+                    int(shield_evidence["shield_index"]), "unknown"
+                ),
+                "candidate_defense_if_shield_bonus_applied": (fresh_game.agi >> 1)
+                + int(shield_evidence["shield_bonus"]),
+                "shield_delta_if_applied": int(shield_evidence["shield_bonus"]),
+                "fresh_game_roundtrip": {
+                    "equipment_byte": fresh_game_roundtrip.equipment_byte,
+                    "defense": fresh_game_roundtrip.defense,
+                },
+                "armor_runtime_control": {
+                    "success": armor_buy_success,
+                    "message": armor_buy_message,
+                    "equipment_byte": armor_buy_state.equipment_byte,
+                    "defense": armor_buy_state.defense,
+                },
+                "shield_runtime_controls": {
+                    "small_shield": {
+                        "success": small_shield_success,
+                        "message": small_shield_message,
+                        "equipment_byte": small_shield_state.equipment_byte,
+                        "defense": small_shield_state.defense,
+                    },
+                    "large_shield": {
+                        "success": large_shield_success,
+                        "message": large_shield_message,
+                        "equipment_byte": large_shield_state.equipment_byte,
+                        "defense": large_shield_state.defense,
+                    },
+                    "silver_shield": {
+                        "success": silver_shield_success,
+                        "message": silver_shield_message,
+                        "equipment_byte": silver_shield_state.equipment_byte,
+                        "defense": silver_shield_state.defense,
+                    },
+                },
+                "rom_be_producer_scan": rom_be_producer_scan,
+                "rom_computed_predicates": rom_computed_predicates,
+                "producer_trace_status": "closed_static_rom_path_first_canonical_shield_read_zero",
+                "canonical_first_loadstats_shield_read": canonical_first_loadstats_shield_read,
+                "intervening_be_writer_cpu_addresses": [],
+                "approved_static_rom_proof_chain": approved_static_rom_proof_chain,
+                "approved_static_rom_return_sites": approved_static_rom_return_sites,
+                "proof_summary": row61_proof_summary,
                 "scope_proven_in_batch3": [
                     "weapon bonuses",
                     "armor bonuses",
                     "Dragon's Scale",
                     "Fighter's Ring",
                 ],
-                "scope_quarantined": ["shield-derived defense", "fresh-game small-shield semantics"],
+                "scope_closed_here": [
+                    "approved static ROM caller chain",
+                    "fresh-game zero-init writes $BE = #$00",
+                    "first canonical LoadStats shield read masks low bits 0",
+                ],
             },
-            False,
-            "engine/state.py canonical derived-stat helper + PARITY_REPORT.md scoped Batch 3 evidence",
-            "Observed fresh-game baseline keeps equipment_byte=0x02 with defense=2 while extracted shield encoding decodes low bits as shield index 2 (+10 defense candidate); semantics remain UNKNOWN until ROM-backed proof resolves whether the checkpoint byte is canonical shield state or another artifact",
-            evidence_tier="unknown",
-            status="UNKNOWN",
+            row61_passed,
+            "verify.py approved static ROM proof chain + extractor/data_out/items.json shield bonus table + engine/state.py fresh-game/runtime corroboration",
+            row61_proof_summary,
+            evidence_tier="extractor-only",
+            status="PASS" if row61_passed else "FAIL",
         )
 
         ring_seed = _clone_state(
@@ -9609,7 +10903,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             evidence_tier="runtime-state",
         )
 
-        key_costs = {row["town"]: row["gold"] for row in items_data.get("key_costs", [])}
+        key_costs = {
+            row["town"]: row["gold"] for row in items_data.get("key_costs", [])
+        }
         generic_key_price = shop_runtime.price_for_item(18)
         add_row(
             "Economy",
@@ -9633,18 +10929,31 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Selected shop and inn TALK handoffs enter bounded dialog flow before side effects",
             "Selected TALK interactions should enter bounded dialog/menu flow before transaction side effects",
             {
-                "shop_action_check": shop_flow_checks.get("npc_shop_control_handoff_runs_bounded_purchase"),
-                "inn_action_check": shop_flow_checks.get("npc_inn_control_handoff_runs_inn_transaction_and_save"),
+                "shop_action_check": shop_flow_checks.get(
+                    "npc_shop_control_handoff_runs_bounded_purchase"
+                ),
+                "inn_action_check": shop_flow_checks.get(
+                    "npc_inn_control_handoff_runs_inn_transaction_and_save"
+                ),
                 "scope_note": phase4_shop_inn.get("scope_note"),
             },
-            bool(shop_flow_checks) and all(bool(value) for value in shop_flow_checks.values()),
+            bool(shop_flow_checks)
+            and all(bool(value) for value in shop_flow_checks.values()),
             "artifacts/phase4_main_loop_npc_shop_inn_handoff.json",
             "Bounded runtime proof: talk now enters dialog, then prompt/menu, then confirmed transaction without first-TALK side effects",
             evidence_tier="runtime-state",
         )
 
-        replay_domains = {entry.get("domain") for entry in replay_manifest.get("fixtures", []) if isinstance(entry, dict)}
-        checkpoint_domains = {entry.get("domain") for entry in checkpoint_manifest.get("fixtures", []) if isinstance(entry, dict)}
+        replay_domains = {
+            entry.get("domain")
+            for entry in replay_manifest.get("fixtures", [])
+            if isinstance(entry, dict)
+        }
+        checkpoint_domains = {
+            entry.get("domain")
+            for entry in checkpoint_manifest.get("fixtures", [])
+            if isinstance(entry, dict)
+        }
         replay_manifest_proof = _phase5_fixture_manifest_proof(
             manifest_path=ROOT / "tests" / "replay" / "manifest.json"
         )
@@ -9683,7 +10992,9 @@ def check_phase5_parity_matrix_gate() -> dict:
             "Checkpoint executable fixture proof availability",
             "representative executable checkpoint fixtures prove dungeon traversal resume, save/load resume continuity, and wearable modifier continuity",
             {
-                "declared_domains": sorted(str(domain) for domain in checkpoint_domains),
+                "declared_domains": sorted(
+                    str(domain) for domain in checkpoint_domains
+                ),
                 "executable_domains": checkpoint_manifest_proof["executable_domains"],
                 "fixture_count": checkpoint_manifest_proof["fixture_count"],
                 "case_count": checkpoint_manifest_proof["case_count"],
@@ -9705,34 +11016,118 @@ def check_phase5_parity_matrix_gate() -> dict:
             status="PASS" if checkpoint_manifest_proof["ok"] else "FAIL",
         )
 
-        resistance_samples = {
-            row["name"]: {
-                "mdef": int(row["mdef"]),
-                "spell_fail_threshold": int(row["spell_fail_threshold"]),
-                "s_ss_resist": int(row["s_ss_resist"]),
-                "s_ss_resist_status": str(row["s_ss_resist_status"]),
-            }
-            for row in enemies["enemies"]
-            if row["name"] in {"Golem", "Wizard", "Red Dragon", "Dragonlord", "Dragonlord's True Form"}
+        runtime_immunity_vectors = _load_json(
+            ROOT
+            / "tests"
+            / "fixtures"
+            / "main_loop_combat_enemy_sleep_stopspell_immunity_vectors.json"
+        ).get("vectors", {})
+        resistance_sample_names = {
+            "Golem",
+            "Wizard",
+            "Red Dragon",
+            "Dragonlord",
+            "Dragonlord's True Form",
         }
+        resistance_sample_proof: dict[str, dict[str, int | str]] = {}
+        rom_mdef_matches = True
+        rom_mdef_high_nibble_matches = True
+        rom_mdef_low_nibble_matches = True
+        rom_spell_fail_threshold_matches = True
+        for enemy_row in enemies["enemies"]:
+            enemy_id = int(enemy_row["enemy_id"])
+            entry_offset = ENEMY_TABLE_START + enemy_id * ENEMY_ENTRY_BYTES
+            rom_mdef = rom.read_byte(entry_offset + 5)
+            rom_mdef_high_nibble = (rom_mdef >> 4) & 0x0F
+            rom_mdef_low_nibble = rom_mdef & 0x0F
+            rom_mdef_matches = rom_mdef_matches and int(enemy_row["mdef"]) == rom_mdef
+            rom_mdef_high_nibble_matches = (
+                rom_mdef_high_nibble_matches
+                and int(enemy_row["mdef_high_nibble"]) == rom_mdef_high_nibble
+            )
+            rom_mdef_low_nibble_matches = (
+                rom_mdef_low_nibble_matches
+                and int(enemy_row["mdef_low_nibble"]) == rom_mdef_low_nibble
+            )
+            rom_spell_fail_threshold_matches = (
+                rom_spell_fail_threshold_matches
+                and int(enemy_row["spell_fail_threshold"]) == rom_mdef_high_nibble
+            )
+            if enemy_row["name"] in resistance_sample_names:
+                resistance_sample_proof[str(enemy_row["name"])] = {
+                    "enemy_id": enemy_id,
+                    "rom_entry_offset": hex(entry_offset),
+                    "rom_byte5_offset": hex(entry_offset + 5),
+                    "rom_byte5": rom_mdef,
+                    "mdef": int(enemy_row["mdef"]),
+                    "mdef_high_nibble": int(enemy_row["mdef_high_nibble"]),
+                    "mdef_low_nibble": int(enemy_row["mdef_low_nibble"]),
+                    "spell_fail_threshold": int(enemy_row["spell_fail_threshold"]),
+                }
+        golem_sleep_immune = dict(
+            runtime_immunity_vectors.get("golem_sleep_immune", {})
+        )
+        golem_sleep_immune["frame_contains_immune"] = "IMMUNE" in str(
+            golem_sleep_immune.get("frame", "")
+        )
+        golem_stopspell_immune = dict(
+            runtime_immunity_vectors.get("golem_stopspell_immune", {})
+        )
+        golem_stopspell_immune["frame_contains_immune"] = "IMMUNE" in str(
+            golem_stopspell_immune.get("frame", "")
+        )
+        slime_sleep_control = dict(
+            runtime_immunity_vectors.get("slime_sleep_regression", {})
+        )
         resistance_fields_present = {
-            "pattern_flags_present": all("pattern_flags" in row for row in enemies["enemies"]),
-            "mdef_present": all("mdef" in row for row in enemies["enemies"]),
-            "spell_fail_threshold_present": all("spell_fail_threshold" in row for row in enemies["enemies"]),
-            "s_ss_resist_present": all("s_ss_resist" in row for row in enemies["enemies"]),
-            "resistance_statuses": sorted({str(row.get("s_ss_resist_status", "missing")) for row in enemies["enemies"]}),
-            "immunity_samples": resistance_samples,
+            "rom_byte5_table_start": hex(ENEMY_TABLE_START),
+            "rom_byte5_full_sweep_enemy_count": len(enemies["enemies"]),
+            "rom_byte5_full_sweep_matches": all(
+                (
+                    rom_mdef_matches,
+                    rom_mdef_high_nibble_matches,
+                    rom_mdef_low_nibble_matches,
+                    rom_spell_fail_threshold_matches,
+                )
+            ),
+            "rom_mdef_matches": rom_mdef_matches,
+            "rom_mdef_high_nibble_matches": rom_mdef_high_nibble_matches,
+            "rom_mdef_low_nibble_matches": rom_mdef_low_nibble_matches,
+            "rom_spell_fail_threshold_matches": rom_spell_fail_threshold_matches,
+            "inferred_mask_matches_high_nibble": all(
+                int(enemy_row.get("s_ss_resist", 0))
+                == (int(enemy_row.get("mdef_high_nibble", 0)) << 4)
+                for enemy_row in enemies["enemies"]
+            ),
+            "high_nibble_15_low_nibble_variants": sorted(
+                {
+                    int(enemy_row["mdef_low_nibble"])
+                    for enemy_row in enemies["enemies"]
+                    if int(enemy_row["mdef_high_nibble"]) == 15
+                }
+            ),
+            "rom_byte5_sample_proof": resistance_sample_proof,
+            "low_nibble_gameplay_semantics_status": "unproven",
+            "runtime_immunity_controls": {
+                "golem_sleep_immune": golem_sleep_immune,
+                "golem_stopspell_immune": golem_stopspell_immune,
+                "slime_sleep_control": slime_sleep_control,
+            },
         }
         add_row(
             "Resistance Decode",
             "ROM-backed resistance mapping availability",
-            "decoded resistance mapping present or explicit blocker surfaced; raw mdef nibble evidence must stay reviewable even if semantics remain unresolved",
+            "raw enemy byte-5 resistance mapping is ROM-backed; nibble split and high-nibble spell-fail threshold relation are proven while low-nibble gameplay semantics remain explicitly unproven",
             resistance_fields_present,
-            False,
-            "extractor/data_out/enemies.json",
-            "Extractor now preserves mdef high/low nibble evidence, spell-fail threshold, and inferred sleep/stopspell mask; authoritative ROM mapping remains UNKNOWN",
-            evidence_tier="unknown",
-            status="UNKNOWN",
+            len(enemies["enemies"]) == ENEMY_COUNT
+            and resistance_fields_present["rom_byte5_full_sweep_matches"] is True
+            and resistance_fields_present["inferred_mask_matches_high_nibble"] is True
+            and resistance_fields_present["high_nibble_15_low_nibble_variants"]
+            == [0, 1, 2, 15],
+            "extractor/data_out/enemies.json + dragon-warrior-1.nes + tests/test_main_loop_scaffold.py sleep/stopspell immunity controls",
+            "Observed full 40-enemy ROM byte-5 sweep matches extracted mdef/high-nibble/low-nibble fields, and high nibble matches spell-fail threshold. Runtime Golem/Slime controls corroborate high-nibble immunity handling while low-nibble gameplay semantics remain unproven by current repo evidence.",
+            evidence_tier="runtime-state",
+            status="PASS",
         )
 
     except Exception as exc:
@@ -10874,23 +12269,39 @@ def _artifact_path_for_phase(phase: str) -> Path:
     if phase == "4-slice-combat-spell-in-battle":
         return ROOT / "artifacts" / "phase4_slice_combat_spell_in_battle.json"
     if phase == "4-slice-combat-asleep-stopspell-flag-effects":
-        return ROOT / "artifacts" / "phase4_slice_combat_asleep_stopspell_flag_effects.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_combat_asleep_stopspell_flag_effects.json"
+        )
     if phase == "4-slice-combat-player-stopspell-enforcement":
-        return ROOT / "artifacts" / "phase4_slice_combat_player_stopspell_enforcement.json"
+        return (
+            ROOT / "artifacts" / "phase4_slice_combat_player_stopspell_enforcement.json"
+        )
     if phase == "4-slice-combat-enemy-sleep-stopspell-immunity":
-        return ROOT / "artifacts" / "phase4_slice_combat_enemy_sleep_stopspell_immunity.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_combat_enemy_sleep_stopspell_immunity.json"
+        )
     if phase == "4-slice-combat-metal-slime-flee":
         return ROOT / "artifacts" / "phase4_slice_combat_metal_slime_flee.json"
     if phase == "4-slice-combat-dragonlord-two-phase-fight":
-        return ROOT / "artifacts" / "phase4_slice_combat_dragonlord_two_phase_fight.json"
+        return (
+            ROOT / "artifacts" / "phase4_slice_combat_dragonlord_two_phase_fight.json"
+        )
     if phase == "4-slice-combat-dragonlord-endgame-victory":
-        return ROOT / "artifacts" / "phase4_slice_combat_dragonlord_endgame_victory.json"
+        return (
+            ROOT / "artifacts" / "phase4_slice_combat_dragonlord_endgame_victory.json"
+        )
     if phase == "4-slice-endgame-return-to-title":
         return ROOT / "artifacts" / "phase4_slice_endgame_return_to_title.json"
     if phase == "4-slice-endgame-input-coverage-hardening":
         return ROOT / "artifacts" / "phase4_slice_endgame_input_coverage_hardening.json"
     if phase == "4-slice-post-victory-npc-world-state-proof":
-        return ROOT / "artifacts" / "phase4_slice_post_victory_npc_world_state_proof.json"
+        return (
+            ROOT / "artifacts" / "phase4_slice_post_victory_npc_world_state_proof.json"
+        )
     if phase == "4-slice-title-screen-endgame-renderer":
         return ROOT / "artifacts" / "phase4_slice_title_screen_endgame_renderer.json"
     if phase == "4-slice-combat-outcome-resolution":
@@ -10906,11 +12317,19 @@ def _artifact_path_for_phase(phase: str) -> Path:
     if phase == "4-slice-npc-dialog-entry-playback":
         return ROOT / "artifacts" / "phase4_slice_npc_dialog_entry_playback.json"
     if phase == "4-slice-npc-special-dialog-control-resolution":
-        return ROOT / "artifacts" / "phase4_slice_npc_special_dialog_control_resolution.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_npc_special_dialog_control_resolution.json"
+        )
     if phase == "4-slice-npc-special-control-side-effects":
         return ROOT / "artifacts" / "phase4_slice_npc_special_control_side_effects.json"
     if phase == "4-slice-npc-special-control-0x6c-side-effect":
-        return ROOT / "artifacts" / "phase4_slice_npc_special_control_0x6c_side_effect.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_npc_special_control_0x6c_side_effect.json"
+        )
     if phase == "4-slice-npc-shop-inn-handoff":
         return ROOT / "artifacts" / "phase4_slice_npc_shop_inn_handoff.json"
     if phase == "4-slice-npc-shop-inn-control-expansion":
@@ -10932,13 +12351,29 @@ def _artifact_path_for_phase(phase: str) -> Path:
     if phase == "4-slice-map-command-search-chest-rewards":
         return ROOT / "artifacts" / "phase4_slice_map_command_search_chest_rewards.json"
     if phase == "4-slice-map-command-search-non-gold-chest-rewards":
-        return ROOT / "artifacts" / "phase4_slice_map_command_search_non_gold_chest_rewards.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_search_non_gold_chest_rewards.json"
+        )
     if phase == "4-slice-map-command-search-tool-rewards-capacity":
-        return ROOT / "artifacts" / "phase4_slice_map_command_search_tool_rewards_capacity.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_search_tool_rewards_capacity.json"
+        )
     if phase == "4-slice-map-command-search-remaining-gold-chest-rewards":
-        return ROOT / "artifacts" / "phase4_slice_map_command_search_remaining_gold_chest_rewards.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_search_remaining_gold_chest_rewards.json"
+        )
     if phase == "4-slice-map-command-search-remaining-unsupported-chest-contents":
-        return ROOT / "artifacts" / "phase4_slice_map_command_search_remaining_unsupported_chest_contents.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_search_remaining_unsupported_chest_contents.json"
+        )
     if phase == "4-slice-map-command-status-surface":
         return ROOT / "artifacts" / "phase4_slice_map_command_status_surface.json"
     if phase == "4-slice-map-command-item-surface":
@@ -10946,19 +12381,45 @@ def _artifact_path_for_phase(phase: str) -> Path:
     if phase == "4-slice-map-command-item-expansion":
         return ROOT / "artifacts" / "phase4_slice_map_command_item_expansion.json"
     if phase == "4-slice-map-command-item-dragons-scale-equip-state":
-        return ROOT / "artifacts" / "phase4_slice_map_command_item_dragons_scale_equip_state.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_item_dragons_scale_equip_state.json"
+        )
     if phase == "4-slice-map-command-item-silver-harp-forced-encounter":
-        return ROOT / "artifacts" / "phase4_slice_map_command_item_silver_harp_forced_encounter.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_item_silver_harp_forced_encounter.json"
+        )
     if phase == "4-slice-map-command-item-rainbow-drop-bridge-trigger":
-        return ROOT / "artifacts" / "phase4_slice_map_command_item_rainbow_drop_bridge_trigger.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_item_rainbow_drop_bridge_trigger.json"
+        )
     if phase == "4-slice-map-command-item-fairy-flute-interaction":
-        return ROOT / "artifacts" / "phase4_slice_map_command_item_fairy_flute_interaction.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_item_fairy_flute_interaction.json"
+        )
     if phase == "4-slice-map-command-item-remaining-quest-item-use-effects":
-        return ROOT / "artifacts" / "phase4_slice_map_command_item_remaining_quest_item_use_effects.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_item_remaining_quest_item_use_effects.json"
+        )
     if phase == "4-slice-map-command-cursed-item-step-damage-hook":
-        return ROOT / "artifacts" / "phase4_slice_map_command_cursed_item_step_damage_hook.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_map_command_cursed_item_step_damage_hook.json"
+        )
     if phase == "4-slice-map-movement-terrain-step-effects":
-        return ROOT / "artifacts" / "phase4_slice_map_movement_terrain_step_effects.json"
+        return (
+            ROOT / "artifacts" / "phase4_slice_map_movement_terrain_step_effects.json"
+        )
     if phase == "4-slice-map-load-curse-check":
         return ROOT / "artifacts" / "phase4_slice_map_load_curse_check.json"
     if phase == "4-slice-map-command-stairs-surface":
@@ -10968,7 +12429,11 @@ def _artifact_path_for_phase(phase: str) -> Path:
     if phase == "4-slice-map-command-door-persistence":
         return ROOT / "artifacts" / "phase4_slice_map_command_door_persistence.json"
     if phase == "4-slice-opened-world-state-save-load-persistence":
-        return ROOT / "artifacts" / "phase4_slice_opened_world_state_save_load_persistence.json"
+        return (
+            ROOT
+            / "artifacts"
+            / "phase4_slice_opened_world_state_save_load_persistence.json"
+        )
     return ROOT / "artifacts" / "phase1_foundation.json"
 
 

@@ -987,7 +987,7 @@
       "row": 61,
       "system": "Stats",
       "test": "Shield-derived defense parity scope",
-      "expected": "fresh-game shield-derived defense remains unresolved; extracted shield encoding now makes the checkpoint/runtime mismatch reviewable without overclaiming parity",
+      "expected": "first canonical fresh-game LoadStats shield read sees RAM $BE low bits 0 on approved static ROM path",
       "actual": {
         "fresh_game_equipment_byte": 2,
         "fresh_game_defense": 2,
@@ -1002,23 +1002,257 @@
           "wearable_attack_bonus": 0,
           "wearable_defense_bonus": 0
         },
+        "decoded_shield_value_from_extractor": 2,
+        "decoded_shield_name_from_extractor": "large_shield",
         "candidate_defense_if_shield_bonus_applied": 12,
+        "shield_delta_if_applied": 10,
+        "fresh_game_roundtrip": {
+          "equipment_byte": 2,
+          "defense": 2
+        },
+        "armor_runtime_control": {
+          "success": true,
+          "message": "purchased and equipped",
+          "equipment_byte": 10,
+          "defense": 6
+        },
+        "shield_runtime_controls": {
+          "small_shield": {
+            "success": true,
+            "message": "purchased and equipped",
+            "equipment_byte": 1,
+            "defense": 2
+          },
+          "large_shield": {
+            "success": true,
+            "message": "purchased and equipped",
+            "equipment_byte": 2,
+            "defense": 2
+          },
+          "silver_shield": {
+            "success": true,
+            "message": "purchased and equipped",
+            "equipment_byte": 3,
+            "defense": 2
+          }
+        },
+        "rom_be_producer_scan": {
+          "all_sta_be_offsets": [
+            "0xd515",
+            "0xd63f",
+            "0xd65d",
+            "0xd66c",
+            "0xe18e",
+            "0xe2ba",
+            "0xf6b5",
+            "0xfbb1"
+          ],
+          "literal_0x02_store_offsets": [],
+          "zero_sequence_candidate_offsets": [
+            "0xd515",
+            "0xf6b5"
+          ],
+          "save_copy_candidate_offsets": [
+            "0xfbb1"
+          ],
+          "equipment_mutation_candidate_offsets": [
+            "0xd63f",
+            "0xd65d",
+            "0xd66c",
+            "0xe18e",
+            "0xe2ba"
+          ],
+          "all_sta_be_cpu_addresses": [
+            "0xd505",
+            "0xd62f",
+            "0xd64d",
+            "0xd65c",
+            "0xe17e",
+            "0xe2aa",
+            "0xf6a5",
+            "0xfba1"
+          ],
+          "zero_sequence_candidate_cpu_addresses": [
+            "0xd505",
+            "0xf6a5"
+          ],
+          "save_copy_candidate_cpu_addresses": [
+            "0xfba1"
+          ],
+          "equipment_mutation_candidate_cpu_addresses": [
+            "0xd62f",
+            "0xd64d",
+            "0xd65c",
+            "0xe17e",
+            "0xe2aa"
+          ]
+        },
+        "rom_computed_predicates": {
+          "fresh_game_entry_signature_cpu_addresses": [
+            "0xf8d4"
+          ],
+          "fresh_game_zero_init_routine_cpu_addresses": [
+            "0xf68f"
+          ],
+          "save_serializer_entry_cpu_addresses": [
+            "0xf9df"
+          ],
+          "fresh_game_wrapper_cpu_addresses": [
+            "0xf8e3"
+          ],
+          "serializer_reads_be_cpu_addresses": [
+            "0xfa54"
+          ],
+          "loadstats_callsite_cpu_addresses": [
+            "0xcb65",
+            "0xcf7a",
+            "0xe536",
+            "0xea76"
+          ],
+          "shield_consumer_cpu_addresses": [
+            "0xf0f1"
+          ],
+          "shield_bonus_table_cpu_address": "0x99df",
+          "shield_bonus_table_rom_offset": "0x19ef",
+          "shield_bonus_table_values": [
+            0,
+            4,
+            10,
+            20
+          ],
+          "literal_0x02_store_to_be_absent": true,
+          "fresh_game_to_first_loadstats_reachability_closed": true,
+          "fresh_game_runtime_mismatch_requires_authoritative_rom_path": true,
+          "shield_bonus_table_matches_extractor": true,
+          "approved_static_proof_chain_matches_rom": true,
+          "approved_static_return_sites_match_rom": true,
+          "intervening_be_writer_absent_on_approved_path": true,
+          "first_canonical_shield_read_low_bits_zero": true
+        },
+        "producer_trace_status": "closed_static_rom_path_first_canonical_shield_read_zero",
+        "canonical_first_loadstats_shield_read": {
+          "writer_cpu_address": "0xf6a5",
+          "writer_a_immediate": "0x00",
+          "serializer_be_read_cpu_address": "0xfa54",
+          "loadstats_shield_read_cpu_address": "0xf0f1",
+          "be_low_bits": 0,
+          "shield_table_index": 0,
+          "shield_bonus_from_rom": 0
+        },
+        "intervening_be_writer_cpu_addresses": [],
+        "approved_static_rom_proof_chain": [
+          {
+            "cpu_address": "0xca08",
+            "expected_bytes": "20 78 f6",
+            "actual_bytes": "20 78 f6",
+            "matches_rom": true,
+            "meaning": "canonical fresh-game caller JSR $F678"
+          },
+          {
+            "cpu_address": "0xf678",
+            "expected_bytes": "20 42 f8",
+            "actual_bytes": "20 42 f8",
+            "matches_rom": true,
+            "meaning": "wrapper JSR $F842"
+          },
+          {
+            "cpu_address": "0xf8e5",
+            "expected_bytes": "20 8f f6",
+            "actual_bytes": "20 8f f6",
+            "matches_rom": true,
+            "meaning": "fresh-game branch JSR $F68F zero-init"
+          },
+          {
+            "cpu_address": "0xf68f",
+            "expected_bytes": "a9 00",
+            "actual_bytes": "a9 00",
+            "matches_rom": true,
+            "meaning": "zero-init loads A = #$00"
+          },
+          {
+            "cpu_address": "0xf6a5",
+            "expected_bytes": "85 be",
+            "actual_bytes": "85 be",
+            "matches_rom": true,
+            "meaning": "zero-init stores A into RAM $BE"
+          },
+          {
+            "cpu_address": "0xf8e8",
+            "expected_bytes": "20 df f9",
+            "actual_bytes": "20 df f9",
+            "matches_rom": true,
+            "meaning": "fresh-game branch JSR $F9DF serializer/save path"
+          },
+          {
+            "cpu_address": "0xfa54",
+            "expected_bytes": "a5 be",
+            "actual_bytes": "a5 be",
+            "matches_rom": true,
+            "meaning": "serializer rereads RAM $BE"
+          },
+          {
+            "cpu_address": "0xf8eb",
+            "expected_bytes": "60",
+            "actual_bytes": "60",
+            "matches_rom": true,
+            "meaning": "fresh-game branch RTS back to wrapper"
+          },
+          {
+            "cpu_address": "0xca1a",
+            "expected_bytes": "20 47 cb",
+            "actual_bytes": "20 47 cb",
+            "matches_rom": true,
+            "meaning": "canonical caller invokes $CB47"
+          },
+          {
+            "cpu_address": "0xcb65",
+            "expected_bytes": "20 50 f0",
+            "actual_bytes": "20 50 f0",
+            "matches_rom": true,
+            "meaning": "LoadStats caller JSR $F050"
+          },
+          {
+            "cpu_address": "0xf0f1",
+            "expected_bytes": "a5 be 29 03",
+            "actual_bytes": "a5 be 29 03",
+            "matches_rom": true,
+            "meaning": "shield consumer reads RAM $BE low bits"
+          }
+        ],
+        "approved_static_rom_return_sites": [
+          {
+            "cpu_address": "0xf67b",
+            "expected_bytes": "ae 39 60",
+            "actual_bytes": "ae 39 60",
+            "matches_rom": true,
+            "meaning": "post-F842 return site in wrapper"
+          },
+          {
+            "cpu_address": "0xca0b",
+            "expected_bytes": "a9 fa 85 b9",
+            "actual_bytes": "a9 fa 85 b9",
+            "matches_rom": true,
+            "meaning": "return site after JSR $F678"
+          }
+        ],
+        "proof_summary": "Approved static ROM proof chain closes row 61: $F68F loads A=#00, $F6A5 stores that zero into RAM $BE, $FA54 rereads the same byte on the fresh-game serializer path, and first canonical LoadStats shield read at $F0F1 masks low bits from that zeroed byte. First canonical fresh-game LoadStats shield read therefore sees low bits 0.",
         "scope_proven_in_batch3": [
           "weapon bonuses",
           "armor bonuses",
           "Dragon's Scale",
           "Fighter's Ring"
         ],
-        "scope_quarantined": [
-          "shield-derived defense",
-          "fresh-game small-shield semantics"
+        "scope_closed_here": [
+          "approved static ROM caller chain",
+          "fresh-game zero-init writes $BE = #$00",
+          "first canonical LoadStats shield read masks low bits 0"
         ]
       },
-      "passed": false,
-      "status": "UNKNOWN",
-      "evidence": "engine/state.py canonical derived-stat helper + PARITY_REPORT.md scoped Batch 3 evidence",
-      "evidence_tier": "unknown",
-      "rom_source": "Observed fresh-game baseline keeps equipment_byte=0x02 with defense=2 while extracted shield encoding decodes low bits as shield index 2 (+10 defense candidate); semantics remain UNKNOWN until ROM-backed proof resolves whether the checkpoint byte is canonical shield state or another artifact"
+      "passed": true,
+      "status": "PASS",
+      "evidence": "verify.py approved static ROM proof chain + extractor/data_out/items.json shield bonus table + engine/state.py fresh-game/runtime corroboration",
+      "evidence_tier": "extractor-only",
+      "rom_source": "Approved static ROM proof chain closes row 61: $F68F loads A=#00, $F6A5 stores that zero into RAM $BE, $FA54 rereads the same byte on the fresh-game serializer path, and first canonical LoadStats shield read at $F0F1 masks low bits from that zeroed byte. First canonical fresh-game LoadStats shield read therefore sees low bits 0."
     },
     {
       "row": 62,
@@ -1145,70 +1379,130 @@
       "row": 67,
       "system": "Resistance Decode",
       "test": "ROM-backed resistance mapping availability",
-      "expected": "decoded resistance mapping present or explicit blocker surfaced; raw mdef nibble evidence must stay reviewable even if semantics remain unresolved",
+      "expected": "raw enemy byte-5 resistance mapping is ROM-backed; nibble split and high-nibble spell-fail threshold relation are proven while low-nibble gameplay semantics remain explicitly unproven",
       "actual": {
-        "pattern_flags_present": true,
-        "mdef_present": true,
-        "spell_fail_threshold_present": true,
-        "s_ss_resist_present": true,
-        "resistance_statuses": [
-          "inferred_from_mdef_high_nibble"
+        "rom_byte5_table_start": "0x5e5b",
+        "rom_byte5_full_sweep_enemy_count": 40,
+        "rom_byte5_full_sweep_matches": true,
+        "rom_mdef_matches": true,
+        "rom_mdef_high_nibble_matches": true,
+        "rom_mdef_low_nibble_matches": true,
+        "rom_spell_fail_threshold_matches": true,
+        "inferred_mask_matches_high_nibble": true,
+        "high_nibble_15_low_nibble_variants": [
+          0,
+          1,
+          2,
+          15
         ],
-        "immunity_samples": {
+        "rom_byte5_sample_proof": {
           "Golem": {
+            "enemy_id": 24,
+            "rom_entry_offset": "0x5fdb",
+            "rom_byte5_offset": "0x5fe0",
+            "rom_byte5": 240,
             "mdef": 240,
-            "spell_fail_threshold": 15,
-            "s_ss_resist": 240,
-            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+            "mdef_high_nibble": 15,
+            "mdef_low_nibble": 0,
+            "spell_fail_threshold": 15
           },
           "Wizard": {
+            "enemy_id": 32,
+            "rom_entry_offset": "0x605b",
+            "rom_byte5_offset": "0x6060",
+            "rom_byte5": 242,
             "mdef": 242,
-            "spell_fail_threshold": 15,
-            "s_ss_resist": 240,
-            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+            "mdef_high_nibble": 15,
+            "mdef_low_nibble": 2,
+            "spell_fail_threshold": 15
           },
           "Red Dragon": {
+            "enemy_id": 37,
+            "rom_entry_offset": "0x60ab",
+            "rom_byte5_offset": "0x60b0",
+            "rom_byte5": 242,
             "mdef": 242,
-            "spell_fail_threshold": 15,
-            "s_ss_resist": 240,
-            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+            "mdef_high_nibble": 15,
+            "mdef_low_nibble": 2,
+            "spell_fail_threshold": 15
           },
           "Dragonlord": {
+            "enemy_id": 38,
+            "rom_entry_offset": "0x60bb",
+            "rom_byte5_offset": "0x60c0",
+            "rom_byte5": 240,
             "mdef": 240,
-            "spell_fail_threshold": 15,
-            "s_ss_resist": 240,
-            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+            "mdef_high_nibble": 15,
+            "mdef_low_nibble": 0,
+            "spell_fail_threshold": 15
           },
           "Dragonlord's True Form": {
+            "enemy_id": 39,
+            "rom_entry_offset": "0x60cb",
+            "rom_byte5_offset": "0x60d0",
+            "rom_byte5": 240,
             "mdef": 240,
-            "spell_fail_threshold": 15,
-            "s_ss_resist": 240,
-            "s_ss_resist_status": "inferred_from_mdef_high_nibble"
+            "mdef_high_nibble": 15,
+            "mdef_low_nibble": 0,
+            "spell_fail_threshold": 15
+          }
+        },
+        "low_nibble_gameplay_semantics_status": "unproven",
+        "runtime_immunity_controls": {
+          "golem_sleep_immune": {
+            "action": "combat_turn",
+            "action_detail": "SLEEP",
+            "screen_mode": "combat",
+            "mp_before": 10,
+            "mp_after": 8,
+            "enemy_asleep_after": false,
+            "enemy_stopspell_after": false,
+            "frame": "\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 BATTLE                                                                      \u2502 \n\u2502 ENEMY: GOLEM                                                            \u2502     \n\u2502 [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588] HP 70/70                                         \u2502 \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                                                                \n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 COMBAT LOG                                                                   \u2502\n\u2502 GOLEM IS IMMUNE.                                                             \u2502\n\u2502 GOLEM STRIKES 0.                                                             \u2502\n                                                                                \n                                                                                \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                                                                \n\u250c COMMAND \u2510                                                                     \n\u2502\u25ba FIGHT\u2502                                                                       \n\u2502  SPELL\u2502                                                                       \n\u2502  RUN  \u2502                                                                       \n\u2502  ITEM \u2502                                                                       \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                                                                       \n                                                                                \n                                                                                \n                                                                                \n                                                                                ",
+            "frame_contains_immune": true
+          },
+          "golem_stopspell_immune": {
+            "action": "combat_turn",
+            "action_detail": "STOPSPELL",
+            "screen_mode": "combat",
+            "mp_before": 10,
+            "mp_after": 8,
+            "enemy_asleep_after": false,
+            "enemy_stopspell_after": false,
+            "frame": "\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 BATTLE                                                                      \u2502 \n\u2502 ENEMY: GOLEM                                                            \u2502     \n\u2502 [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588] HP 70/70                                         \u2502 \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                                                                \n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 COMBAT LOG                                                                   \u2502\n\u2502 GOLEM IS IMMUNE.                                                             \u2502\n\u2502 GOLEM STRIKES 0.                                                             \u2502\n                                                                                \n                                                                                \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                                                                \n\u250c COMMAND \u2510                                                                     \n\u2502\u25ba FIGHT\u2502                                                                       \n\u2502  SPELL\u2502                                                                       \n\u2502  RUN  \u2502                                                                       \n\u2502  ITEM \u2502                                                                       \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                                                                       \n                                                                                \n                                                                                \n                                                                                \n                                                                                ",
+            "frame_contains_immune": true
+          },
+          "slime_sleep_control": {
+            "action": "combat_turn",
+            "action_detail": "SLEEP",
+            "screen_mode": "combat",
+            "mp_before": 10,
+            "mp_after": 8,
+            "enemy_asleep_after": true,
+            "enemy_stopspell_after": false,
+            "frame": "\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 BATTLE                                                                      \u2502 \n\u2502 ENEMY: SLIME                                                            \u2502     \n\u2502 [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588] HP 70/70                                         \u2502 \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                                                                \n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 COMBAT LOG                                                                   \u2502\n\u2502 SLIME IS ASLEEP.                                                             \u2502\n\u2502 Slime is asleep.                                                             \u2502\n                                                                                \n                                                                                \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                                                                \n\u250c COMMAND \u2510                                                                     \n\u2502\u25ba FIGHT\u2502                                                                       \n\u2502  SPELL\u2502                                                                       \n\u2502  RUN  \u2502                                                                       \n\u2502  ITEM \u2502                                                                       \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                                                                       \n                                                                                \n                                                                                \n                                                                                \n                                                                                "
           }
         }
       },
-      "passed": false,
-      "status": "UNKNOWN",
-      "evidence": "extractor/data_out/enemies.json",
-      "evidence_tier": "unknown",
-      "rom_source": "Extractor now preserves mdef high/low nibble evidence, spell-fail threshold, and inferred sleep/stopspell mask; authoritative ROM mapping remains UNKNOWN"
+      "passed": true,
+      "status": "PASS",
+      "evidence": "extractor/data_out/enemies.json + dragon-warrior-1.nes + tests/test_main_loop_scaffold.py sleep/stopspell immunity controls",
+      "evidence_tier": "runtime-state",
+      "rom_source": "Observed full 40-enemy ROM byte-5 sweep matches extracted mdef/high-nibble/low-nibble fields, and high nibble matches spell-fail threshold. Runtime Golem/Slime controls corroborate high-nibble immunity handling while low-nibble gameplay semantics remain unproven by current repo evidence."
     }
   ],
-  "all_passed": false,
+  "all_passed": true,
   "summary": {
     "row_count": 67,
     "status_counts": {
-      "PASS": 65,
-      "UNKNOWN": 2
+      "PASS": 67
     },
     "evidence_tier_counts": {
-      "extractor-only": 55,
-      "runtime-state": 8,
-      "unknown": 2,
+      "extractor-only": 56,
+      "runtime-state": 9,
       "replay-proven": 1,
       "checkpoint-proven": 1
     },
-    "all_passed": false
+    "all_passed": true
   },
-  "parity_report_sha256": "c4dabaa88c57e82395dd616107b24f1d7dcaf109c676c0d8b3873365049a5f51"
+  "parity_report_sha256": "2067e016f1c3abee28e5ee5460fcc7bd35031ce90358007f7764f513cd59eca2"
 }

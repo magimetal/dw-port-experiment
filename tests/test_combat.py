@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 
 from engine.items_engine import FLAG_DRAGON_SCALE, FLAG_FIGHTERS_RING
+from extractor.enemies import ENEMY_COUNT, ENEMY_ENTRY_BYTES, ENEMY_TABLE_START
+from extractor.rom import DW1ROM
 from engine.combat import (
     EN_DRAGONLORD1,
     apply_damage,
@@ -75,7 +77,9 @@ def test_spell_ranges_over_full_8bit_rng_domain() -> None:
     heal_values = [heal_spell_hp(ScriptedRNG([value])) for value in range(256)]
     healmore_values = [healmore_spell_hp(ScriptedRNG([value])) for value in range(256)]
     hurt_values = [hurt_spell_damage(ScriptedRNG([value])) for value in range(256)]
-    hurtmore_values = [hurtmore_spell_damage(ScriptedRNG([value])) for value in range(256)]
+    hurtmore_values = [
+        hurtmore_spell_damage(ScriptedRNG([value])) for value in range(256)
+    ]
 
     assert min(heal_values) == 10
     assert max(heal_values) == 17
@@ -145,7 +149,9 @@ def test_combat_slice_artifacts_exist_and_are_consistent() -> None:
 
 
 def test_enemy_spell_mapping_presence_or_blocker_visibility() -> None:
-    enemies = json.loads((ROOT / "extractor" / "data_out" / "enemies.json").read_text())["enemies"]
+    enemies = json.loads(
+        (ROOT / "extractor" / "data_out" / "enemies.json").read_text()
+    )["enemies"]
     spellcasters = [enemy for enemy in enemies if enemy["pattern_flags"] != 0]
 
     assert spellcasters
@@ -162,24 +168,45 @@ def test_enemy_spell_mapping_presence_or_blocker_visibility() -> None:
 
 
 def test_enemy_spell_mapping_is_explicit_only_for_proven_pattern_subset() -> None:
-    enemies = json.loads((ROOT / "extractor" / "data_out" / "enemies.json").read_text())["enemies"]
-    hurt_pattern_enemies = [enemy for enemy in enemies if enemy["pattern_flags"] == 0x02]
-    unresolved_spellcasters = [enemy for enemy in enemies if enemy["pattern_flags"] not in (0, 0x02)]
+    enemies = json.loads(
+        (ROOT / "extractor" / "data_out" / "enemies.json").read_text()
+    )["enemies"]
+    hurt_pattern_enemies = [
+        enemy for enemy in enemies if enemy["pattern_flags"] == 0x02
+    ]
+    unresolved_spellcasters = [
+        enemy for enemy in enemies if enemy["pattern_flags"] not in (0, 0x02)
+    ]
 
-    assert [enemy["name"] for enemy in hurt_pattern_enemies] == ["Magician", "Magidrakee"]
+    assert [enemy["name"] for enemy in hurt_pattern_enemies] == [
+        "Magician",
+        "Magidrakee",
+    ]
     assert enemy_spell_actions_for_pattern(0x02) == ("HURT",)
     assert all(enemy["spell_action"] == "HURT" for enemy in hurt_pattern_enemies)
-    assert all(enemy["spell_action_status"] == "proven" for enemy in hurt_pattern_enemies)
+    assert all(
+        enemy["spell_action_status"] == "proven" for enemy in hurt_pattern_enemies
+    )
     assert all(enemy["spell_action_blocker"] is None for enemy in hurt_pattern_enemies)
     assert unresolved_spellcasters
-    assert all(enemy_spell_actions_for_pattern(int(enemy["pattern_flags"])) == () for enemy in unresolved_spellcasters)
+    assert all(
+        enemy_spell_actions_for_pattern(int(enemy["pattern_flags"])) == ()
+        for enemy in unresolved_spellcasters
+    )
     assert all(enemy["spell_action"] is None for enemy in unresolved_spellcasters)
-    assert all(enemy["spell_action_status"] == "unknown" for enemy in unresolved_spellcasters)
-    assert all(isinstance(enemy["spell_action_blocker"], str) and enemy["spell_action_blocker"] for enemy in unresolved_spellcasters)
+    assert all(
+        enemy["spell_action_status"] == "unknown" for enemy in unresolved_spellcasters
+    )
+    assert all(
+        isinstance(enemy["spell_action_blocker"], str) and enemy["spell_action_blocker"]
+        for enemy in unresolved_spellcasters
+    )
 
 
 def test_enemy_resistance_decode_fields_preserve_raw_mdef_evidence() -> None:
-    enemies = json.loads((ROOT / "extractor" / "data_out" / "enemies.json").read_text())["enemies"]
+    enemies = json.loads(
+        (ROOT / "extractor" / "data_out" / "enemies.json").read_text()
+    )["enemies"]
     golem = next(enemy for enemy in enemies if enemy["name"] == "Golem")
     magician = next(enemy for enemy in enemies if enemy["name"] == "Magician")
 
@@ -197,8 +224,39 @@ def test_enemy_resistance_decode_fields_preserve_raw_mdef_evidence() -> None:
     assert magician["s_ss_resist"] == 0x00
 
 
+def test_enemy_rom_byte5_full_sweep_matches_extracted_resistance_fields() -> None:
+    rom = DW1ROM.from_baseline(ROOT)
+    enemies = json.loads(
+        (ROOT / "extractor" / "data_out" / "enemies.json").read_text()
+    )["enemies"]
+
+    assert len(enemies) == ENEMY_COUNT
+
+    high_nibble_15_low_nibble_variants = {
+        int(enemy["mdef_low_nibble"])
+        for enemy in enemies
+        if int(enemy["mdef_high_nibble"]) == 0x0F
+    }
+
+    for enemy in enemies:
+        enemy_id = int(enemy["enemy_id"])
+        entry_offset = ENEMY_TABLE_START + enemy_id * ENEMY_ENTRY_BYTES
+        rom_mdef = rom.read_byte(entry_offset + 5)
+        rom_high_nibble = (rom_mdef >> 4) & 0x0F
+        rom_low_nibble = rom_mdef & 0x0F
+
+        assert int(enemy["mdef"]) == rom_mdef
+        assert int(enemy["mdef_high_nibble"]) == rom_high_nibble
+        assert int(enemy["mdef_low_nibble"]) == rom_low_nibble
+        assert int(enemy["spell_fail_threshold"]) == rom_high_nibble
+
+    assert sorted(high_nibble_15_low_nibble_variants) == [0, 1, 2, 15]
+
+
 def test_equipment_bonus_flags_need_canonical_recompute_mapping_review() -> None:
-    items_payload = json.loads((ROOT / "extractor" / "data_out" / "items.json").read_text())
+    items_payload = json.loads(
+        (ROOT / "extractor" / "data_out" / "items.json").read_text()
+    )
     bonuses = items_payload["equipment_bonuses"]
 
     assert bonuses["weapons"][3] == 10

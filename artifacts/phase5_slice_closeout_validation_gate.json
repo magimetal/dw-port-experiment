@@ -18,33 +18,29 @@
         "evidence": {
           "phase5_parity": {
             "artifact": "artifacts/phase5_parity.json",
-            "all_passed": false,
+            "all_passed": true,
             "row_count": 67,
             "summary": {
               "row_count": 67,
               "status_counts": {
-                "PASS": 65,
-                "UNKNOWN": 2
+                "PASS": 67
               },
               "evidence_tier_counts": {
-                "extractor-only": 55,
-                "runtime-state": 8,
-                "unknown": 2,
+                "extractor-only": 56,
+                "runtime-state": 9,
                 "replay-proven": 1,
                 "checkpoint-proven": 1
               },
-              "all_passed": false
+              "all_passed": true
             },
             "evidence_tiers": [
               "checkpoint-proven",
               "extractor-only",
               "replay-proven",
-              "runtime-state",
-              "unknown"
+              "runtime-state"
             ],
             "statuses": [
-              "PASS",
-              "UNKNOWN"
+              "PASS"
             ]
           },
           "phase5_terminal_size": {
